@@ -1,0 +1,29 @@
+<resources>
+
+    <string-array name="sections">
+        <item>@string/section_live</item>
+        <item>@string/section_recommend</item>
+        <item>@string/section_bangumi</item>
+        <item>@string/section_more</item>
+        <item>@string/section_focus</item>
+        <item>@string/section_discover</item>
+    </string-array>
+
+    <string name="title_activity_dagger">DaggerActivity</string>
+    <string name="title_activity_news">NewsActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">哔哩哔哩</string>
+    <string name="home_top_default_nickname">未登录</string>
+    <string name="menu_top_download_tips">离线列表</string>
+    <string name="menu_top_search_tips">搜索</string>
+    <string name="nav_offline_manager">离线缓存</string>
+    <string name="section_bangumi">番剧</string>
+    <string name="section_discover">发现</string>
+    <string name="section_focus">关注</string>
+    <string name="section_live">直播</string>
+    <string name="section_more">分区</string>
+    <string name="section_recommend">推荐</string>
+    <string name="title_game">游戏中心</string>
+</resources>

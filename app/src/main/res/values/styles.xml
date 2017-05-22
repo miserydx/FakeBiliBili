@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--colorPrimary对应ActionBar的颜色-->
+        <item name="colorPrimary">@color/theme_color_primary</item>
+        <!--colorPrimaryDark对应状态栏的颜色-->
+        <item name="colorPrimaryDark">@color/theme_color_primary</item>
+        <!--colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--ActionBarDrawerToggle设置颜色 -->
+        <item name="colorControlNormal">@android:color/white</item>
+        <!-- 底部导航栏的颜色 -->
+        <!--<item name="android:navigationBarColor" tools:targetApi="lollipop">@color/navigationBarColor</item>-->
+        <!--<item name="android:windowBackground">@color/windowBackground</item>-->
+    </style>
+
+    <!--<style name="AppTheme.SwipeBack">-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

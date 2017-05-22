@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content_news"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/AppTheme">
+
+        <LinearLayout
+            android:id="@+id/top_menu_nav_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_drawer_home" />
+
+            <ImageView
+                android:id="@+id/avatar_iv"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:src="@drawable/bili_default_avatar" />
+
+            <TextView
+                android:id="@+id/username_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="@string/home_top_default_nickname"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_xlarge" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_layout_height"
+        android:background="?attr/colorPrimaryDark"
+        app:tl_textAllCaps="true"
+        app:tl_textsize="14sp"
+        app:tl_tab_space_equal="true"
+        app:tl_indicator_width_equal_title="true"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
