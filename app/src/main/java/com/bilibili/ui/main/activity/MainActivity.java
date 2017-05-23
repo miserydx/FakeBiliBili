@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.bilibili.R;
 import com.bilibili.base.IBaseMvpActivity;
@@ -16,6 +17,7 @@ import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.ui.main.fragment.MainFragment;
 import com.bilibili.ui.main.mvp.contract.MainContract;
 import com.bilibili.ui.main.mvp.presenter.MainPresenter;
+import com.bilibili.util.StatusBarUtil;
 
 import javax.inject.Inject;
 
@@ -34,11 +36,6 @@ public class MainActivity extends SupportActivity implements IBaseMvpActivity<Ma
     NavigationView mNavigationView;
 
     @Override
-    public boolean setCustomStatusBar() {
-        return false;
-    }
-
-    @Override
     public void initInject(ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
@@ -54,12 +51,8 @@ public class MainActivity extends SupportActivity implements IBaseMvpActivity<Ma
     }
 
     @Override
-    public View getPaddingNeedView() {
-        return mFrameLayout;
-    }
-
-    @Override
     public void initViewAndEvent() {
+        StatusBarUtil.setColorForDrawerLayout(this, getResources().getColor(R.color.theme_color_primary), mFrameLayout);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

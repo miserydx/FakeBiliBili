@@ -15,6 +15,7 @@ import com.bilibili.R;
 import com.bilibili.base.IBaseActivity;
 import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.ui.test.fragment.NewsFragment;
+import com.bilibili.util.StatusBarUtil;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -37,22 +38,13 @@ public class NewsActivity extends SupportActivity implements IBaseActivity {
     }
 
     @Override
-    public boolean setCustomStatusBar() {
-        return false;
-    }
-
-    @Override
-    public View getPaddingNeedView() {
-        return mFrameLayout;
-    }
-
-    @Override
     public void initInject(ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
     @Override
     public void initViewAndEvent() {
+        StatusBarUtil.setColorForDrawerLayout(this, getResources().getColor(R.color.theme_color_primary), mFrameLayout);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

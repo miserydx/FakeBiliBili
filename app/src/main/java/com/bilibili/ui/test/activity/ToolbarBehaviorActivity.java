@@ -5,7 +5,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.bilibili.R;
 import com.bilibili.base.IBaseMvpActivity;
@@ -14,6 +13,7 @@ import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
 import com.bilibili.ui.test.adapter.MvpStructureAdapter;
+import com.bilibili.util.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +47,6 @@ public class ToolbarBehaviorActivity extends SupportActivity implements IBaseMvp
     }
 
     @Override
-    public boolean setCustomStatusBar() {
-        return true;
-    }
-
-    @Override
     public void initInject(ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
@@ -62,12 +57,8 @@ public class ToolbarBehaviorActivity extends SupportActivity implements IBaseMvp
     }
 
     @Override
-    public View getPaddingNeedView() {
-        return null;
-    }
-
-    @Override
     public void initViewAndEvent() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.theme_color_primary));
         mToolbar.setTitle("新闻");
         setSupportActionBar(mToolbar);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

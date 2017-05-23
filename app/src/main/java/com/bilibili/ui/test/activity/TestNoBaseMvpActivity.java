@@ -1,13 +1,12 @@
 package com.bilibili.ui.test.activity;
 
-import android.view.View;
-
 import com.bilibili.R;
 import com.bilibili.base.IBaseMvpActivity;
 import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.NoBaseMvpPresenter;
+import com.bilibili.util.StatusBarUtil;
 
 import java.util.List;
 
@@ -36,18 +35,8 @@ public class TestNoBaseMvpActivity extends SupportActivity implements IBaseMvpAc
     }
 
     @Override
-    public View getPaddingNeedView() {
-        return null;
-    }
-
-    @Override
-    public boolean setCustomStatusBar() {
-        return false;
-    }
-
-    @Override
     public void initViewAndEvent() {
-
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.theme_color_primary));
     }
 
     @Override

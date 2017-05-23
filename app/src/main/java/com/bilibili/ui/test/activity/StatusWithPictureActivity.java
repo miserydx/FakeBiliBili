@@ -4,7 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.bilibili.R;
 import com.bilibili.base.IBaseMvpActivity;
@@ -12,7 +11,7 @@ import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.adapter.MvpStructureAdapter;
-import com.bilibili.util.StatusBarUtils;
+import com.bilibili.util.StatusBarUtil;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
 
 import java.util.ArrayList;
@@ -40,11 +39,6 @@ public class StatusWithPictureActivity extends SupportActivity implements IBaseM
     private List<WeiXinJingXuanBean.NewsList> mList = new ArrayList<>();
 
     @Override
-    public boolean setCustomStatusBar() {
-        return true;
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_status_picture;
     }
@@ -60,14 +54,9 @@ public class StatusWithPictureActivity extends SupportActivity implements IBaseM
     }
 
     @Override
-    public View getPaddingNeedView() {
-        return null;
-    }
-
-    @Override
     public void initViewAndEvent() {
         //自定义statusbar样式,与toolbar融合
-        StatusBarUtils.setStatusBarMergeWithToolBar(mToolbar, this);
+        StatusBarUtil.setStatusBarMergeWithTopView(this, mToolbar);
         mToolbar.setTitle("新闻");
         setSupportActionBar(mToolbar);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

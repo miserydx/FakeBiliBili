@@ -8,6 +8,7 @@ import com.bilibili.R;
 import com.bilibili.base.IBaseActivity;
 import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.ui.main.activity.MainActivity;
+import com.bilibili.util.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,23 +39,13 @@ public class NavigationTestActivity extends SupportActivity implements IBaseActi
     }
 
     @Override
-    public View getPaddingNeedView() {
-        return null;
-    }
-
-    @Override
-    public boolean setCustomStatusBar() {
-        return false;
-    }
-
-    @Override
     public void initInject(ActivityComponent activityComponent) {
 
     }
 
     @Override
     public void initViewAndEvent() {
-
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.theme_color_primary));
     }
 
     @OnClick({R.id.toolbar_behavior_mvp_btn, R.id.news_btn, R.id.status_picture_mvp_btn, R.id.scroll_gradient_mvp_btn, R.id.test_api_btn,

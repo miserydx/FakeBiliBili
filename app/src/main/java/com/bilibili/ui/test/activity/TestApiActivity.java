@@ -1,7 +1,6 @@
 package com.bilibili.ui.test.activity;
 
 import android.util.Log;
-import android.view.View;
 
 import com.bilibili.R;
 import com.bilibili.app.ApiHelper;
@@ -22,6 +21,7 @@ import com.bilibili.model.bean.ResultObject;
 import com.bilibili.model.bean.SearchHotResponse;
 import com.bilibili.model.bean.SplashResponse;
 import com.bilibili.util.DateUtil;
+import com.bilibili.util.StatusBarUtil;
 
 import javax.inject.Inject;
 
@@ -45,22 +45,13 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
     }
 
     @Override
-    public View getPaddingNeedView() {
-        return null;
-    }
-
-    @Override
-    public boolean setCustomStatusBar() {
-        return false;
-    }
-
-    @Override
     public void initInject(ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
     @Override
     public void initViewAndEvent() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.theme_color_primary));
         appApis.getRegionShow(ApiHelper.getAppKey(),ApiHelper.getBUILD(),ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
