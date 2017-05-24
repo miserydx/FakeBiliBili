@@ -133,7 +133,7 @@ public class ApiModule {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request oldRequest = chain.request();
-                if(!ApiHelper.needSigned(oldRequest.url().host())){
+                if(!ApiHelper.needSigned(oldRequest.url().host(), oldRequest.url().encodedPath())){
                     return chain.proceed(oldRequest);
                 }
                 //拼接参数(按顺序)+SecretKey

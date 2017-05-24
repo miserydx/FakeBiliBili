@@ -9,6 +9,8 @@ import com.bilibili.model.api.annotation.NeedSign;
 
 import java.lang.reflect.Method;
 
+import retrofit2.http.GET;
+
 /**
  * Created by jiayiyang on 17/4/27.
  */
@@ -59,16 +61,17 @@ public class ApiHelper {
         return SCALE;
     }
 
-    public static boolean needSigned(String host) {
+    public static boolean needSigned(String host, String path) {
+        boolean needSigned = false;
         Class clz = getClass(host);
-        if (clz == null) {
-            return false;
-        }
         for (Method method : clz.getMethods()) {
             NeedSign needSign = method.getAnnotation(NeedSign.class);
-            return (needSign != null);
+            GET get = method.getAnnotation(GET.class);
+            if (needSign != null && get.value().equals(path)) {
+                needSigned = true;
+            }
         }
-        return false;
+        return needSigned;
     }
 
     private static Class getClass(String host) {
