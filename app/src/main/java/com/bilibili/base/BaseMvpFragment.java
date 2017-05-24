@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bilibili.di.component.DaggerFragmentComponent;
-import com.bilibili.di.component.FragmentComponent;
 import com.bilibili.app.App;
 import com.bilibili.di.component.AppComponent;
+import com.bilibili.di.component.DaggerFragmentComponent;
+import com.bilibili.di.component.FragmentComponent;
 import com.bilibili.di.module.FragmentModule;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -21,8 +23,10 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by jiayiyang on 17/4/14.
  */
 
-abstract public class BaseFragment extends SupportFragment {
+abstract public class BaseMvpFragment<T extends AbsBasePresenter> extends SupportFragment implements BaseView{
 
+    @Inject
+    protected T mPresenter;
     protected Context mContext;
     private Unbinder mUnbinder;
     private View mView;
@@ -36,23 +40,39 @@ abstract public class BaseFragment extends SupportFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(setContentView(), null);
+        mView = inflater.inflate(getLayoutId(), null);
         return mView;
     }
-
-    abstract protected int setContentView();
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, view);
         initInject();
+        if (mPresenter != null)
+            mPresenter.attachView(this);
         initViewAndEvent();
     }
 
-    abstract protected void initInject();
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.loadData();
+    }
 
-    abstract protected void initViewAndEvent();
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.releaseData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mPresenter != null)
+            mPresenter.detachView();
+        mUnbinder.unbind();
+    }
 
     private AppComponent getAppComponent(){
         return ((App)_mActivity.getApplication()).getAppComponent();
@@ -65,9 +85,21 @@ abstract public class BaseFragment extends SupportFragment {
                 .build();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mUnbinder.unbind();
-    }
+    /**
+     * 设置布局
+     *
+     * @return 布局Rid
+     */
+    protected abstract int getLayoutId();
+
+    /**
+     * 初始化dagger注入
+     */
+    protected abstract void initInject();
+
+    /**
+     * 初始化页面
+     */
+    protected abstract void initViewAndEvent();
+
 }
