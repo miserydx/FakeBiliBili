@@ -1,7 +1,6 @@
-package com.bilibili.ui.main.mvp.presenter;
+package com.bilibili.ui.main;
 
 import com.bilibili.base.AbsBasePresenter;
-import com.bilibili.ui.main.mvp.contract.MainContract;
 
 import javax.inject.Inject;
 

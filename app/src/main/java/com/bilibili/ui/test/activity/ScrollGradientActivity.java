@@ -10,10 +10,10 @@ import com.bilibili.R;
 import com.bilibili.base.IBaseMvpActivity;
 import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.model.bean.WeiXinJingXuanBean;
-import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.adapter.MvpStructureAdapter;
-import com.bilibili.util.StatusBarUtil;
+import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
+import com.bilibili.util.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;

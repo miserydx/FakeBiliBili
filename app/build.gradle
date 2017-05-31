@@ -25,9 +25,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //ui
-    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
-    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     //rxjava
     compile 'io.reactivex:rxjava:1.0.14'
@@ -47,6 +47,7 @@ dependencies {
     //other
     compile 'me.yokeyword:fragmentation:0.10.1'
     compile 'me.yokeyword:fragmentation-swipeback:0.7.10'
+    compile 'me.drakeet.multitype:multitype:3.0.1'
 
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'

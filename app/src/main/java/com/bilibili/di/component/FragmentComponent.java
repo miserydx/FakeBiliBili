@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.bilibili.di.module.FragmentModule;
 import com.bilibili.di.scope.PerFragment;
-import com.bilibili.ui.main.fragment.MainFragment;
+import com.bilibili.ui.main.MainFragment;
 import com.bilibili.ui.test.fragment.NewsFragment;
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 

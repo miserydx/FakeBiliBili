@@ -1,4 +1,4 @@
-package com.bilibili.ui.main.fragment;
+package com.bilibili.ui.main;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 
 import com.bilibili.R;
 import com.bilibili.base.BaseFragment;
-import com.bilibili.ui.main.activity.MainActivity;
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 import com.flyco.tablayout.SlidingTabLayout;
 

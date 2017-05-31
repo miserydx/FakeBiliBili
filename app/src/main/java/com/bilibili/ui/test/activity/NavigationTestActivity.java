@@ -7,7 +7,7 @@ import android.widget.Button;
 import com.bilibili.R;
 import com.bilibili.base.IBaseActivity;
 import com.bilibili.di.component.ActivityComponent;
-import com.bilibili.ui.main.activity.MainActivity;
+import com.bilibili.ui.main.MainActivity;
 import com.bilibili.util.StatusBarUtil;
 
 import butterknife.BindView;

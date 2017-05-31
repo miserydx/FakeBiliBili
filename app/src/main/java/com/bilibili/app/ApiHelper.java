@@ -64,6 +64,9 @@ public class ApiHelper {
     public static boolean needSigned(String host, String path) {
         boolean needSigned = false;
         Class clz = getClass(host);
+        if (clz == null) {
+            return needSigned;
+        }
         for (Method method : clz.getMethods()) {
             NeedSign needSign = method.getAnnotation(NeedSign.class);
             GET get = method.getAnnotation(GET.class);
@@ -75,7 +78,7 @@ public class ApiHelper {
     }
 
     private static Class getClass(String host) {
-        Class clz = null;
+        Class clz;
         try {
             switch (host) {
                 case APP_HOST:

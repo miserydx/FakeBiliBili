@@ -1,7 +1,7 @@
 package com.bilibili.di.component;
 
 import com.bilibili.di.module.ActivityModule;
-import com.bilibili.ui.main.activity.MainActivity;
+import com.bilibili.ui.main.MainActivity;
 import com.bilibili.ui.test.activity.NewsActivity;
 import com.bilibili.ui.test.activity.TestApiActivity;
 import com.bilibili.ui.test.activity.TestNoBaseActivity;

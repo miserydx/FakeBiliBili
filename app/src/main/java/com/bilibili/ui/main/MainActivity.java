@@ -1,4 +1,4 @@
-package com.bilibili.ui.main.activity;
+package com.bilibili.ui.main;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.bilibili.R;
 import com.bilibili.base.IBaseMvpActivity;
 import com.bilibili.di.component.ActivityComponent;
-import com.bilibili.ui.main.fragment.MainFragment;
-import com.bilibili.ui.main.mvp.contract.MainContract;
-import com.bilibili.ui.main.mvp.presenter.MainPresenter;
 import com.bilibili.util.StatusBarUtil;
 
 import javax.inject.Inject;

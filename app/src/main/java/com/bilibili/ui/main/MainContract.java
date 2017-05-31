@@ -1,10 +1,7 @@
-package com.bilibili.ui.main.mvp.contract;
+package com.bilibili.ui.main;
 
 import com.bilibili.base.BasePresenter;
 import com.bilibili.base.BaseView;
-import com.bilibili.model.bean.WeiXinJingXuanBean;
-
-import java.util.List;
 
 /**
  * Created by jiayiyang on 17/3/25.
