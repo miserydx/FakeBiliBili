@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bilibili"
+    android:versionCode="1"
+    android:versionName="1.0.0">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:name="com.bilibili.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 主页 -->
+        <activity
+            android:name="com.bilibili.ui.test.activity.NavigationTestActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 测试mvp结构 -->
+        <!-- 测试Fragment TabLayout DrawerLayout 沉浸式布局 -->
+        <activity
+            android:name="com.bilibili.ui.test.activity.NewsActivity"
+            android:label="@string/title_activity_news"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- Toolbar随页面滑动收展 -->
+        <activity
+            android:name="com.bilibili.ui.test.activity.ToolbarBehaviorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- StatusBar同Toolbar同背景 -->
+        <activity
+            android:name="com.bilibili.ui.test.activity.StatusWithPictureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- StatusBar同Toolbar同背景,滑动ToolBar放大缩小渐变 -->
+        <activity
+            android:name="com.bilibili.ui.test.activity.ScrollGradientActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 测试api -->
+        <activity
+            android:name="com.bilibili.ui.test.activity.TestApiActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 测试lifecycle -->
+        <activity android:name="com.bilibili.ui.test.activity.TestNoBaseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 测试lifecycle和mvp -->
+        <activity android:name="com.bilibili.ui.test.activity.TestNoBaseMvpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 主页 -->
+        <activity android:name="com.bilibili.ui.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+    </application>
+
+</manifest>
