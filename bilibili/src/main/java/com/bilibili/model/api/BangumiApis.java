@@ -4,9 +4,9 @@ import com.bilibili.model.api.annotation.NeedSign;
 import com.bilibili.model.bean.BangumiIndexPageResponse;
 import com.bilibili.model.bean.ResultObject;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by jiayiyang on 17/3/26.

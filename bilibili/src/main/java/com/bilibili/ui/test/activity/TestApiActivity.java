@@ -25,10 +25,11 @@ import com.common.util.StatusBarUtil;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import me.yokeyword.fragmentation.SupportActivity;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class TestApiActivity extends SupportActivity implements IBaseActivity {
 
@@ -55,19 +56,20 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         appApis.getRegionShow(ApiHelper.getAppKey(),ApiHelper.getBUILD(),ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultList<RegionShowResponse>>() {
+                .subscribe(new Consumer<ResultList<RegionShowResponse>>() {
                     @Override
-                    public void call(ResultList<RegionShowResponse> regionShowResponseResultList) {
+                    public void accept(@NonNull ResultList<RegionShowResponse> regionShowResponseResultList) throws Exception {
                         Log.d("misery", "regionShowResponseResultList="+ regionShowResponseResultList);
+
                     }
                 });
 
         appApis.getRegion(ApiHelper.getBUILD())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultList<RegionResponse>>() {
+                .subscribe(new Consumer<ResultList<RegionResponse>>() {
                     @Override
-                    public void call(ResultList<RegionResponse> regionResponseResultList) {
+                    public void accept(ResultList<RegionResponse> regionResponseResultList) {
                         Log.d("misery", "regionResponseResultList="+ regionResponseResultList);
                     }
                 });
@@ -75,9 +77,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         appApis.getIndex(ApiHelper.getAppKey(), ApiHelper.getBUILD(), "1493277505", ApiHelper.getMobiApp(), "wifi", ApiHelper.getPLATFORM(), "true", DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultList<IndexResponse>>() {
+                .subscribe(new Consumer<ResultList<IndexResponse>>() {
                     @Override
-                    public void call(ResultList<IndexResponse> indexResponseResultList) {
+                    public void accept(ResultList<IndexResponse> indexResponseResultList) {
                         Log.d("misery", "indexResponseResultList="+ indexResponseResultList);
                     }
                 });
@@ -85,9 +87,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         appApis.getSplash(ApiHelper.getMobiApp(), ApiHelper.getBUILD(), AppApis.CHANNEL, 1080, 1920, AppApis.VER)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultList<SplashResponse>>() {
+                .subscribe(new Consumer<ResultList<SplashResponse>>() {
                     @Override
-                    public void call(ResultList<SplashResponse> splashResponseResultList) {
+                    public void accept(ResultList<SplashResponse> splashResponseResultList) {
                         Log.d("misery", "splashResponseResultList="+ splashResponseResultList);
                     }
                 });
@@ -95,9 +97,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         liveApis.getCommon(ApiHelper.getDevice(), ApiHelper.getAppKey(), ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), ApiHelper.getScale(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultObject<LiveCommonResponse>>() {
+                .subscribe(new Consumer<ResultObject<LiveCommonResponse>>() {
                     @Override
-                    public void call(ResultObject<LiveCommonResponse> liveCommonResultList) {
+                    public void accept(ResultObject<LiveCommonResponse> liveCommonResultList) {
                         Log.d("misery", "liveCommonResultList="+ liveCommonResultList);
                     }
                 });
@@ -105,9 +107,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         liveApis.getRecommend(ApiHelper.getDevice(), ApiHelper.getAppKey(), ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), ApiHelper.getScale(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultObject<LiveRecommendResponse>>() {
+                .subscribe(new Consumer<ResultObject<LiveRecommendResponse>>() {
                     @Override
-                    public void call(ResultObject<LiveRecommendResponse> liveRecommendResponseResultList) {
+                    public void accept(ResultObject<LiveRecommendResponse> liveRecommendResponseResultList) {
                         Log.d("misery", "liveRecommendResponseResultList="+ liveRecommendResponseResultList);
                     }
                 });
@@ -115,9 +117,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         liveApis.getAreas(ApiHelper.getDevice(), ApiHelper.getAppKey(), ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), ApiHelper.getScale(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultList<LiveAreasResponse>>() {
+                .subscribe(new Consumer<ResultList<LiveAreasResponse>>() {
                     @Override
-                    public void call(ResultList<LiveAreasResponse> liveAreasResponseResultList) {
+                    public void accept(ResultList<LiveAreasResponse> liveAreasResponseResultList) {
                         Log.d("misery", "liveAreasResponseResultList="+ liveAreasResponseResultList);
                     }
                 });
@@ -125,9 +127,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         bangumiApis.getIndexPage(ApiHelper.getAppKey(),ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultObject<BangumiIndexPageResponse>>() {
+                .subscribe(new Consumer<ResultObject<BangumiIndexPageResponse>>() {
                     @Override
-                    public void call(ResultObject<BangumiIndexPageResponse> bangumiIndexPageResponseResultObject) {
+                    public void accept(ResultObject<BangumiIndexPageResponse> bangumiIndexPageResponseResultObject) {
                         Log.d("misery", "bangumiIndexPageResponseResultObject="+bangumiIndexPageResponseResultObject);
                     }
                 });
@@ -135,9 +137,9 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         appApis.getSerchHot(ApiHelper.getMobiApp(), ApiHelper.getBUILD(), 50, ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResultObject<SearchHotResponse>>() {
+                .subscribe(new Consumer<ResultObject<SearchHotResponse>>() {
                     @Override
-                    public void call(ResultObject<SearchHotResponse> appSerchHotResponseResultObject) {
+                    public void accept(ResultObject<SearchHotResponse> appSerchHotResponseResultObject) {
                         Log.d("misery", "appSerchHotResponseResultObject="+ appSerchHotResponseResultObject);
                     }
                 });

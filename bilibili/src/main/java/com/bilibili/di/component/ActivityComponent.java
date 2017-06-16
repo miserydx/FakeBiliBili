@@ -21,21 +21,17 @@ import dagger.Component;
 @Component(dependencies = {ApiComponent.class}, modules = {ActivityModule.class, PageModule.class})
 @PerActivity
 public interface ActivityComponent {
+    //Bilibili
+    void inject(MainActivity mainActivity);
 
+    //Test
     void inject(NewsActivity newsActivity);
-
     void inject(ToolbarBehaviorActivity toolbarBehaviorActivity);
-
     void inject(StatusWithPictureActivity statusWithPictureActivity);
-
     void inject(ScrollGradientActivity scrollGradientActivity);
-
     void inject(TestApiActivity testApiActivity);
-
     void inject(TestNoBaseActivity testNoBaseActivity);
-
     void inject(TestNoBaseMvpActivity testNoBaseMvpActivity);
 
-    void inject(MainActivity mainActivity);
 
 }

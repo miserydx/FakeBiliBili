@@ -9,9 +9,9 @@ import com.bilibili.model.bean.ResultObject;
 import com.bilibili.model.bean.SearchHotResponse;
 import com.bilibili.model.bean.SplashResponse;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by jiayiyang on 17/3/26.

@@ -3,8 +3,8 @@ package com.bilibili.model.api;
 
 import com.bilibili.model.bean.HotListBean;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
-import rx.Observable;
 
 /**
  * Created by yangjiayi on 2017/3/25.

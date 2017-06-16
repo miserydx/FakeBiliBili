@@ -7,9 +7,9 @@ import com.bilibili.model.bean.LiveRecommendResponse;
 import com.bilibili.model.bean.ResultList;
 import com.bilibili.model.bean.ResultObject;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by jiayiyang on 17/5/2.

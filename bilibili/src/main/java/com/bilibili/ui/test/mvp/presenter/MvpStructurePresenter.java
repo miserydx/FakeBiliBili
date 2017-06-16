@@ -9,11 +9,11 @@ import com.common.base.AbsBasePresenter;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by jiayiyang on 17/3/25.
@@ -33,39 +33,33 @@ public class MvpStructurePresenter extends AbsBasePresenter<MvpStructureContract
 
     @Override
     public void loadData() {
-        Subscription rxSubscription2 = weChatApis.getWeiXinJingXuan(WeChatApis.KEY, 25, 1)
+        weChatApis.getWeiXinJingXuan(WeChatApis.KEY, 25, 1)
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .doOnNext(new Action1<WeiXinJingXuanBean>() {
-                    @Override
-                    public void call(WeiXinJingXuanBean weiXinJingXuanBean) {
-
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WeiXinJingXuanBean>() {
+                .subscribe(new Observer<WeiXinJingXuanBean>() {
+                    Disposable disposable;
                     @Override
-                    public void onStart() {
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable = d;
+                        registerRx(disposable);
                         mView.setRefreshing();
                     }
 
                     @Override
-                    public void onCompleted() {
-                        Log.d("misery", "onCompleted");
-                    }
-
-                    @Override
-                    public void onNext(WeiXinJingXuanBean weiXinJingXuanBean) {
+                    public void onNext(@NonNull WeiXinJingXuanBean weiXinJingXuanBean) {
                         mView.updateData(weiXinJingXuanBean.getNewslist());
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        Log.d("misery", "onError");
-                        Log.e("zzt", "error " + e.toString());
+                    public void onError(@NonNull Throwable e) {
+                       Log.d("misery", "onError \n"+ e.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("misery", "onCompleted");
                     }
                 });
-        subscribeRx(rxSubscription2);
     }
 
     @Override
