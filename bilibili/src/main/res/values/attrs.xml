@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SmartViewPager">
+        <attr name="need_indicator" format="boolean"/>
+        <attr name="auto_scroll" format="boolean"/>
+        <attr name="circulate" format="boolean"/>
+        <attr name="scroll_delay" format="integer"/>
+    </declare-styleable>
+</resources>
