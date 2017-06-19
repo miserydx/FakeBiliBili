@@ -1,5 +1,6 @@
 package com.bilibili.ui.test.activity;
 
+import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
@@ -31,7 +32,7 @@ public class TestNoBaseMvpActivity extends SupportActivity implements IBaseMvpAc
 
     @Override
     public void initInject() {
-
+        App.getInstance().getActivityComponent().inject(this);
     }
 
     @Override
