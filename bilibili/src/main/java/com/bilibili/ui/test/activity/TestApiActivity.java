@@ -53,7 +53,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
     @Override
     public void initViewAndEvent() {
         StatusBarUtil.setColor(this, getResources().getColor(R.color.theme_color_primary));
-        appApis.getRegionShow(ApiHelper.getAppKey(),ApiHelper.getBUILD(),ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
+        appApis.getRegionShow(ApiHelper.APP_KEY,ApiHelper.BUILD,ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultList<RegionShowResponse>>() {
@@ -64,7 +64,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        appApis.getRegion(ApiHelper.getBUILD())
+        appApis.getRegion(ApiHelper.BUILD)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultList<RegionResponse>>() {
@@ -74,7 +74,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        appApis.getIndex(ApiHelper.getAppKey(), ApiHelper.getBUILD(), "1493277505", ApiHelper.getMobiApp(), "wifi", ApiHelper.getPLATFORM(), "true", DateUtil.getSystemTime())
+        appApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultList<IndexResponse>>() {
@@ -84,7 +84,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        appApis.getSplash(ApiHelper.getMobiApp(), ApiHelper.getBUILD(), AppApis.CHANNEL, 1080, 1920, AppApis.VER)
+        appApis.getSplash(ApiHelper.MOBI_APP, ApiHelper.BUILD, AppApis.CHANNEL, 1080, 1920, AppApis.VER)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultList<SplashResponse>>() {
@@ -94,7 +94,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        liveApis.getCommon(ApiHelper.getDevice(), ApiHelper.getAppKey(), ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), ApiHelper.getScale(), DateUtil.getSystemTime())
+        liveApis.getCommon(ApiHelper.DEVICE, ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, ApiHelper.SCALE, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultObject<LiveCommonResponse>>() {
@@ -104,7 +104,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        liveApis.getRecommend(ApiHelper.getDevice(), ApiHelper.getAppKey(), ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), ApiHelper.getScale(), DateUtil.getSystemTime())
+        liveApis.getRecommend(ApiHelper.DEVICE, ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, ApiHelper.SCALE, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultObject<LiveRecommendResponse>>() {
@@ -114,7 +114,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        liveApis.getAreas(ApiHelper.getDevice(), ApiHelper.getAppKey(), ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), ApiHelper.getScale(), DateUtil.getSystemTime())
+        liveApis.getAreas(ApiHelper.DEVICE, ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, ApiHelper.SCALE, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultList<LiveAreasResponse>>() {
@@ -124,7 +124,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        bangumiApis.getIndexPage(ApiHelper.getAppKey(),ApiHelper.getBUILD(), ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
+        bangumiApis.getIndexPage(ApiHelper.APP_KEY,ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultObject<BangumiIndexPageResponse>>() {
@@ -134,7 +134,7 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
                     }
                 });
 
-        appApis.getSerchHot(ApiHelper.getMobiApp(), ApiHelper.getBUILD(), 50, ApiHelper.getMobiApp(), ApiHelper.getPLATFORM(), DateUtil.getSystemTime())
+        appApis.getSerchHot(ApiHelper.MOBI_APP, ApiHelper.BUILD, 50, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResultObject<SearchHotResponse>>() {

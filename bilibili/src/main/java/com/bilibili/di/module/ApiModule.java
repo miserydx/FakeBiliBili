@@ -145,7 +145,7 @@ public class ApiModule {
                         queryParams.append("&");
                     }
                 }
-                queryParams.append(ApiHelper.getSecretKey());
+                queryParams.append(ApiHelper.SECRET_KEY);
                 String orignSign = queryParams.toString();
                 //进行MD5加密
                 String sign = "";
