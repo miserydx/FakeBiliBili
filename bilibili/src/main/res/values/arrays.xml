@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sections">
+        <item>@string/section_live</item>
+        <item>@string/section_recommend</item>
+        <item>@string/section_bangumi</item>
+        <item>@string/section_more</item>
+        <item>@string/section_focus</item>
+        <item>@string/section_discover</item>
+    </string-array>
+</resources>

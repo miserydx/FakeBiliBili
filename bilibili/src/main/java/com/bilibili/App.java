@@ -9,6 +9,7 @@ import com.bilibili.di.component.DaggerApiComponent;
 import com.bilibili.di.component.DaggerFragmentComponent;
 import com.bilibili.di.component.FragmentComponent;
 import com.bilibili.di.module.ApiModule;
+import com.bilibili.di.module.FragmentModule;
 import com.common.app.ActivityLifecycleManager;
 import com.common.app.AppComponent;
 import com.common.app.DaggerAppComponent;
@@ -66,6 +67,7 @@ public class App extends Application {
     public FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()
                 .apiComponent(getApiComponent())
+                .fragmentModule(new FragmentModule())
                 .build();
     }
 

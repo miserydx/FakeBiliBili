@@ -1,6 +1,5 @@
 package com.common.base;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,15 +20,8 @@ public abstract class BaseMvpFragment<T extends AbsBasePresenter> extends Suppor
 
     @Inject
     protected T mPresenter;
-    protected Context mContext;
     private Unbinder mUnbinder;
     private View mView;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
-    }
 
     @Nullable
     @Override

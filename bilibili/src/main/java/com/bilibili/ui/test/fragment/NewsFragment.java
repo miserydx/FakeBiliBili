@@ -31,7 +31,7 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     protected int setContentView() {
-        return R.layout.fragment_news;
+        return R.layout.fragment_main;
     }
 
     @Override

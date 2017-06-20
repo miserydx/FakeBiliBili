@@ -16,7 +16,7 @@ public class PageModule {
 
     @Provides
     @PerActivity
-    NewsFragment provideNewsFragemnt(){
+    NewsFragment provideNewsFragment(){
         return new NewsFragment();
     }
 

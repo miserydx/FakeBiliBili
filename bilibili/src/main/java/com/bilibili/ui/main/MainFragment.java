@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 import com.common.base.BaseFragment;
@@ -40,9 +41,9 @@ public class MainFragment extends BaseFragment {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
-    private OnInteractionListener mLisrener;
+    private OnInteractionListener mListener;
     private NewsPagerAdapter adapter;
-    private List<NewsPageFragment> mFagments = new ArrayList<>();
+    private List<NewsPageFragment> mFragments = new ArrayList<>();
     private String[] mTitles;
 
     public interface OnInteractionListener {
@@ -54,17 +55,17 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mLisrener = (MainActivity) activity;
+        mListener = (MainActivity) activity;
     }
 
     @Override
     protected int setContentView() {
-        return R.layout.fragment_news;
+        return R.layout.fragment_main;
     }
 
     @Override
     protected void initInject() {
-//        getFragmentComponent().inject(this);
+        App.getInstance().getFragmentComponent().inject(this);
         mTitles = getResources().getStringArray(R.array.sections);
     }
 
@@ -75,7 +76,7 @@ public class MainFragment extends BaseFragment {
         ((SupportActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         for (String s : mTitles) {
-            mFagments.add(new NewsPageFragment());
+            mFragments.add(new NewsPageFragment());
         }
         adapter = new NewsPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
@@ -86,7 +87,7 @@ public class MainFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_menu_nav_ll:
-                mLisrener.toggleDrawer();
+                mListener.toggleDrawer();
         }
     }
 
@@ -121,7 +122,7 @@ public class MainFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return mFagments.size();
+            return mFragments.size();
         }
 
         @Override
@@ -131,7 +132,7 @@ public class MainFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return mFagments.get(position);
+            return mFragments.get(position);
         }
     }
 

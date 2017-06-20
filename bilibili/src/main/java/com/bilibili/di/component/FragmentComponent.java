@@ -1,7 +1,5 @@
 package com.bilibili.di.component;
 
-import android.app.Activity;
-
 import com.bilibili.di.module.FragmentModule;
 import com.bilibili.di.scope.PerFragment;
 import com.bilibili.ui.main.MainFragment;
@@ -17,8 +15,6 @@ import dagger.Component;
 @Component(dependencies = ApiComponent.class, modules = FragmentModule.class)
 @PerFragment
 public interface FragmentComponent {
-
-    Activity getActivity();
 
     void inject(NewsFragment newsFragment);
 
