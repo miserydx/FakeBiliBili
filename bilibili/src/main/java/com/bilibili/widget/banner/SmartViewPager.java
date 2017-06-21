@@ -32,7 +32,7 @@ public class SmartViewPager extends FrameLayout {
 
     private Context mContext;
 
-    private ViewPager mViewPager;
+    private FixedWrapContentViewPager mViewPager;
 
     private IndicatorView mIndicator;
 
@@ -71,7 +71,7 @@ public class SmartViewPager extends FrameLayout {
     }
 
     private void initView() {
-        mViewPager = new ViewPager(mContext);
+        mViewPager = new FixedWrapContentViewPager(mContext);
         LayoutParams viewPagerLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mViewPager.setLayoutParams(viewPagerLp);
         mViewPager.addOnPageChangeListener(mPageChangeListener);
