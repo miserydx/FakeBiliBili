@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_live_follow"
+        style="@style/navigation_text_style"
+        android:drawableTop="@drawable/live_home_follow_anchor"
+        android:text="@string/nav_follow" />
+
+    <TextView
+        android:id="@+id/tv_live_center"
+        style="@style/navigation_text_style"
+        android:drawableTop="@drawable/live_home_live_center"
+        android:text="@string/nav_center" />
+
+    <TextView
+        android:id="@+id/tv_live_video"
+        style="@style/navigation_text_style"
+        android:drawableTop="@drawable/live_home_clip_video"
+        android:text="@string/nav_video"/>
+
+    <TextView
+        android:id="@+id/tv_live_search"
+        style="@style/navigation_text_style"
+        android:drawableTop="@drawable/live_home_search_room"
+        android:text="@string/nav_search"/>
+
+    <TextView
+        android:id="@+id/tv_live_category"
+        style="@style/navigation_text_style"
+        android:drawableTop="@drawable/live_home_all_category"
+        android:text="@string/nav_category"/>
+
+</LinearLayout>

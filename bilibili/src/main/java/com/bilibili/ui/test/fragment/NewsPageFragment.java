@@ -24,9 +24,9 @@ import me.drakeet.multitype.MultiTypeAdapter;
 
 public class NewsPageFragment extends BaseMvpFragment<MvpStructurePresenter> implements MvpStructureContract.View {
 
-    @BindView(R.id.news_rv)
+    @BindView(R.id.rv)
     RecyclerView mRecyclerView;
-    @BindView(R.id.news_refresh)
+    @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
     private MultiTypeAdapter mAdapter;

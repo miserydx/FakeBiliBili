@@ -18,4 +18,11 @@
     <string name="section_more">分区</string>
     <string name="section_recommend">推荐</string>
     <string name="title_game">游戏中心</string>
+
+    <!-- Live -->
+    <string name="nav_follow">关注</string>
+    <string name="nav_center">中心</string>
+    <string name="nav_video">小视频</string>
+    <string name="nav_search">搜索</string>
+    <string name="nav_category">分类</string>
 </resources>

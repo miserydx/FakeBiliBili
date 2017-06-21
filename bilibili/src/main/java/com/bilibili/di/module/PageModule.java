@@ -2,6 +2,8 @@ package com.bilibili.di.module;
 
 
 import com.bilibili.di.scope.PerActivity;
+import com.bilibili.di.scope.PerFragment;
+import com.bilibili.ui.live.LiveFragment;
 import com.bilibili.ui.test.fragment.NewsFragment;
 
 import dagger.Module;
@@ -18,6 +20,13 @@ public class PageModule {
     @PerActivity
     NewsFragment provideNewsFragment(){
         return new NewsFragment();
+    }
+
+    //main
+    @Provides
+    @PerFragment
+    LiveFragment provideLiveFragment() {
+        return new LiveFragment();
     }
 
 }

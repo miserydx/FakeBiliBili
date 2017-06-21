@@ -8,13 +8,20 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="toolbar_padding_top">50dp</dimen>
 
+    <!--common-->
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_min">2dp</dimen>
+
+    <!--main-->
+    <dimen name="tab_layout_height">40dp</dimen>
     <dimen name="avatar_size">34.0dip</dimen>
     <dimen name="avatar_size_half">34.0dip</dimen>
     <dimen name="avatar_small_width">20.0dip</dimen>
-    <dimen name="default_margin">16.0dip</dimen>
-    <dimen name="tab_layout_height">40dp</dimen>
-    <dimen name="text_size_large">14.0sp</dimen>
-    <dimen name="text_size_medium">12.0sp</dimen>
-    <dimen name="text_size_small">10.0sp</dimen>
-    <dimen name="text_size_xlarge">16.0sp</dimen>
+
 </resources>
