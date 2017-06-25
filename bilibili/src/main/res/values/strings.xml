@@ -25,4 +25,19 @@
     <string name="nav_video">小视频</string>
     <string name="nav_search">搜索</string>
     <string name="nav_category">分类</string>
+
+    <!-- Navigation -->
+    <string name="nav_login">点击头像登录</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_vip">我的大会员</string>
+    <string name="nav_vip_point">我的大会员</string>
+    <string name="nav_unicom">免流量服务</string>
+    <string name="nav_download">离线缓存</string>
+    <string name="nav_view_later">稍后再看</string>
+    <string name="nav_star">我的收藏</string>
+    <string name="nav_history">历史记录</string>
+    <string name="nav_people">我的关注</string>
+    <string name="nav_account_balance_wallet">B币钱包</string>
+    <string name="nav_color_lens">主题选择</string>
+    <string name="nav_settings">设置与帮助</string>
 </resources>

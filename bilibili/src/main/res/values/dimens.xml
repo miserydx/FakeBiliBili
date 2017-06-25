@@ -23,5 +23,7 @@
     <dimen name="avatar_size">34.0dip</dimen>
     <dimen name="avatar_size_half">34.0dip</dimen>
     <dimen name="avatar_small_width">20.0dip</dimen>
+    <dimen name="avatar_top_margin">40dp</dimen>
+    <dimen name="list_item_avatar_large_size">70dp</dimen>
 
 </resources>
