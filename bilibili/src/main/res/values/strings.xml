@@ -25,6 +25,9 @@
     <string name="nav_video">小视频</string>
     <string name="nav_search">搜索</string>
     <string name="nav_category">分类</string>
+    <string name="partition_count_format">当前%1$s个直播</string>
+    <string name="live_load_more">查看更多</string>
+    <string name="live_more">更多直播</string>
 
     <!-- Navigation -->
     <string name="nav_login">点击头像登录</string>

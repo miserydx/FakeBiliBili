@@ -113,6 +113,7 @@ public class SmartViewPager extends FrameLayout {
     }
 
     public void setAdapter(PagerAdapter adapter) {
+        removeAllViews();
         mAdapter = adapter;
         mViewPager.setAdapter(adapter);
         if (mIsNeedIndicator) {

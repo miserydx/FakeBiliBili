@@ -3,9 +3,9 @@ package com.bilibili.model.api;
 import com.bilibili.model.api.annotation.NeedSign;
 import com.bilibili.model.bean.DataListResponse;
 import com.bilibili.model.bean.DataObjectResponse;
-import com.bilibili.model.bean.LiveAreas;
-import com.bilibili.model.bean.LiveCommon;
-import com.bilibili.model.bean.LiveRecommend;
+import com.bilibili.model.bean.live.LiveAreas;
+import com.bilibili.model.bean.live.LiveCommon;
+import com.bilibili.model.bean.live.LiveRecommend;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

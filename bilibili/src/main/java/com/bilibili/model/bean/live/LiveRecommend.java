@@ -1,4 +1,4 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.live;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class LiveRecommend {
         return this.recommend_data;
     }
 
-    class Recommend_data {
+    public class Recommend_data {
         private List<Lives> lives;
 
         private Partition partition;
@@ -49,7 +49,7 @@ public class LiveRecommend {
             return this.banner_data;
         }
 
-        class Partition {
+        public class Partition {
             private int id;
 
             private String name;
@@ -100,7 +100,7 @@ public class LiveRecommend {
                 return this.count;
             }
 
-            class Sub_icon {
+            public class Sub_icon {
                 private String src;
 
                 private String height;
@@ -135,7 +135,7 @@ public class LiveRecommend {
 
         }
 
-        class Lives {
+        public class Lives {
             private Owner owner;
 
             private Cover cover;
@@ -258,7 +258,7 @@ public class LiveRecommend {
 
         }
 
-        class Banner_data {
+        public class Banner_data {
             private Owner owner;
 
             private Cover cover;
@@ -381,7 +381,7 @@ public class LiveRecommend {
 
         }
 
-        class Cover {
+        public class Cover {
             private String src;
 
             private int height;
@@ -414,7 +414,7 @@ public class LiveRecommend {
 
         }
 
-        class Owner {
+        public class Owner {
             private String face;
 
             private int mid;

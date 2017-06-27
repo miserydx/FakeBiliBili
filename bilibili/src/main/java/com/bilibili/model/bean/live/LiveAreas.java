@@ -1,4 +1,4 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.live;
 
 /**
  * Created by jiayiyang on 17/5/5.

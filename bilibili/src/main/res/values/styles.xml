@@ -30,8 +30,13 @@
     </style>
 
     <!--text-->
-    <style name="normal_text_style" parent="parent_text_style">
+    <style name="large_text_style" parent="parent_text_style">
         <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="normal_text_style" parent="parent_text_style">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="small_text_style" parent="parent_text_style">
@@ -41,6 +46,7 @@
     <style name="navigation_text_style" parent="normal_text_style">
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">@dimen/margin_small</item>
     </style>
 
     <!--image-->

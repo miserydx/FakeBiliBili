@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public abstract class BannerAdapter<T, V extends View> extends PagerAdapter {
 
     public static int INVALID_ID = 0;
 
-    protected List<T> data;
+    protected List<T> data = new ArrayList<>();
 
     public BannerAdapter() {}
 
@@ -57,7 +58,8 @@ public abstract class BannerAdapter<T, V extends View> extends PagerAdapter {
     }
 
     public void setData(List<T> data, boolean isCirculate) {
-        this.data = data;
+        this.data.clear();
+        this.data.addAll(data);
         if (isCirculate) {
             T first = data.get(0);
             T last = data.get(data.size() - 1);

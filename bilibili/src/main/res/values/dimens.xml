@@ -9,9 +9,9 @@
     <dimen name="toolbar_padding_top">50dp</dimen>
 
     <!--common-->
-    <dimen name="text_size_large">16sp</dimen>
-    <dimen name="text_size_normal">14sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_large">14sp</dimen>
+    <dimen name="text_size_normal">13sp</dimen>
+    <dimen name="text_size_small">11sp</dimen>
 
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_normal">16dp</dimen>

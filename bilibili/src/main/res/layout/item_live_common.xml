@@ -10,33 +10,33 @@
         <ImageView
             android:id="@+id/iv_cover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_cover"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_small">
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_next_video_placeholder"/>
 
-            <TextView
-                android:id="@+id/tv_area"
-                style="@style/normal_text_style"
-                android:layout_marginRight="@dimen/margin_small"
-                android:textColor="@color/theme_color_primary" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/normal_text_style" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_area_title"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/iv_cover"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/margin_small"
+            android:paddingRight="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_small"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/small_text_style"
+            android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/tv_online"
+            android:layout_toStartOf="@+id/tv_online"
             android:gravity="center_vertical"
+            android:maxLines="1"
             android:padding="@dimen/margin_small"
             android:textColor="@color/_bkgd__gray_light" />
 
@@ -48,7 +48,7 @@
             android:layout_alignParentRight="true"
             android:drawableLeft="@drawable/ic_live_count"
             android:drawablePadding="2dp"
-            android:drawableTint="@color/_bkgd__gray_very_light"
+            android:drawableTint="@color/_bkgd__gray"
             android:gravity="center_vertical"
             android:padding="@dimen/margin_small"
             android:textColor="@color/_bkgd__gray_light" />

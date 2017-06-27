@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:layout_weight="5">
 
     <TextView
         android:id="@+id/tv_live_follow"
@@ -20,18 +22,18 @@
         android:id="@+id/tv_live_video"
         style="@style/navigation_text_style"
         android:drawableTop="@drawable/live_home_clip_video"
-        android:text="@string/nav_video"/>
+        android:text="@string/nav_video" />
 
     <TextView
         android:id="@+id/tv_live_search"
         style="@style/navigation_text_style"
         android:drawableTop="@drawable/live_home_search_room"
-        android:text="@string/nav_search"/>
+        android:text="@string/nav_search" />
 
     <TextView
         android:id="@+id/tv_live_category"
         style="@style/navigation_text_style"
         android:drawableTop="@drawable/live_home_all_category"
-        android:text="@string/nav_category"/>
+        android:text="@string/nav_category" />
 
 </LinearLayout>

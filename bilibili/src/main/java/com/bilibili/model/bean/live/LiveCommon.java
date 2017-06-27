@@ -1,4 +1,4 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.live;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class LiveCommon {
         return this.navigator;
     }
 
-    class Banner {
+    public static class Banner {
         private String title;
 
         private String img;
@@ -91,7 +91,7 @@ public class LiveCommon {
 
     }
 
-    class EntranceIcons {
+    public static class EntranceIcons {
         private int id;
 
         private String name;
@@ -122,7 +122,7 @@ public class LiveCommon {
             return this.entrance_icon;
         }
 
-        class Entrance_icon {
+        public class Entrance_icon {
             private String src;
 
             private String height;
@@ -157,7 +157,7 @@ public class LiveCommon {
 
     }
 
-    class Navigator {
+    public static class Navigator {
         private int id;
 
         private String name;
@@ -188,7 +188,7 @@ public class LiveCommon {
             return this.entrance_icon;
         }
 
-        class Entrance_icon {
+        public class Entrance_icon {
             private String src;
 
             private String height;
@@ -223,7 +223,7 @@ public class LiveCommon {
 
     }
 
-    class Partitions {
+    public static class Partitions {
         private Partition partition;
 
         private List<Lives> lives;
@@ -244,7 +244,7 @@ public class LiveCommon {
             return this.lives;
         }
 
-        class Partition {
+        public static class Partition {
             private int id;
 
             private String name;
@@ -295,7 +295,7 @@ public class LiveCommon {
                 return this.count;
             }
 
-            class Sub_icon {
+            public class Sub_icon {
                 private String src;
 
                 private String height;
@@ -330,7 +330,7 @@ public class LiveCommon {
 
         }
 
-        class Lives {
+        public static class Lives {
             private Owner owner;
 
             private Cover cover;
@@ -451,7 +451,7 @@ public class LiveCommon {
                 return this.is_tv;
             }
 
-            class Cover {
+            public class Cover {
                 private String src;
 
                 private int height;
@@ -484,7 +484,7 @@ public class LiveCommon {
 
             }
 
-            class Owner {
+            public class Owner {
                 private String face;
 
                 private int mid;
