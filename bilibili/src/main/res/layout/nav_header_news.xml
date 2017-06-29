@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="185dp"
@@ -9,39 +8,43 @@
     android:gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/avatar_iv"
-        android:layout_width="@dimen/list_item_avatar_large_size"
-        android:layout_height="@dimen/list_item_avatar_large_size"
-        android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginTop="@dimen/avatar_top_margin"
-        android:src="@drawable/bili_default_avatar"
-        app:layout_constraintLeft_toLeftOf="@id/constraintLayout"
-        app:layout_constraintTop_toTopOf="@id/constraintLayout" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:text="@string/nav_login"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintLeft_toLeftOf="@id/avatar_iv"
-        app:layout_constraintTop_toBottomOf="@id/avatar_iv" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:text="Android Studio"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="android.studio@android.com" />
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/bili_drawerbg_not_logined"
-        android:tint="@color/_bkgd__pink_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintRight_toRightOf="@+id/constraintLayout" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_normal"
-        android:src="@drawable/ic_switch_night"
-        app:layout_constraintRight_toRightOf="@id/constraintLayout"
-        app:layout_constraintTop_toTopOf="@id/avatar_iv" />
+        android:alpha="0.2"
+        app:layout_constraintRight_toRightOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"/>
 
 </android.support.constraint.ConstraintLayout>

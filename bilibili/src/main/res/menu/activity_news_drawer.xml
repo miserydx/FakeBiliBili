@@ -2,68 +2,36 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/group1"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/nav_home"
-            android:checked="true"/>
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Import" />
         <item
-            android:id="@+id/nav_vip"
-            android:icon="@drawable/ic_nav_vip"
-            android:title="@string/nav_vip" />
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Gallery" />
         <item
-            android:id="@+id/nav_vip_point"
-            android:icon="@drawable/ic_nav_point"
-            android:title="@string/nav_vip_point" />
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
         <item
-            android:id="@+id/nav_unicom"
-            android:icon="@drawable/ic_nav_unicom"
-            android:title="@string/nav_unicom" />
-        <item
-            android:id="@+id/nav_download"
-            android:icon="@drawable/ic_download_grey_24dp"
-            android:title="@string/nav_download" />
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />
     </group>
 
-    <group
-        android:id="@+id/group2"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_view_later"
-            android:icon="@drawable/ic_view_later_24dp"
-            android:title="@string/nav_view_later" />
-        <item
-            android:id="@+id/nav_star"
-            android:icon="@drawable/ic_star_black_24dp"
-            android:title="@string/nav_star" />
-        <item
-            android:id="@+id/nav_history"
-            android:icon="@drawable/ic_history_black_24dp"
-            android:title="@string/nav_history" />
-        <item
-            android:id="@+id/nav_people"
-            android:icon="@drawable/ic_people_black_24dp"
-            android:title="@string/nav_people" />
-        <item
-            android:id="@+id/nav_account_balance_wallet"
-            android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-            android:title="@string/nav_account_balance_wallet" />
-    </group>
-
-    <group
-        android:id="@+id/group3"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_color_lens"
-            android:icon="@drawable/ic_color_lens_black_24dp"
-            android:title="@string/nav_color_lens" />
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/nav_settings" />
-    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
 
 </menu>
