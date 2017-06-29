@@ -14,12 +14,15 @@ import android.widget.LinearLayout;
 
 import com.bilibili.App;
 import com.bilibili.R;
+import com.bilibili.ui.bangumi.BangumiFragment;
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 import com.common.base.BaseFragment;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,9 +44,12 @@ public class MainFragment extends BaseFragment {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
+    @Inject
+    BangumiFragment mBangumiFragment;
+
     private OnInteractionListener mListener;
-    private NewsPagerAdapter adapter;
-    private List<NewsPageFragment> mFragments = new ArrayList<>();
+    private MainPagerAdapter pagerAdapter;
+    private List<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
 
     public interface OnInteractionListener {
@@ -74,12 +80,15 @@ public class MainFragment extends BaseFragment {
         setHasOptionsMenu(true);
         ((SupportActivity) getActivity()).setSupportActionBar(mToolbar);
         ((SupportActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         for (String s : mTitles) {
-            mFragments.add(new NewsPageFragment());
+            if(s.equals(getResources().getString(R.string.section_bangumi))){
+                mFragments.add(mBangumiFragment);
+            }else {
+                mFragments.add(new NewsPageFragment());
+            }
         }
-        adapter = new NewsPagerAdapter(getChildFragmentManager());
-        viewPager.setAdapter(adapter);
+        pagerAdapter = new MainPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
         tabLayout.setViewPager(viewPager, mTitles);
     }
 
@@ -114,9 +123,9 @@ public class MainFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private class NewsPagerAdapter extends FragmentPagerAdapter {
+    private class MainPagerAdapter extends FragmentPagerAdapter {
 
-        NewsPagerAdapter(FragmentManager fm) {
+        MainPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
