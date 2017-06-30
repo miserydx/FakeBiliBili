@@ -6,7 +6,7 @@ import java.util.List;
  * Created by jiayiyang on 17/5/5.
  */
 
-public class BangumiIndexPageResponse {
+public class BangumiIndexPage {
 
     private List<Ad> ad ;
 

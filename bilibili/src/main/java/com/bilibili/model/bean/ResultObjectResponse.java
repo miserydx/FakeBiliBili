@@ -1,16 +1,14 @@
 package com.bilibili.model.bean;
 
-import java.util.List;
-
 /**
- * Created by jiayiyang on 17/5/2.
+ * Created by miserydx on 17/6/30.
  */
 
-public class ResultList<T> {
+public class ResultObjectResponse<T> {
 
     private int code;
 
-    private List<T> data;
+    private T result;
 
     private String message;
 
@@ -26,12 +24,12 @@ public class ResultList<T> {
         this.code = code;
     }
 
-    public List<T> getData() {
-        return data;
+    public T getData() {
+        return result;
     }
 
-    public void setData(List<T> data) {
-        this.data = data;
+    public void setData(T data) {
+        this.result = data;
     }
 
     public String getMessage() {

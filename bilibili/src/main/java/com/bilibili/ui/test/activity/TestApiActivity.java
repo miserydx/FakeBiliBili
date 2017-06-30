@@ -8,17 +8,18 @@ import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.AppApis;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.api.LiveApis;
-import com.bilibili.model.bean.BangumiIndexPageResponse;
-import com.bilibili.model.bean.IndexResponse;
-import com.bilibili.model.bean.LiveAreasResponse;
-import com.bilibili.model.bean.LiveCommonResponse;
-import com.bilibili.model.bean.LiveRecommendResponse;
-import com.bilibili.model.bean.RegionResponse;
-import com.bilibili.model.bean.RegionShowResponse;
-import com.bilibili.model.bean.ResultList;
-import com.bilibili.model.bean.ResultObject;
-import com.bilibili.model.bean.SearchHotResponse;
-import com.bilibili.model.bean.SplashResponse;
+import com.bilibili.model.bean.BangumiIndexPage;
+import com.bilibili.model.bean.DataListResponse;
+import com.bilibili.model.bean.DataObjectResponse;
+import com.bilibili.model.bean.AppIndex;
+import com.bilibili.model.bean.LiveAreas;
+import com.bilibili.model.bean.LiveCommon;
+import com.bilibili.model.bean.LiveRecommend;
+import com.bilibili.model.bean.AppRegion;
+import com.bilibili.model.bean.AppRegionShow;
+import com.bilibili.model.bean.ResultObjectResponse;
+import com.bilibili.model.bean.AppSearchHot;
+import com.bilibili.model.bean.AppSplash;
 import com.common.base.IBaseActivity;
 import com.common.util.DateUtil;
 import com.common.util.StatusBarUtil;
@@ -56,10 +57,10 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         appApis.getRegionShow(ApiHelper.APP_KEY,ApiHelper.BUILD,ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultList<RegionShowResponse>>() {
+                .subscribe(new Consumer<DataListResponse<AppRegionShow>>() {
                     @Override
-                    public void accept(@NonNull ResultList<RegionShowResponse> regionShowResponseResultList) throws Exception {
-                        Log.d("misery", "regionShowResponseResultList="+ regionShowResponseResultList);
+                    public void accept(@NonNull DataListResponse<AppRegionShow> appRegionShowRes) throws Exception {
+                        Log.d("misery", "DataListResponse<AppRegionShow>="+ appRegionShowRes);
 
                     }
                 });
@@ -67,80 +68,80 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
         appApis.getRegion(ApiHelper.BUILD)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultList<RegionResponse>>() {
+                .subscribe(new Consumer<DataListResponse<AppRegion>>() {
                     @Override
-                    public void accept(ResultList<RegionResponse> regionResponseResultList) {
-                        Log.d("misery", "regionResponseResultList="+ regionResponseResultList);
+                    public void accept(DataListResponse<AppRegion> appRegionRes) {
+                        Log.d("misery", "DataListResponse<AppRegion>="+ appRegionRes);
                     }
                 });
 
         appApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultList<IndexResponse>>() {
+                .subscribe(new Consumer<DataListResponse<AppIndex>>() {
                     @Override
-                    public void accept(ResultList<IndexResponse> indexResponseResultList) {
-                        Log.d("misery", "indexResponseResultList="+ indexResponseResultList);
+                    public void accept(DataListResponse<AppIndex> appIndexRes) {
+                        Log.d("misery", "DataListResponse<AppIndex>="+ appIndexRes);
                     }
                 });
 
         appApis.getSplash(ApiHelper.MOBI_APP, ApiHelper.BUILD, AppApis.CHANNEL, 1080, 1920, AppApis.VER)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultList<SplashResponse>>() {
+                .subscribe(new Consumer<DataListResponse<AppSplash>>() {
                     @Override
-                    public void accept(ResultList<SplashResponse> splashResponseResultList) {
-                        Log.d("misery", "splashResponseResultList="+ splashResponseResultList);
+                    public void accept(DataListResponse<AppSplash> appSplashRes) {
+                        Log.d("misery", "DataListResponse<AppSplash>="+ appSplashRes);
                     }
                 });
 
         liveApis.getCommon(ApiHelper.DEVICE, ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, ApiHelper.SCALE, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultObject<LiveCommonResponse>>() {
+                .subscribe(new Consumer<DataObjectResponse<LiveCommon>>() {
                     @Override
-                    public void accept(ResultObject<LiveCommonResponse> liveCommonResultList) {
-                        Log.d("misery", "liveCommonResultList="+ liveCommonResultList);
+                    public void accept(DataObjectResponse<LiveCommon> liveCommonRes) {
+                        Log.d("misery", "DataObjectResponse<LiveCommon>="+ liveCommonRes);
                     }
                 });
 
         liveApis.getRecommend(ApiHelper.DEVICE, ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, ApiHelper.SCALE, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultObject<LiveRecommendResponse>>() {
+                .subscribe(new Consumer<DataObjectResponse<LiveRecommend>>() {
                     @Override
-                    public void accept(ResultObject<LiveRecommendResponse> liveRecommendResponseResultList) {
-                        Log.d("misery", "liveRecommendResponseResultList="+ liveRecommendResponseResultList);
+                    public void accept(DataObjectResponse<LiveRecommend> liveRecommendRes) {
+                        Log.d("misery", "DataObjectResponse<LiveRecommend>="+ liveRecommendRes);
                     }
                 });
 
         liveApis.getAreas(ApiHelper.DEVICE, ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, ApiHelper.SCALE, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultList<LiveAreasResponse>>() {
+                .subscribe(new Consumer<DataListResponse<LiveAreas>>() {
                     @Override
-                    public void accept(ResultList<LiveAreasResponse> liveAreasResponseResultList) {
-                        Log.d("misery", "liveAreasResponseResultList="+ liveAreasResponseResultList);
+                    public void accept(DataListResponse<LiveAreas> liveAreasRes) {
+                        Log.d("misery", "DataListResponse<LiveAreas>="+ liveAreasRes);
                     }
                 });
 
         bangumiApis.getIndexPage(ApiHelper.APP_KEY,ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultObject<BangumiIndexPageResponse>>() {
+                .subscribe(new Consumer<ResultObjectResponse<BangumiIndexPage>>() {
                     @Override
-                    public void accept(ResultObject<BangumiIndexPageResponse> bangumiIndexPageResponseResultObject) {
-                        Log.d("misery", "bangumiIndexPageResponseResultObject="+bangumiIndexPageResponseResultObject);
+                    public void accept(ResultObjectResponse<BangumiIndexPage> bangumiIndexPageRes) {
+                        Log.d("misery", "ResultObjectResponse<BangumiIndexPage>="+ bangumiIndexPageRes);
                     }
                 });
 
         appApis.getSerchHot(ApiHelper.MOBI_APP, ApiHelper.BUILD, 50, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResultObject<SearchHotResponse>>() {
+                .subscribe(new Consumer<DataObjectResponse<AppSearchHot>>() {
                     @Override
-                    public void accept(ResultObject<SearchHotResponse> appSerchHotResponseResultObject) {
-                        Log.d("misery", "appSerchHotResponseResultObject="+ appSerchHotResponseResultObject);
+                    public void accept(DataObjectResponse<AppSearchHot> appSerchHotRes) {
+                        Log.d("misery", "DataObjectResponse<AppSearchHot>="+ appSerchHotRes);
                     }
                 });
     }

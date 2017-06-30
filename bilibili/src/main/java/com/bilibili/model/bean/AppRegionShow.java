@@ -8,7 +8,7 @@ import java.util.List;
  * Created by jiayiyang on 17/5/2.
  */
 
-public class RegionShowResponse {
+public class AppRegionShow {
 
     private String param;
 

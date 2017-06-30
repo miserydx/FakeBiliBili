@@ -1,11 +1,11 @@
 package com.bilibili.model.api;
 
 import com.bilibili.model.api.annotation.NeedSign;
-import com.bilibili.model.bean.LiveAreasResponse;
-import com.bilibili.model.bean.LiveCommonResponse;
-import com.bilibili.model.bean.LiveRecommendResponse;
-import com.bilibili.model.bean.ResultList;
-import com.bilibili.model.bean.ResultObject;
+import com.bilibili.model.bean.DataListResponse;
+import com.bilibili.model.bean.DataObjectResponse;
+import com.bilibili.model.bean.LiveAreas;
+import com.bilibili.model.bean.LiveCommon;
+import com.bilibili.model.bean.LiveRecommend;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -25,13 +25,13 @@ public interface LiveApis {
      */
     @GET("/AppNewIndex/recommend")
     @NeedSign
-    Observable<ResultObject<LiveRecommendResponse>> getRecommend(@Query("_device") String _device,
-                                                                 @Query("appkey") String appkey,
-                                                                 @Query("build") String build,
-                                                                 @Query("mobi_app") String mobi_app,
-                                                                 @Query("platform") String platform,
-                                                                 @Query("scale") String scale,
-                                                                 @Query("ts") String ts
+    Observable<DataObjectResponse<LiveRecommend>> getRecommend(@Query("_device") String _device,
+                                                               @Query("appkey") String appkey,
+                                                               @Query("build") String build,
+                                                               @Query("mobi_app") String mobi_app,
+                                                               @Query("platform") String platform,
+                                                               @Query("scale") String scale,
+                                                               @Query("ts") String ts
     );
 
     /**
@@ -40,13 +40,13 @@ public interface LiveApis {
      */
     @GET("/AppNewIndex/common")
     @NeedSign
-    Observable<ResultObject<LiveCommonResponse>> getCommon(@Query("_device") String _device,
-                                                           @Query("appkey") String appkey,
-                                                           @Query("build") String build,
-                                                           @Query("mobi_app") String mobi_app,
-                                                           @Query("platform") String platform,
-                                                           @Query("scale") String scale,
-                                                           @Query("ts") String ts
+    Observable<DataObjectResponse<LiveCommon>> getCommon(@Query("_device") String _device,
+                                                         @Query("appkey") String appkey,
+                                                         @Query("build") String build,
+                                                         @Query("mobi_app") String mobi_app,
+                                                         @Query("platform") String platform,
+                                                         @Query("scale") String scale,
+                                                         @Query("ts") String ts
     );
 
     /**
@@ -55,12 +55,12 @@ public interface LiveApis {
      */
     @GET("/AppIndex/areas")
     @NeedSign
-    Observable<ResultList<LiveAreasResponse>> getAreas(@Query("_device") String _device,
-                                                       @Query("appkey") String appkey,
-                                                       @Query("build") String build,
-                                                       @Query("mobi_app") String mobi_app,
-                                                       @Query("platform") String platform,
-                                                       @Query("scale") String scale,
-                                                       @Query("ts") String ts
+    Observable<DataListResponse<LiveAreas>> getAreas(@Query("_device") String _device,
+                                                     @Query("appkey") String appkey,
+                                                     @Query("build") String build,
+                                                     @Query("mobi_app") String mobi_app,
+                                                     @Query("platform") String platform,
+                                                     @Query("scale") String scale,
+                                                     @Query("ts") String ts
     );
 }

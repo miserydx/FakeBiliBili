@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by jiayiyang on 17/5/2.
  */
 
-public class RegionResponse {
+public class AppRegion {
 
     private int tid;
 

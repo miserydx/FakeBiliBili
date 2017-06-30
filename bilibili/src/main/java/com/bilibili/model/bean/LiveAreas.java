@@ -4,7 +4,7 @@ package com.bilibili.model.bean;
  * Created by jiayiyang on 17/5/5.
  */
 
-public class LiveAreasResponse {
+public class LiveAreas {
 
     private int id;
 

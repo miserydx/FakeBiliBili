@@ -6,7 +6,7 @@ import java.util.List;
  * Created by jiayiyang on 17/5/5.
  */
 
-public class LiveRecommendResponse {
+public class LiveRecommend {
 
     private Recommend_data recommend_data;
 

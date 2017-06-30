@@ -8,7 +8,7 @@ import java.util.List;
  * Created by jiayiyang on 17/4/28.
  */
 
-public class IndexResponse {
+public class AppIndex {
 
     private String title;
 

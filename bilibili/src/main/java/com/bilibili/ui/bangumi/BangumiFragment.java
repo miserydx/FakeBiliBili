@@ -11,7 +11,7 @@ import butterknife.BindView;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
- * Created by Android_ZzT on 17/6/18.
+ * Created by miserydx on 17/6/29.
  */
 
 public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implements BangumiContract.View {

@@ -4,7 +4,7 @@ package com.bilibili.model.bean;
  * Created by jiayiyang on 17/5/5.
  */
 
-public class SearchHotResponse {
+public class AppSearchHot {
 
     private String trackid;
 

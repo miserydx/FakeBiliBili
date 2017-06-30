@@ -4,7 +4,7 @@ package com.bilibili.model.bean;
  * Created by jiayiyang on 17/4/28.
  */
 
-public class SplashResponse {
+public class AppSplash {
 
         private int id;
 

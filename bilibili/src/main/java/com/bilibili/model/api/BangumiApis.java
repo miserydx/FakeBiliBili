@@ -1,8 +1,8 @@
 package com.bilibili.model.api;
 
 import com.bilibili.model.api.annotation.NeedSign;
-import com.bilibili.model.bean.BangumiIndexPageResponse;
-import com.bilibili.model.bean.ResultObject;
+import com.bilibili.model.bean.BangumiIndexPage;
+import com.bilibili.model.bean.ResultObjectResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -22,7 +22,7 @@ public interface BangumiApis {
      */
     @GET("/appindex/follow_index_page")
     @NeedSign
-    Observable<ResultObject<BangumiIndexPageResponse>> getIndexPage(@Query("appkey") String appkey,
+    Observable<ResultObjectResponse<BangumiIndexPage>> getIndexPage(@Query("appkey") String appkey,
                                                                     @Query("build") String build,
                                                                     @Query("mobi_app") String mobi_app,
                                                                     @Query("platform") String platform,

@@ -4,7 +4,7 @@ package com.bilibili.model.bean;
  * Created by jiayiyang on 17/5/2.
  */
 
-public class ResultObject<T> {
+public class DataObjectResponse<T> {
 
     private int code;
 
