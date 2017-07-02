@@ -43,4 +43,8 @@
     <string name="nav_account_balance_wallet">B币钱包</string>
     <string name="nav_color_lens">主题选择</string>
     <string name="nav_settings">设置与帮助</string>
+
+    <!-- Bangumi -->
+    <string name="bangumi_index_all_title">索引</string>
+    <string name="bangumi_timeline_title">时间表</string>
 </resources>

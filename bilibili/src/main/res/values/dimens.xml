@@ -9,14 +9,82 @@
     <dimen name="toolbar_padding_top">50dp</dimen>
 
     <!--common-->
-    <dimen name="text_size_large">14sp</dimen>
-    <dimen name="text_size_normal">13sp</dimen>
-    <dimen name="text_size_small">11sp</dimen>
+    <dimen name="height_8">8.0dip</dimen>
+    <dimen name="height_20dp">20.0dip</dimen>
+    <dimen name="height_22">22.0dip</dimen>
+    <dimen name="height_24dp">24.0dip</dimen>
+    <dimen name="height_26">26.0dip</dimen>
+    <dimen name="height_28">28.0dip</dimen>
+    <dimen name="height_32">32.0dip</dimen>
+    <dimen name="height_48">48.0dip</dimen>
+    <dimen name="height_56">56.0dip</dimen>
+    <dimen name="height_60">60.0dip</dimen>
+    <dimen name="height_68">68.0dip</dimen>
+    <dimen name="height_72">72.0dip</dimen>
+    <dimen name="height_128">128.0dip</dimen>
+    <dimen name="height_178">178.0dip</dimen>
+
+    <dimen name="index_card_radius">4dp</dimen>
+
+    <dimen name="left_margin_4">4.0dip</dimen>
+    <dimen name="left_margin_5">5.0dip</dimen>
+    <dimen name="left_margin_12">12.0dip</dimen>
+    <dimen name="left_margin_16">16.0dip</dimen>
+    <dimen name="left_margin_20">20.0dip</dimen>
+    <dimen name="left_margin_22">22.0dip</dimen>
+    <dimen name="left_margin_24">24.0dip</dimen>
+    <dimen name="left_margin_273">273.0dip</dimen>
+    <dimen name="left_margin_290">290.0dip</dimen>
+    <dimen name="left_margin_35">35.0dip</dimen>
+    <dimen name="left_margin_48">48.0dip</dimen>
 
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_min">2dp</dimen>
+
+    <dimen name="padding_6">6.0dip</dimen>
+    <dimen name="padding_8">8.0dip</dimen>
+    <dimen name="padding_10">10.0dip</dimen>
+    <dimen name="padding_12">12.0dip</dimen>
+    <dimen name="padding_20dp">20.0dip</dimen>
+    <dimen name="padding_22">22.0dip</dimen>
+    <dimen name="padding_24dp">24.0dip</dimen>
+    <dimen name="padding_26">26.0dip</dimen>
+    <dimen name="padding_28">28.0dip</dimen>
+    <dimen name="padding_32">32.0dip</dimen>
+    <dimen name="padding_48">48.0dip</dimen>
+    <dimen name="padding_56">56.0dip</dimen>
+    <dimen name="padding_60">60.0dip</dimen>
+    <dimen name="padding_68">68.0dip</dimen>
+    <dimen name="padding_72">72.0dip</dimen>
+    <dimen name="padding_128">128.0dip</dimen>
+    <dimen name="padding_178">178.0dip</dimen>
+
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_tiny">10sp</dimen>
+
+    <dimen name="view_size_1dp">1.0dip</dimen>
+    <dimen name="view_size_1px">1.0dip</dimen>
+
+    <dimen name="width_8">8.0dip</dimen>
+    <dimen name="width_20dp">20.0dip</dimen>
+    <dimen name="width_22">22.0dip</dimen>
+    <dimen name="width_24dp">24.0dip</dimen>
+    <dimen name="width_26">26.0dip</dimen>
+    <dimen name="width_28">28.0dip</dimen>
+    <dimen name="width_32">32.0dip</dimen>
+    <dimen name="width_48">48.0dip</dimen>
+    <dimen name="width_56">56.0dip</dimen>
+    <dimen name="width_58">58.0dip</dimen>
+    <dimen name="width_60">60.0dip</dimen>
+    <dimen name="width_68">68.0dip</dimen>
+    <dimen name="width_72">72.0dip</dimen>
+    <dimen name="width_128">128.0dip</dimen>
+    <dimen name="width_178">178.0dip</dimen>
 
     <!--main-->
     <dimen name="tab_layout_height">40dp</dimen>
@@ -25,5 +93,8 @@
     <dimen name="avatar_small_width">20.0dip</dimen>
     <dimen name="avatar_top_margin">40dp</dimen>
     <dimen name="list_item_avatar_large_size">70dp</dimen>
+
+    <!--bangumi-->
+    <dimen name="bangumi_card_image_height">105dp</dimen>
 
 </resources>

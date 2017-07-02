@@ -16,6 +16,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import me.drakeet.multitype.Items;
 
 /**
  * Created by miserydx on 17/6/29.
@@ -41,6 +42,12 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
                     @Override
                     public void accept(@NonNull ResultObjectResponse<BangumiIndexPage> bangumiIndexPageRes) throws Exception {
                         Log.d(TAG, "ResultObjectResponse<BangumiIndexPage> = "+bangumiIndexPageRes);
+                        Items items = new Items();
+                        items.add(new BangumiIndexFollowBinder.BangumiIndexFollow());
+                        items.add(new BangumiHomeBinder.BangumiHome());
+                        items.add(bangumiIndexPageRes.getData().getRecommend_cn().getFoot().get(0));
+                        items.add(bangumiIndexPageRes.getData().getRecommend_jp().getFoot().get(0));
+                        mView.updateData(items);
                     }
                 });
         registerRx(disposable);
