@@ -28,7 +28,10 @@
 
     <dimen name="common_margin_4">4.0dip</dimen>
     <dimen name="common_margin_5">5.0dip</dimen>
+    <dimen name="common_margin_6">6.0dip</dimen>
+    <dimen name="common_margin_10">10.0dip</dimen>
     <dimen name="common_margin_12">12.0dip</dimen>
+    <dimen name="common_margin_15">15.0dip</dimen>
     <dimen name="common_margin_16">16.0dip</dimen>
     <dimen name="common_margin_20">20.0dip</dimen>
     <dimen name="common_margin_22">22.0dip</dimen>
@@ -38,25 +41,6 @@
     <dimen name="common_margin_273">273.0dip</dimen>
     <dimen name="common_margin_290">290.0dip</dimen>
 
-    <dimen name="margin_6">6.0dip</dimen>
-    <dimen name="margin_8">8.0dip</dimen>
-    <dimen name="margin_9">9.0dip</dimen>
-    <dimen name="margin_10">10.0dip</dimen>
-    <dimen name="margin_12">12.0dip</dimen>
-    <dimen name="margin_15">15.0dip</dimen>
-    <dimen name="margin_20">20.0dip</dimen>
-    <dimen name="margin_22">22.0dip</dimen>
-    <dimen name="margin_24dp">24.0dip</dimen>
-    <dimen name="margin_26">26.0dip</dimen>
-    <dimen name="margin_28">28.0dip</dimen>
-    <dimen name="margin_32">32.0dip</dimen>
-    <dimen name="margin_48">48.0dip</dimen>
-    <dimen name="margin_56">56.0dip</dimen>
-    <dimen name="margin_60">60.0dip</dimen>
-    <dimen name="margin_68">68.0dip</dimen>
-    <dimen name="margin_72">72.0dip</dimen>
-    <dimen name="margin_128">128.0dip</dimen>
-    <dimen name="margin_178">178.0dip</dimen>
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_medium">12dp</dimen>
@@ -88,7 +72,7 @@
     <dimen name="text_size_tiny">10sp</dimen>
 
     <dimen name="view_size_1dp">1.0dip</dimen>
-    <dimen name="view_size_1px">1.0dip</dimen>
+    <dimen name="view_size_1px">1.0px</dimen>
 
     <dimen name="width_8">8.0dip</dimen>
     <dimen name="width_20dp">20.0dip</dimen>
