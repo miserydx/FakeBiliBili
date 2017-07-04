@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.LiveApis;
-import com.bilibili.model.bean.ResultObject;
+import com.bilibili.model.bean.DataObjectResponse;
 import com.bilibili.model.bean.live.LiveCommon;
 import com.bilibili.model.bean.live.LiveRecommend;
 import com.bilibili.model.bean.live.LiveResponse;
@@ -40,7 +40,7 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
 
     @Override
     public void loadData() {
-        Observable<ResultObject<LiveCommon>> common = liveApis.getCommon(
+        Observable<DataObjectResponse<LiveCommon>> common = liveApis.getCommon(
                 ApiHelper.DEVICE,
                 ApiHelper.APP_KEY,
                 ApiHelper.BUILD,
@@ -49,7 +49,7 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
                 ApiHelper.SCALE,
                 DateUtil.getSystemTime());
 
-        Observable<ResultObject<LiveRecommend>> recommend = liveApis.getRecommend(
+        Observable<DataObjectResponse<LiveRecommend>> recommend = liveApis.getRecommend(
                 ApiHelper.DEVICE,
                 ApiHelper.APP_KEY,
                 ApiHelper.BUILD,
@@ -58,22 +58,22 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
                 ApiHelper.SCALE,
                 DateUtil.getSystemTime());
 
-        Observable.zip(common, recommend, new BiFunction<ResultObject<LiveCommon>, ResultObject<LiveRecommend>, ResultObject<LiveResponse>>() {
+        Observable.zip(common, recommend, new BiFunction<DataObjectResponse<LiveCommon>, DataObjectResponse<LiveRecommend>, DataObjectResponse<LiveResponse>>() {
 
             @Override
-            public ResultObject<LiveResponse> apply(@NonNull ResultObject<LiveCommon> liveCommon, @NonNull ResultObject<LiveRecommend> liveRecommend) throws Exception {
+            public DataObjectResponse<LiveResponse> apply(@NonNull DataObjectResponse<LiveCommon> liveCommon, @NonNull DataObjectResponse<LiveRecommend> liveRecommend) throws Exception {
                 LiveResponse liveResponse = new LiveResponse(liveRecommend.getData(), liveCommon.getData());
-                ResultObject<LiveResponse> liveResponseResultObject = new ResultObject<>();
-                liveResponseResultObject.setData(liveResponse);
-                return liveResponseResultObject;
+                DataObjectResponse<LiveResponse> liveResponseDataObjectResponse = new DataObjectResponse<>();
+                liveResponseDataObjectResponse.setData(liveResponse);
+                return liveResponseDataObjectResponse;
             }
         })
 
-                .map(new Function<ResultObject<LiveResponse>, Items>() {
+                .map(new Function<DataObjectResponse<LiveResponse>, Items>() {
 
                     @Override
-                    public Items apply(@NonNull ResultObject<LiveResponse> liveResponseResultObject) throws Exception {
-                        return liveResponse2Items(liveResponseResultObject);
+                    public Items apply(@NonNull DataObjectResponse<LiveResponse> liveResponseDataObjectResponse) throws Exception {
+                        return liveResponse2Items(liveResponseDataObjectResponse);
                     }
                 })
                 .subscribeOn(Schedulers.newThread())
@@ -104,9 +104,9 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
 
     }
 
-    private Items liveResponse2Items(ResultObject<LiveResponse> liveResponseResultObject) {
+    private Items liveResponse2Items(DataObjectResponse<LiveResponse> liveResponseDataObjectResponse) {
         Items items = new Items();
-        LiveResponse liveResponse = liveResponseResultObject.getData();
+        LiveResponse liveResponse = liveResponseDataObjectResponse.getData();
         LiveCommon liveCommon = liveResponse.getLiveCommonResponse();
         LiveRecommend liveRecommend = liveResponse.getLiveRecommendResponse();
 

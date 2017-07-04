@@ -14,11 +14,8 @@ import android.widget.LinearLayout;
 
 import com.bilibili.App;
 import com.bilibili.R;
-<<<<<<< HEAD
 import com.bilibili.ui.bangumi.BangumiFragment;
-=======
 import com.bilibili.ui.live.LiveFragment;
->>>>>>> feature: 增加直播界面及逻辑
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 import com.common.base.BaseFragment;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -52,11 +49,7 @@ public class MainFragment extends BaseFragment {
     BangumiFragment mBangumiFragment;
 
     private OnInteractionListener mListener;
-<<<<<<< HEAD
-    private MainPagerAdapter pagerAdapter;
-=======
-    private NewsPagerAdapter adapter;
->>>>>>> feature: 增加直播界面及逻辑
+    private MainPagerAdapter adapter;
     private List<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
 
@@ -87,22 +80,10 @@ public class MainFragment extends BaseFragment {
         setHasOptionsMenu(true);
         ((SupportActivity) getActivity()).setSupportActionBar(mToolbar);
         ((SupportActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-<<<<<<< HEAD
-        for (String s : mTitles) {
-            if(s.equals(getResources().getString(R.string.section_bangumi))){
-                mFragments.add(mBangumiFragment);
-            }else {
-                mFragments.add(new NewsPageFragment());
-            }
-        }
-        pagerAdapter = new MainPagerAdapter(getChildFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-=======
         mTitles = getResources().getStringArray(R.array.sections);
         initChildFragment();
-        adapter = new NewsPagerAdapter(getChildFragmentManager());
+        adapter = new MainPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
->>>>>>> feature: 增加直播界面及逻辑
         tabLayout.setViewPager(viewPager, mTitles);
     }
 
@@ -137,20 +118,16 @@ public class MainFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-    private class MainPagerAdapter extends FragmentPagerAdapter {
-=======
     private void initChildFragment() {
         mFragments.add(new LiveFragment());
         mFragments.add(new NewsPageFragment());
-        mFragments.add(new NewsPageFragment());
+        mFragments.add(new BangumiFragment());
         mFragments.add(new NewsPageFragment());
         mFragments.add(new NewsPageFragment());
         mFragments.add(new NewsPageFragment());
     }
 
-    private class NewsPagerAdapter extends FragmentPagerAdapter {
->>>>>>> feature: 增加直播界面及逻辑
+    private class MainPagerAdapter extends FragmentPagerAdapter {
 
         MainPagerAdapter(FragmentManager fm) {
             super(fm);
