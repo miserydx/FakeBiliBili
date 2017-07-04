@@ -45,6 +45,12 @@
     <string name="nav_settings">设置与帮助</string>
 
     <!-- Bangumi -->
+    <string name="bangumi_common_section_header_recommend">番剧推荐</string>
+    <string name="bangumi_follow_section_header_more">查看更多&#160;</string>
+    <string name="bangumi_follow_section_header_recommend_domestic">国产动画推荐</string>
     <string name="bangumi_index_all_title">索引</string>
+    <string name="bangumi_index_status_format_1">更新至%s</string>
+    <string name="bangumi_index_status_format_2">全%s话</string>
+    <string name="bangumi_index_status_format_3">更新至第%s话</string>
     <string name="bangumi_timeline_title">时间表</string>
 </resources>

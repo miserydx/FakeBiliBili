@@ -1,4 +1,4 @@
-package com.bilibili.ui.bangumi;
+package com.bilibili.ui.bangumi.viewbinder;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,7 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by miserydx on 17/7/2.
  */
 
-public class BangumiHomeBinder extends ItemViewBinder<BangumiHomeBinder.BangumiHome, BangumiHomeBinder.BangumiHomeHolder>{
+public class BangumiHomeBinder extends ItemViewBinder<BangumiHomeBinder.BangumiHome, BangumiHomeBinder.BangumiHomeHolder> {
 
     @NonNull
     @Override
@@ -28,13 +28,14 @@ public class BangumiHomeBinder extends ItemViewBinder<BangumiHomeBinder.BangumiH
 
     }
 
-    static class BangumiHomeHolder extends RecyclerView.ViewHolder{
+    static class BangumiHomeHolder extends RecyclerView.ViewHolder {
+
         public BangumiHomeHolder(View itemView) {
             super(itemView);
         }
     }
 
-    static class BangumiHome {
+    public static class BangumiHome {
 
     }
 }

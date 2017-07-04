@@ -1,4 +1,4 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.bangumi;
 
 import java.util.List;
 
@@ -210,7 +210,9 @@ public class BangumiIndexPage {
 
     }
 
-    class Recommend {
+    public class Recommend {
+        private String badge;
+
         private String cover;
 
         private String favourites;
@@ -236,6 +238,14 @@ public class BangumiIndexPage {
         private int total_count;
 
         private int watching_count;
+
+        public String getBadge() {
+            return badge;
+        }
+
+        public void setBadge(String badge) {
+            this.badge = badge;
+        }
 
         public void setCover(String cover) {
             this.cover = cover;

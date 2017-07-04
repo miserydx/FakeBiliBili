@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="125dp"
     android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/index_card_item_pull_tips_background"
-    app:cardElevation="0dp">
+    android:foreground="@drawable/item_background">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bangumi_home_login_guide" />
 
-</android.support.v7.widget.CardView>
+</FrameLayout>

@@ -6,7 +6,7 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/index_card_item_pull_tips_background"
-    app:cardCornerRadius="@dimen/index_card_radius"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardElevation="0dp"
     app:cardPreventCornerOverlap="false">
 
@@ -27,6 +27,7 @@
             android:layout_marginLeft="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_small"
+            android:textColor="@color/TextColorBlack"
             android:textSize="@dimen/text_size_normal" />
 
         <TextView
@@ -34,9 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_tv"
+            android:layout_marginBottom="@dimen/margin_10"
             android:layout_marginLeft="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_small"
+            android:textColor="@color/_text__white_dark"
             android:textSize="@dimen/text_size_normal" />
     </RelativeLayout>
 

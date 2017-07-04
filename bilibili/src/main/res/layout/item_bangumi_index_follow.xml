@@ -21,7 +21,9 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/common_margin_4">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -49,7 +51,9 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/common_margin_4">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -80,92 +84,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:divider="@drawable/divider_middle"
+        android:orientation="horizontal"
+        android:showDividers="middle">
 
-        <android.support.v7.widget.CardView
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/index_card_item_pull_tips_background"
-            app:cardElevation="0dp">
+            android:foreground="@drawable/item_background">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/divider_right">
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_6"
+                android:paddingTop="@dimen/padding_6">
 
-                <LinearLayout
+                <ImageView
+                    android:layout_width="@dimen/width_26"
+                    android:layout_height="@dimen/height_26"
+                    android:src="@drawable/bangumi_follow_ic_timeline" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/padding_6"
-                    android:paddingTop="@dimen/padding_6">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/common_margin_24"
+                    android:text="@string/bangumi_timeline_title"
+                    android:textColor="@color/index_card_text_light"
+                    android:textSize="@dimen/text_size_small" />
 
-                    <ImageView
-                        android:layout_width="@dimen/width_26"
-                        android:layout_height="@dimen/height_26"
-                        android:src="@drawable/bangumi_follow_ic_timeline" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/left_margin_24"
-                        android:text="@string/bangumi_timeline_title"
-                        android:textColor="@color/index_card_text_light"
-                        android:textSize="@dimen/text_size_small" />
+        </FrameLayout>
 
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/index_card_item_pull_tips_background"
-            app:cardElevation="0dp">
+            android:foreground="@drawable/item_background">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_6"
+                android:paddingTop="@dimen/padding_6">
 
-                <LinearLayout
+                <ImageView
+                    android:layout_width="@dimen/width_26"
+                    android:layout_height="@dimen/height_26"
+                    android:src="@drawable/bangumi_follow_ic_index" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/padding_6"
-                    android:paddingTop="@dimen/padding_6">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/common_margin_24"
+                    android:letterSpacing="0.5"
+                    android:text="@string/bangumi_index_all_title"
+                    android:textColor="@color/index_card_text_light"
+                    android:textSize="@dimen/text_size_small" />
 
-                    <ImageView
-                        android:layout_width="@dimen/width_26"
-                        android:layout_height="@dimen/height_26"
-                        android:src="@drawable/bangumi_follow_ic_index" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/left_margin_24"
-                        android:letterSpacing="0.5"
-                        android:text="@string/bangumi_index_all_title"
-                        android:textColor="@color/index_card_text_light"
-                        android:textSize="@dimen/text_size_small" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
+        </FrameLayout>
 
     </LinearLayout>
 

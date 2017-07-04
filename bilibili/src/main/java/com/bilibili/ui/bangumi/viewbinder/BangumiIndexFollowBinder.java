@@ -1,4 +1,4 @@
-package com.bilibili.ui.bangumi;
+package com.bilibili.ui.bangumi.viewbinder;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +34,7 @@ public class BangumiIndexFollowBinder extends ItemViewBinder<BangumiIndexFollowB
         }
     }
 
-    static class BangumiIndexFollow {
+    public static class BangumiIndexFollow {
 
     }
 }

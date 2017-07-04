@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:right="0dp"
-        android:top="@dimen/padding_6"
-        android:bottom="@dimen/padding_6">
+    <item
+        android:bottom="@dimen/padding_6"
+        android:top="@dimen/padding_6">
         <shape android:shape="rectangle">
+            <size android:width="1dp" />
+            <padding
+                android:bottom="@dimen/padding_6"
+                android:top="@dimen/padding_6" />
             <solid android:color="@color/theme_color_dividing_line_tm" />
         </shape>
     </item>
-    <item android:right="1dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/white" />
-        </shape>
-    </item>
-
 </layer-list>

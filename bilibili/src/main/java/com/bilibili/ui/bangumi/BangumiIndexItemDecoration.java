@@ -3,6 +3,7 @@ package com.bilibili.ui.bangumi;
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.bilibili.R;
@@ -23,11 +24,32 @@ public class BangumiIndexItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = parent.getChildLayoutPosition(view);
         if (spanSizeLookup.getSpanSize(position) == 3) {
-            if(position > 1){//追翻页列表前两项为静态item
+            if (position == 1) {
+                outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.bangumi_index_home_bottom_margin);
+            }
+            if (position > 1) {//追翻页列表前两项为静态item
                 outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_normal);
                 outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
                 outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
             }
+        } else {
+            int spanIndex = spanSizeLookup.getSpanIndex(position, 3);
+            Log.d("misery", "spanIndex = " + spanIndex);
+            switch (spanIndex) {
+                case 0:
+                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_min);
+                    break;
+                case 1:
+                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
+                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
+                    break;
+                case 2:
+                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_min);
+                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                    break;
+            }
+            outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_15);
         }
     }
 

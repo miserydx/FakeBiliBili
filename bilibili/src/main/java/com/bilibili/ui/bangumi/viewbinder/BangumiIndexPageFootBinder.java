@@ -1,4 +1,4 @@
-package com.bilibili.ui.bangumi;
+package com.bilibili.ui.bangumi.viewbinder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.BangumiIndexPage;
+import com.bilibili.model.bean.bangumi.BangumiIndexPage;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -42,7 +42,7 @@ public class BangumiIndexPageFootBinder extends ItemViewBinder<BangumiIndexPage.
         Glide.with(mContext)
                 .load(item.getCover())
                 .asBitmap()
-                .placeholder(R.drawable.ic_download_cover_default)
+                .placeholder(R.drawable.bili_default_image_tv)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivCover);
         holder.tvTitle.setText(item.getTitle());

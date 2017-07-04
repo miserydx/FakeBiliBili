@@ -13,7 +13,9 @@ public interface BangumiContract {
 
     interface View extends BaseView {
 
-        void updateData(Items items);
+        void onDataUpdated(Items items);
+
+        void onRefreshingStateChanged(boolean isRefresh);
 
     }
 
