@@ -40,6 +40,7 @@ public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Liv
         Glide.with(holder.ivCover.getContext())
                 .load(item.getCover().getSrc())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.bili_default_image_tv)
                 .crossFade(300)
                 .into(holder.ivCover);
 

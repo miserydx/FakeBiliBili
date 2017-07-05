@@ -116,15 +116,15 @@ public class SmartViewPager extends FrameLayout {
         removeAllViews();
         mAdapter = adapter;
         mViewPager.setAdapter(adapter);
+        addView(mViewPager);
         if (mIsNeedIndicator) {
             int count = mIsNeedCirculate ? (mAdapter.getCount() - 2) : mAdapter.getCount();
             mIndicator.setItemCount(count);
             addView(mIndicator);
         }
-        addView(mViewPager);
     }
 
-    public void setNeedAutoCirculate(boolean needAutoCirculate) {
+    public void setNeedAutoScroll(boolean needAutoCirculate) {
         mIsNeedAutoScroll = needAutoCirculate;
         sHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
     }
@@ -136,10 +136,12 @@ public class SmartViewPager extends FrameLayout {
     public void setIndicatorColor(int color, int indicatorColor) {
         mIndicator.setColor(color);
         mIndicator.setIndicatorColor(indicatorColor);
+        requestLayout();
     }
 
     public void setIndicatorRadius(int dp) {
         mIndicator.setRadius(dp);
+        requestLayout();
     }
 
     public void setIndicatorGravity(int gravity) {
@@ -207,6 +209,7 @@ public class SmartViewPager extends FrameLayout {
                             mViewPager.setCurrentItem(count - 2, false);
                         }
                     }, 200);
+
                 } else if (position == count - 1) {
                     postDelayed(new Runnable() {
                         @Override
@@ -214,6 +217,7 @@ public class SmartViewPager extends FrameLayout {
                             mViewPager.setCurrentItem(1, false);
                         }
                     }, 200);
+
                 }
             }
         }

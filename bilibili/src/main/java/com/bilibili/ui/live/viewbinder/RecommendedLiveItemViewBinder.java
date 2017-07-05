@@ -40,6 +40,7 @@ public class RecommendedLiveItemViewBinder extends ItemViewBinder<LiveRecommend.
         holder.ivCover.setScaleType(ImageView.ScaleType.FIT_XY);
         Glide.with(holder.ivCover.getContext())
                 .load(item.getCover().getSrc())
+                .placeholder(R.drawable.bili_default_image_tv)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade(300)
                 .into(holder.ivCover);

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,8 +7,5 @@
     <com.bilibili.widget.banner.SmartViewPager
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:need_indicator="true"
-        app:circulate="true"
-        app:auto_scroll="true"/>
+        android:layout_height="120dp" />
 </LinearLayout>

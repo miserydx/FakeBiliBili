@@ -16,7 +16,6 @@ import com.bilibili.widget.banner.BannerAdapter;
 import com.bilibili.widget.banner.SmartViewPager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.common.util.SystemUtil;
 
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
             super(itemView);
             ButterKnife.bind(this, itemView);
             banner.setNeedCirculate(true);
-            banner.setNeedAutoCirculate(true);
+            banner.setNeedAutoScroll(true);
             banner.setIndicatorGravity(Gravity.BOTTOM | Gravity.RIGHT);
             banner.setIndicatorColor(ContextCompat.getColor(itemView.getContext(), R.color.white),
                     ContextCompat.getColor(itemView.getContext(),R.color.pink));
@@ -84,7 +83,8 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         protected ImageView getItemView() {
             ImageView imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setMaxHeight(SystemUtil.dp2px(context, 64));
+            ViewGroup.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            imageView.setLayoutParams(params);
             imageView.setBackgroundResource(R.drawable.ic_next_video_placeholder);
             return imageView;
         }
@@ -94,6 +94,7 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
             Glide.with(context)
                     .load(item.getImg())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.bili_default_image_tv)
                     .crossFade(300)
                     .into(itemView);
         }

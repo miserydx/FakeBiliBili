@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/margin_normal"
     android:layout_marginRight="@dimen/margin_normal"
-    android:layout_marginBottom="@dimen/margin_normal">
+    android:layout_marginBottom="@dimen/margin_normal"
+    android:clickable="true"
+    android:foreground="@drawable/item_background">
 
     <TextView
         style="@style/normal_text_style"

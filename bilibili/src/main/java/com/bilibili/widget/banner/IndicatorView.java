@@ -16,7 +16,7 @@ public class IndicatorView extends View {
 
     public static final int DEFAULT_ITEM_COUNT = 0;
 
-    public static final int DEFAULT_COLOR = Color.LTGRAY;
+    public static final int DEFAULT_COLOR = Color.WHITE;
 
     public static final int DEFAULT_INDICATOR_COLOR = Color.GRAY;
 
@@ -64,7 +64,7 @@ public class IndicatorView extends View {
         mIndicatorPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mIndicatorPaint.setColor(mIndicatorColor);
 
-        mRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+        mRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics());
         mIndicatorRadius = mRadius;
         mPadding = mRadius;
     }
@@ -110,11 +110,13 @@ public class IndicatorView extends View {
 
     public void setColor(int color) {
         mColor = color;
+        mPaint.setColor(mColor);
         invalidate();
     }
 
     public void setIndicatorColor(int color) {
         mIndicatorColor = color;
+        mIndicatorPaint.setColor(color);
         invalidate();
     }
 
