@@ -29,9 +29,11 @@ public class BangumiIndexFollowBinder extends ItemViewBinder<BangumiIndexFollowB
     }
 
     static class BangumiIndexFollowHolder extends RecyclerView.ViewHolder{
-        public BangumiIndexFollowHolder(View itemView) {
+
+        private BangumiIndexFollowHolder(View itemView) {
             super(itemView);
         }
+
     }
 
     public static class BangumiIndexFollow {

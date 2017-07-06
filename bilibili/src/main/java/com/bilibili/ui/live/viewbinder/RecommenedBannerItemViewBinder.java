@@ -14,6 +14,7 @@ import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveRecommend;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ public class RecommenedBannerItemViewBinder extends ItemViewBinder<LiveRecommend
     @Override
     protected void onBindViewHolder(@NonNull BannerViewHolder holder, @NonNull LiveRecommend.Recommend_data.Banner_data item) {
         int height = item.getCover().getHeight();
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height*3/2);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height * 3 / 2);
         holder.ivCover.setLayoutParams(params);
         holder.ivCover.setScaleType(ImageView.ScaleType.FIT_XY);
         Glide.with(holder.ivCover.getContext())
@@ -44,7 +45,7 @@ public class RecommenedBannerItemViewBinder extends ItemViewBinder<LiveRecommend
                 .crossFade(200)
                 .into(holder.ivCover);
         holder.tvName.setText(item.getOwner().getName());
-        holder.tvOnline.setText(String.valueOf(item.getOnline()));
+        holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
         String tintArea = "<font color='#FF4081'>" + "#" + item.getArea() + "#&nbsp;" + "</font>";
         holder.tvAreaTitle.setText(Html.fromHtml(tintArea + item.getTitle()));
     }

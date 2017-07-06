@@ -17,7 +17,8 @@
         <ImageView
             android:id="@+id/cover_iv"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bangumi_card_image_height" />
+            android:layout_height="@dimen/bangumi_card_image_height"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/title_tv"

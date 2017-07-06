@@ -30,9 +30,10 @@ public class BangumiHomeBinder extends ItemViewBinder<BangumiHomeBinder.BangumiH
 
     static class BangumiHomeHolder extends RecyclerView.ViewHolder {
 
-        public BangumiHomeHolder(View itemView) {
+        private BangumiHomeHolder(View itemView) {
             super(itemView);
         }
+
     }
 
     public static class BangumiHome {

@@ -16,7 +16,7 @@
         app:cardPreventCornerOverlap="false">
 
         <RelativeLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/cover_rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -25,6 +25,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/badge_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/yellow_dark"
+                android:paddingLeft="@dimen/padding_3"
+                android:paddingRight="@dimen/padding_3"
+                android:textColor="@color/_text__white"
+                android:textSize="@dimen/text_size_11"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/favourites_tv"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/ucrop_shadow_upside"
+                android:gravity="bottom"
+                android:padding="@dimen/padding_5"
+                android:textColor="@color/_text__white"
+                android:textSize="@dimen/text_size_11" />
 
         </RelativeLayout>
 

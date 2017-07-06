@@ -13,7 +13,7 @@
     <string name="nav_offline_manager">离线缓存</string>
     <string name="section_bangumi">追番</string>
     <string name="section_discover">发现</string>
-    <string name="section_focus">关注</string>
+    <string name="section_dynamic">动态</string>
     <string name="section_live">直播</string>
     <string name="section_more">分区</string>
     <string name="section_recommend">推荐</string>
@@ -52,5 +52,6 @@
     <string name="bangumi_index_status_format_1">更新至%s</string>
     <string name="bangumi_index_status_format_2">全%s话</string>
     <string name="bangumi_index_status_format_3">更新至第%s话</string>
+    <string name="bangumi_index_text_suffix_hit">%s人追番</string>
     <string name="bangumi_timeline_title">时间表</string>
 </resources>

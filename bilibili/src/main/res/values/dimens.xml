@@ -48,6 +48,8 @@
     <dimen name="margin_tiny">7dp</dimen>
     <dimen name="margin_min">2dp</dimen>
 
+    <dimen name="padding_3">3.0dip</dimen>
+    <dimen name="padding_5">5.0dip</dimen>
     <dimen name="padding_6">6.0dip</dimen>
     <dimen name="padding_8">8.0dip</dimen>
     <dimen name="padding_10">10.0dip</dimen>
@@ -66,6 +68,7 @@
     <dimen name="padding_128">128.0dip</dimen>
     <dimen name="padding_178">178.0dip</dimen>
 
+    <dimen name="text_size_11">11sp</dimen>
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="text_size_normal">14sp</dimen>
     <dimen name="text_size_small">12sp</dimen>

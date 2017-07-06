@@ -67,6 +67,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
+        mRecyclerView.setBackgroundResource(R.color.white);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new BangumiIndexItemDecoration(spanSizeLookup));
         mAdapter = new MultiTypeAdapter();

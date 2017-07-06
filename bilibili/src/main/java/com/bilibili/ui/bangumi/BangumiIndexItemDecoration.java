@@ -28,13 +28,12 @@ public class BangumiIndexItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.bangumi_index_home_bottom_margin);
             }
             if (position > 1) {//追翻页列表前两项为静态item
-                outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_normal);
                 outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
                 outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
             }
         } else {
             int spanIndex = spanSizeLookup.getSpanIndex(position, 3);
-            Log.d("misery", "spanIndex = " + spanIndex);
             switch (spanIndex) {
                 case 0:
                     outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);

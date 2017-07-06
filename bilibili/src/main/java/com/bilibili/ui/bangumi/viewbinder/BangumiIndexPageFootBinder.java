@@ -58,7 +58,7 @@ public class BangumiIndexPageFootBinder extends ItemViewBinder<BangumiIndexPage.
         @BindView(R.id.desc_tv)
         TextView tvDesc;
 
-        public BangumiIndexPageFootHolder(View itemView) {
+        private BangumiIndexPageFootHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

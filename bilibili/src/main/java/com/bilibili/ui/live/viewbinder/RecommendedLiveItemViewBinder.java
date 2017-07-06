@@ -14,6 +14,7 @@ import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveRecommend;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +47,7 @@ public class RecommendedLiveItemViewBinder extends ItemViewBinder<LiveRecommend.
                 .into(holder.ivCover);
 
         holder.tvName.setText(item.getOwner().getName());
-        holder.tvOnline.setText(String.valueOf(item.getOnline()));
+        holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
         String tintArea = "<font color='#FF4081'>" + "#" + item.getArea() + "#&nbsp;" + "</font>";
         holder.tvAreaTitle.setText(Html.fromHtml(tintArea + item.getTitle()));
     }

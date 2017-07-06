@@ -13,6 +13,7 @@ import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +46,7 @@ public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Liv
                 .into(holder.ivCover);
 
         holder.tvTitle.setText(item.getTitle());
-        holder.tvOnline.setText(String.valueOf(item.getOnline()));
+        holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
         holder.tvName.setText(item.getOwner().getName());
     }
 

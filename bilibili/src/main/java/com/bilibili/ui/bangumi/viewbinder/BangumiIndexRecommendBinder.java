@@ -49,7 +49,7 @@ public class BangumiIndexRecommendBinder extends ItemViewBinder<BangumiIndexReco
         @BindView(R.id.title_tv)
         TextView tvTitle;
 
-        public BangumiIndexRecommendHolder(View itemView) {
+        private BangumiIndexRecommendHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
