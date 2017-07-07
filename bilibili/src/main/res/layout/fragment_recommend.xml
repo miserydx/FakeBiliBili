@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/filter_bar_size"
+        android:background="@color/bg_main">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:foreground="@drawable/item_background"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_22"
+            android:paddingRight="@dimen/padding_22"
+            android:text="@string/index_feed_recommend"
+            android:textColor="@color/_text__white_dark"
+            android:textSize="@dimen/text_size_normal" />
+
+        <ImageView
+            android:id="@+id/attention_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/margin_small"
+            android:paddingRight="@dimen/margin_medium"
+            android:src="@drawable/ic_index_attention"
+            android:tint="@color/theme_color_primary" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/attention_iv"
+            android:paddingLeft="@dimen/margin_medium"
+            android:paddingRight="@dimen/margin_small"
+            android:src="@drawable/ic_index_rank"
+            android:tint="@color/theme_color_primary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_size_1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray_dark_alpha26"/>
+        
+    </RelativeLayout>
+
+    <include layout="@layout/layout_refresh_list" />
+
+</LinearLayout>

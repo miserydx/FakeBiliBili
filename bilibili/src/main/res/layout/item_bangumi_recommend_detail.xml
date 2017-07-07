@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/favourites_tv"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/height_60"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/ucrop_shadow_upside"
                 android:gravity="bottom"

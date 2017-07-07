@@ -159,5 +159,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="14dp"
-        android:background="@color/gray_light_2" />
+        android:background="@color/bg_main" />
 </LinearLayout>

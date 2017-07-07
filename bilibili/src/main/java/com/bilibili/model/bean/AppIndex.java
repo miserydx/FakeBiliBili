@@ -27,13 +27,19 @@ public class AppIndex {
 
     private int danmaku;
 
+    private int reply;
+
+    private int favorite;
+
+    private int coin;
+
+    private int share;
+
     private int idx;
 
     private int tid;
 
     private String tname;
-
-    private Tag tag;
 
     private List<Dislike_reasons> dislike_reasons;
 
@@ -46,6 +52,16 @@ public class AppIndex {
     private String name;
 
     private String face;
+
+    private String request_id;
+
+    private int src_id;
+
+    private boolean is_ad_loc;
+
+    private String client_ip;
+
+    private int ad_index;
 
     public void setTitle(String title) {
         this.title = title;
@@ -83,7 +99,7 @@ public class AppIndex {
         this._goto = _goto;
     }
 
-    public String getGoto() {
+    public String get_goto() {
         return this._goto;
     }
 
@@ -111,6 +127,38 @@ public class AppIndex {
         return this.danmaku;
     }
 
+    public void setReply(int reply) {
+        this.reply = reply;
+    }
+
+    public int getReply() {
+        return this.reply;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
+
+    public int getFavorite() {
+        return this.favorite;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public int getCoin() {
+        return this.coin;
+    }
+
+    public void setShare(int share) {
+        this.share = share;
+    }
+
+    public int getShare() {
+        return this.share;
+    }
+
     public void setIdx(int idx) {
         this.idx = idx;
     }
@@ -133,14 +181,6 @@ public class AppIndex {
 
     public String getTname() {
         return this.tname;
-    }
-
-    public void setTag(Tag tag) {
-        this.tag = tag;
-    }
-
-    public Tag getTag() {
-        return this.tag;
     }
 
     public void setDislike_reasons(List<Dislike_reasons> dislike_reasons) {
@@ -189,6 +229,46 @@ public class AppIndex {
 
     public String getFace() {
         return this.face;
+    }
+
+    public void setRequest_id(String request_id) {
+        this.request_id = request_id;
+    }
+
+    public String getRequest_id() {
+        return this.request_id;
+    }
+
+    public void setSrc_id(int src_id) {
+        this.src_id = src_id;
+    }
+
+    public int getSrc_id() {
+        return this.src_id;
+    }
+
+    public void setIs_ad_loc(boolean is_ad_loc) {
+        this.is_ad_loc = is_ad_loc;
+    }
+
+    public boolean getIs_ad_loc() {
+        return this.is_ad_loc;
+    }
+
+    public void setClient_ip(String client_ip) {
+        this.client_ip = client_ip;
+    }
+
+    public String getClient_ip() {
+        return this.client_ip;
+    }
+
+    public void setAd_index(int ad_index) {
+        this.ad_index = ad_index;
+    }
+
+    public int getAd_index() {
+        return this.ad_index;
     }
 
     class Dislike_reasons {

@@ -1,6 +1,7 @@
 package com.bilibili.ui.bangumi;
 
 import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,8 +41,8 @@ public class BangumiIndexItemDecoration extends RecyclerView.ItemDecoration {
                     outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_min);
                     break;
                 case 1:
-                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
-                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
+                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.common_margin_6);
+                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.common_margin_6);
                     break;
                 case 2:
                     outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_min);

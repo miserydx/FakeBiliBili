@@ -16,6 +16,7 @@
     <dimen name="height_26">26.0dip</dimen>
     <dimen name="height_28">28.0dip</dimen>
     <dimen name="height_32">32.0dip</dimen>
+    <dimen name="height_40">40.0dip</dimen>
     <dimen name="height_48">48.0dip</dimen>
     <dimen name="height_56">56.0dip</dimen>
     <dimen name="height_60">60.0dip</dimen>
@@ -45,13 +46,15 @@
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_medium">12dp</dimen>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="margin_tiny">7dp</dimen>
+    <dimen name="margin_tiny">6dp</dimen>
     <dimen name="margin_min">2dp</dimen>
 
+    <dimen name="padding_2">2.0dip</dimen>
     <dimen name="padding_3">3.0dip</dimen>
     <dimen name="padding_5">5.0dip</dimen>
     <dimen name="padding_6">6.0dip</dimen>
     <dimen name="padding_8">8.0dip</dimen>
+    <dimen name="padding_9">9.0dip</dimen>
     <dimen name="padding_10">10.0dip</dimen>
     <dimen name="padding_12">12.0dip</dimen>
     <dimen name="padding_20dp">20.0dip</dimen>
@@ -104,5 +107,9 @@
     <!--bangumi-->
     <dimen name="bangumi_card_image_height">105dp</dimen>
     <dimen name="bangumi_index_home_bottom_margin">17dp</dimen>
+
+    <!--recommend-->
+    <dimen name="filter_bar_size">40.0dip</dimen>
+    <dimen name="recommend_cover_height">102.0dip</dimen>
 
 </resources>

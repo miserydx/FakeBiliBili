@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_small"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/index_card_radius"
+    app:cardElevation="0dp"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/recommend_cover_height">
+
+            <ImageView
+                android:id="@+id/cover_iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/ucrop_shadow_upside" />
+
+            <TextView
+                android:id="@+id/play_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="@dimen/margin_min"
+                android:layout_marginLeft="@dimen/margin_tiny"
+                android:drawableLeft="@drawable/bangumi_common_ic_video_views"
+                android:drawablePadding="@dimen/padding_3"
+                android:textColor="@color/_text__white"
+                android:textSize="@dimen/text_size_11" />
+
+            <TextView
+                android:id="@+id/reply_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/margin_min"
+                android:layout_marginLeft="@dimen/margin_tiny"
+                android:layout_toRightOf="@id/play_tv"
+                android:drawableLeft="@drawable/bangumi_common_ic_video_danmakus"
+                android:drawablePadding="@dimen/padding_3"
+                android:textColor="@color/_text__white"
+                android:textSize="@dimen/text_size_11" />
+
+            <TextView
+                android:id="@+id/duration_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/margin_min"
+                android:layout_marginRight="@dimen/margin_tiny"
+                android:textColor="@color/_text__white"
+                android:textSize="@dimen/text_size_11" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:lines="2"
+            android:textColor="@color/TextColorBlack"
+            android:textSize="@dimen/text_size_normal" />
+
+        <TextView
+            android:id="@+id/t_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:paddingBottom="@dimen/padding_12"
+            android:paddingTop="@dimen/padding_12"
+            android:textColor="@color/_text__white_dark"
+            android:textSize="@dimen/text_size_small" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:paddingBottom="@dimen/padding_9"
+        android:paddingRight="@dimen/padding_12"
+        android:paddingTop="55dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/ic_more_grey" />
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

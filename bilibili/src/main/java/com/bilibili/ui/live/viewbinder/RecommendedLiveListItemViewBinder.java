@@ -2,6 +2,7 @@ package com.bilibili.ui.live.viewbinder;
 
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,6 +69,7 @@ public class RecommendedLiveListItemViewBinder extends ItemViewBinder<LiveRecomm
                 }
             });
             final int spacingPixel = SystemUtil.dp2px(itemView.getContext(), 8);
+            recyclerView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.bg_main));
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(gridLayoutManager);
             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {

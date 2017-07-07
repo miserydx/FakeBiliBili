@@ -6,6 +6,7 @@ import com.bilibili.di.scope.PerFragment;
 import com.bilibili.ui.bangumi.BangumiFragment;
 import com.bilibili.ui.live.LiveFragment;
 import com.bilibili.ui.main.MainFragment;
+import com.bilibili.ui.recommed.RecommendFragment;
 import com.bilibili.ui.test.fragment.NewsFragment;
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 
@@ -28,4 +29,6 @@ public interface FragmentComponent {
     void inject(LiveFragment liveFragment);
 
     void inject(BangumiFragment bangumiFragment);
+
+    void inject(RecommendFragment recommendFragment);
 }

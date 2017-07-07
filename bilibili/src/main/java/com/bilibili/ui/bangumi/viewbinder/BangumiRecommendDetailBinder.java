@@ -1,6 +1,7 @@
 package com.bilibili.ui.bangumi.viewbinder;
 
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -28,6 +29,8 @@ import me.drakeet.multitype.ItemViewBinder;
 
 public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPage.Recommend, BangumiRecommendDetailBinder.BangumiRecommendDetailHolder> {
 
+    private int coverHeight = 0;
+
     public BangumiRecommendDetailBinder() {
 
     }
@@ -41,15 +44,19 @@ public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPag
 
     @Override
     protected void onBindViewHolder(@NonNull final BangumiRecommendDetailHolder holder, @NonNull BangumiIndexPage.Recommend item) {
-        holder.rlCover.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int width = holder.rlCover.getWidth();
-                CardView.LayoutParams params = new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT, width * 4 / 3);
-                holder.rlCover.setLayoutParams(params);
-                holder.rlCover.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-            }
-        });
+        if (coverHeight != 0) {
+            setCoverHeight(holder.rlCover, coverHeight);
+        } else {
+            holder.rlCover.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    int width = holder.rlCover.getWidth();
+                    coverHeight = width * 4 / 3;
+                    setCoverHeight(holder.rlCover, coverHeight);
+                    holder.rlCover.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            });
+        }
         Glide.with(holder.ivCover.getContext())
                 .load(item.getCover())
                 .placeholder(R.drawable.bili_default_image_tv)
@@ -64,6 +71,11 @@ public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPag
         holder.tvTitle.setText(item.getTitle());
         String newestText = String.format(holder.tvNewest.getContext().getResources().getString(R.string.bangumi_index_status_format_3), item.getNewest_ep_index());
         holder.tvNewest.setText(newestText);
+    }
+
+    private void setCoverHeight(RelativeLayout rlCover, int height) {
+        CardView.LayoutParams params = new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT, height);
+        rlCover.setLayoutParams(params);
     }
 
     static class BangumiRecommendDetailHolder extends RecyclerView.ViewHolder {

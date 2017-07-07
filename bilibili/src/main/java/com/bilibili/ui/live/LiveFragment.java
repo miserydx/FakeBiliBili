@@ -64,7 +64,7 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
         mAdapter.register(FooterItemViewBinder.FooterItem.class, new FooterItemViewBinder());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color._bkgd__gray_very_light));
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -76,7 +76,8 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
                 }
             }
         });
-       mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRefreshLayout.setColorSchemeResources(R.color.theme_color_primary);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
            @Override
            public void onRefresh() {
                mPresenter.loadData();
