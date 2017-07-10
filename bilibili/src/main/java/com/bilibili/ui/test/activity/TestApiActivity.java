@@ -8,15 +8,12 @@ import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.AppApis;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.api.LiveApis;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
-import com.bilibili.model.bean.DataListResponse;
-import com.bilibili.model.bean.DataObjectResponse;
-import com.bilibili.model.bean.AppIndex;
-import com.bilibili.model.bean.AppRegion;
-import com.bilibili.model.bean.AppRegionShow;
 import com.bilibili.model.bean.AppSearchHot;
 import com.bilibili.model.bean.AppSplash;
+import com.bilibili.model.bean.DataListResponse;
+import com.bilibili.model.bean.DataObjectResponse;
 import com.bilibili.model.bean.ResultObjectResponse;
+import com.bilibili.model.bean.bangumi.BangumiIndexPage;
 import com.bilibili.model.bean.live.LiveAreas;
 import com.bilibili.model.bean.live.LiveCommon;
 import com.bilibili.model.bean.live.LiveRecommend;
@@ -27,7 +24,6 @@ import com.common.util.StatusBarUtil;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -54,36 +50,6 @@ public class TestApiActivity extends SupportActivity implements IBaseActivity {
     @Override
     public void initViewAndEvent() {
         StatusBarUtil.setColor(this, getResources().getColor(R.color.theme_color_primary));
-        appApis.getRegionShow(ApiHelper.APP_KEY,ApiHelper.BUILD,ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<DataListResponse<AppRegionShow>>() {
-                    @Override
-                    public void accept(@NonNull DataListResponse<AppRegionShow> appRegionShowRes) throws Exception {
-                        Log.d("misery", "DataListResponse<AppRegionShow>="+ appRegionShowRes);
-
-                    }
-                });
-
-        appApis.getRegion(ApiHelper.BUILD)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<DataListResponse<AppRegion>>() {
-                    @Override
-                    public void accept(DataListResponse<AppRegion> appRegionRes) {
-                        Log.d("misery", "DataListResponse<AppRegion>="+ appRegionRes);
-                    }
-                });
-
-        appApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<DataListResponse<AppIndex>>() {
-                    @Override
-                    public void accept(DataListResponse<AppIndex> appIndexRes) {
-                        Log.d("misery", "DataListResponse<AppIndex>="+ appIndexRes);
-                    }
-                });
 
         appApis.getSplash(ApiHelper.MOBI_APP, ApiHelper.BUILD, AppApis.CHANNEL, 1080, 1920, AppApis.VER)
                 .subscribeOn(Schedulers.io())

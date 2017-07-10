@@ -1,4 +1,4 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.region;
 
 import com.google.gson.annotations.SerializedName;
 

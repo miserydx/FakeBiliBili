@@ -17,6 +17,7 @@ import com.bilibili.R;
 import com.bilibili.ui.bangumi.BangumiFragment;
 import com.bilibili.ui.live.LiveFragment;
 import com.bilibili.ui.recommed.RecommendFragment;
+import com.bilibili.ui.region.RegionFragment;
 import com.bilibili.ui.test.fragment.NewsPageFragment;
 import com.common.base.BaseFragment;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -48,6 +49,12 @@ public class MainFragment extends BaseFragment {
 
     @Inject
     BangumiFragment mBangumiFragment;
+    @Inject
+    RegionFragment mRegionFragment;
+    @Inject
+    LiveFragment mLiveFragmet;
+    @Inject
+    RecommendFragment mRecommendFragment;
 
     private OnInteractionListener mListener;
     private MainPagerAdapter adapter;
@@ -120,10 +127,10 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initChildFragment() {
-        mFragments.add(new LiveFragment());
-        mFragments.add(new RecommendFragment());
-        mFragments.add(new BangumiFragment());
-        mFragments.add(new NewsPageFragment());
+        mFragments.add(mLiveFragmet);
+        mFragments.add(mRecommendFragment);
+        mFragments.add(mBangumiFragment);
+        mFragments.add(mRegionFragment);
         mFragments.add(new NewsPageFragment());
         mFragments.add(new NewsPageFragment());
     }

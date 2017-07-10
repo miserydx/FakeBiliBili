@@ -5,6 +5,8 @@ import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.AppApis;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.api.LiveApis;
+import com.bilibili.model.api.RecommendApis;
+import com.bilibili.model.api.RegionApis;
 import com.bilibili.model.api.WeChatApis;
 import com.bilibili.model.api.ZhihuApis;
 import com.common.util.MD5Utils;
@@ -38,8 +40,14 @@ public class ApiModule {
     //Create Api
     @GlobalApis
     @Provides
-    LiveApis provideLiveServices(@Named("LiveApis") Retrofit retrofit) {
+    LiveApis provideLiveService(@Named("LiveApis") Retrofit retrofit) {
         return retrofit.create(LiveApis.class);
+    }
+
+    @GlobalApis
+    @Provides
+    RecommendApis provideRecommendService(@Named("RecommendApi") Retrofit retrofit) {
+        return retrofit.create(RecommendApis.class);
     }
 
     @GlobalApis
@@ -50,10 +58,17 @@ public class ApiModule {
 
     @GlobalApis
     @Provides
-    BangumiApis provideBilibiliService(@Named("BilibiliApi") Retrofit retrofit) {
+    BangumiApis provideBangumiService(@Named("BangumiApi") Retrofit retrofit) {
         return retrofit.create(BangumiApis.class);
     }
 
+    @GlobalApis
+    @Provides
+    RegionApis provideRegionService(@Named("RegionApi") Retrofit retrofit) {
+        return retrofit.create(RegionApis.class);
+    }
+
+    //Test Api
     @GlobalApis
     @Provides
     ZhihuApis provideZhihuService(@Named("ZhihuApi") Retrofit retrofit) {
@@ -76,6 +91,13 @@ public class ApiModule {
 
     @GlobalApis
     @Provides
+    @Named("RecommendApi")
+    Retrofit provideRecommendRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, RecommendApis.HOST);
+    }
+
+    @GlobalApis
+    @Provides
     @Named("AppApi")
     Retrofit provideAppRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, AppApis.HOST);
@@ -83,11 +105,19 @@ public class ApiModule {
 
     @GlobalApis
     @Provides
-    @Named("BilibiliApi")
-    Retrofit provideBilibiliRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+    @Named("BangumiApi")
+    Retrofit provideBangumiRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, BangumiApis.HOST);
     }
 
+    @GlobalApis
+    @Provides
+    @Named("RegionApi")
+    Retrofit provideRegionRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, RegionApis.HOST);
+    }
+
+    //Test Api
     @GlobalApis
     @Provides
     @Named("ZhihuApi")

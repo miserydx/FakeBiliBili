@@ -28,7 +28,7 @@ public class SmartViewPager extends FrameLayout {
 
     public static final int MSG_AUTO_CIRCULATE_START = 1000;
 
-    private static CirculateHandler sHandler;
+    private CirculateHandler mHandler;
 
     private Context mContext;
 
@@ -58,7 +58,7 @@ public class SmartViewPager extends FrameLayout {
 
     public SmartViewPager(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        sHandler = new CirculateHandler(this);
+        mHandler = new CirculateHandler(this);
         mContext = context;
         initView();
 
@@ -104,9 +104,9 @@ public class SmartViewPager extends FrameLayout {
         super.onWindowVisibilityChanged(visibility);
         if (mIsNeedAutoScroll) {
             if (visibility == GONE) {
-                sHandler.removeMessages(MSG_AUTO_CIRCULATE_START);
+                mHandler.removeMessages(MSG_AUTO_CIRCULATE_START);
             } else {
-                sHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
+                mHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
             }
         }
         mViewPager.setCurrentItem(mCurItemPosition);
@@ -126,7 +126,11 @@ public class SmartViewPager extends FrameLayout {
 
     public void setNeedAutoScroll(boolean needAutoCirculate) {
         mIsNeedAutoScroll = needAutoCirculate;
-        sHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
+        if (mIsNeedAutoScroll) {
+            mHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
+        } else {
+            mHandler.removeMessages(MSG_AUTO_CIRCULATE_START);
+        }
     }
 
     public void setNeedCirculate(boolean isCirculate) {
@@ -164,7 +168,7 @@ public class SmartViewPager extends FrameLayout {
         }
     };
 
-    private static class CirculateHandler extends Handler {
+    private class CirculateHandler extends Handler {
 
         WeakReference<SmartViewPager> ref;
 
@@ -227,15 +231,15 @@ public class SmartViewPager extends FrameLayout {
             switch (state) {
                 case ViewPager.SCROLL_STATE_IDLE:
                     if (mIsNeedAutoScroll) {
-                        if (!sHandler.hasMessages(MSG_AUTO_CIRCULATE_START)) {
-                            sHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
+                        if (!mHandler.hasMessages(MSG_AUTO_CIRCULATE_START)) {
+                            mHandler.sendEmptyMessageDelayed(MSG_AUTO_CIRCULATE_START, mDelayedTime);
                         }
                     }
                     break;
                 case ViewPager.SCROLL_STATE_DRAGGING:
                     if (mIsNeedAutoScroll) {
-                        if (sHandler.hasMessages(MSG_AUTO_CIRCULATE_START)) {
-                            sHandler.removeMessages(MSG_AUTO_CIRCULATE_START);
+                        if (mHandler.hasMessages(MSG_AUTO_CIRCULATE_START)) {
+                            mHandler.removeMessages(MSG_AUTO_CIRCULATE_START);
                         }
                     }
                     break;

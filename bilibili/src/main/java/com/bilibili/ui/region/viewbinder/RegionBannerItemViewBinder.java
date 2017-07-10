@@ -1,4 +1,4 @@
-package com.bilibili.ui.live.viewbinder;
+package com.bilibili.ui.region.viewbinder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.live.LiveCommon;
+import com.bilibili.model.bean.region.AppRegionShow;
 import com.bilibili.widget.banner.BannerAdapter;
 import com.bilibili.widget.banner.SmartViewPager;
 import com.bumptech.glide.Glide;
@@ -24,54 +24,52 @@ import butterknife.ButterKnife;
 import me.drakeet.multitype.ItemViewBinder;
 
 /**
- * Created by Android_ZzT on 17/6/21.
+ * Created by Android_ZzT on 17/7/9.
  */
 
-public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemViewBinder.BannerItemViewHolder> {
+public class RegionBannerItemViewBinder extends ItemViewBinder<AppRegionShow.Banner, RegionBannerItemViewBinder.RegionBannerViewHolder> {
 
     @NonNull
     @Override
-    protected BannerItemViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+    protected RegionBannerViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         View itemView = inflater.inflate(R.layout.item_banner, null);
-        return new BannerItemViewHolder(itemView);
+        return new RegionBannerViewHolder(itemView);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull BannerItemViewHolder holder, @NonNull LiveCommon item) {
-        holder.setData(item.getBanner());
+    protected void onBindViewHolder(@NonNull RegionBannerViewHolder holder, @NonNull AppRegionShow.Banner item) {
+        holder.setData(item.getTop());
     }
 
-    static class BannerItemViewHolder extends RecyclerView.ViewHolder {
+    static class RegionBannerViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.banner)
         SmartViewPager banner;
 
-        private LiveBannerAdapter adapter;
+        private RegionBannerAdapter adapter;
 
-
-        public BannerItemViewHolder(View itemView) {
+        public RegionBannerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             banner.setNeedCirculate(true);
-            banner.setNeedAutoScroll(true);
             banner.setIndicatorGravity(Gravity.BOTTOM | Gravity.RIGHT);
             banner.setIndicatorColor(ContextCompat.getColor(itemView.getContext(), R.color.white),
-                    ContextCompat.getColor(itemView.getContext(),R.color.pink));
-            adapter = new LiveBannerAdapter(itemView.getContext());
+                    ContextCompat.getColor(itemView.getContext(), R.color.pink));
+            adapter = new RegionBannerAdapter(itemView.getContext());
         }
 
-        private void setData(List<LiveCommon.Banner> data) {
+        public void setData(List<AppRegionShow.Banner.Top> data) {
             adapter.setData(data, true);
             banner.setAdapter(adapter);
         }
     }
 
-    static class LiveBannerAdapter extends BannerAdapter<LiveCommon.Banner, ImageView> {
+    static class RegionBannerAdapter extends BannerAdapter<AppRegionShow.Banner.Top, ImageView> {
 
         private Context context;
 
-        public LiveBannerAdapter(Context ctx) {
-            context = ctx;
+        public RegionBannerAdapter(Context context) {
+            this.context = context;
         }
 
         @Override
@@ -89,9 +87,9 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         }
 
         @Override
-        protected void bindData(ImageView itemView, LiveCommon.Banner item) {
+        protected void bindData(ImageView itemView, AppRegionShow.Banner.Top item) {
             Glide.with(context)
-                    .load(item.getImg())
+                    .load(item.getImage())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.bili_default_image_tv)
                     .crossFade(300)

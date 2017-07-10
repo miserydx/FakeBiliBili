@@ -3,8 +3,8 @@ package com.bilibili.ui.recommed;
 import android.util.Log;
 
 import com.bilibili.model.api.ApiHelper;
-import com.bilibili.model.api.AppApis;
-import com.bilibili.model.bean.AppIndex;
+import com.bilibili.model.api.RecommendApis;
+import com.bilibili.model.bean.recommend.AppIndex;
 import com.bilibili.model.bean.DataListResponse;
 import com.bilibili.ui.bangumi.BangumiFragment;
 import com.common.base.AbsBasePresenter;
@@ -27,16 +27,16 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
 
     private static final String TAG = RecommendPresenter.class.getSimpleName();
 
-    private AppApis appApis;
+    private RecommendApis recommendApis;
 
     @Inject
-    public RecommendPresenter(AppApis appApis) {
-        this.appApis = appApis;
+    public RecommendPresenter(RecommendApis recommendApis) {
+        this.recommendApis = recommendApis;
     }
 
     @Override
     public void loadData() {
-        appApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
+        recommendApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DataListResponse<AppIndex>>() {

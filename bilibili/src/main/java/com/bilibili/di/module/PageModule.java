@@ -5,6 +5,8 @@ import com.bilibili.di.scope.PerActivity;
 import com.bilibili.di.scope.PerFragment;
 import com.bilibili.ui.bangumi.BangumiFragment;
 import com.bilibili.ui.live.LiveFragment;
+import com.bilibili.ui.recommed.RecommendFragment;
+import com.bilibili.ui.region.RegionFragment;
 import com.bilibili.ui.test.fragment.NewsFragment;
 
 import dagger.Module;
@@ -17,6 +19,7 @@ import dagger.Provides;
 @Module
 public class PageModule {
 
+    //Test
     @Provides
     @PerActivity
     NewsFragment provideNewsFragment(){
@@ -32,8 +35,19 @@ public class PageModule {
 
     @Provides
     @PerFragment
+    RecommendFragment provideRecommendFragment() {
+        return new RecommendFragment();
+    }
+
+    @Provides
+    @PerFragment
     BangumiFragment provideBangumiFragment() {
         return new BangumiFragment();
     }
 
+    @Provides
+    @PerFragment
+    RegionFragment provideRegionFragment() {
+        return new RegionFragment();
+    }
 }

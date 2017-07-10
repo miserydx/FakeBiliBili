@@ -1,4 +1,6 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.region;
+
+import android.support.annotation.DrawableRes;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,6 +19,8 @@ public class AppRegionShow {
     private String style;
 
     private String title;
+
+    private Partition partition;
 
     private List<Body> body;
 
@@ -54,6 +58,14 @@ public class AppRegionShow {
         return this.title;
     }
 
+    public Partition getPartition() {
+        return partition;
+    }
+
+    public void setPartition(Partition partition) {
+        this.partition = partition;
+    }
+
     public void setBody(List<Body> body) {
         this.body = body;
     }
@@ -70,7 +82,8 @@ public class AppRegionShow {
         return this.banner;
     }
 
-    class Body {
+    public class Body {
+
         private String title;
 
         private String cover;
@@ -85,6 +98,8 @@ public class AppRegionShow {
         private int play;
 
         private int danmaku;
+
+        private int favourite;
 
         private boolean is_ad;
 
@@ -144,6 +159,14 @@ public class AppRegionShow {
             return this.danmaku;
         }
 
+        public int getFavourite() {
+            return favourite;
+        }
+
+        public void setFavourite(int favourite) {
+            this.favourite = favourite;
+        }
+
         public void setIs_ad(boolean is_ad) {
             this.is_ad = is_ad;
         }
@@ -151,21 +174,20 @@ public class AppRegionShow {
         public boolean getIs_ad() {
             return this.is_ad;
         }
-
     }
 
-    class Banner {
-        private List<Bottom> bottom;
+    public class Banner {
+        private List<Top> top;
 
-        public void setBottom(List<Bottom> bottom) {
-            this.bottom = bottom;
+        public void setTop(List<Top> top) {
+            this.top = top;
         }
 
-        public List<Bottom> getBottom() {
-            return this.bottom;
+        public List<Top> getTop() {
+            return this.top;
         }
 
-        class Bottom {
+        public class Top {
             private int id;
 
             private String title;
@@ -270,4 +292,27 @@ public class AppRegionShow {
 
     }
 
+    public class Partition {
+
+        private String title;
+
+        @DrawableRes
+        private int logo;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public int getLogo() {
+            return logo;
+        }
+
+        public void setLogo(int logo) {
+            this.logo = logo;
+        }
+    }
 }

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/_bkgd__gray_very_light">
+
+    <TableRow>
+
+        <LinearLayout
+            android:id="@+id/layout_live"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_live" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/section_live" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_bangumi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_bangumi" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/bangumi" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_anim"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_anim" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/animation" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_guo_chuang"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_guo_chuang" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/guo_chuang" />
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+
+        <LinearLayout
+            android:id="@+id/layout_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_music" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/music" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_dance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_dance" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/dancing" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_game"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_game" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/game" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_tech"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_tech" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/technology" />
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+
+        <LinearLayout
+            android:id="@+id/layout_life"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_life" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/life" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_gui_chu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_gui_chu" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/gui_chu" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_fashion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_fashion" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/fashion" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_ad"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_ad" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/advertisement" />
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+
+        <LinearLayout
+            android:id="@+id/layout_entertainment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_entertain" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/entertainment" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_movie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_movie" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/movie" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_tv_play"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_tv_play" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="@string/tv_play" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_game_center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="@drawable/item_background"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_category_game_center" />
+
+            <TextView
+                style="@style/normal_text_style"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_small"
+                android:text="游戏中心" />
+        </LinearLayout>
+
+    </TableRow>
+
+
+</TableLayout>

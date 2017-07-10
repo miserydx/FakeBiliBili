@@ -23,7 +23,7 @@ public class MoreItemViewBinder extends ItemViewBinder<MoreItemViewBinder.MoreIt
     @NonNull
     @Override
     protected MoreViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_live_more, null);
+        View itemView = inflater.inflate(R.layout.item_more, null);
         return new MoreViewHolder(itemView);
     }
 

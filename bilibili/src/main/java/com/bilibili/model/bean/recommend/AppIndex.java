@@ -1,4 +1,4 @@
-package com.bilibili.model.bean;
+package com.bilibili.model.bean.recommend;
 
 import com.google.gson.annotations.SerializedName;
 

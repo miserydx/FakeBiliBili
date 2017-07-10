@@ -57,4 +57,24 @@
 
     <!-- Recommend -->
     <string name="index_feed_recommend">综合</string>
+
+    <!--Region-->
+    <string name="go_into">进去看看</string>
+    <string name="live">直播</string>
+    <string name="bangumi">番剧</string>
+    <string name="animation">动画</string>
+    <string name="guo_chuang">国创</string>
+    <string name="music">音乐</string>
+    <string name="dancing">舞蹈</string>
+    <string name="game">游戏</string>
+    <string name="technology">科技</string>
+    <string name="life">生活</string>
+    <string name="gui_chu">鬼畜</string>
+    <string name="fashion">时尚</string>
+    <string name="advertisement">广告</string>
+    <string name="entertainment">娱乐</string>
+    <string name="movie">电影</string>
+    <string name="tv_play">电视剧</string>
+    <string name="game_center">游戏中心</string>
+    <string name="more_format">更多%s</string>
 </resources>

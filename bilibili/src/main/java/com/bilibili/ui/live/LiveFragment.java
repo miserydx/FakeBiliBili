@@ -27,7 +27,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
 
 public class LiveFragment extends BaseMvpFragment<LivePresenter> implements LiveContract.View {
 
-    public static final String TAG = "LiveFragment";
+    public static final String TAG = LiveFragment.class.getSimpleName();
 
     @BindView(R.id.rv)
     RecyclerView mRecyclerView;

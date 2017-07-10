@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.bilibili.App;
 import com.bilibili.R;
-import com.bilibili.model.bean.AppIndex;
+import com.bilibili.model.bean.recommend.AppIndex;
 import com.bilibili.ui.recommed.viewbinder.RecommendIndexItemBinder;
 import com.bumptech.glide.Glide;
 import com.common.base.BaseMvpFragment;
