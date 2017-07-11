@@ -12,7 +12,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/scroll_bar"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

@@ -80,6 +80,7 @@
     <dimen name="view_size_1dp">1.0dip</dimen>
     <dimen name="view_size_1px">1.0px</dimen>
 
+    <dimen name="width_4">4.0dip</dimen>
     <dimen name="width_8">8.0dip</dimen>
     <dimen name="width_20dp">20.0dip</dimen>
     <dimen name="width_22">22.0dip</dimen>

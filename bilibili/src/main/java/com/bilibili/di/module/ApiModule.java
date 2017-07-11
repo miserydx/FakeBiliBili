@@ -9,12 +9,8 @@ import com.bilibili.model.api.RecommendApis;
 import com.bilibili.model.api.RegionApis;
 import com.bilibili.model.api.WeChatApis;
 import com.bilibili.model.api.ZhihuApis;
-import com.common.util.MD5Utils;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
@@ -132,7 +128,7 @@ public class ApiModule {
         return createRetrofit(builder, client, WeChatApis.HOST);
     }
 
-    Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient okHttpClient, String url) {
+    private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient okHttpClient, String url) {
         return builder.baseUrl(url)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -159,31 +155,7 @@ public class ApiModule {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request oldRequest = chain.request();
-                if (!ApiHelper.needSigned(oldRequest.url().host(), oldRequest.url().encodedPath())) {
-                    return chain.proceed(oldRequest);
-                }
-                //拼接参数(按顺序)+SecretKey
-                Set set = oldRequest.url().queryParameterNames();
-                StringBuilder queryParams = new StringBuilder();
-                Iterator<String> it = set.iterator();
-                while (it.hasNext()) {
-                    String str = it.next();
-                    queryParams.append(str);
-                    queryParams.append("=");
-                    queryParams.append(oldRequest.url().queryParameter(str));
-                    if (it.hasNext()) {
-                        queryParams.append("&");
-                    }
-                }
-                queryParams.append(ApiHelper.SECRET_KEY);
-                String orignSign = queryParams.toString();
-                //进行MD5加密
-                String sign = "";
-                try {
-                    sign = MD5Utils.getMD5(orignSign).trim();
-                } catch (NoSuchAlgorithmException e) {
-
-                }
+                String sign = ApiHelper.getSign(oldRequest.url());
                 //添加sign参数
                 HttpUrl.Builder newBuilder = oldRequest.url()
                         .newBuilder()

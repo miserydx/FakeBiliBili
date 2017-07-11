@@ -26,8 +26,12 @@ import me.drakeet.multitype.Items;
 public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View> implements RecommendContract.Presenter {
 
     private static final String TAG = RecommendPresenter.class.getSimpleName();
+    private static final int STATE_NORMAL = 0;
+    private static final int STATE_REFRESHING = 1;
+    private static final int STATE_LOAD_MORE = 2;
 
     private RecommendApis recommendApis;
+    private int state = STATE_NORMAL;
 
     @Inject
     public RecommendPresenter(RecommendApis recommendApis) {
@@ -36,6 +40,20 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
 
     @Override
     public void loadData() {
+        state = STATE_REFRESHING;
+        loadDataOrLoadMore(false);
+    }
+
+    @Override
+    public void loadMore() {
+        if (state == STATE_LOAD_MORE) {
+            return;
+        }
+        state = STATE_LOAD_MORE;
+        loadDataOrLoadMore(true);
+    }
+
+    private void loadDataOrLoadMore(final boolean isLoadMore) {
         recommendApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,20 +67,20 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
                     @Override
                     public void onNext(@NonNull DataListResponse<AppIndex> appIndexDataListResponse) {
                         Items items = new Items();
-                        for(AppIndex appIndex : appIndexDataListResponse.getData()){
+                        for (AppIndex appIndex : appIndexDataListResponse.getData()) {
                             items.add(appIndex);
                         }
-                        mView.onDataUpdated(items);
+                        mView.onDataUpdated(items, isLoadMore);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(BangumiFragment.TAG, e.getMessage().toString());
+                        Log.e(BangumiFragment.TAG, e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-
+                        state = STATE_NORMAL;
                     }
                 });
     }

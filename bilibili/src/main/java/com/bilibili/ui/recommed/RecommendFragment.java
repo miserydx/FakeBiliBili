@@ -3,7 +3,9 @@ package com.bilibili.ui.recommed;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.bilibili.App;
 import com.bilibili.R;
@@ -76,16 +78,25 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
                 } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     Glide.with(getContext()).resumeRequests();
                 }
+                GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
+                //列表中LastVisibleItem为倒数第二行时，加载更多
+                if (manager.findLastVisibleItemPosition() + 3 >= manager.getItemCount()) {
+                    mPresenter.loadMore();
+                }
             }
         });
     }
 
     @Override
-    public void onDataUpdated(Items items) {
+    public void onDataUpdated(Items items, boolean isLoadMore) {
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
         }
-        this.items = items;
+        if (isLoadMore) {
+            this.items.addAll(items);
+        } else {
+            this.items = items;
+        }
         mAdapter.setItems(this.items);
         mAdapter.notifyDataSetChanged();
     }

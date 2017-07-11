@@ -2,11 +2,13 @@ package com.bilibili.model.api;
 
 import android.util.Log;
 
-import com.bilibili.model.api.annotation.NeedSign;
+import com.common.util.MD5Utils;
 
-import java.lang.reflect.Method;
+import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
+import java.util.Set;
 
-import retrofit2.http.GET;
+import okhttp3.HttpUrl;
 
 /**
  * Created by jiayiyang on 17/4/27.
@@ -15,61 +17,40 @@ import retrofit2.http.GET;
 public class ApiHelper {
 
     private static final String TAG = ApiHelper.class.getSimpleName();
+    private static final String SECRET_KEY = "ea85624dfcf12d7cc7b2b3a94fac1f2c";
 
     public static final String PARAM_SIGN = "sign";
-
     public static final String APP_KEY = "c1b107428d337928";
-    public static final String SECRET_KEY = "ea85624dfcf12d7cc7b2b3a94fac1f2c";
-    public static final String BUILD = "50300";
+    public static final String BUILD = "50900";
     public static final String MOBI_APP = "android";
     public static final String PLATFORM = "android";
     public static final String DEVICE = "android";
     public static final String SCALE = "xxhdpi";
 
-    public static final String BANGUMI_HOST = "bangumi.bilibili.com";
-    public static final String APP_HOST = "app.bilibili.com";
-    public static final String LIVE_HOST = "live.bilibili.com";
-
-    public static boolean needSigned(String host, String path) {
-        boolean needSigned = false;
-        Class clz = getClass(host);
-        if (clz == null) {
-            return needSigned;
-        }
-        for (Method method : clz.getMethods()) {
-            NeedSign needSign = method.getAnnotation(NeedSign.class);
-            GET get = method.getAnnotation(GET.class);
-            if (needSign != null && get.value().equals(path)) {
-                needSigned = true;
+    public static String getSign(HttpUrl url) {
+        //拼接参数(按顺序)+SecretKey
+        Set<String> set = url.queryParameterNames();
+        StringBuilder queryParams = new StringBuilder();
+        Iterator<String> it = set.iterator();
+        while (it.hasNext()) {
+            String str = it.next();
+            queryParams.append(str);
+            queryParams.append("=");
+            queryParams.append(url.queryParameter(str));
+            if (it.hasNext()) {
+                queryParams.append("&");
             }
         }
-        return needSigned;
-    }
-
-    private static Class getClass(String host) {
-        Class clz;
+        queryParams.append(SECRET_KEY);
+        String orignSign = queryParams.toString();
+        //进行MD5加密
+        String sign = "";
         try {
-            switch (host) {
-                case APP_HOST:
-                    clz = AppApis.class;
-                    break;
-
-                case BANGUMI_HOST:
-                    clz = BangumiApis.class;
-                    break;
-
-                case LIVE_HOST:
-                    clz = LiveApis.class;
-                    break;
-
-                default:
-                    throw new Exception("unrecorded host");
-            }
-        } catch (Exception e) {
-            Log.d(TAG, "e : " + e.getMessage());
-            return null;
+            sign = MD5Utils.getMD5(orignSign).trim();
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "sign encryption failed : " + e.getMessage());
         }
-        return clz;
+        return sign;
     }
 
 }

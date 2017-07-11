@@ -13,13 +13,15 @@ public interface RecommendContract {
 
     interface View extends BaseView {
 
-        void onDataUpdated(Items items);
+        void onDataUpdated(Items items, boolean isLoadMore);
 
         void onRefreshingStateChanged(boolean isRefresh);
 
     }
 
     interface Presenter extends BasePresenter {
+
+        void loadMore();
 
     }
 
