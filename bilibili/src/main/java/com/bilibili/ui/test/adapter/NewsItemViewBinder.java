@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.WeiXinJingXuanBean;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,12 +39,10 @@ public class NewsItemViewBinder extends ItemViewBinder<WeiXinJingXuanBean.NewsLi
 
     @Override
     protected void onBindViewHolder(@NonNull NewsItemViewHolder holder, @NonNull WeiXinJingXuanBean.NewsList item) {
-        Glide.with(mContext)
-                .load(item.getPicUrl())
-                .asBitmap()
-                .placeholder(R.color.colorPrimaryDark)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivCover);
+        Context context = holder.ivCover.getContext();
+        int width = SystemUtil.dp2px(context, 60);
+        int height = SystemUtil.dp2px(context, 60);
+        ImageUtil.load(holder.ivCover, item.getPicUrl(), width, height);
         holder.tvTitle.setText(item.getTitle());
         holder.tvDescription.setText(item.getDescription());
     }
@@ -52,7 +50,7 @@ public class NewsItemViewBinder extends ItemViewBinder<WeiXinJingXuanBean.NewsLi
     static class NewsItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.cover_iv)
-        ImageView ivCover;
+        SimpleDraweeView ivCover;
         @BindView(R.id.title_tv)
         TextView tvTitle;
         @BindView(R.id.description_tv)

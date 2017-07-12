@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
-import com.common.util.SystemUtil;
 
 import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.Items;
@@ -53,7 +52,7 @@ public class LiveListItemViewBinder extends ItemViewBinder<LiveCommon.Partitions
             adapter.register(LiveCommon.Partitions.Lives.class, new LiveItemViewBinder());
             adapter.register(MoreItemViewBinder.MoreItem.class, new MoreItemViewBinder());
             GridLayoutManager gridLayoutManager = new GridLayoutManager(itemView.getContext(), SPAN_SIZE);
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            final GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
                     int spanSize = SPAN_SIZE;
@@ -63,21 +62,34 @@ public class LiveListItemViewBinder extends ItemViewBinder<LiveCommon.Partitions
                     }
                     return spanSize;
                 }
-            });
+            };
+            gridLayoutManager.setSpanSizeLookup(spanSizeLookup);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(gridLayoutManager);
-            final int spacingPixel = SystemUtil.dp2px(itemView.getContext(), 8);
             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
                 @Override
                 public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                    outRect.left = spacingPixel;
-                    outRect.right = spacingPixel;
-                    outRect.bottom = spacingPixel;
-                    outRect.top = spacingPixel;
+                    int position = parent.getChildLayoutPosition(view);
+                    if (spanSizeLookup.getSpanSize(position) == SPAN_SIZE) {
+                        outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                        outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                    } else {
+                        int spanIndex = spanSizeLookup.getSpanIndex(position, SPAN_SIZE);
+                        switch (spanIndex) {
+                            case 0:
+                                outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                                outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
+                                break;
+                            case 1:
+                                outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
+                                outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+                                break;
+                        }
+                    }
+                    outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
+                    outRect.top = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
                 }
             });
-            int padding = SystemUtil.dp2px(itemView.getContext(), 8);
-            recyclerView.setPadding(padding, 0, padding, 0);
 
         }
 
@@ -87,7 +99,7 @@ public class LiveListItemViewBinder extends ItemViewBinder<LiveCommon.Partitions
 //            for (LiveCommon.Partitions.Lives live: item.getLives()) {
 //                items.add(live);
 //            }
-            for (int i=0; i<4; i++) {
+            for (int i = 0; i < 4; i++) {
                 items.add(item.getLives().get(i));
             }
             items.add(new MoreItemViewBinder.MoreItem());

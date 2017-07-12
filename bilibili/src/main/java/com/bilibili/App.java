@@ -1,6 +1,8 @@
 package com.bilibili;
 
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.bilibili.di.component.ActivityComponent;
 import com.bilibili.di.component.ApiComponent;
@@ -13,6 +15,16 @@ import com.bilibili.di.module.FragmentModule;
 import com.common.app.ActivityLifecycleManager;
 import com.common.app.AppComponent;
 import com.common.app.DaggerAppComponent;
+import com.facebook.cache.common.CacheKey;
+import com.facebook.common.memory.MemoryTrimType;
+import com.facebook.common.memory.MemoryTrimmable;
+import com.facebook.common.memory.MemoryTrimmableRegistry;
+import com.facebook.common.memory.NoOpMemoryTrimmableRegistry;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.cache.CountingMemoryCache;
+import com.facebook.imagepipeline.cache.DefaultEncodedMemoryCacheParamsSupplier;
+import com.facebook.imagepipeline.cache.ImageCacheStatsTracker;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
 import me.yokeyword.fragmentation.BuildConfig;
 import me.yokeyword.fragmentation.Fragmentation;
@@ -31,6 +43,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
         registerActivityLifecycleCallbacks(new ActivityLifecycleManager());
         Fragmentation.builder()
                 // 设置 栈视图 模式为 悬浮球模式   SHAKE: 摇一摇唤出   NONE：隐藏
@@ -48,10 +61,102 @@ public class App extends Application {
                     }
                 })
                 .install();
-        sInstance = this;
+        initFresco();
         if (sAppComponent == null) {
             sAppComponent = DaggerAppComponent.create();
         }
+    }
+
+    public void initFresco() {
+        //当内存紧张时采取的措施
+        MemoryTrimmableRegistry memoryTrimmableRegistry = NoOpMemoryTrimmableRegistry.getInstance();
+        memoryTrimmableRegistry.registerMemoryTrimmable(new MemoryTrimmable() {
+            @Override
+            public void trim(MemoryTrimType trimType) {
+                final double suggestedTrimRatio = trimType.getSuggestedTrimRatio();
+                Log.d("Fresco", String.format("onCreate suggestedTrimRatio : %d", suggestedTrimRatio));
+                if (MemoryTrimType.OnCloseToDalvikHeapLimit.getSuggestedTrimRatio() == suggestedTrimRatio
+                        || MemoryTrimType.OnSystemLowMemoryWhileAppInBackground.getSuggestedTrimRatio() == suggestedTrimRatio
+                        || MemoryTrimType.OnSystemLowMemoryWhileAppInForeground.getSuggestedTrimRatio() == suggestedTrimRatio
+                        ) {
+                    //清除内存缓存
+                    Fresco.getImagePipeline().clearMemoryCaches();
+                }
+            }
+        });
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .setResizeAndRotateEnabledForNetwork(true)
+//                .setBitmapMemoryCacheParamsSupplier(new DefaultBitmapMemoryCacheParamsSupplier((ActivityManager) getSystemService(ACTIVITY_SERVICE)))
+                .setBitmapMemoryCacheParamsSupplier(new DefaultEncodedMemoryCacheParamsSupplier())
+                .setMemoryTrimmableRegistry(memoryTrimmableRegistry)
+                .setBitmapsConfig(Bitmap.Config.RGB_565)
+                .setImageCacheStatsTracker(new ImageCacheStatsTracker() {
+                    @Override
+                    public void onBitmapCachePut() {
+
+                    }
+
+                    @Override
+                    public void onBitmapCacheHit(CacheKey cacheKey) {
+                        Log.d("misery", "onBitmapCacheHit : " + cacheKey.getUriString());
+                    }
+
+                    @Override
+                    public void onBitmapCacheMiss() {
+
+                    }
+
+                    @Override
+                    public void onMemoryCachePut() {
+                    }
+
+                    @Override
+                    public void onMemoryCacheHit(CacheKey cacheKey) {
+                        Log.d("misery", "onMemoryCacheHit : " + cacheKey.getUriString());
+                    }
+
+                    @Override
+                    public void onMemoryCacheMiss() {
+                    }
+
+                    @Override
+                    public void onStagingAreaHit(CacheKey cacheKey) {
+                        Log.d("misery", "onStagingAreaHit : " + cacheKey.getUriString());
+                    }
+
+                    @Override
+                    public void onStagingAreaMiss() {
+
+                    }
+
+                    @Override
+                    public void onDiskCacheHit() {
+                        Log.d("misery", "onMemoryCacheHit");
+                    }
+
+                    @Override
+                    public void onDiskCacheMiss() {
+
+                    }
+
+                    @Override
+                    public void onDiskCacheGetFail() {
+
+                    }
+
+                    @Override
+                    public void registerBitmapMemoryCache(CountingMemoryCache<?, ?> bitmapMemoryCache) {
+
+                    }
+
+                    @Override
+                    public void registerEncodedMemoryCache(CountingMemoryCache<?, ?> encodedMemoryCache) {
+
+                    }
+                })
+                .build();
+        Fresco.initialize(this, config);
     }
 
     public AppComponent getAppComponent() {

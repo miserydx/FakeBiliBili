@@ -14,8 +14,8 @@ import com.bilibili.ui.live.viewbinder.FooterItemViewBinder;
 import com.bilibili.ui.live.viewbinder.LiveListItemViewBinder;
 import com.bilibili.ui.live.viewbinder.NavigatorItemViewBinder;
 import com.bilibili.ui.live.viewbinder.RecommendedLiveListItemViewBinder;
-import com.bumptech.glide.Glide;
 import com.common.base.BaseMvpFragment;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -70,19 +70,19 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Glide.with(getContext()).pauseRequests();
+                    Fresco.getImagePipeline().pause();
                 } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getContext()).resumeRequests();
+                    Fresco.getImagePipeline().resume();
                 }
             }
         });
         mRefreshLayout.setColorSchemeResources(R.color.theme_color_primary);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-           @Override
-           public void onRefresh() {
-               mPresenter.loadData();
-           }
-       });
+            @Override
+            public void onRefresh() {
+                mPresenter.loadData();
+            }
+        });
     }
 
     @Override

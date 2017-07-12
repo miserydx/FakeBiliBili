@@ -7,15 +7,14 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveRecommend;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
 import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,12 +47,9 @@ public class RecommendedPartitionItemViewBinder extends ItemViewBinder<LiveRecom
         params.addRule(RelativeLayout.CENTER_VERTICAL);
         params.rightMargin = SystemUtil.dp2px(context, 4);
         holder.ivIcon.setLayoutParams(params);
-        Glide.with(context)
-                .load(item.getSub_icon().getSrc())
-                .crossFade(200)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivIcon);
-
+        int iconWidth = context.getResources().getDimensionPixelSize(R.dimen.width_24dp);
+        int iconHeight = context.getResources().getDimensionPixelSize(R.dimen.height_24dp);
+        ImageUtil.load(holder.ivIcon, item.getSub_icon().getSrc(), iconWidth, iconHeight);
         String tintCount = "<font color='#FF4081'>" + item.getCount() + "</font>";
         String count = String.format(context.getString(R.string.partition_count_format), tintCount);
         holder.tvCount.setText(Html.fromHtml(count));
@@ -65,7 +61,7 @@ public class RecommendedPartitionItemViewBinder extends ItemViewBinder<LiveRecom
         @BindView(R.id.tv_name)
         TextView tvName;
         @BindView(R.id.iv_icon)
-        ImageView ivIcon;
+        SimpleDraweeView ivIcon;
         @BindView(R.id.tv_count)
         TextView tvCount;
 

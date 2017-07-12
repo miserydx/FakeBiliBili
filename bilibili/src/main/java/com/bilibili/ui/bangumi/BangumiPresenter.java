@@ -57,7 +57,8 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(BangumiFragment.TAG, e.getMessage());
+                        Log.e(BangumiFragment.TAG, "onError");
+                        e.printStackTrace();
                     }
 
                     @Override

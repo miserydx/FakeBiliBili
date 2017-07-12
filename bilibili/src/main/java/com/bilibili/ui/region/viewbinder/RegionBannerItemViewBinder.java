@@ -14,8 +14,10 @@ import com.bilibili.R;
 import com.bilibili.model.bean.region.AppRegionShow;
 import com.bilibili.widget.banner.BannerAdapter;
 import com.bilibili.widget.banner.SmartViewPager;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -64,7 +66,7 @@ public class RegionBannerItemViewBinder extends ItemViewBinder<AppRegionShow.Ban
         }
     }
 
-    static class RegionBannerAdapter extends BannerAdapter<AppRegionShow.Banner.Top, ImageView> {
+    static class RegionBannerAdapter extends BannerAdapter<AppRegionShow.Banner.Top, SimpleDraweeView> {
 
         private Context context;
 
@@ -78,8 +80,8 @@ public class RegionBannerItemViewBinder extends ItemViewBinder<AppRegionShow.Ban
         }
 
         @Override
-        protected ImageView getItemView() {
-            ImageView imageView = new ImageView(context);
+        protected SimpleDraweeView getItemView() {
+            SimpleDraweeView imageView = new SimpleDraweeView(context);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             ViewGroup.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             imageView.setLayoutParams(params);
@@ -87,13 +89,10 @@ public class RegionBannerItemViewBinder extends ItemViewBinder<AppRegionShow.Ban
         }
 
         @Override
-        protected void bindData(ImageView itemView, AppRegionShow.Banner.Top item) {
-            Glide.with(context)
-                    .load(item.getImage())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.drawable.bili_default_image_tv)
-                    .crossFade(300)
-                    .into(itemView);
+        protected void bindData(SimpleDraweeView itemView, AppRegionShow.Banner.Top item) {
+            int width = ScreenUtil.getScreenWidth(context);
+            int height = SystemUtil.dp2px(context, 120);
+            ImageUtil.load(itemView, item.getImage(), width, height);
         }
     }
 }

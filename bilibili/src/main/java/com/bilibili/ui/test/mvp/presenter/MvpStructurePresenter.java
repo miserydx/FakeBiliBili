@@ -38,6 +38,7 @@ public class MvpStructurePresenter extends AbsBasePresenter<MvpStructureContract
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WeiXinJingXuanBean>() {
                     Disposable disposable;
+
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable = d;
@@ -52,7 +53,8 @@ public class MvpStructurePresenter extends AbsBasePresenter<MvpStructureContract
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                       Log.d("misery", "onError \n"+ e.getMessage().toString());
+                        Log.d("misery", "onError");
+                        e.printStackTrace();
                     }
 
                     @Override

@@ -61,7 +61,9 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         registerRx(d);
-                        mView.onRefreshingStateChanged(true);
+                        if (state == STATE_REFRESHING) {
+                            mView.onRefreshingStateChanged(true);
+                        }
                     }
 
                     @Override
@@ -75,7 +77,8 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(BangumiFragment.TAG, e.getMessage());
+                        Log.e(BangumiFragment.TAG, "onError");
+                        e.printStackTrace();
                     }
 
                     @Override

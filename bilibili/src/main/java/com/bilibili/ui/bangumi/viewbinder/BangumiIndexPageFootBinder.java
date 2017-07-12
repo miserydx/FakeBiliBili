@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.bangumi.BangumiIndexPage;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,12 +24,6 @@ import me.drakeet.multitype.ItemViewBinder;
 
 public class BangumiIndexPageFootBinder extends ItemViewBinder<BangumiIndexPage.Foot, BangumiIndexPageFootBinder.BangumiIndexPageFootHolder> {
 
-    private Context mContext;
-
-    public BangumiIndexPageFootBinder(Context context) {
-        mContext = context;
-    }
-
     @NonNull
     @Override
     protected BangumiIndexPageFootHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
@@ -39,20 +33,18 @@ public class BangumiIndexPageFootBinder extends ItemViewBinder<BangumiIndexPage.
 
     @Override
     protected void onBindViewHolder(@NonNull BangumiIndexPageFootHolder holder, @NonNull BangumiIndexPage.Foot item) {
-        Glide.with(mContext)
-                .load(item.getCover())
-                .asBitmap()
-                .placeholder(R.drawable.bili_default_image_tv)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivCover);
+        Context context = holder.ivCover.getContext();
+        int width = ScreenUtil.getScreenWidth(context) - 24;
+        int height = context.getResources().getDimensionPixelSize(R.dimen.bangumi_card_image_height);
+        ImageUtil.load(holder.ivCover, item.getCover(), width, height);
         holder.tvTitle.setText(item.getTitle());
         holder.tvDesc.setText(item.getDesc());
     }
 
-    static class BangumiIndexPageFootHolder extends RecyclerView.ViewHolder{
+    static class BangumiIndexPageFootHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.cover_iv)
-        ImageView ivCover;
+        SimpleDraweeView ivCover;
         @BindView(R.id.title_tv)
         TextView tvTitle;
         @BindView(R.id.desc_tv)

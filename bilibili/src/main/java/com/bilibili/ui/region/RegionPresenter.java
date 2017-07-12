@@ -67,7 +67,8 @@ public class RegionPresenter extends AbsBasePresenter<RegionContract.View> {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(RegionFragment.TAG, e.getMessage().toString());
+                        Log.e(RegionFragment.TAG, "onError");
+                        e.printStackTrace();
                     }
 
                     @Override

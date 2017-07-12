@@ -1,23 +1,23 @@
 package com.bilibili.ui.bangumi.viewbinder;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.bangumi.BangumiIndexPage;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
 import com.common.util.StringUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,8 +28,6 @@ import me.drakeet.multitype.ItemViewBinder;
  */
 
 public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPage.Recommend, BangumiRecommendDetailBinder.BangumiRecommendDetailHolder> {
-
-    private int coverHeight = 0;
 
     public BangumiRecommendDetailBinder() {
 
@@ -43,25 +41,13 @@ public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPag
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final BangumiRecommendDetailHolder holder, @NonNull BangumiIndexPage.Recommend item) {
-        if (coverHeight != 0) {
-            setCoverHeight(holder.rlCover, coverHeight);
-        } else {
-            holder.rlCover.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    int width = holder.rlCover.getWidth();
-                    coverHeight = width * 4 / 3;
-                    setCoverHeight(holder.rlCover, coverHeight);
-                    holder.rlCover.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
-            });
-        }
-        Glide.with(holder.ivCover.getContext())
-                .load(item.getCover())
-                .placeholder(R.drawable.bili_default_image_tv)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivCover);
+    protected void onBindViewHolder(@NonNull final BangumiRecommendDetailHolder holder, @NonNull final BangumiIndexPage.Recommend item) {
+        Context context = holder.ivCover.getContext();
+        int width = ScreenUtil.getScreenWidth(context) / 3 - SystemUtil.dp2px(context, 14);
+        int height = width * 4 / 3;
+        CardView.LayoutParams params = new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT, height);
+        holder.rlCover.setLayoutParams(params);
+        ImageUtil.load(holder.ivCover, item.getCover(), width, height);
         if (!TextUtils.isEmpty(item.getBadge())) {
             holder.tvBadge.setVisibility(View.VISIBLE);
             holder.tvBadge.setText(item.getBadge());
@@ -73,17 +59,12 @@ public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPag
         holder.tvNewest.setText(newestText);
     }
 
-    private void setCoverHeight(RelativeLayout rlCover, int height) {
-        CardView.LayoutParams params = new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT, height);
-        rlCover.setLayoutParams(params);
-    }
-
     static class BangumiRecommendDetailHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.cover_rl)
         RelativeLayout rlCover;
         @BindView(R.id.cover_iv)
-        ImageView ivCover;
+        SimpleDraweeView ivCover;
         @BindView(R.id.badge_tv)
         TextView tvBadge;
         @BindView(R.id.favourites_tv)

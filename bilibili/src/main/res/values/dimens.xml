@@ -30,6 +30,7 @@
     <dimen name="common_margin_4">4.0dip</dimen>
     <dimen name="common_margin_5">5.0dip</dimen>
     <dimen name="common_margin_6">6.0dip</dimen>
+    <dimen name="common_margin_7">7.0dip</dimen>
     <dimen name="common_margin_10">10.0dip</dimen>
     <dimen name="common_margin_12">12.0dip</dimen>
     <dimen name="common_margin_15">15.0dip</dimen>
@@ -104,6 +105,9 @@
     <dimen name="avatar_small_width">20.0dip</dimen>
     <dimen name="avatar_top_margin">40dp</dimen>
     <dimen name="list_item_avatar_large_size">70dp</dimen>
+
+    <!--bangumi-->
+    <dimen name="live_card_image_height">101dp</dimen>
 
     <!--bangumi-->
     <dimen name="bangumi_card_image_height">105dp</dimen>

@@ -14,11 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/cover_iv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bangumi_card_image_height"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            app:placeholderImage="@drawable/bili_default_image_tv"/>
 
         <TextView
             android:id="@+id/title_tv"

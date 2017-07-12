@@ -20,12 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/recommend_cover_height">
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/cover_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:placeholderImage="@drawable/bili_default_image_tv"/>
 
             <View
                 android:layout_width="match_parent"

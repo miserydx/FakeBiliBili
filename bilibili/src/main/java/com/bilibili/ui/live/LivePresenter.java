@@ -92,7 +92,8 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(LiveFragment.TAG, e.getMessage().toString());
+                        Log.e(LiveFragment.TAG, "onError");
+                        e.printStackTrace();
                     }
 
                     @Override

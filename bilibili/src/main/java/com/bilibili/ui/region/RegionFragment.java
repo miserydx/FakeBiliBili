@@ -12,8 +12,8 @@ import com.bilibili.ui.region.viewbinder.RegionBodyItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionFooterItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionHeaderItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionPartitionItemViewBinder;
-import com.bumptech.glide.Glide;
 import com.common.base.BaseMvpFragment;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -76,9 +76,9 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Glide.with(getContext()).pauseRequests();
+                    Fresco.getImagePipeline().pause();
                 } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getContext()).resumeRequests();
+                    Fresco.getImagePipeline().resume();
                 }
             }
         });

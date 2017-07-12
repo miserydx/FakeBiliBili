@@ -3,15 +3,12 @@ package com.bilibili.ui.recommed;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.recommend.AppIndex;
 import com.bilibili.ui.recommed.viewbinder.RecommendIndexItemBinder;
-import com.bumptech.glide.Glide;
 import com.common.base.BaseMvpFragment;
 
 import butterknife.BindView;
@@ -73,11 +70,6 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Glide.with(getContext()).pauseRequests();
-                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getContext()).resumeRequests();
-                }
                 GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
                 //列表中LastVisibleItem为倒数第二行时，加载更多
                 if (manager.findLastVisibleItemPosition() + 3 >= manager.getItemCount()) {

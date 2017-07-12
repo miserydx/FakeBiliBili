@@ -1,18 +1,20 @@
 package com.bilibili.ui.recommed.viewbinder;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.recommend.AppIndex;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
 import com.common.util.StringUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,11 +35,10 @@ public class RecommendIndexItemBinder extends ItemViewBinder<AppIndex, Recommend
 
     @Override
     protected void onBindViewHolder(@NonNull final RecommendIndexItemHolder holder, @NonNull AppIndex item) {
-        Glide.with(holder.ivCover.getContext())
-                .load(item.getCover())
-                .placeholder(R.drawable.bili_default_image_tv)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivCover);
+        Context context = holder.ivCover.getContext();
+        int width = ScreenUtil.getScreenWidth(context) / 2 - SystemUtil.dp2px(context, 14);
+        int height = context.getResources().getDimensionPixelSize(R.dimen.recommend_cover_height);
+        ImageUtil.load(holder.ivCover, item.getCover(), width, height);
         holder.tvPlay.setText(StringUtil.numberToWord(item.getPlay()));
         holder.tvReply.setText(StringUtil.numberToWord(item.getReply()));
         holder.tvDuration.setText(StringUtil.secToTime(item.getDuration()));
@@ -48,7 +49,7 @@ public class RecommendIndexItemBinder extends ItemViewBinder<AppIndex, Recommend
     static class RecommendIndexItemHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.cover_iv)
-        ImageView ivCover;
+        SimpleDraweeView ivCover;
         @BindView(R.id.play_tv)
         TextView tvPlay;
         @BindView(R.id.reply_tv)

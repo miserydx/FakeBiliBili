@@ -1,19 +1,20 @@
 package com.bilibili.ui.live.viewbinder;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
 import com.common.util.StringUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,17 +35,10 @@ public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Liv
 
     @Override
     protected void onBindViewHolder(@NonNull LiveViewHolder holder, @NonNull LiveCommon.Partitions.Lives item) {
-        int height = Integer.valueOf(item.getCover().getHeight());
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height * 3 / 2);
-        holder.ivCover.setLayoutParams(params);
-        holder.ivCover.setScaleType(ImageView.ScaleType.FIT_XY);
-        Glide.with(holder.ivCover.getContext())
-                .load(item.getCover().getSrc())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.bili_default_image_tv)
-                .crossFade(300)
-                .into(holder.ivCover);
-
+        Context context = holder.ivCover.getContext();
+        int coverWidth = ScreenUtil.getScreenWidth(context) / 2 - SystemUtil.dp2px(context, 18);
+        int coverHeight = context.getResources().getDimensionPixelSize(R.dimen.live_card_image_height);
+        ImageUtil.load(holder.ivCover, item.getCover().getSrc(), coverWidth, coverHeight);
         holder.tvTitle.setText(item.getTitle());
         holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
         holder.tvName.setText(item.getOwner().getName());
@@ -53,7 +47,7 @@ public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Liv
     static class LiveViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_cover)
-        ImageView ivCover;
+        SimpleDraweeView ivCover;
         @BindView(R.id.tv_area_title)
         TextView tvTitle;
         @BindView(R.id.tv_name)

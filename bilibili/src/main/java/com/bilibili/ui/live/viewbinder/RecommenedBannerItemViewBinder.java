@@ -1,20 +1,21 @@
 package com.bilibili.ui.live.viewbinder;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveRecommend;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
 import com.common.util.StringUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,15 +36,10 @@ public class RecommenedBannerItemViewBinder extends ItemViewBinder<LiveRecommend
 
     @Override
     protected void onBindViewHolder(@NonNull BannerViewHolder holder, @NonNull LiveRecommend.Recommend_data.Banner_data item) {
-        int height = item.getCover().getHeight();
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height * 3 / 2);
-        holder.ivCover.setLayoutParams(params);
-        holder.ivCover.setScaleType(ImageView.ScaleType.FIT_XY);
-        Glide.with(holder.ivCover.getContext())
-                .load(item.getCover().getSrc())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .crossFade(200)
-                .into(holder.ivCover);
+        Context context = holder.ivCover.getContext();
+        int width = ScreenUtil.getScreenWidth(context);
+        int height = SystemUtil.dp2px(context, 120);
+        ImageUtil.load(holder.ivCover, item.getCover().getSrc(), width, height);
         holder.tvName.setText(item.getOwner().getName());
         holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
         String tintArea = "<font color='#FF4081'>" + "#" + item.getArea() + "#&nbsp;" + "</font>";
@@ -55,7 +51,7 @@ public class RecommenedBannerItemViewBinder extends ItemViewBinder<LiveRecommend
         @BindView(R.id.tv_name)
         TextView tvName;
         @BindView(R.id.iv_cover)
-        ImageView ivCover;
+        SimpleDraweeView ivCover;
         @BindView(R.id.tv_area_title)
         TextView tvAreaTitle;
         @BindView(R.id.tv_online)

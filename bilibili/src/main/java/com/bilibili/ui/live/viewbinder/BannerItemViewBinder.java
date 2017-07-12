@@ -14,8 +14,10 @@ import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
 import com.bilibili.widget.banner.BannerAdapter;
 import com.bilibili.widget.banner.SmartViewPager;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.common.util.ImageUtil;
+import com.common.util.ScreenUtil;
+import com.common.util.SystemUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -56,7 +58,7 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
             banner.setNeedAutoScroll(true);
             banner.setIndicatorGravity(Gravity.BOTTOM | Gravity.RIGHT);
             banner.setIndicatorColor(ContextCompat.getColor(itemView.getContext(), R.color.white),
-                    ContextCompat.getColor(itemView.getContext(),R.color.pink));
+                    ContextCompat.getColor(itemView.getContext(), R.color.pink));
             adapter = new LiveBannerAdapter(itemView.getContext());
         }
 
@@ -66,7 +68,7 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         }
     }
 
-    static class LiveBannerAdapter extends BannerAdapter<LiveCommon.Banner, ImageView> {
+    static class LiveBannerAdapter extends BannerAdapter<LiveCommon.Banner, SimpleDraweeView> {
 
         private Context context;
 
@@ -80,8 +82,8 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         }
 
         @Override
-        protected ImageView getItemView() {
-            ImageView imageView = new ImageView(context);
+        protected SimpleDraweeView getItemView() {
+            SimpleDraweeView imageView = new SimpleDraweeView(context);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             ViewGroup.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             imageView.setLayoutParams(params);
@@ -89,13 +91,10 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         }
 
         @Override
-        protected void bindData(ImageView itemView, LiveCommon.Banner item) {
-            Glide.with(context)
-                    .load(item.getImg())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.drawable.bili_default_image_tv)
-                    .crossFade(300)
-                    .into(itemView);
+        protected void bindData(SimpleDraweeView itemView, LiveCommon.Banner item) {
+            int width = ScreenUtil.getScreenWidth(context);
+            int height = SystemUtil.dp2px(context, 120);
+            ImageUtil.load(itemView, item.getImg(), width, height);
         }
     }
 }

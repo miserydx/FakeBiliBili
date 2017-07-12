@@ -13,8 +13,8 @@ import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFollowBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexPageFootBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexRecommendBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiRecommendDetailBinder;
-import com.bumptech.glide.Glide;
 import com.common.base.BaseMvpFragment;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -78,15 +78,15 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
         mAdapter.register(BangumiHomeBinder.BangumiHome.class, new BangumiHomeBinder());
         mAdapter.register(BangumiIndexRecommendBinder.BangumiIndexRecommend.class, new BangumiIndexRecommendBinder());
         mAdapter.register(BangumiIndexPage.Recommend.class, new BangumiRecommendDetailBinder());
-        mAdapter.register(BangumiIndexPage.Foot.class, new BangumiIndexPageFootBinder(getContext()));
+        mAdapter.register(BangumiIndexPage.Foot.class, new BangumiIndexPageFootBinder());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Glide.with(getContext()).pauseRequests();
+                    Fresco.getImagePipeline().pause();
                 } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getContext()).resumeRequests();
+                    Fresco.getImagePipeline().resume();
                 }
             }
         });
