@@ -38,12 +38,12 @@ public abstract class BaseMvpFragment<T extends AbsBasePresenter> extends Suppor
         if (mPresenter != null)
             mPresenter.attachView(this);
         initViewAndEvent();
+        mPresenter.loadData();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.loadData();
     }
 
     @Override

@@ -26,6 +26,7 @@ public class ApiHelper {
     public static final String PLATFORM = "android";
     public static final String DEVICE = "android";
     public static final String SCALE = "xxhdpi";
+    public static final String NETWORK_WIFI = "wifi";
 
     public static String getSign(HttpUrl url) {
         //拼接参数(按顺序)+SecretKey

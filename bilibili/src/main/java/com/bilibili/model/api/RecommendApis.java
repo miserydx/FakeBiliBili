@@ -27,10 +27,13 @@ public interface RecommendApis {
     Observable<DataListResponse<AppIndex>> getIndex(@Query("appkey") String appkey,
                                                     @Query("build") String build,
                                                     @Query("idx") String idx,
+                                                    @Query("login_event") int login_event,
                                                     @Query("mobi_app") String mobi_app,
                                                     @Query("network") String network,
+                                                    @Query("open_event") String open_event,
                                                     @Query("platform") String platform,
-                                                    @Query("pull") String pull,
+                                                    @Query("pull") boolean pull,
+                                                    @Query("style") int style,
                                                     @Query("ts") String ts
     );
 }

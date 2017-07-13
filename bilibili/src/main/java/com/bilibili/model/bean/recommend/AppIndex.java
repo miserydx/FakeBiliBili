@@ -37,6 +37,8 @@ public class AppIndex {
 
     private int idx;
 
+    private List<Banner_item> banner_item;
+
     private int tid;
 
     private String tname;
@@ -165,6 +167,22 @@ public class AppIndex {
 
     public int getIdx() {
         return this.idx;
+    }
+
+    public void set_goto(String _goto) {
+        this._goto = _goto;
+    }
+
+    public List<Banner_item> getBanner_item() {
+        return banner_item;
+    }
+
+    public void setBanner_item(List<Banner_item> banner_item) {
+        this.banner_item = banner_item;
+    }
+
+    public boolean is_ad_loc() {
+        return is_ad_loc;
     }
 
     public void setTid(int tid) {
@@ -338,5 +356,167 @@ public class AppIndex {
 
         }
 
+    }
+
+    public class Banner_item {
+        private int id;
+
+        private String title;
+
+        private String image;
+
+        private String hash;
+
+        private String uri;
+
+        private String request_id;
+
+        private int creative_id;
+
+        private int src_id;
+
+        private boolean is_ad;
+
+        private boolean is_ad_loc;
+
+        private String ad_cb;
+
+        private String client_ip;
+
+        private int server_type;
+
+        private int resource_id;
+
+        private int index;
+
+        private int cm_mark;
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return this.id;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return this.title;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getImage() {
+            return this.image;
+        }
+
+        public void setHash(String hash) {
+            this.hash = hash;
+        }
+
+        public String getHash() {
+            return this.hash;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public String getUri() {
+            return this.uri;
+        }
+
+        public void setRequest_id(String request_id) {
+            this.request_id = request_id;
+        }
+
+        public String getRequest_id() {
+            return this.request_id;
+        }
+
+        public void setCreative_id(int creative_id) {
+            this.creative_id = creative_id;
+        }
+
+        public int getCreative_id() {
+            return this.creative_id;
+        }
+
+        public void setSrc_id(int src_id) {
+            this.src_id = src_id;
+        }
+
+        public int getSrc_id() {
+            return this.src_id;
+        }
+
+        public void setIs_ad(boolean is_ad) {
+            this.is_ad = is_ad;
+        }
+
+        public boolean getIs_ad() {
+            return this.is_ad;
+        }
+
+        public void setIs_ad_loc(boolean is_ad_loc) {
+            this.is_ad_loc = is_ad_loc;
+        }
+
+        public boolean getIs_ad_loc() {
+            return this.is_ad_loc;
+        }
+
+        public void setAd_cb(String ad_cb) {
+            this.ad_cb = ad_cb;
+        }
+
+        public String getAd_cb() {
+            return this.ad_cb;
+        }
+
+        public void setClient_ip(String client_ip) {
+            this.client_ip = client_ip;
+        }
+
+        public String getClient_ip() {
+            return this.client_ip;
+        }
+
+        public void setServer_type(int server_type) {
+            this.server_type = server_type;
+        }
+
+        public int getServer_type() {
+            return this.server_type;
+        }
+
+        public void setResource_id(int resource_id) {
+            this.resource_id = resource_id;
+        }
+
+        public int getResource_id() {
+            return this.resource_id;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return this.index;
+        }
+
+        public void setCm_mark(int cm_mark) {
+            this.cm_mark = cm_mark;
+        }
+
+        public int getCm_mark() {
+            return this.cm_mark;
+        }
     }
 }

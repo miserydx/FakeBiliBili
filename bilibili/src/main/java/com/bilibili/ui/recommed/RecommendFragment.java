@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.recommend.AppIndex;
+import com.bilibili.ui.recommed.viewbinder.RecommendBannerItemViewBinder;
 import com.bilibili.ui.recommed.viewbinder.RecommendIndexItemBinder;
 import com.common.base.BaseMvpFragment;
 
@@ -49,14 +50,15 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadData();
+                mPresenter.pullToRefresh();
             }
         });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
         GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                return 1;
+                Object o = items.get(position);
+                return o instanceof RecommendBannerItemViewBinder.Banner ? SPAN_COUNT : 1;
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
@@ -66,6 +68,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         mAdapter = new MultiTypeAdapter();
         //register item
         mAdapter.register(AppIndex.class, new RecommendIndexItemBinder());
+        mAdapter.register(RecommendBannerItemViewBinder.Banner.class, new RecommendBannerItemViewBinder());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -80,17 +83,31 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     }
 
     @Override
-    public void onDataUpdated(Items items, boolean isLoadMore) {
+    public void onDataUpdated(Items items, int state) {
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
         }
-        if (isLoadMore) {
-            this.items.addAll(items);
-        } else {
-            this.items = items;
+        switch (state) {
+            case RecommendPresenter.STATE_INITIAL:
+                this.items = items;
+                mAdapter.setItems(this.items);
+                mAdapter.notifyDataSetChanged();
+                break;
+            case RecommendPresenter.STATE_REFRESHING:
+                Items temp = new Items();
+                temp.addAll(this.items);
+                this.items = items;
+                this.items.addAll(temp);
+                mAdapter.setItems(this.items);
+                mAdapter.notifyItemRangeChanged(0, items.size());
+                break;
+            case RecommendPresenter.STATE_LOAD_MORE:
+                int position = this.items.size();
+                this.items.addAll(items);
+                mAdapter.setItems(this.items);
+                mAdapter.notifyItemInserted(position);
+                break;
         }
-        mAdapter.setItems(this.items);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override

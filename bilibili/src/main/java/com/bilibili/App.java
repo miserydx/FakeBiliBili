@@ -1,5 +1,6 @@
 package com.bilibili;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -12,18 +13,15 @@ import com.bilibili.di.component.DaggerFragmentComponent;
 import com.bilibili.di.component.FragmentComponent;
 import com.bilibili.di.module.ApiModule;
 import com.bilibili.di.module.FragmentModule;
+import com.bilibili.widget.banner.CustomBitmapMemoryCacheParamsSupplier;
 import com.common.app.ActivityLifecycleManager;
 import com.common.app.AppComponent;
 import com.common.app.DaggerAppComponent;
-import com.facebook.cache.common.CacheKey;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.MemoryTrimmable;
 import com.facebook.common.memory.MemoryTrimmableRegistry;
 import com.facebook.common.memory.NoOpMemoryTrimmableRegistry;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.cache.CountingMemoryCache;
-import com.facebook.imagepipeline.cache.DefaultEncodedMemoryCacheParamsSupplier;
-import com.facebook.imagepipeline.cache.ImageCacheStatsTracker;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
 import me.yokeyword.fragmentation.BuildConfig;
@@ -88,73 +86,10 @@ public class App extends Application {
                 .setDownsampleEnabled(true)
                 .setResizeAndRotateEnabledForNetwork(true)
 //                .setBitmapMemoryCacheParamsSupplier(new DefaultBitmapMemoryCacheParamsSupplier((ActivityManager) getSystemService(ACTIVITY_SERVICE)))
-                .setBitmapMemoryCacheParamsSupplier(new DefaultEncodedMemoryCacheParamsSupplier())
+//                .setBitmapMemoryCacheParamsSupplier(new DefaultEncodedMemoryCacheParamsSupplier())
+                .setBitmapMemoryCacheParamsSupplier(new CustomBitmapMemoryCacheParamsSupplier((ActivityManager) getSystemService(ACTIVITY_SERVICE)))
                 .setMemoryTrimmableRegistry(memoryTrimmableRegistry)
                 .setBitmapsConfig(Bitmap.Config.RGB_565)
-                .setImageCacheStatsTracker(new ImageCacheStatsTracker() {
-                    @Override
-                    public void onBitmapCachePut() {
-
-                    }
-
-                    @Override
-                    public void onBitmapCacheHit(CacheKey cacheKey) {
-                        Log.d("misery", "onBitmapCacheHit : " + cacheKey.getUriString());
-                    }
-
-                    @Override
-                    public void onBitmapCacheMiss() {
-
-                    }
-
-                    @Override
-                    public void onMemoryCachePut() {
-                    }
-
-                    @Override
-                    public void onMemoryCacheHit(CacheKey cacheKey) {
-                        Log.d("misery", "onMemoryCacheHit : " + cacheKey.getUriString());
-                    }
-
-                    @Override
-                    public void onMemoryCacheMiss() {
-                    }
-
-                    @Override
-                    public void onStagingAreaHit(CacheKey cacheKey) {
-                        Log.d("misery", "onStagingAreaHit : " + cacheKey.getUriString());
-                    }
-
-                    @Override
-                    public void onStagingAreaMiss() {
-
-                    }
-
-                    @Override
-                    public void onDiskCacheHit() {
-                        Log.d("misery", "onMemoryCacheHit");
-                    }
-
-                    @Override
-                    public void onDiskCacheMiss() {
-
-                    }
-
-                    @Override
-                    public void onDiskCacheGetFail() {
-
-                    }
-
-                    @Override
-                    public void registerBitmapMemoryCache(CountingMemoryCache<?, ?> bitmapMemoryCache) {
-
-                    }
-
-                    @Override
-                    public void registerEncodedMemoryCache(CountingMemoryCache<?, ?> encodedMemoryCache) {
-
-                    }
-                })
                 .build();
         Fresco.initialize(this, config);
     }
