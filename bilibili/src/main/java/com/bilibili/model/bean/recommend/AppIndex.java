@@ -101,7 +101,7 @@ public class AppIndex {
         this._goto = _goto;
     }
 
-    public String get_goto() {
+    public String getGoto() {
         return this._goto;
     }
 
@@ -167,10 +167,6 @@ public class AppIndex {
 
     public int getIdx() {
         return this.idx;
-    }
-
-    public void set_goto(String _goto) {
-        this._goto = _goto;
     }
 
     public List<Banner_item> getBanner_item() {

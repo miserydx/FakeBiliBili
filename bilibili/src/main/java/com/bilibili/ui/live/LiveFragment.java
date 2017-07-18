@@ -14,12 +14,12 @@ import com.bilibili.ui.live.viewbinder.FooterItemViewBinder;
 import com.bilibili.ui.live.viewbinder.LiveListItemViewBinder;
 import com.bilibili.ui.live.viewbinder.NavigatorItemViewBinder;
 import com.bilibili.ui.live.viewbinder.RecommendedLiveListItemViewBinder;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by Android_ZzT on 17/6/18.
@@ -34,7 +34,7 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
     @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private MultiTypeAdapter mAdapter;
+    private BiliMultiTypeAdapter mAdapter;
 
     private Items mItems;
 
@@ -51,7 +51,7 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
     @Override
     protected void initViewAndEvent() {
         mItems = new Items();
-        mAdapter = new MultiTypeAdapter();
+        mAdapter = new BiliMultiTypeAdapter();
         //banner
         mAdapter.register(LiveCommon.class, new BannerItemViewBinder());
         //navigator

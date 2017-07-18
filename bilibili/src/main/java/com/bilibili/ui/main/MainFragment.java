@@ -132,7 +132,6 @@ public class MainFragment extends BaseFragment {
         mFragments.add(mBangumiFragment);
         mFragments.add(mRegionFragment);
         mFragments.add(new NewsPageFragment());
-        mFragments.add(new NewsPageFragment());
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter {

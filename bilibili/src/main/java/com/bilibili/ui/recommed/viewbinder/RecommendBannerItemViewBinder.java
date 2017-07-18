@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.recommend.AppIndex;
@@ -21,6 +22,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -61,6 +63,9 @@ public class RecommendBannerItemViewBinder extends ItemViewBinder<RecommendBanne
             banner.setIndicatorGravity(Gravity.BOTTOM | Gravity.RIGHT);
             banner.setIndicatorColor(ContextCompat.getColor(itemView.getContext(), R.color.white),
                     ContextCompat.getColor(itemView.getContext(), R.color.pink));
+            int height = itemView.getContext().getResources().getDimensionPixelSize(R.dimen.banner_item_height);
+            ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+            banner.setLayoutParams(params);
             adapter = new RecommendBannerAdapter(itemView.getContext());
         }
 
@@ -100,8 +105,8 @@ public class RecommendBannerItemViewBinder extends ItemViewBinder<RecommendBanne
 
         @Override
         protected void bindData(SimpleDraweeView itemView, AppIndex.Banner_item item) {
-            int width = ScreenUtil.getScreenWidth(context);
-            int height = SystemUtil.dp2px(context, 120);
+            int width = ScreenUtil.getScreenWidth(context) - SystemUtil.dp2px(context, 16);
+            int height = context.getResources().getDimensionPixelSize(R.dimen.banner_item_height);
             ImageUtil.load(itemView, item.getImage(), width, height);
         }
     }
@@ -110,12 +115,43 @@ public class RecommendBannerItemViewBinder extends ItemViewBinder<RecommendBanne
 
         private List<AppIndex.Banner_item> bannerItemList;
 
+        private String param;
+
+        @SerializedName("goto")
+        private String _goto;
+
+        private int idx;
+
         public List<AppIndex.Banner_item> getBannerItemList() {
             return bannerItemList;
         }
 
         public void setBannerItemList(List<AppIndex.Banner_item> bannerItemList) {
             this.bannerItemList = bannerItemList;
+        }
+
+        public String getParam() {
+            return param;
+        }
+
+        public void setParam(String param) {
+            this.param = param;
+        }
+
+        public String get_goto() {
+            return _goto;
+        }
+
+        public void set_goto(String _goto) {
+            this._goto = _goto;
+        }
+
+        public int getIdx() {
+            return idx;
+        }
+
+        public void setIdx(int idx) {
+            this.idx = idx;
         }
     }
 }

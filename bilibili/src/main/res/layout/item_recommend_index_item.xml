@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                app:placeholderImage="@drawable/bili_default_image_tv"/>
+                app:placeholderImage="@drawable/bili_default_image_tv" />
 
             <View
                 android:layout_width="match_parent"
@@ -108,6 +108,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:src="@drawable/ic_more_grey" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/login_cover_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingBottom="18dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="18dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/login_cover_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 

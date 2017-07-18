@@ -4,17 +4,20 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
 import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.recommend.AppIndex;
 import com.bilibili.ui.recommed.viewbinder.RecommendBannerItemViewBinder;
 import com.bilibili.ui.recommed.viewbinder.RecommendIndexItemBinder;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by miserydx on 17/7/6.
@@ -31,7 +34,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private MultiTypeAdapter mAdapter;
+    private BiliMultiTypeAdapter mAdapter;
     private Items items = new Items();
 
     @Override
@@ -50,7 +53,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.pullToRefresh();
+                pullToRefresh();
             }
         });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
@@ -58,25 +61,25 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
             @Override
             public int getSpanSize(int position) {
                 Object o = items.get(position);
-                return o instanceof RecommendBannerItemViewBinder.Banner ? SPAN_COUNT : 1;
+                return o instanceof AppIndex ? 1 : SPAN_COUNT;
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new RecommendIndexItemDecoration(spanSizeLookup));
-        mAdapter = new MultiTypeAdapter();
+        mAdapter = new BiliMultiTypeAdapter();
         //register item
         mAdapter.register(AppIndex.class, new RecommendIndexItemBinder());
         mAdapter.register(RecommendBannerItemViewBinder.Banner.class, new RecommendBannerItemViewBinder());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
                 //列表中LastVisibleItem为倒数第二行时，加载更多
-                if (manager.findLastVisibleItemPosition() + 3 >= manager.getItemCount()) {
-                    mPresenter.loadMore();
+                if (manager.findLastVisibleItemPosition() + SPAN_COUNT >= manager.getItemCount()) {
+                    mPresenter.loadMore(((AppIndex) items.get(items.size() - 1)).getIdx() - 1);
                 }
             }
         });
@@ -99,7 +102,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
                 this.items = items;
                 this.items.addAll(temp);
                 mAdapter.setItems(this.items);
-                mAdapter.notifyItemRangeChanged(0, items.size());
+                mAdapter.notifyDataSetChanged();
                 break;
             case RecommendPresenter.STATE_LOAD_MORE:
                 int position = this.items.size();
@@ -110,8 +113,29 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         }
     }
 
+    private void pullToRefresh() {
+        int idx = 0;
+        if (items.get(0) instanceof RecommendBannerItemViewBinder.Banner) {
+            idx = ((RecommendBannerItemViewBinder.Banner) items.get(0)).getIdx() + 1;
+        } else if (items.get(0) instanceof AppIndex) {
+            idx = ((AppIndex) items.get(0)).getIdx() + 1;
+        }
+        mPresenter.pullToRefresh(idx);
+    }
+
     @Override
     public void onRefreshingStateChanged(boolean isRefresh) {
         mRefreshLayout.setRefreshing(isRefresh);
     }
+
+    @OnClick(R.id.load_more_tv)
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.load_more_tv:
+                mRefreshLayout.setRefreshing(true);
+                pullToRefresh();
+                break;
+        }
+    }
+
 }

@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.BangumiApis;
+import com.bilibili.model.bean.ResultListResponse;
+import com.bilibili.model.bean.bangumi.BangumiIndexFall;
 import com.bilibili.model.bean.bangumi.BangumiIndexPage;
 import com.bilibili.model.bean.ResultObjectResponse;
+import com.bilibili.ui.bangumi.viewbinder.BangumiDividerBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiHomeBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFollowBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexRecommendBinder;
@@ -28,8 +31,14 @@ import me.drakeet.multitype.Items;
 public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> implements BangumiContract.Presenter {
 
     private static final String TAG = BangumiPresenter.class.getSimpleName();
+    public static final int STATE_NORMAL = 0;
+    public static final int STATE_INITIAL = 1;
+    public static final int STATE_REFRESHING = 2;
+    public static final int STATE_LOAD_MORE = 3;
 
     private BangumiApis bangumiApis;
+    private int state = 0;
+    private long cursor = 0;
 
     @Inject
     public BangumiPresenter(BangumiApis bangumiApis) {
@@ -38,6 +47,20 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
 
     @Override
     public void loadData() {
+        state = STATE_INITIAL;
+        getIndexPage();
+    }
+
+    @Override
+    public void pullToRefresh() {
+        if (state == STATE_REFRESHING) {
+            return;
+        }
+        state = STATE_REFRESHING;
+        getIndexPage();
+    }
+
+    private void getIndexPage() {
         bangumiApis.getIndexPage(ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,9 +73,8 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
 
                     @Override
                     public void onNext(@NonNull ResultObjectResponse<BangumiIndexPage> bangumiIndexPageRes) {
-                        Log.d(TAG, "ResultObjectResponse<BangumiIndexPage> = " + bangumiIndexPageRes);
                         Items items = getItems(bangumiIndexPageRes.getData());
-                        mView.onDataUpdated(items);
+                        mView.onDataUpdated(items, state);
                     }
 
                     @Override
@@ -63,6 +85,7 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
 
                     @Override
                     public void onComplete() {
+                        state = STATE_NORMAL;
                         mView.onRefreshingStateChanged(false);
                     }
                 });
@@ -72,17 +95,64 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
         Items items = new Items();
         items.add(new BangumiIndexFollowBinder.BangumiIndexFollow());
         items.add(new BangumiHomeBinder.BangumiHome());
-        items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_JP));
+        items.add(new BangumiDividerBinder.BangumiDivider());
+        items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_JP_RECOMMEND));
         for (BangumiIndexPage.Recommend recommend : bangumiIndexPage.getRecommend_jp().getRecommend()) {
             items.add(recommend);
         }
         items.add(bangumiIndexPage.getRecommend_jp().getFoot().get(0));
-        items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_CN));
+        items.add(new BangumiDividerBinder.BangumiDivider());
+        items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_CN_RECOMMEND));
         for (BangumiIndexPage.Recommend recommend : bangumiIndexPage.getRecommend_cn().getRecommend()) {
             items.add(recommend);
         }
         items.add(bangumiIndexPage.getRecommend_cn().getFoot().get(0));
         return items;
+    }
+
+    @Override
+    public void loadMore() {
+        if (state == STATE_LOAD_MORE) {
+            return;
+        }
+        bangumiApis.getIndexFall(ApiHelper.APP_KEY, ApiHelper.BUILD, cursor, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResultListResponse<BangumiIndexFall>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        registerRx(d);
+                        state = STATE_LOAD_MORE;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResultListResponse<BangumiIndexFall> bangumiIndexFallRes) {
+                        Items items = new Items();
+                        if (cursor == 0) {
+                            items.add(new BangumiDividerBinder.BangumiDivider());
+                            items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_EDITORS_RECOMMEND));
+                        }
+                        for (BangumiIndexFall bangumiIndexFall : bangumiIndexFallRes.getData()) {
+                            if (bangumiIndexFall.getCursor() != 0) {
+                                cursor = (long) (bangumiIndexFall.getCursor());
+                            }
+                            items.add(bangumiIndexFall);
+                        }
+                        mView.onDataUpdated(items, state);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(BangumiFragment.TAG, "onError");
+                        e.printStackTrace();
+                        mView.onDataUpdateError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        state = STATE_NORMAL;
+                    }
+                });
     }
 
     @Override

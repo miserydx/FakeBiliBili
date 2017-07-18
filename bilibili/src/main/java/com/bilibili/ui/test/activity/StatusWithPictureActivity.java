@@ -13,6 +13,7 @@ import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.adapter.NewsItemViewBinder;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.IBaseMvpActivity;
 import com.common.base.adapter.OnItemClickListener;
 import com.common.util.StatusBarUtil;
@@ -23,7 +24,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.drakeet.multitype.MultiTypeAdapter;
 import me.yokeyword.fragmentation.SupportActivity;
 
 public class StatusWithPictureActivity extends SupportActivity implements IBaseMvpActivity<MvpStructurePresenter>, MvpStructureContract.View {
@@ -41,7 +41,7 @@ public class StatusWithPictureActivity extends SupportActivity implements IBaseM
 
 //    private MvpStructureAdapter mAdapter;
 
-    private MultiTypeAdapter mAdapter;
+    private BiliMultiTypeAdapter mAdapter;
 
     private List<WeiXinJingXuanBean.NewsList> mList = new ArrayList<>();
 
@@ -76,7 +76,7 @@ public class StatusWithPictureActivity extends SupportActivity implements IBaseM
 //        mAdapter = new MvpStructureAdapter(this, mList);
 //        recyclerView.setAdapter(mAdapter);
 
-        mAdapter = new MultiTypeAdapter();
+        mAdapter = new BiliMultiTypeAdapter();
         mAdapter.register(WeiXinJingXuanBean.NewsList.class, new NewsItemViewBinder(this));
         recyclerView.setAdapter(mAdapter);
         mPresenter.loadData();

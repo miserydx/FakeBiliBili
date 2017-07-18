@@ -57,7 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_layout_height"
             android:background="?attr/colorPrimaryDark"
-            app:tl_indicator_width_equal_title="true"
+            app:tl_indicator_margin_left="@dimen/margin_medium"
+            app:tl_indicator_margin_right="@dimen/margin_medium"
             app:tl_tab_space_equal="true"
             app:tl_textAllCaps="true"
             app:tl_textsize="14sp" />

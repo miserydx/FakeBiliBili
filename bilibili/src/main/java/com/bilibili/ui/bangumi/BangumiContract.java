@@ -13,13 +13,19 @@ public interface BangumiContract {
 
     interface View extends BaseView {
 
-        void onDataUpdated(Items items);
+        void onDataUpdated(Items items, int state);
 
         void onRefreshingStateChanged(boolean isRefresh);
+
+        void onDataUpdateError();
 
     }
 
     interface Presenter extends BasePresenter {
+
+        void pullToRefresh();
+
+        void loadMore();
 
     }
 }

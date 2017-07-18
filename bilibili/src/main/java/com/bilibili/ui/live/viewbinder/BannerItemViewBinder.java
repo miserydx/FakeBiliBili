@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
@@ -16,7 +17,6 @@ import com.bilibili.widget.banner.BannerAdapter;
 import com.bilibili.widget.banner.SmartViewPager;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
-import com.common.util.SystemUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -59,6 +59,9 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
             banner.setIndicatorGravity(Gravity.BOTTOM | Gravity.RIGHT);
             banner.setIndicatorColor(ContextCompat.getColor(itemView.getContext(), R.color.white),
                     ContextCompat.getColor(itemView.getContext(), R.color.pink));
+            int height = itemView.getContext().getResources().getDimensionPixelSize(R.dimen.top_banner_height);
+            ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+            banner.setLayoutParams(params);
             adapter = new LiveBannerAdapter(itemView.getContext());
         }
 
@@ -93,7 +96,7 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         @Override
         protected void bindData(SimpleDraweeView itemView, LiveCommon.Banner item) {
             int width = ScreenUtil.getScreenWidth(context);
-            int height = SystemUtil.dp2px(context, 120);
+            int height = context.getResources().getDimensionPixelSize(R.dimen.top_banner_height);
             ImageUtil.load(itemView, item.getImg(), width, height);
         }
     }

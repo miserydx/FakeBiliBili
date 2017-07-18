@@ -1,6 +1,5 @@
 package com.bilibili.model.api;
 
-import com.bilibili.model.api.annotation.NeedSign;
 import com.bilibili.model.bean.DataListResponse;
 import com.bilibili.model.bean.region.AppRegion;
 import com.bilibili.model.bean.region.AppRegionShow;
@@ -30,7 +29,6 @@ public interface RegionApis {
      * http://app.bilibili.com/x/v2/show/index?appkey=1d8b6e7d45233436&build=502000&mobi_app=android&platform=android&ts=1493711039000&sign=01cfab07e67d3520363d82636296dc8b
      */
     @GET("/x/v2/show/index")
-    @NeedSign
     Observable<DataListResponse<AppRegionShow>> getRegionShow(@Query("appkey") String appkey,
                                                               @Query("build") String build,
                                                               @Query("mobi_app") String mobi_app,

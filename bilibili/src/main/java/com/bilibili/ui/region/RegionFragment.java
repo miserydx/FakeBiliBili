@@ -12,12 +12,12 @@ import com.bilibili.ui.region.viewbinder.RegionBodyItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionFooterItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionHeaderItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionPartitionItemViewBinder;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by Android_ZzT on 17/7/6.
@@ -34,7 +34,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
 
     private Items mItems;
 
-    private MultiTypeAdapter mAdapter;
+    private BiliMultiTypeAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -53,10 +53,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
             @Override
             public int getSpanSize(int position) {
                 Object item = mItems.get(position);
-                return (item instanceof RegionHeaderItemViewBinder.RegionHeader
-                        ||item instanceof AppRegionShow.Partition
-                        || item instanceof AppRegionShow.Banner
-                        || item instanceof RegionFooterItemViewBinder.RegionFooter) ? SPAN_COUNT : 1;
+                return item instanceof AppRegionShow.Body ? 1 : SPAN_COUNT;
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
@@ -65,7 +62,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
 
         mItems = new Items();
-        mAdapter = new MultiTypeAdapter();
+        mAdapter = new BiliMultiTypeAdapter();
         mAdapter.register(RegionHeaderItemViewBinder.RegionHeader.class, new RegionHeaderItemViewBinder());
         mAdapter.register(AppRegionShow.Partition.class, new RegionPartitionItemViewBinder());
         mAdapter.register(AppRegionShow.Body.class, new RegionBodyItemViewBinder());

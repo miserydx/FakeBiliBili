@@ -13,7 +13,7 @@ import com.bilibili.di.component.DaggerFragmentComponent;
 import com.bilibili.di.component.FragmentComponent;
 import com.bilibili.di.module.ApiModule;
 import com.bilibili.di.module.FragmentModule;
-import com.bilibili.widget.banner.CustomBitmapMemoryCacheParamsSupplier;
+import com.bilibili.widget.CustomBitmapMemoryCacheParamsSupplier;
 import com.common.app.ActivityLifecycleManager;
 import com.common.app.AppComponent;
 import com.common.app.DaggerAppComponent;

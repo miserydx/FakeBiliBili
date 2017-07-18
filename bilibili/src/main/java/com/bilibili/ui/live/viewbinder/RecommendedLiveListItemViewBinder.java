@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveRecommend;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 
 import java.util.List;
 
 import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by Android_ZzT on 17/6/29.
@@ -38,7 +38,7 @@ public class RecommendedLiveListItemViewBinder extends ItemViewBinder<LiveRecomm
 
     static class LiveListViewHolder extends RecyclerView.ViewHolder {
 
-        MultiTypeAdapter adapter;
+        BiliMultiTypeAdapter adapter;
 
         RecyclerView recyclerView;
 
@@ -49,7 +49,7 @@ public class RecommendedLiveListItemViewBinder extends ItemViewBinder<LiveRecomm
         public LiveListViewHolder(View itemView) {
             super(itemView);
             recyclerView = (RecyclerView) itemView;
-            adapter = new MultiTypeAdapter();
+            adapter = new BiliMultiTypeAdapter();
             items = new Items();
             adapter.register(LiveRecommend.Recommend_data.Partition.class, new RecommendedPartitionItemViewBinder(itemView.getContext()));
             adapter.register(LiveRecommend.Recommend_data.Banner_data.class, new RecommenedBannerItemViewBinder());

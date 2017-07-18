@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="125dp"
+    android:layout_height="wrap_content"
     android:clickable="true"
-    android:foreground="@drawable/item_background">
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="145dp"
+        android:foreground="@drawable/item_background"
         android:src="@drawable/bangumi_home_login_guide" />
 
-</FrameLayout>
+</LinearLayout>

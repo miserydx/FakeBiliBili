@@ -1,4 +1,4 @@
-package com.bilibili.widget.banner;
+package com.bilibili.widget;
 
 import android.app.ActivityManager;
 import android.os.Build;

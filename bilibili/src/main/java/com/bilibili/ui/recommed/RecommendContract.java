@@ -21,9 +21,9 @@ public interface RecommendContract {
 
     interface Presenter extends BasePresenter {
 
-        void pullToRefresh();
+        void pullToRefresh(int idx);
 
-        void loadMore();
+        void loadMore(int idx);
 
     }
 

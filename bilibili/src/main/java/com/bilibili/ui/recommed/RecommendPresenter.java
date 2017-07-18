@@ -42,6 +42,7 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
     private String openEvent;
     private boolean pull;
     private int state;
+    private int idx;
 
     @Inject
     public RecommendPresenter(RecommendApis recommendApis) {
@@ -55,16 +56,21 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
     }
 
     @Override
-    public void pullToRefresh() {
+    public void pullToRefresh(int idx) {
+        if (state == STATE_REFRESHING) {
+            return;
+        }
+        this.idx = idx;
         state = STATE_REFRESHING;
         getIndex(state);
     }
 
     @Override
-    public void loadMore() {
+    public void loadMore(int idx) {
         if (state == STATE_LOAD_MORE) {
             return;
         }
+        this.idx = idx;
         state = STATE_LOAD_MORE;
         getIndex(state);
     }
@@ -72,10 +78,10 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
 
     /**
      * 列表数据接口
+     *
      * @param operationState 请求状态：初次请求，下拉刷新，上滑加载更多
      */
     private void getIndex(final int operationState) {
-        String idx = "0";
         switch (operationState) {
             case STATE_INITIAL:
                 loginEvent = LOGIN_EVENT_INITIAL;
@@ -122,6 +128,9 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
                             if (appIndex.getBanner_item() != null) {
                                 RecommendBannerItemViewBinder.Banner banner = new RecommendBannerItemViewBinder.Banner();
                                 banner.setBannerItemList(appIndex.getBanner_item());
+                                banner.set_goto(appIndex.getGoto());
+                                banner.setIdx(appIndex.getIdx());
+                                banner.setParam(appIndex.getParam());
                                 items.add(banner);
                             } else {
                                 items.add(appIndex);
@@ -142,40 +151,6 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
                     }
                 });
     }
-//    private void getIndex(final int operationState) {
-//        recommendApis.getIndex(ApiHelper.APP_KEY, ApiHelper.BUILD, "1493277505", ApiHelper.MOBI_APP, "wifi", ApiHelper.PLATFORM, "true", DateUtil.getSystemTime())
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<DataListResponse<AppIndex>>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {
-//                        registerRx(d);
-//                        if (state == STATE_INITIAL || state == STATE_REFRESHING) {
-//                            mView.onRefreshingStateChanged(true);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onNext(@NonNull DataListResponse<AppIndex> appIndexDataListResponse) {
-//                        Items items = new Items();
-//                        for (AppIndex appIndex : appIndexDataListResponse.getData()) {
-//                            items.add(appIndex);
-//                        }
-//                        mView.onDataUpdated(items, operationState);
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        Log.e(BangumiFragment.TAG, "onError");
-//                        e.printStackTrace();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        state = STATE_NORMAL;
-//                    }
-//                });
-//    }
 
     @Override
     public void releaseData() {

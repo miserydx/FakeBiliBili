@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 
 import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by Android_ZzT on 17/6/29.
@@ -35,7 +35,7 @@ public class LiveListItemViewBinder extends ItemViewBinder<LiveCommon.Partitions
 
     static class LiveListViewHolder extends RecyclerView.ViewHolder {
 
-        MultiTypeAdapter adapter;
+        BiliMultiTypeAdapter adapter;
 
         RecyclerView recyclerView;
 
@@ -47,7 +47,7 @@ public class LiveListItemViewBinder extends ItemViewBinder<LiveCommon.Partitions
             super(itemView);
             recyclerView = (RecyclerView) itemView;
             items = new Items();
-            adapter = new MultiTypeAdapter();
+            adapter = new BiliMultiTypeAdapter();
             adapter.register(LiveCommon.Partitions.Partition.class, new PartitionItemViewBinder(itemView.getContext()));
             adapter.register(LiveCommon.Partitions.Lives.class, new LiveItemViewBinder());
             adapter.register(MoreItemViewBinder.MoreItem.class, new MoreItemViewBinder());

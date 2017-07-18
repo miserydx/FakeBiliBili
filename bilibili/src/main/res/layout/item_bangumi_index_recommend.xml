@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:foreground="@drawable/item_background">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/recommend_iv"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/container_rl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true" />
+        android:clickable="true"
+        android:background="@drawable/item_background">
 
-    <TextView
-        android:id="@+id/title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/recommend_iv"
-        android:gravity="center"
-        android:padding="@dimen/padding_6"
-        android:textColor="@color/TextColorBlack"
-        android:textSize="@dimen/text_size_normal" />
+        <ImageView
+            android:id="@+id/recommend_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:drawableRight="@drawable/ic_gray_arrow_right"
-        android:text="@string/bangumi_follow_section_header_more"
-        android:textColor="@color/_text__white_dark"
-        android:textSize="@dimen/text_size_small" />
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/recommend_iv"
+            android:gravity="center"
+            android:padding="@dimen/padding_6"
+            android:textColor="@color/TextColorBlack"
+            android:textSize="@dimen/text_size_normal" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/ic_gray_arrow_right"
+            android:textColor="@color/_text__white_dark"
+            android:textSize="@dimen/text_size_small" />
+
+    </RelativeLayout>
+
+</LinearLayout>

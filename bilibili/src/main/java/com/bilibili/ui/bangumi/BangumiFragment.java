@@ -7,18 +7,21 @@ import android.support.v7.widget.RecyclerView;
 
 import com.bilibili.App;
 import com.bilibili.R;
+import com.bilibili.model.bean.bangumi.BangumiIndexFall;
 import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.ui.bangumi.viewbinder.BangumiDividerBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiHomeBinder;
+import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFallBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFollowBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexPageFootBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexRecommendBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiRecommendDetailBinder;
+import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by miserydx on 17/6/29.
@@ -35,7 +38,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
     @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private MultiTypeAdapter mAdapter;
+    private BiliMultiTypeAdapter mAdapter;
     private Items items = new Items();
 
     @Override
@@ -54,7 +57,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadData();
+                mPresenter.pullToRefresh();
             }
         });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
@@ -62,23 +65,29 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
             @Override
             public int getSpanSize(int position) {
                 Object o = items.get(position);
-                return (o instanceof BangumiIndexPage.Foot
-                        || o instanceof BangumiIndexFollowBinder.BangumiIndexFollow
-                        || o instanceof BangumiHomeBinder.BangumiHome)
-                        || o instanceof BangumiIndexRecommendBinder.BangumiIndexRecommend ? SPAN_COUNT : 1;
+                return o instanceof BangumiIndexPage.Recommend ? 1 : SPAN_COUNT;
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new BangumiIndexItemDecoration(spanSizeLookup));
-        mAdapter = new MultiTypeAdapter();
+        mAdapter = new BiliMultiTypeAdapter();
         //register item
         mAdapter.register(BangumiIndexFollowBinder.BangumiIndexFollow.class, new BangumiIndexFollowBinder());
         mAdapter.register(BangumiHomeBinder.BangumiHome.class, new BangumiHomeBinder());
         mAdapter.register(BangumiIndexRecommendBinder.BangumiIndexRecommend.class, new BangumiIndexRecommendBinder());
         mAdapter.register(BangumiIndexPage.Recommend.class, new BangumiRecommendDetailBinder());
         mAdapter.register(BangumiIndexPage.Foot.class, new BangumiIndexPageFootBinder());
+        mAdapter.register(BangumiIndexFall.class, new BangumiIndexFallBinder());
+        mAdapter.register(BangumiDividerBinder.BangumiDivider.class, new BangumiDividerBinder());
+        mAdapter.setFooterItemEnabled(true);
+        mAdapter.setOnLoadMoreListener(new BiliMultiTypeAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                mPresenter.loadMore();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -89,21 +98,50 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
                     Fresco.getImagePipeline().resume();
                 }
             }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+            }
         });
     }
 
     @Override
-    public void onDataUpdated(Items items) {
-        if (mRefreshLayout.isRefreshing()) {
-            mRefreshLayout.setRefreshing(false);
+    public void onDataUpdated(Items items, int state) {
+        switch (state) {
+            case BangumiPresenter.STATE_INITIAL:
+                this.items = items;
+                mAdapter.setItems(this.items);
+                mAdapter.notifyDataSetChanged();
+                break;
+            case BangumiPresenter.STATE_REFRESHING:
+                Items temp = new Items();
+                temp.addAll(this.items.subList(items.size(), this.items.size() - 1));
+                this.items = items;
+                this.items.addAll(temp);
+                mAdapter.setItems(this.items);
+                mAdapter.notifyDataSetChanged();
+                break;
+            case BangumiPresenter.STATE_LOAD_MORE:
+                if(items.size() == 0){
+                    mAdapter.showNoMore();
+                }
+                int position = this.items.size();
+                this.items.addAll(items);
+                mAdapter.setItems(this.items);
+                mAdapter.notifyItemInserted(position);
+                break;
         }
-        this.items = items;
-        mAdapter.setItems(this.items);
-        mAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onRefreshingStateChanged(boolean isRefresh) {
         mRefreshLayout.setRefreshing(isRefresh);
+    }
+
+    @Override
+    public void onDataUpdateError() {
+        mAdapter.showFailToLoad();
     }
 }

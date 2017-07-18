@@ -9,7 +9,10 @@
     <dimen name="toolbar_padding_top">50dp</dimen>
 
     <!--common-->
+    <dimen name="banner_item_height">100.0dip</dimen>
+
     <dimen name="height_8">8.0dip</dimen>
+    <dimen name="height_16">16.0dip</dimen>
     <dimen name="height_20dp">20.0dip</dimen>
     <dimen name="height_22">22.0dip</dimen>
     <dimen name="height_24dp">24.0dip</dimen>
@@ -77,12 +80,14 @@
     <dimen name="text_size_normal">14sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_tiny">10sp</dimen>
+    <dimen name="top_banner_height">120.0dip</dimen>
 
     <dimen name="view_size_1dp">1.0dip</dimen>
     <dimen name="view_size_1px">1.0px</dimen>
 
     <dimen name="width_4">4.0dip</dimen>
     <dimen name="width_8">8.0dip</dimen>
+    <dimen name="width_16">16.0dip</dimen>
     <dimen name="width_20dp">20.0dip</dimen>
     <dimen name="width_22">22.0dip</dimen>
     <dimen name="width_24dp">24.0dip</dimen>
@@ -106,7 +111,7 @@
     <dimen name="avatar_top_margin">40dp</dimen>
     <dimen name="list_item_avatar_large_size">70dp</dimen>
 
-    <!--bangumi-->
+    <!--live-->
     <dimen name="live_card_image_height">101dp</dimen>
 
     <!--bangumi-->

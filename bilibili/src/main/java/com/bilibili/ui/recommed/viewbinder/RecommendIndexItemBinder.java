@@ -2,10 +2,15 @@ package com.bilibili.ui.recommed.viewbinder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
@@ -35,6 +40,16 @@ public class RecommendIndexItemBinder extends ItemViewBinder<AppIndex, Recommend
 
     @Override
     protected void onBindViewHolder(@NonNull final RecommendIndexItemHolder holder, @NonNull AppIndex item) {
+        if ("login".equals(item.getGoto())) {
+            holder.flLoginCover.setVisibility(View.VISIBLE);
+            if ("2".equals(item.getParam())) {
+                holder.ivLoginCover.setImageDrawable(ContextCompat.getDrawable(holder.ivLoginCover.getContext(), R.drawable.ic_promo_index_sign2_v2));
+            } else if ("3".equals(item.getParam())) {
+                holder.ivLoginCover.setImageDrawable(ContextCompat.getDrawable(holder.ivLoginCover.getContext(), R.drawable.ic_promo_index_sign3_v2));
+            } else {
+                holder.ivLoginCover.setImageDrawable(ContextCompat.getDrawable(holder.ivLoginCover.getContext(), R.drawable.ic_promo_index_sign1_v2));
+            }
+        }
         Context context = holder.ivCover.getContext();
         int width = ScreenUtil.getScreenWidth(context) / 2 - SystemUtil.dp2px(context, 14);
         int height = context.getResources().getDimensionPixelSize(R.dimen.recommend_cover_height);
@@ -60,6 +75,10 @@ public class RecommendIndexItemBinder extends ItemViewBinder<AppIndex, Recommend
         TextView tvTitle;
         @BindView(R.id.t_name_tv)
         TextView tvTName;
+        @BindView(R.id.login_cover_fl)
+        FrameLayout flLoginCover;
+        @BindView(R.id.login_cover_iv)
+        ImageView ivLoginCover;
 
         private RecommendIndexItemHolder(View itemView) {
             super(itemView);

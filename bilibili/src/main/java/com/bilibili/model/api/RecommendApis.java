@@ -1,6 +1,5 @@
 package com.bilibili.model.api;
 
-import com.bilibili.model.api.annotation.NeedSign;
 import com.bilibili.model.bean.recommend.AppIndex;
 import com.bilibili.model.bean.DataListResponse;
 
@@ -18,15 +17,20 @@ public interface RecommendApis {
 
 
     /**
-     * 推荐数据，每次请求都不一样，b站逻辑为请求到新的便保存到本地，进入app即初次展示推荐页面时，数据请求失败会加载本地存储的数据
-     * 下拉刷新将数据集合添加到集合前列,上拉加载将数据集合添加到集合末尾
-     * http://app.bilibili.com/x/feed/index?appkey=1d8b6e7d45233436&build=502000&idx=1493277505&mobi_app=android&network=wifi&platform=android&pull=true&style=2&ts=1493362805000&sign=91c7aa61728e8299df5755%20d106babbfd
+     * 首次进入加载（带banner）
+     * https://app.bilibili.com/x/feed/index?appkey=1d8b6e7d45233436&build=508000&idx=0&login_event=1&mobi_app=android&network=wifi&open_event=cold&platform=android&pull=true&style=2&ts=1499589051&sign=394a36c0a4fcd89c858e3e77a304aa43
+     *
+     * 下拉刷新
+     * https://app.bilibili.com/x/feed/index?appkey=1d8b6e7d45233436&build=508000&idx=1499589063&login_event=0&mobi_app=android&network=wifi&open_event=&platform=android&pull=true&style=2&ts=1499589096&sign=cbdcc10ed7964205b55b57704d9cebe8
+     *
+     * 上拉加载
+     * https://app.bilibili.com/x/feed/index?appkey=1d8b6e7d45233436&build=509000&idx=1499655142&login_event=0&mobi_app=android&network=wifi&open_event=&platform=android&pull=false&style=2&ts=1499655410&sign=de96086aaa456a817aa69c822f4aa44a
+     *
      */
     @GET("/x/feed/index")
-    @NeedSign
     Observable<DataListResponse<AppIndex>> getIndex(@Query("appkey") String appkey,
                                                     @Query("build") String build,
-                                                    @Query("idx") String idx,
+                                                    @Query("idx") int idx,
                                                     @Query("login_event") int login_event,
                                                     @Query("mobi_app") String mobi_app,
                                                     @Query("network") String network,

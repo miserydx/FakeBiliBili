@@ -6,6 +6,11 @@
     <string name="action_settings">Settings</string>
     <string name="app_name">Faker哔哩</string>
 
+    <!-- Common -->
+    <string name="charge_loading">加载中...</string>
+    <string name="charge_no_data_tips">╮(╯3╰)╭再怎么找也没有啦</string>
+    <string name="tips_load_error">加载失败了Σ(OДO</string>
+
     <!-- Main -->
     <string name="home_top_default_nickname">未登录</string>
     <string name="menu_top_download_tips">离线列表</string>
@@ -48,6 +53,7 @@
     <string name="bangumi_common_section_header_recommend">番剧推荐</string>
     <string name="bangumi_follow_section_header_more">查看更多</string>
     <string name="bangumi_follow_section_header_recommend_domestic">国产动画推荐</string>
+    <string name="bangumi_follow_section_header_recommend_editor">编辑推荐</string>
     <string name="bangumi_index_all_title">索引</string>
     <string name="bangumi_index_status_format_1">更新至%s</string>
     <string name="bangumi_index_status_format_2">全%s话</string>
