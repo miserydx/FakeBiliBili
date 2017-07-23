@@ -5,9 +5,9 @@ import android.util.Log;
 import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.bean.ResultListResponse;
+import com.bilibili.model.bean.ResultObjectResponse;
 import com.bilibili.model.bean.bangumi.BangumiIndexFall;
 import com.bilibili.model.bean.bangumi.BangumiIndexPage;
-import com.bilibili.model.bean.ResultObjectResponse;
 import com.bilibili.ui.bangumi.viewbinder.BangumiDividerBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiHomeBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFollowBinder;
@@ -35,6 +35,7 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
     public static final int STATE_INITIAL = 1;
     public static final int STATE_REFRESHING = 2;
     public static final int STATE_LOAD_MORE = 3;
+    public static final int STATE_LOAD_ERROR = 4;
 
     private BangumiApis bangumiApis;
     private int state = 0;
@@ -145,7 +146,8 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
                     public void onError(@NonNull Throwable e) {
                         Log.e(BangumiFragment.TAG, "onError");
                         e.printStackTrace();
-                        mView.onDataUpdateError();
+                        state = STATE_LOAD_ERROR;
+                        mView.onDataUpdated(null, STATE_LOAD_ERROR);
                     }
 
                     @Override

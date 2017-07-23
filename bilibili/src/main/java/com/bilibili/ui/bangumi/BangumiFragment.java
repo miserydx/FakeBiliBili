@@ -131,6 +131,9 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
                 mAdapter.setItems(this.items);
                 mAdapter.notifyItemInserted(position);
                 break;
+            case BangumiPresenter.STATE_LOAD_ERROR:
+                mAdapter.showFailToLoad();
+                break;
         }
 
     }
@@ -138,10 +141,5 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
     @Override
     public void onRefreshingStateChanged(boolean isRefresh) {
         mRefreshLayout.setRefreshing(isRefresh);
-    }
-
-    @Override
-    public void onDataUpdateError() {
-        mAdapter.showFailToLoad();
     }
 }

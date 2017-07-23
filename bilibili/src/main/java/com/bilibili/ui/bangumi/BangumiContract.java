@@ -17,8 +17,6 @@ public interface BangumiContract {
 
         void onRefreshingStateChanged(boolean isRefresh);
 
-        void onDataUpdateError();
-
     }
 
     interface Presenter extends BasePresenter {

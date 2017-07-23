@@ -8,6 +8,10 @@ import java.util.List;
 import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.MultiTypeAdapter;
 
+import static com.bilibili.widget.recyclerview.BaseFooterItem.STATE_LOAD_FAIL;
+import static com.bilibili.widget.recyclerview.BaseFooterItem.STATE_NO_MORE;
+
+
 /**
  * Created by miserydx on 17/7/14.
  */
@@ -19,14 +23,15 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     private List items;
     private boolean showFooterItem = false;
     private OnFooterViewVisibleChangedListener OnFooterViewVisibleChangedListener;
-    private Object footerItem;
-    private LoadMoreBinder loadMoreBinder;
+    private BaseFooterItem footerItem;
+    private DefaultLoadMoreBinder defaultLoadMoreBinder;
 
     public BiliMultiTypeAdapter() {
         super();
-        footerItem = new LoadMoreBinder.LoadMore();
-        loadMoreBinder = new LoadMoreBinder();
-        register(LoadMoreBinder.LoadMore.class, loadMoreBinder);
+        footerItem = new BaseFooterItem();
+        footerItem.setState(BaseFooterItem.STATE_LOAD_MORE);
+        defaultLoadMoreBinder = new DefaultLoadMoreBinder();
+        register(BaseFooterItem.class, defaultLoadMoreBinder);
     }
 
     /**
@@ -39,26 +44,26 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     }
 
     public void setOnLoadMoreListener(OnLoadMoreListener listener) {
-        loadMoreBinder.setOnLoadMoreBinder(listener);
+        defaultLoadMoreBinder.setOnLoadMoreBinder(listener);
     }
 
     /**
      * 设置默认footer显示没有更多
      */
     public void showNoMore() {
-        changeLoadMoreState(LoadMoreBinder.LoadMore.STATE_NO_MORE);
+        changeLoadMoreState(STATE_NO_MORE);
     }
 
     /**
-     * 设置默认fotter显示加载失败
+     * 设置默认footer显示加载失败
      */
     public void showFailToLoad() {
-        changeLoadMoreState(LoadMoreBinder.LoadMore.STATE_FAILED_TO_LOAD);
+        changeLoadMoreState(STATE_LOAD_FAIL);
     }
 
     private void changeLoadMoreState(int state) {
-        if (footerItem instanceof LoadMoreBinder.LoadMore) {
-            ((LoadMoreBinder.LoadMore) footerItem).setState(state);
+        if (footerItem instanceof BaseFooterItem) {
+            (footerItem).setState(state);
             notifyItemChanged(items.size() - 1);
         }
     }
@@ -70,7 +75,7 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
      * @param binder item的viewbinder
      * @param <T>    item的class
      */
-    public <T> void registerCustomFooterItem(@NonNull Class<? extends T> clazz, @NonNull ItemViewBinder<T, ?> binder) {
+    public <T extends BaseFooterItem> void registerCustomFooterItem(@NonNull Class<? extends T> clazz, @NonNull ItemViewBinder<T, ?> binder) {
         try {
             footerItem = clazz.newInstance();
             register(clazz, binder);
@@ -84,9 +89,7 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     @Override
     @SuppressWarnings("unchecked")
     public void setItems(@NonNull List<?> items) {
-        if (items.contains(footerItem)) {
-            items.remove(items.indexOf(footerItem));
-        }
+        items.remove(footerItem);
         this.items = items;
         if (showFooterItem) {
             this.items.add(footerItem);
@@ -97,8 +100,8 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         if (OnFooterViewVisibleChangedListener != null) {
-            if (holder instanceof LoadMoreBinder.LoadMoreHolder) {
-                OnFooterViewVisibleChangedListener.attachedToWindow((LoadMoreBinder.LoadMoreHolder) holder);
+            if (holder instanceof DefaultLoadMoreBinder.LoadMoreHolder) {
+                OnFooterViewVisibleChangedListener.attachedToWindow((DefaultLoadMoreBinder.LoadMoreHolder) holder);
             }
         }
     }
@@ -106,8 +109,8 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
         if (OnFooterViewVisibleChangedListener != null) {
-            if (holder instanceof LoadMoreBinder.LoadMoreHolder) {
-                OnFooterViewVisibleChangedListener.detachedFromWindow((LoadMoreBinder.LoadMoreHolder) holder);
+            if (holder instanceof DefaultLoadMoreBinder.LoadMoreHolder) {
+                OnFooterViewVisibleChangedListener.detachedFromWindow((DefaultLoadMoreBinder.LoadMoreHolder) holder);
             }
         }
     }
@@ -117,9 +120,9 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     }
 
     public interface OnFooterViewVisibleChangedListener {
-        void attachedToWindow(LoadMoreBinder.LoadMoreHolder holder);
+        void attachedToWindow(DefaultLoadMoreBinder.LoadMoreHolder holder);
 
-        void detachedFromWindow(LoadMoreBinder.LoadMoreHolder holder);
+        void detachedFromWindow(DefaultLoadMoreBinder.LoadMoreHolder holder);
     }
 
     public interface OnLoadMoreListener {
