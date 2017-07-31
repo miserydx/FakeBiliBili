@@ -4,7 +4,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.bilibili.App;
@@ -72,8 +71,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         //register item
         mAdapter.register(AppIndex.class, new RecommendIndexItemBinder());
         mAdapter.register(RecommendBannerItemViewBinder.Banner.class, new RecommendBannerItemViewBinder());
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mAdapter.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
@@ -81,8 +79,10 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
                 if (manager.findLastVisibleItemPosition() + SPAN_COUNT >= manager.getItemCount()) {
                     mPresenter.loadMore(((AppIndex) items.get(items.size() - 1)).getIdx() - 1);
                 }
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

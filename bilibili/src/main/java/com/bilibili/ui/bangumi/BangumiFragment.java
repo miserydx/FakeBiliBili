@@ -18,7 +18,6 @@ import com.bilibili.ui.bangumi.viewbinder.BangumiIndexRecommendBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiRecommendDetailBinder;
 import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -87,23 +86,9 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
             public void onLoadMore() {
                 mPresenter.loadMore();
             }
-        });
+        }, BiliMultiTypeAdapter.LOAD_MORE_MODE_BOTTOM);
+        mAdapter.setScrollSaveStrategyEnabled(true);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Fresco.getImagePipeline().pause();
-                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Fresco.getImagePipeline().resume();
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-            }
-        });
     }
 
     @Override
@@ -123,7 +108,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
                 mAdapter.notifyDataSetChanged();
                 break;
             case BangumiPresenter.STATE_LOAD_MORE:
-                if(items.size() == 0){
+                if (items.size() == 0) {
                     mAdapter.showNoMore();
                 }
                 int position = this.items.size();

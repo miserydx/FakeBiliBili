@@ -20,11 +20,15 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
 
     private static final String TAG = BiliMultiTypeAdapter.class.getSimpleName();
 
+    public static final int LOAD_MORE_MODE_LAST_ITEM = 0;
+    public static final int LOAD_MORE_MODE_BOTTOM = 1;
+
     private List items;
     private boolean showFooterItem = false;
     private OnFooterViewVisibleChangedListener OnFooterViewVisibleChangedListener;
     private BaseFooterItem footerItem;
     private DefaultLoadMoreBinder defaultLoadMoreBinder;
+    private BiliOnScrollListenerProxy biliOnScrollListenerProxy;
 
     public BiliMultiTypeAdapter() {
         super();
@@ -32,6 +36,23 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
         footerItem.setState(BaseFooterItem.STATE_LOAD_MORE);
         defaultLoadMoreBinder = new DefaultLoadMoreBinder();
         register(BaseFooterItem.class, defaultLoadMoreBinder);
+        biliOnScrollListenerProxy = new BiliOnScrollListenerProxy();
+    }
+
+    /**
+     * 设置列表数据集合
+     *
+     * @param items
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public void setItems(@NonNull List<?> items) {
+        items.remove(footerItem);
+        this.items = items;
+        if (showFooterItem) {
+            this.items.add(footerItem);
+        }
+        super.setItems(items);
     }
 
     /**
@@ -43,8 +64,21 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
         showFooterItem = flag;
     }
 
-    public void setOnLoadMoreListener(OnLoadMoreListener listener) {
-        defaultLoadMoreBinder.setOnLoadMoreBinder(listener);
+    /**
+     * 设置加载更多监听事件
+     *
+     * @param listener
+     * @param mode 分为上拉到底加载和上拉到最后一项出现时加载
+     */
+    public void setOnLoadMoreListener(OnLoadMoreListener listener, int mode) {
+        switch (mode) {
+            case LOAD_MORE_MODE_BOTTOM:
+                biliOnScrollListenerProxy.setOnLoadMoreListener(listener);
+                break;
+            case LOAD_MORE_MODE_LAST_ITEM:
+                defaultLoadMoreBinder.setOnLoadMoreBinder(listener);
+                break;
+        }
     }
 
     /**
@@ -86,15 +120,22 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
         }
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void setItems(@NonNull List<?> items) {
-        items.remove(footerItem);
-        this.items = items;
-        if (showFooterItem) {
-            this.items.add(footerItem);
-        }
-        super.setItems(items);
+    /**
+     * 通过adapter为recyclerview设置滑动监听
+     *
+     * @param onScrollListener
+     */
+    public void setOnScrollListener(RecyclerView.OnScrollListener onScrollListener) {
+        biliOnScrollListenerProxy.setTarget(onScrollListener);
+    }
+
+    /**
+     * 设置是否滑动中加载图片，默认为false
+     *
+     * @param flag 是否滑动中加载图片
+     */
+    public void setScrollSaveStrategyEnabled(boolean flag) {
+        biliOnScrollListenerProxy.setScrollSaveStrategyEnabled(flag);
     }
 
     @Override
@@ -113,6 +154,11 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
                 OnFooterViewVisibleChangedListener.detachedFromWindow((DefaultLoadMoreBinder.LoadMoreHolder) holder);
             }
         }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        recyclerView.addOnScrollListener(biliOnScrollListenerProxy);
     }
 
     public void setOnFooterViewVisibleChangedListener(OnFooterViewVisibleChangedListener listener) {

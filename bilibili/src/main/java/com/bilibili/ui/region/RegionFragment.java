@@ -14,7 +14,6 @@ import com.bilibili.ui.region.viewbinder.RegionHeaderItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionPartitionItemViewBinder;
 import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -60,7 +59,6 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new RegionIndexItemDecoration(spanSizeLookup));
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
-
         mItems = new Items();
         mAdapter = new BiliMultiTypeAdapter();
         mAdapter.register(RegionHeaderItemViewBinder.RegionHeader.class, new RegionHeaderItemViewBinder());
@@ -68,17 +66,8 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         mAdapter.register(AppRegionShow.Body.class, new RegionBodyItemViewBinder());
         mAdapter.register(AppRegionShow.Banner.class, new RegionBannerItemViewBinder());
         mAdapter.register(RegionFooterItemViewBinder.RegionFooter.class, new RegionFooterItemViewBinder());
+        mAdapter.setScrollSaveStrategyEnabled(true);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Fresco.getImagePipeline().pause();
-                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Fresco.getImagePipeline().resume();
-                }
-            }
-        });
     }
 
     @Override

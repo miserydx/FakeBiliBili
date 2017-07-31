@@ -16,7 +16,6 @@ import com.bilibili.ui.live.viewbinder.NavigatorItemViewBinder;
 import com.bilibili.ui.live.viewbinder.RecommendedLiveListItemViewBinder;
 import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -62,20 +61,11 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
         mAdapter.register(LiveCommon.Partitions.class, new LiveListItemViewBinder());
         //footer
         mAdapter.register(FooterItemViewBinder.FooterItem.class, new FooterItemViewBinder());
+        mAdapter.setScrollSaveStrategyEnabled(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    Fresco.getImagePipeline().pause();
-                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Fresco.getImagePipeline().resume();
-                }
-            }
-        });
         mRefreshLayout.setColorSchemeResources(R.color.theme_color_primary);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
