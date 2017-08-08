@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.bangumi.BangumiIndexFall;
+import com.bilibili.model.bean.BangumiIndexFall;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
 import com.facebook.drawee.view.SimpleDraweeView;

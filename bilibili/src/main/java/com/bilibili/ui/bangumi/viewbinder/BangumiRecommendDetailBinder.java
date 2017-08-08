@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.model.bean.Recommend;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
 import com.common.util.StringUtil;
@@ -27,7 +27,7 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by miserydx on 17/6/30.
  */
 
-public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPage.Recommend, BangumiRecommendDetailBinder.BangumiRecommendDetailHolder> {
+public class BangumiRecommendDetailBinder extends ItemViewBinder<Recommend, BangumiRecommendDetailBinder.BangumiRecommendDetailHolder> {
 
     public BangumiRecommendDetailBinder() {
 
@@ -41,7 +41,7 @@ public class BangumiRecommendDetailBinder extends ItemViewBinder<BangumiIndexPag
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final BangumiRecommendDetailHolder holder, @NonNull final BangumiIndexPage.Recommend item) {
+    protected void onBindViewHolder(@NonNull final BangumiRecommendDetailHolder holder, @NonNull final Recommend item) {
         Context context = holder.ivCover.getContext();
         int width = ScreenUtil.getScreenWidth(context) / 3 - SystemUtil.dp2px(context, 14);
         int height = width * 4 / 3;

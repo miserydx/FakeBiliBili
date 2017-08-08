@@ -7,8 +7,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.bilibili.App;
 import com.bilibili.R;
-import com.bilibili.model.bean.bangumi.BangumiIndexFall;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.model.bean.Foot;
+import com.bilibili.model.bean.Recommend;
+import com.bilibili.model.bean.BangumiIndexFall;
 import com.bilibili.ui.bangumi.viewbinder.BangumiDividerBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiHomeBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFallBinder;
@@ -64,7 +65,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
             @Override
             public int getSpanSize(int position) {
                 Object o = items.get(position);
-                return o instanceof BangumiIndexPage.Recommend ? 1 : SPAN_COUNT;
+                return o instanceof Recommend ? 1 : SPAN_COUNT;
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
@@ -76,8 +77,8 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
         mAdapter.register(BangumiIndexFollowBinder.BangumiIndexFollow.class, new BangumiIndexFollowBinder());
         mAdapter.register(BangumiHomeBinder.BangumiHome.class, new BangumiHomeBinder());
         mAdapter.register(BangumiIndexRecommendBinder.BangumiIndexRecommend.class, new BangumiIndexRecommendBinder());
-        mAdapter.register(BangumiIndexPage.Recommend.class, new BangumiRecommendDetailBinder());
-        mAdapter.register(BangumiIndexPage.Foot.class, new BangumiIndexPageFootBinder());
+        mAdapter.register(Recommend.class, new BangumiRecommendDetailBinder());
+        mAdapter.register(Foot.class, new BangumiIndexPageFootBinder());
         mAdapter.register(BangumiIndexFall.class, new BangumiIndexFallBinder());
         mAdapter.register(BangumiDividerBinder.BangumiDivider.class, new BangumiDividerBinder());
         mAdapter.setFooterItemEnabled(true);

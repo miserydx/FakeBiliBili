@@ -130,7 +130,7 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     }
 
     /**
-     * 设置是否滑动中加载图片，默认为false
+     * 设置是否滑动中停止加载图片，默认为false
      *
      * @param flag 是否滑动中加载图片
      */

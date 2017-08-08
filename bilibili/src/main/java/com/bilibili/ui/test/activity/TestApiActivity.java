@@ -13,7 +13,7 @@ import com.bilibili.model.bean.AppSplash;
 import com.bilibili.model.bean.DataListResponse;
 import com.bilibili.model.bean.DataObjectResponse;
 import com.bilibili.model.bean.ResultObjectResponse;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.model.bean.BangumiIndexPage;
 import com.bilibili.model.bean.live.LiveAreas;
 import com.bilibili.model.bean.live.LiveCommon;
 import com.bilibili.model.bean.live.LiveRecommend;

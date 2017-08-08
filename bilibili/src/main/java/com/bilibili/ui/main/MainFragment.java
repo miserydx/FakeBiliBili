@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 import com.bilibili.App;
 import com.bilibili.R;
-import com.bilibili.ui.bangumi.BangumiFragment;
+import com.bilibili.ui.bangumi.BangumiFragmentKotlin;
 import com.bilibili.ui.live.LiveFragment;
 import com.bilibili.ui.recommed.RecommendFragment;
 import com.bilibili.ui.region.RegionFragment;
@@ -48,7 +48,7 @@ public class MainFragment extends BaseFragment {
     ViewPager viewPager;
 
     @Inject
-    BangumiFragment mBangumiFragment;
+    BangumiFragmentKotlin mBangumiFragment;
     @Inject
     RegionFragment mRegionFragment;
     @Inject

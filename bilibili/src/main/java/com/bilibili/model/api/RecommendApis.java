@@ -1,6 +1,6 @@
 package com.bilibili.model.api;
 
-import com.bilibili.model.bean.recommend.AppIndex;
+import com.bilibili.model.bean.AppIndex;
 import com.bilibili.model.bean.DataListResponse;
 
 import io.reactivex.Observable;

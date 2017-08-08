@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.model.bean.Foot;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -22,7 +22,7 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by miserydx on 17/6/30.
  */
 
-public class BangumiIndexPageFootBinder extends ItemViewBinder<BangumiIndexPage.Foot, BangumiIndexPageFootBinder.BangumiIndexPageFootHolder> {
+public class BangumiIndexPageFootBinder extends ItemViewBinder<Foot, BangumiIndexPageFootBinder.BangumiIndexPageFootHolder> {
 
     @NonNull
     @Override
@@ -32,7 +32,7 @@ public class BangumiIndexPageFootBinder extends ItemViewBinder<BangumiIndexPage.
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull BangumiIndexPageFootHolder holder, @NonNull BangumiIndexPage.Foot item) {
+    protected void onBindViewHolder(@NonNull BangumiIndexPageFootHolder holder, @NonNull Foot item) {
         Context context = holder.ivCover.getContext();
         int width = ScreenUtil.getScreenWidth(context) - 24;
         int height = context.getResources().getDimensionPixelSize(R.dimen.bangumi_card_image_height);

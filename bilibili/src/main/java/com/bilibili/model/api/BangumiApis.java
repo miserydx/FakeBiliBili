@@ -1,8 +1,8 @@
 package com.bilibili.model.api;
 
+import com.bilibili.model.bean.BangumiIndexFall;
 import com.bilibili.model.bean.ResultListResponse;
-import com.bilibili.model.bean.bangumi.BangumiIndexFall;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.model.bean.BangumiIndexPage;
 import com.bilibili.model.bean.ResultObjectResponse;
 
 import io.reactivex.Observable;

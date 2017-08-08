@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.bilibili.model.api.ApiHelper;
 import com.bilibili.model.api.BangumiApis;
+import com.bilibili.model.bean.BangumiIndexFall;
+import com.bilibili.model.bean.Recommend;
 import com.bilibili.model.bean.ResultListResponse;
 import com.bilibili.model.bean.ResultObjectResponse;
-import com.bilibili.model.bean.bangumi.BangumiIndexFall;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
+import com.bilibili.model.bean.BangumiIndexPage;
 import com.bilibili.ui.bangumi.viewbinder.BangumiDividerBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiHomeBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFollowBinder;
@@ -21,6 +22,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import me.drakeet.multitype.Items;
 
@@ -64,8 +66,15 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
     private void getIndexPage() {
         bangumiApis.getIndexPage(ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .map(new Function<ResultObjectResponse<BangumiIndexPage>, Items>() {
+                    @Override
+                    public Items apply(@NonNull ResultObjectResponse<BangumiIndexPage> bangumiIndexPageRes) throws Exception {
+                        return getItems(bangumiIndexPageRes.getData());
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResultObjectResponse<BangumiIndexPage>>() {
+                .subscribe(new Observer<Items>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         registerRx(d);
@@ -73,14 +82,13 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
                     }
 
                     @Override
-                    public void onNext(@NonNull ResultObjectResponse<BangumiIndexPage> bangumiIndexPageRes) {
-                        Items items = getItems(bangumiIndexPageRes.getData());
+                    public void onNext(@NonNull Items items) {
                         mView.onDataUpdated(items, state);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(BangumiFragment.TAG, "onError");
+                        Log.e(TAG, "onError");
                         e.printStackTrace();
                     }
 
@@ -98,13 +106,13 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
         items.add(new BangumiHomeBinder.BangumiHome());
         items.add(new BangumiDividerBinder.BangumiDivider());
         items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_JP_RECOMMEND));
-        for (BangumiIndexPage.Recommend recommend : bangumiIndexPage.getRecommend_jp().getRecommend()) {
+        for (Recommend recommend : bangumiIndexPage.getRecommend_jp().getRecommend()) {
             items.add(recommend);
         }
         items.add(bangumiIndexPage.getRecommend_jp().getFoot().get(0));
         items.add(new BangumiDividerBinder.BangumiDivider());
         items.add(new BangumiIndexRecommendBinder.BangumiIndexRecommend(BangumiIndexRecommendBinder.BangumiIndexRecommend.SECTION_CN_RECOMMEND));
-        for (BangumiIndexPage.Recommend recommend : bangumiIndexPage.getRecommend_cn().getRecommend()) {
+        for (Recommend recommend : bangumiIndexPage.getRecommend_cn().getRecommend()) {
             items.add(recommend);
         }
         items.add(bangumiIndexPage.getRecommend_cn().getFoot().get(0));
@@ -118,16 +126,10 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
         }
         bangumiApis.getIndexFall(ApiHelper.APP_KEY, ApiHelper.BUILD, cursor, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResultListResponse<BangumiIndexFall>>() {
+                .observeOn(Schedulers.newThread())
+                .map(new Function<ResultListResponse<BangumiIndexFall>, Items>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        registerRx(d);
-                        state = STATE_LOAD_MORE;
-                    }
-
-                    @Override
-                    public void onNext(@NonNull ResultListResponse<BangumiIndexFall> bangumiIndexFallRes) {
+                    public Items apply(@NonNull ResultListResponse<BangumiIndexFall> bangumiIndexFallRes) throws Exception {
                         Items items = new Items();
                         if (cursor == 0) {
                             items.add(new BangumiDividerBinder.BangumiDivider());
@@ -139,12 +141,25 @@ public class BangumiPresenter extends AbsBasePresenter<BangumiContract.View> imp
                             }
                             items.add(bangumiIndexFall);
                         }
+                        return items;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Items>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        registerRx(d);
+                        state = STATE_LOAD_MORE;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Items items) {
                         mView.onDataUpdated(items, state);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(BangumiFragment.TAG, "onError");
+                        Log.e(TAG, "onError");
                         e.printStackTrace();
                         state = STATE_LOAD_ERROR;
                         mView.onDataUpdated(null, STATE_LOAD_ERROR);
