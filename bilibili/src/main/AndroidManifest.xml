@@ -58,19 +58,29 @@
             android:theme="@style/AppTheme" />
 
         <!-- 测试lifecycle -->
-        <activity android:name="com.bilibili.ui.test.activity.TestNoBaseActivity"
+        <activity
+            android:name="com.bilibili.ui.test.activity.TestNoBaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!-- 测试lifecycle和mvp -->
-        <activity android:name="com.bilibili.ui.test.activity.TestNoBaseMvpActivity"
+        <activity
+            android:name="com.bilibili.ui.test.activity.TestNoBaseMvpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!-- 主页 -->
-        <activity android:name="com.bilibili.ui.main.MainActivity"
+        <!-- 测试播放器-->
+        <activity
+            android:name=".ui.test.activity.TestPlayerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+
+        <!-- 主页 -->
+
+        <activity
+            android:name="com.bilibili.ui.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

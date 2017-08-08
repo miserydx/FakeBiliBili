@@ -1,1 +1,1 @@
-include ':bilibili',':common'
+include ':bilibili', ':common', ':ijkplayer'

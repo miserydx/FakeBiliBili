@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.bilibili"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0.0"
@@ -32,6 +32,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':common')
+    compile project(':ijkplayer')
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.google.dagger:dagger:2.5'

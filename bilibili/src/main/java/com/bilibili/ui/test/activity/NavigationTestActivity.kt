@@ -25,7 +25,7 @@ class NavigationTestActivity : SupportActivity(), IBaseActivity {
         StatusBarUtil.setColor(this, resources.getColor(R.color.theme_color_primary))
     }
 
-    @OnClick(R.id.toolbar_behavior_mvp_btn, R.id.news_btn, R.id.status_picture_mvp_btn, R.id.scroll_gradient_mvp_btn, R.id.test_api_btn, R.id.test_no_base_btn, R.id.test_no_base_mvp_btn, R.id.main_btn)
+    @OnClick(R.id.toolbar_behavior_mvp_btn, R.id.news_btn, R.id.status_picture_mvp_btn, R.id.scroll_gradient_mvp_btn, R.id.test_api_btn, R.id.test_no_base_btn, R.id.test_no_base_mvp_btn, R.id.main_btn, R.id.test_player_btn)
     fun jumpToPage(view: View) {
         when (view.id) {
             R.id.toolbar_behavior_mvp_btn -> startActivity(Intent(this, ToolbarBehaviorActivity::class.java))
@@ -36,6 +36,7 @@ class NavigationTestActivity : SupportActivity(), IBaseActivity {
             R.id.test_no_base_btn -> startActivity(Intent(this, TestNoBaseActivity::class.java))
             R.id.test_no_base_mvp_btn -> startActivity(Intent(this, TestNoBaseMvpActivity::class.java))
             R.id.main_btn -> startActivity(Intent(this, MainActivity::class.java))
+            R.id.test_player_btn -> startActivity(Intent(this, TestPlayerActivity::class.java))
         }
     }
 
