@@ -17,6 +17,7 @@ import com.bilibili.widget.CustomBitmapMemoryCacheParamsSupplier;
 import com.common.app.ActivityLifecycleManager;
 import com.common.app.AppComponent;
 import com.common.app.DaggerAppComponent;
+import com.common.util.Utils;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.MemoryTrimmable;
 import com.facebook.common.memory.MemoryTrimmableRegistry;
@@ -63,6 +64,8 @@ public class App extends Application {
         if (sAppComponent == null) {
             sAppComponent = DaggerAppComponent.create();
         }
+        //初始化工具类
+        Utils.init(this);
     }
 
     public void initFresco() {

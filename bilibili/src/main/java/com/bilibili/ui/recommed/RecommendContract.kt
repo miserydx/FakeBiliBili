@@ -25,6 +25,8 @@ interface RecommendContract {
 
         fun loadMore(idx: Int)
 
+        fun loadingMoreFinished()
+
     }
 
 }

@@ -93,6 +93,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
                 val position = this.items.size
                 this.items.addAll(items)
                 mAdapter.items = this.items
+                mPresenter.loadingMoreFinished()
                 mAdapter.notifyItemInserted(position)
             }
         }

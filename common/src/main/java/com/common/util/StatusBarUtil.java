@@ -118,4 +118,22 @@ public class StatusBarUtil {
         }
         return statusBarHeight;
     }
+
+    /**
+     * 隐藏状态栏
+     */
+    public static void hideStatusBar(Activity activity) {
+        View decorView = activity.getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    /**
+     * 显示状态栏
+     */
+    public static void showStatusBar(Activity activity) {
+        View decorView = activity.getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
 }

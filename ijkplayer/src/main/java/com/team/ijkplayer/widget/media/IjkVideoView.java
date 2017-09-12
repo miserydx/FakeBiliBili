@@ -128,6 +128,8 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
     private TextView subtitleDisplay;
 
+    private OnVideoControlListener mOnVideoControlListener;
+
     public IjkVideoView(Context context) {
         super(context);
         initVideoView(context);
@@ -180,6 +182,10 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                 LayoutParams.WRAP_CONTENT,
                 Gravity.BOTTOM);
         addView(subtitleDisplay, layoutParams_txt);
+    }
+
+    public void setOnVideoControlListener(OnVideoControlListener listener){
+        mOnVideoControlListener = listener;
     }
 
     public void setRenderView(IRenderView renderView) {
@@ -337,7 +343,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                     (TextUtils.isEmpty(scheme) || scheme.equalsIgnoreCase("file"))) {
                 IMediaDataSource dataSource = new FileMediaDataSource(new File(mUri.toString()));
                 mMediaPlayer.setDataSource(dataSource);
-            }  else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                 mMediaPlayer.setDataSource(mAppContext, mUri, mHeaders);
             } else {
                 mMediaPlayer.setDataSource(mUri.toString());
@@ -410,7 +416,9 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     IMediaPlayer.OnPreparedListener mPreparedListener = new IMediaPlayer.OnPreparedListener() {
         public void onPrepared(IMediaPlayer mp) {
             mPrepareEndTime = System.currentTimeMillis();
-            mHudViewHolder.updateLoadCost(mPrepareEndTime - mPrepareStartTime);
+            if (mHudViewHolder != null) {
+                mHudViewHolder.updateLoadCost(mPrepareEndTime - mPrepareStartTime);
+            }
             mCurrentState = STATE_PREPARED;
 
             // Get the capabilities of the player for this stream
@@ -442,13 +450,13 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                         if (mTargetState == STATE_PLAYING) {
                             start();
                             if (mMediaController != null) {
-                                mMediaController.show();
+//                                mMediaController.show();
                             }
                         } else if (!isPlaying() &&
                                 (seekToPosition != 0 || getCurrentPosition() > 0)) {
                             if (mMediaController != null) {
                                 // Show the media controls when we're paused into a video and make 'em stick.
-                                mMediaController.show(0);
+//                                mMediaController.show(0);
                             }
                         }
                     }
@@ -592,7 +600,9 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         @Override
         public void onSeekComplete(IMediaPlayer mp) {
             mSeekEndTime = System.currentTimeMillis();
-            mHudViewHolder.updateSeekCost(mSeekEndTime - mSeekStartTime);
+            if (mHudViewHolder != null) {
+                mHudViewHolder.updateSeekCost(mSeekEndTime - mSeekStartTime);
+            }
         }
     };
 
@@ -735,7 +745,8 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (isInPlaybackState() && mMediaController != null) {
-            toggleMediaControlsVisiblity();
+//            toggleMediaControlsVisiblity();
+            mOnVideoControlListener.onTouchEvent(ev);
         }
         return false;
     }
@@ -762,7 +773,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                     keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE) {
                 if (mMediaPlayer.isPlaying()) {
                     pause();
-                    mMediaController.show();
+//                    mMediaController.show();
                 } else {
                     start();
                     mMediaController.hide();
@@ -778,7 +789,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                     || keyCode == KeyEvent.KEYCODE_MEDIA_PAUSE) {
                 if (mMediaPlayer.isPlaying()) {
                     pause();
-                    mMediaController.show();
+//                    mMediaController.show();
                 }
                 return true;
             } else {
@@ -790,11 +801,11 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     }
 
     private void toggleMediaControlsVisiblity() {
-        if (mMediaController.isShowing()) {
-            mMediaController.hide();
-        } else {
-            mMediaController.show();
-        }
+//        if (mMediaController.isShowing()) {
+//            mMediaController.hide();
+//        } else {
+//            mMediaController.show();
+//        }
     }
 
     @Override
@@ -914,7 +925,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             IRenderView.AR_16_9_FIT_PARENT,
             IRenderView.AR_4_3_FIT_PARENT};
     private int mCurrentAspectRatioIndex = 0;
-    private int mCurrentAspectRatio = s_allAspectRatio[0];
+    private int mCurrentAspectRatio = s_allAspectRatio[1];
 
     public int toggleAspectRatio() {
         mCurrentAspectRatioIndex++;
@@ -1256,5 +1267,9 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
     public int getSelectedTrack(int trackType) {
         return MediaPlayerCompat.getSelectedTrack(mMediaPlayer, trackType);
+    }
+
+    public interface OnVideoControlListener{
+        void onTouchEvent(MotionEvent ev);
     }
 }

@@ -8,6 +8,7 @@ import com.bilibili.model.bean.BangumiIndexPage
 import com.bilibili.ui.bangumi.viewbinder.*
 import com.common.base.AbsBasePresenter
 import com.common.util.DateUtil
+import io.reactivex.Observable
 
 import javax.inject.Inject
 
@@ -17,6 +18,8 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import me.drakeet.multitype.Items
+import java.util.concurrent.TimeUnit
+import java.util.function.Consumer
 
 /**
  * Created by miserydx on 17/6/29.
@@ -34,23 +37,17 @@ constructor(private val bangumiApis: BangumiApis) : AbsBasePresenter<BangumiCont
         val STATE_LOAD_ERROR = 4
     }
 
-    private var state = 0
     private var cursor: Long = 0
 
     override fun loadData() {
-        state = STATE_INITIAL
-        getIndexPage()
+        getIndexPage(STATE_INITIAL)
     }
 
     override fun pullToRefresh() {
-        if (state == STATE_REFRESHING) {
-            return
-        }
-        state = STATE_REFRESHING
-        getIndexPage()
+        getIndexPage(STATE_REFRESHING)
     }
 
-    private fun getIndexPage() {
+    private fun getIndexPage(state: Int) {
         bangumiApis.getIndexPage(ApiHelper.APP_KEY, ApiHelper.BUILD, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
@@ -72,7 +69,6 @@ constructor(private val bangumiApis: BangumiApis) : AbsBasePresenter<BangumiCont
                     }
 
                     override fun onComplete() {
-                        state = STATE_NORMAL
                         mView.onRefreshingStateChanged(false)
                     }
                 })
@@ -98,9 +94,6 @@ constructor(private val bangumiApis: BangumiApis) : AbsBasePresenter<BangumiCont
     }
 
     override fun loadMore() {
-        if (state == STATE_LOAD_MORE) {
-            return
-        }
         bangumiApis.getIndexFall(ApiHelper.APP_KEY, ApiHelper.BUILD, cursor, ApiHelper.MOBI_APP, ApiHelper.PLATFORM, DateUtil.getSystemTime())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
@@ -122,23 +115,19 @@ constructor(private val bangumiApis: BangumiApis) : AbsBasePresenter<BangumiCont
                 .subscribe(object : Observer<Items> {
                     override fun onSubscribe(@NonNull d: Disposable) {
                         registerRx(d)
-                        state = STATE_LOAD_MORE
                     }
 
                     override fun onNext(@NonNull items: Items) {
-                        mView.onDataUpdated(items, state)
+                        mView.onDataUpdated(items, STATE_LOAD_MORE)
                     }
 
                     override fun onError(@NonNull e: Throwable) {
                         Log.e(TAG, "onError")
                         e.printStackTrace()
-                        state = STATE_LOAD_ERROR
                         mView.onDataUpdated(null, STATE_LOAD_ERROR)
                     }
 
-                    override fun onComplete() {
-                        state = STATE_NORMAL
-                    }
+                    override fun onComplete() {}
                 })
     }
 

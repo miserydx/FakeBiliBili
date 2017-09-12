@@ -6,12 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#0099cc">
 
-    <com.team.ijkplayer.widget.media.IjkVideoView
-        android:id="@+id/video_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"/>
-
     <TableLayout
         android:id="@+id/hud_view"
         android:layout_width="wrap_content"
@@ -29,5 +23,11 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:context=".toolbar_widget" />
+
+    <com.team.ijkplayer.widget.media.IjkVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 
 import com.bilibili.App
 import com.bilibili.R
@@ -37,9 +38,7 @@ class BangumiFragmentKotlin : BaseMvpFragment<BangumiPresenterKotlin>(), Bangumi
     private lateinit var mAdapter: BiliMultiTypeAdapter
     private var items = Items()
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_bangumi
-    }
+    override fun getLayoutId(): Int = R.layout.fragment_bangumi
 
     override fun initInject() {
         App.getInstance().fragmentComponent.inject(this)
@@ -75,7 +74,7 @@ class BangumiFragmentKotlin : BaseMvpFragment<BangumiPresenterKotlin>(), Bangumi
         mRecyclerView.adapter = mAdapter
     }
 
-    override fun onDataUpdated(items: Items?, state: Int) {
+    @Synchronized override fun onDataUpdated(items: Items?, state: Int) {
         when (state) {
             BangumiPresenterKotlin.STATE_INITIAL -> {
                 this.items = items!!
@@ -97,6 +96,7 @@ class BangumiFragmentKotlin : BaseMvpFragment<BangumiPresenterKotlin>(), Bangumi
                 val position = this.items.size
                 this.items.addAll(items)
                 mAdapter.items = this.items
+                mAdapter.setLoadMoreFinished()
                 mAdapter.notifyItemInserted(position)
             }
             BangumiPresenterKotlin.STATE_LOAD_ERROR -> mAdapter.showFailToLoad()

@@ -41,30 +41,29 @@ constructor(private val recommendApis: RecommendApis) : AbsBasePresenter<Recomme
     private var loginEvent: Int = 0
     private var openEvent: String? = null
     private var pull: Boolean = false
-    private var state: Int = 0
     private var idx: Int = 0
+    private var isLoadingMore: Boolean = false
+
+    override fun loadingMoreFinished(){
+        isLoadingMore = false
+    }
 
     override fun loadData() {
-        state = STATE_INITIAL
-        getIndex(state)
+        getIndex(STATE_INITIAL)
     }
 
     override fun pullToRefresh(idx: Int) {
-        if (state == STATE_REFRESHING) {
-            return
-        }
         this.idx = idx
-        state = STATE_REFRESHING
-        getIndex(state)
+        getIndex(STATE_REFRESHING)
     }
 
     override fun loadMore(idx: Int) {
-        if (state == STATE_LOAD_MORE) {
+        if(isLoadingMore){
             return
         }
+        isLoadingMore = true
         this.idx = idx
-        state = STATE_LOAD_MORE
-        getIndex(state)
+        getIndex(STATE_LOAD_MORE)
     }
 
 
@@ -123,7 +122,7 @@ constructor(private val recommendApis: RecommendApis) : AbsBasePresenter<Recomme
                 .subscribe(object : Observer<Items> {
                     override fun onSubscribe(@NonNull d: Disposable) {
                         registerRx(d)
-                        if (state == STATE_INITIAL || state == STATE_REFRESHING) {
+                        if (operationState == STATE_INITIAL || operationState == STATE_REFRESHING) {
                             mView.onRefreshingStateChanged(true)
                         }
                     }
@@ -137,9 +136,7 @@ constructor(private val recommendApis: RecommendApis) : AbsBasePresenter<Recomme
                         e.printStackTrace()
                     }
 
-                    override fun onComplete() {
-                        state = STATE_NORMAL
-                    }
+                    override fun onComplete() {}
                 })
     }
 

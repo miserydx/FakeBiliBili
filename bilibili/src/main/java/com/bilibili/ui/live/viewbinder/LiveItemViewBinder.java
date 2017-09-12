@@ -2,6 +2,7 @@ package com.bilibili.ui.live.viewbinder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
+import com.bilibili.ui.live.liveplay.LivePlayActivity;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
 import com.common.util.StringUtil;
@@ -34,18 +36,26 @@ public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Liv
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull LiveViewHolder holder, @NonNull LiveCommon.Partitions.Lives item) {
-        Context context = holder.ivCover.getContext();
+    protected void onBindViewHolder(@NonNull final LiveViewHolder holder, @NonNull final LiveCommon.Partitions.Lives item) {
+        final Context context = holder.cvContainer.getContext();
         int coverWidth = ScreenUtil.getScreenWidth(context) / 2 - SystemUtil.dp2px(context, 18);
         int coverHeight = context.getResources().getDimensionPixelSize(R.dimen.live_card_image_height);
         ImageUtil.load(holder.ivCover, item.getCover().getSrc(), coverWidth, coverHeight);
         holder.tvTitle.setText(item.getTitle());
         holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
         holder.tvName.setText(item.getOwner().getName());
+        holder.cvContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LivePlayActivity.Companion.startActivity(holder.cvContainer.getContext(), item.getPlayurl(), String.valueOf(item.getRoom_id()));
+            }
+        });
     }
 
     static class LiveViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.cv_container)
+        CardView cvContainer;
         @BindView(R.id.iv_cover)
         SimpleDraweeView ivCover;
         @BindView(R.id.tv_area_title)

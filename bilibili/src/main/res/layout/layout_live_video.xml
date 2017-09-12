@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shadow_gradient_reverse">
+
+    <com.team.ijkplayer.widget.media.IjkVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:visibility="invisible"/>
+
+    <FrameLayout
+        android:id="@+id/bg_control_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/live_bg_control_top"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/shadow_gradient"/>
+
+    <RelativeLayout
+        android:id="@+id/bg_control_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/live_bg_control_bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shadow_gradient_reverse"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_fullscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/common_margin_10"
+            android:cropToPadding="true"
+            android:src="@drawable/ic_portrait_fullscreen" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/anim_video_loading"/>
+
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/danmu_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?selectableItemBackgroundBorderless" />
+
+</RelativeLayout>

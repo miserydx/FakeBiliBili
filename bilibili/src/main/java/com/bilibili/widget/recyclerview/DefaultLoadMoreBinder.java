@@ -22,7 +22,12 @@ import butterknife.ButterKnife;
 public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, DefaultLoadMoreBinder.LoadMoreHolder> {
 
     private static final int CIRCLE_BG_LIGHT = 0xFFFAFAFA;
+    private boolean isLoading = false;
     private BiliMultiTypeAdapter.OnLoadMoreListener onLoadMoreListener;
+
+    public void setLoadingFinished() {
+        isLoading = false;
+    }
 
     @NonNull
     @Override
@@ -45,7 +50,8 @@ public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, 
             public void attachedToWindow(LoadMoreHolder holder) {
                 if (item.getState() == BaseFooterItem.STATE_LOAD_MORE) {
                     ((MaterialProgressDrawable) holder.ivIcon.getDrawable()).start();
-                    if (onLoadMoreListener != null) {
+                    if (onLoadMoreListener != null && isLoading) {
+                        isLoading = true;
                         onLoadMoreListener.onLoadMore();
                     }
                 }
@@ -53,7 +59,7 @@ public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, 
 
             @Override
             public void detachedFromWindow(LoadMoreHolder holder) {
-                item.setState(BaseFooterItem.STATE_LOAD_MORE);
+//                item.setState(BaseFooterItem.STATE_LOAD_MORE);
                 ((MaterialProgressDrawable) holder.ivIcon.getDrawable()).stop();
             }
         });

@@ -2,15 +2,14 @@ package com.bilibili.ui.test.activity
 
 import android.content.Intent
 import android.view.View
-import android.widget.Button
 
 import com.bilibili.R
 import com.bilibili.ui.main.MainActivity
 import com.common.base.IBaseActivity
 import com.common.util.StatusBarUtil
 
-import butterknife.BindView
 import butterknife.OnClick
+import com.bilibili.ui.live.liveplay.LivePlayActivity
 import me.yokeyword.fragmentation.SupportActivity
 
 class NavigationTestActivity : SupportActivity(), IBaseActivity {
@@ -36,7 +35,7 @@ class NavigationTestActivity : SupportActivity(), IBaseActivity {
             R.id.test_no_base_btn -> startActivity(Intent(this, TestNoBaseActivity::class.java))
             R.id.test_no_base_mvp_btn -> startActivity(Intent(this, TestNoBaseMvpActivity::class.java))
             R.id.main_btn -> startActivity(Intent(this, MainActivity::class.java))
-            R.id.test_player_btn -> startActivity(Intent(this, TestPlayerActivity::class.java))
+            R.id.test_player_btn -> startActivity(Intent(this, LivePlayActivity::class.java))
         }
     }
 

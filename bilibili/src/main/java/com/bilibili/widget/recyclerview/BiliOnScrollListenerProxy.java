@@ -14,6 +14,7 @@ public class BiliOnScrollListenerProxy extends RecyclerView.OnScrollListener {
     private RecyclerView.OnScrollListener target;
     private boolean isScrollLoad = false;
     private BiliMultiTypeAdapter.OnLoadMoreListener onLoadMoreListener;
+    private boolean isLoading = false;
 
     public void setTarget(RecyclerView.OnScrollListener target) {
         this.target = target;
@@ -27,11 +28,16 @@ public class BiliOnScrollListenerProxy extends RecyclerView.OnScrollListener {
         onLoadMoreListener = listener;
     }
 
+    public void setLoadingFinished(){
+        isLoading = false;
+    }
+
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+        if (!ViewCompat.canScrollVertically(recyclerView, 1) && !isLoading) {
             if (onLoadMoreListener != null) {
+                isLoading = true;
                 onLoadMoreListener.onLoadMore();
             }
         }

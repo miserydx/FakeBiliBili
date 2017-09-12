@@ -113,6 +113,8 @@
 
     <!--live-->
     <dimen name="live_card_image_height">101dp</dimen>
+    <dimen name="live_bg_control_top">65dp</dimen>
+    <dimen name="live_bg_control_bottom">30dp</dimen>
 
     <!--bangumi-->
     <dimen name="bangumi_card_image_height">105dp</dimen>

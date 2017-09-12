@@ -40,6 +40,14 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
     }
 
     /**
+     * 通知加载更多状态完成
+     */
+    public void setLoadMoreFinished(){
+        defaultLoadMoreBinder.setLoadingFinished();
+        biliOnScrollListenerProxy.setLoadingFinished();
+    }
+
+    /**
      * 设置列表数据集合
      *
      * @param items
@@ -72,10 +80,10 @@ public class BiliMultiTypeAdapter extends MultiTypeAdapter {
      */
     public void setOnLoadMoreListener(OnLoadMoreListener listener, int mode) {
         switch (mode) {
-            case LOAD_MORE_MODE_BOTTOM:
+            case LOAD_MORE_MODE_BOTTOM://上拉到底加载
                 biliOnScrollListenerProxy.setOnLoadMoreListener(listener);
                 break;
-            case LOAD_MORE_MODE_LAST_ITEM:
+            case LOAD_MORE_MODE_LAST_ITEM://上拉到最后一项出现时加载
                 defaultLoadMoreBinder.setOnLoadMoreBinder(listener);
                 break;
         }
