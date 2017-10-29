@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light_2">
+
+    <LinearLayout
+        android:id="@+id/send_layout"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/container"
+        app:layout_constraintLeft_toLeftOf="@id/container"
+        app:layout_constraintRight_toRightOf="@id/container">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/padding_4"
+            android:src="@drawable/ic_live_player_send_gift"
+            android:tint="?attr/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="@dimen/padding_4"
+            android:layout_marginRight="@dimen/padding_4"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_divider_1dp_gray_bg_white"
+            android:gravity="center_vertical"
+            android:text="输入想发送的弹幕"
+            android:textColor="@color/_text__gray" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/padding_4"
+            android:src="@drawable/ic_send"
+            android:tint="@color/gray" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/padding_4"
+        app:layout_constraintBottom_toTopOf="@id/send_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

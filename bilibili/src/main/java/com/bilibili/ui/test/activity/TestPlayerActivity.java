@@ -1,6 +1,5 @@
 package com.bilibili.ui.test.activity;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TableLayout;

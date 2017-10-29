@@ -84,7 +84,8 @@
         <!-- 直播页 -->
         <activity android:name=".ui.live.liveplay.LivePlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

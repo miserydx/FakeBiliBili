@@ -40,15 +40,15 @@ public class BangumiIndexItemDecoration extends RecyclerView.ItemDecoration {
                     outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_min);
                     break;
                 case 1:
-                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.common_margin_7);
-                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.common_margin_7);
+                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_7);
+                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_7);
                     break;
                 case 2:
                     outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_min);
                     outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
                     break;
             }
-            outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.common_margin_15);
+            outRect.bottom = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_15);
         }
     }
 

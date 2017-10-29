@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_container"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shadow_gradient_reverse">
+    android:layout_height="match_parent">
 
-    <com.team.ijkplayer.widget.media.IjkVideoView
-        android:id="@+id/video_view"
+    <com.team.ijkplayer.player.DXBaseVideoPlayer
+        android:id="@+id/dx_video_player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:visibility="invisible"/>
+        android:background="@color/videoplay_live_pop_bg" />
 
-    <FrameLayout
-        android:id="@+id/bg_control_top"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/control_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/live_bg_control_top"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/shadow_gradient"/>
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/bg_control_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/live_bg_control_bottom"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/shadow_gradient_reverse"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        <FrameLayout
+            android:id="@+id/bg_control_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/live_bg_control_top"
+            android:background="@drawable/shadow_gradient"
+            app:layout_constraintLeft_toLeftOf="@id/control_container"
+            app:layout_constraintRight_toRightOf="@id/control_container"
+            app:layout_constraintTop_toTopOf="@id/control_container" />
+
+        <FrameLayout
+            android:id="@+id/bg_control_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/live_bg_control_bottom"
+            android:background="@drawable/shadow_gradient_reverse"
+            app:layout_constraintBottom_toBottomOf="@id/control_container"
+            app:layout_constraintLeft_toLeftOf="@id/control_container"
+            app:layout_constraintRight_toRightOf="@id/control_container" />
 
         <ImageView
-            android:id="@+id/iv_fullscreen"
+            android:id="@+id/start_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/common_margin_10"
-            android:cropToPadding="true"
-            android:src="@drawable/ic_portrait_fullscreen" />
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:src="@drawable/ic_clip_video_play"
+            app:layout_constraintBottom_toTopOf="@+id/fullscreen_iv"
+            app:layout_constraintRight_toRightOf="@+id/control_container" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/fullscreen_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_tiny"
+            android:src="@drawable/ic_portrait_fullscreen"
+            app:layout_constraintBottom_toBottomOf="@+id/control_container"
+            app:layout_constraintRight_toRightOf="@+id/control_container" />
 
-    <ImageView
-        android:id="@+id/iv_placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/anim_video_loading"/>
+        <ImageView
+            android:id="@+id/placeholder_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/anim_video_loading"
+            app:layout_constraintBottom_toBottomOf="@id/control_container"
+            app:layout_constraintLeft_toLeftOf="@id/control_container"
+            app:layout_constraintRight_toRightOf="@id/control_container"
+            app:layout_constraintTop_toTopOf="@id/control_container" />
 
-    <master.flame.danmaku.ui.widget.DanmakuView
-        android:id="@+id/danmu_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?selectableItemBackgroundBorderless" />
+    </android.support.constraint.ConstraintLayout>
 
-</RelativeLayout>
+</merge>

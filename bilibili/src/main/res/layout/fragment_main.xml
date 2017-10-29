@@ -53,7 +53,7 @@
 
 
         <com.flyco.tablayout.SlidingTabLayout
-            android:id="@+id/tablayout"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_layout_height"
             android:background="?attr/colorPrimaryDark"

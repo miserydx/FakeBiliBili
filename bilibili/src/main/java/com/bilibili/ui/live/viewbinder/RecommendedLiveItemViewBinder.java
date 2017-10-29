@@ -49,6 +49,7 @@ public class RecommendedLiveItemViewBinder extends ItemViewBinder<LiveRecommend.
         holder.cvContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                TestDanmuActivity.Companion.startActivity(holder.cvContainer.getContext(), item.getPlayurl(), String.valueOf(item.getRoom_id()));
                 LivePlayActivity.Companion.startActivity(holder.cvContainer.getContext(), item.getPlayurl(), String.valueOf(item.getRoom_id()));
             }
         });

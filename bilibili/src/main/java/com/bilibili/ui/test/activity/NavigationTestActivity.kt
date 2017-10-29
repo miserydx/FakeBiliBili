@@ -9,7 +9,6 @@ import com.common.base.IBaseActivity
 import com.common.util.StatusBarUtil
 
 import butterknife.OnClick
-import com.bilibili.ui.live.liveplay.LivePlayActivity
 import me.yokeyword.fragmentation.SupportActivity
 
 class NavigationTestActivity : SupportActivity(), IBaseActivity {
@@ -35,7 +34,7 @@ class NavigationTestActivity : SupportActivity(), IBaseActivity {
             R.id.test_no_base_btn -> startActivity(Intent(this, TestNoBaseActivity::class.java))
             R.id.test_no_base_mvp_btn -> startActivity(Intent(this, TestNoBaseMvpActivity::class.java))
             R.id.main_btn -> startActivity(Intent(this, MainActivity::class.java))
-            R.id.test_player_btn -> startActivity(Intent(this, LivePlayActivity::class.java))
+            R.id.test_player_btn -> startActivity(Intent(this, TestDanmuActivity::class.java))
         }
     }
 

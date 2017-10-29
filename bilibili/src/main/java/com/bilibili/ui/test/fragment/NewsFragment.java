@@ -20,7 +20,7 @@ import butterknife.BindView;
 
 public class NewsFragment extends BaseFragment {
 
-    @BindView(R.id.tablayout)
+    @BindView(R.id.tab_layout)
     SlidingTabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;

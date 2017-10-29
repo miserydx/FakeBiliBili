@@ -404,4 +404,5 @@
     <color name="yellow_drak_2">#ffffaf00</color>
     <color name="yellow_light">#fffeb345</color>
     <color name="yellow_light_1">#fffabb12</color>
+    <color name="transparent">#00000000</color>
 </resources>

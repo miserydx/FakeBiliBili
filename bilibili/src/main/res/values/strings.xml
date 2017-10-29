@@ -33,6 +33,11 @@
     <string name="partition_count_format">当前%1$s个直播</string>
     <string name="live_load_more">查看更多</string>
     <string name="live_more">更多直播</string>
+    <string name="live_share">分享</string>
+    <string name="live_report">举报</string>
+    <string name="live_interaction">互动</string>
+    <string name="live_ranking_list">排行榜</string>
+    <string name="live_fleet">舰队</string>
 
     <!-- Navigation -->
     <string name="nav_login">点击头像登录</string>

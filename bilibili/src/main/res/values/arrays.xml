@@ -7,4 +7,9 @@
         <item>@string/section_more</item>
         <item>@string/section_dynamic</item>
     </string-array>
+    <string-array name="live_play">
+        <item>@string/live_interaction</item>
+        <item>@string/live_ranking_list</item>
+        <item>@string/live_fleet</item>
+    </string-array>
 </resources>

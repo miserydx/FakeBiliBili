@@ -33,15 +33,15 @@ class BangumiIndexItemDecorationKotlin(private val spanSizeLookup: GridLayoutMan
                     outRect.right = view.context.resources.getDimensionPixelSize(R.dimen.margin_min)
                 }
                 1 -> {
-                    outRect.left = view.context.resources.getDimensionPixelSize(R.dimen.common_margin_7)
-                    outRect.right = view.context.resources.getDimensionPixelSize(R.dimen.common_margin_7)
+                    outRect.left = view.context.resources.getDimensionPixelSize(R.dimen.margin_7)
+                    outRect.right = view.context.resources.getDimensionPixelSize(R.dimen.margin_7)
                 }
                 2 -> {
                     outRect.left = view.context.resources.getDimensionPixelSize(R.dimen.margin_min)
                     outRect.right = view.context.resources.getDimensionPixelSize(R.dimen.margin_medium)
                 }
             }
-            outRect.bottom = view.context.resources.getDimensionPixelSize(R.dimen.common_margin_15)
+            outRect.bottom = view.context.resources.getDimensionPixelSize(R.dimen.margin_15)
         }
     }
 

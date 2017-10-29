@@ -1,13 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <com.bilibili.widget.video.BiliLiveVideoView
-            android:id="@+id/video_layout"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
+    <com.bilibili.widget.video.LiveVideoPlayer
+        android:id="@+id/live_video_player"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/live_video_player_height"
+        android:background="@color/videoplay__preloading_background" />
 
-</RelativeLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_divider_hfdp_gray_bg_white">
+
+        <ImageView
+            android:id="@+id/avatar_iv"
+            android:layout_width="@dimen/width_56"
+            android:layout_height="@dimen/height_56"
+            android:layout_margin="@dimen/margin_medium"
+            android:src="@drawable/bili_default_avatar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:drawablePadding="@dimen/padding_2"
+            android:drawableRight="@drawable/ic_pink_arrow_right"
+            android:text="吃鸡吃鸡吃鸡"
+            android:textColor="@color/TextColorBlack"
+            app:layout_constraintLeft_toRightOf="@id/avatar_iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/author_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/title_tv"
+            app:layout_constraintTop_toBottomOf="@id/title_tv">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_transparent_corner_pink"
+                android:paddingLeft="@dimen/padding_2"
+                android:paddingRight="@dimen/padding_2"
+                android:text="UP31"
+                android:textColor="@color/theme_color_pink" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_tiny"
+                android:text="Misery"
+                android:textColor="@color/theme_color_pink" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_online"
+            style="@style/normal_text_style"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:drawableLeft="@drawable/ic_live_count"
+            android:drawablePadding="@dimen/padding_2"
+            android:drawableTint="@color/_bkgd__gray"
+            android:text="4396"
+            android:textColor="@color/_bkgd__gray_light"
+            app:layout_constraintLeft_toLeftOf="@id/author_ll"
+            app:layout_constraintTop_toBottomOf="@id/author_ll" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_36"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:orientation="horizontal"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/author_ll">
+
+            <TextView
+                android:id="@+id/tv_attention"
+                style="@style/normal_text_style"
+                android:background="@drawable/ic_attention_arrow"
+                android:gravity="center"
+                android:text="5.9万"
+                android:textColor="@color/_bkgd__gray_light" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_2"
+                android:background="@drawable/background_pink_corner"
+                android:gravity="center"
+                android:text="+关注"
+                android:textColor="@color/_text__white" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="36dp"-->
+    <!--android:background="@color/pink">-->
+
+    <!--</RelativeLayout>-->
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_layout_height"
+        android:background="@drawable/bottom_divider_hfdp_gray_bg_white"
+        app:tl_indicator_color="?attr/colorPrimary"
+        app:tl_indicator_margin_left="@dimen/margin_medium"
+        app:tl_indicator_margin_right="@dimen/margin_medium"
+        app:tl_tab_space_equal="true"
+        app:tl_textAllCaps="true"
+        app:tl_textSelectColor="?attr/colorPrimary"
+        app:tl_textUnselectColor="@color/black"
+        app:tl_textsize="14sp" />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -32,9 +32,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     private lateinit var mAdapter: BiliMultiTypeAdapter
     private var items = Items()
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_recommend
-    }
+    override fun getLayoutId(): Int = R.layout.fragment_recommend
 
     override fun initInject() {
         App.getInstance().fragmentComponent.inject(this)

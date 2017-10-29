@@ -107,7 +107,7 @@ public class StatusBarUtil {
         return statusView;
     }
 
-    private static int getStatusBarHeight(Activity activity) {
+    public static int getStatusBarHeight(Activity activity) {
         if (statusBarHeight != 0) {
             return statusBarHeight;
         } else {

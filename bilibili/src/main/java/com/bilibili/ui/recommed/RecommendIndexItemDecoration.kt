@@ -31,7 +31,7 @@ class RecommendIndexItemDecoration(private val spanSizeLookup: GridLayoutManager
                 }
             }
         }
-        outRect.top = view.context.resources.getDimensionPixelSize(R.dimen.common_margin_10)
+        outRect.top = view.context.resources.getDimensionPixelSize(R.dimen.margin_10)
         if (position == state!!.itemCount - 1 || position == state.itemCount - 2) {
             outRect.bottom = view.context.resources.getDimensionPixelSize(R.dimen.margin_tiny)
         }

@@ -42,7 +42,7 @@ public class MainFragment extends BaseFragment {
     Toolbar mToolbar;
     @BindView(R.id.top_menu_nav_ll)
     LinearLayout llTopMenuNavigation;
-    @BindView(R.id.tablayout)
+    @BindView(R.id.tab_layout)
     SlidingTabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
