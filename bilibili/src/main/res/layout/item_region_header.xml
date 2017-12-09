@@ -2,7 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/_bkgd__gray_very_light">
+    android:background="@color/bg_main">
 
     <TableRow>
 
@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/textView2"
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/section_live" />
@@ -48,7 +48,7 @@
                 android:src="@mipmap/ic_category_bangumi" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/bangumi" />
@@ -71,7 +71,7 @@
                 android:src="@mipmap/ic_category_anim" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/animation" />
@@ -94,7 +94,7 @@
                 android:src="@mipmap/ic_category_guo_chuang" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/guo_chuang" />
@@ -121,7 +121,7 @@
                 android:src="@mipmap/ic_category_music" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/music" />
@@ -144,7 +144,7 @@
                 android:src="@mipmap/ic_category_dance" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/dancing" />
@@ -167,7 +167,7 @@
                 android:src="@mipmap/ic_category_game" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/game" />
@@ -190,7 +190,7 @@
                 android:src="@mipmap/ic_category_tech" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/technology" />
@@ -217,7 +217,7 @@
                 android:src="@mipmap/ic_category_life" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/life" />
@@ -240,7 +240,7 @@
                 android:src="@mipmap/ic_category_gui_chu" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/gui_chu" />
@@ -263,7 +263,7 @@
                 android:src="@mipmap/ic_category_fashion" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/fashion" />
@@ -286,7 +286,7 @@
                 android:src="@mipmap/ic_category_ad" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/advertisement" />
@@ -313,7 +313,7 @@
                 android:src="@mipmap/ic_category_entertain" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/entertainment" />
@@ -336,7 +336,7 @@
                 android:src="@mipmap/ic_category_movie" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/movie" />
@@ -359,7 +359,7 @@
                 android:src="@mipmap/ic_category_tv_play" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="@string/tv_play" />
@@ -382,7 +382,7 @@
                 android:src="@mipmap/ic_category_game_center" />
 
             <TextView
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_small"
                 android:text="游戏中心" />

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialLoadingView">
+        <attr name="ring_color" format="color" />
+        <attr name="style">
+            <enum name="Default" value="0" />
+            <enum name="Large" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

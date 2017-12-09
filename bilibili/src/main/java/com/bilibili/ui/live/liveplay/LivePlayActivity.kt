@@ -14,23 +14,25 @@ import com.bilibili.R
 import com.bilibili.ui.live.liveplay.fragment.LiveDanmuFragment
 import com.bilibili.ui.test.fragment.PlaceHolderFragment
 import com.bilibili.util.InflateUtil
+import com.bilibili.widget.danmu.live.LiveDanMuReceiver
 import com.bilibili.widget.video.LiveVideoPlayer
 import com.common.base.IBaseMvpActivity
 import com.flyco.tablayout.SlidingTabLayout
 import com.team.ijkplayer.player.DXVideoView
 import me.yokeyword.fragmentation.SupportActivity
+import java.io.IOException
 import java.util.ArrayList
 import javax.inject.Inject
 
 class LivePlayActivity : SupportActivity(), IBaseMvpActivity<LivePlayPresenter>, LivePlayContract.View,
-        DXVideoView.OnPreparedListener, DXVideoView.OnStartListener, DXVideoView.OnPauseListener {
+        DXVideoView.OnPreparedListener {
 
     companion object {
 
         private val TYPE_LIVE_URL = "type_live_url"
         private val TYPE_LIVE_ROOM_ID = "type_live_room_id"
 
-        fun startActivity(context: Context, url: String, roomId: String) {
+        fun startActivity(context: Context, url: String, roomId: Int) {
             val intent = Intent(context, LivePlayActivity::class.java)
             intent.putExtra(TYPE_LIVE_URL, url)
             intent.putExtra(TYPE_LIVE_ROOM_ID, roomId)
@@ -63,18 +65,17 @@ class LivePlayActivity : SupportActivity(), IBaseMvpActivity<LivePlayPresenter>,
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         val dynamicUrl = intent.getStringExtra(TYPE_LIVE_URL)
-        val roomId = intent.getStringExtra(TYPE_LIVE_ROOM_ID)
+        val roomId = intent.getIntExtra(TYPE_LIVE_ROOM_ID, -1)
         initToolbar()
         videoPlayer.setOnPreparedListener(this)
-        videoPlayer.setOnStartListener(this)
-        videoPlayer.setOnPauseListener(this)
         videoPlayer.setUp(dynamicUrl)
-        videoPlayer.initDanmakuView(roomId)
+        videoPlayer.initDanmakuView()
         mTitles = resources.getStringArray(R.array.live_play)
         initChildFragment()
         adapter = LivePlayPagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
         tabLayout.setViewPager(viewPager, mTitles)
+        connectDanmu(roomId)
     }
 
     private fun initToolbar() {
@@ -88,9 +89,13 @@ class LivePlayActivity : SupportActivity(), IBaseMvpActivity<LivePlayPresenter>,
     }
 
     private fun initChildFragment() {
-        mFragments.add(LiveDanmuFragment())
+        mFragments.add(LiveDanmuFragment.newInstance())
         mFragments.add(PlaceHolderFragment())
         mFragments.add(PlaceHolderFragment())
+    }
+
+    private fun connectDanmu(roomId: Int) {
+        LiveDanMuReceiver.getInstance().connect(roomId)
     }
 
     override fun onPause() {
@@ -105,6 +110,11 @@ class LivePlayActivity : SupportActivity(), IBaseMvpActivity<LivePlayPresenter>,
 
     override fun onDestroy() {
         videoPlayer.release()
+        try {
+            LiveDanMuReceiver.getInstance().close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
         super.onDestroy()
     }
 
@@ -116,14 +126,6 @@ class LivePlayActivity : SupportActivity(), IBaseMvpActivity<LivePlayPresenter>,
     }
 
     override fun onPrepared() {
-
-    }
-
-    override fun onVideoStart() {
-
-    }
-
-    override fun onVideoPause() {
 
     }
 

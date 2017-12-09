@@ -87,7 +87,8 @@ public class RegionPresenter extends AbsBasePresenter<RegionContract.View> {
             //partition
             AppRegionShow.Partition p = appRegionShow.new Partition();
             p.setTitle(appRegionShow.getTitle());
-            p.setLogo(ResourceManager.getRegionIconByTitle(appRegionShow.getTitle()));
+//            p.setLogo(ResourceManager.getRegionIconByTitle(appRegionShow.getTitle()));
+            p.setLogo(ResourceManager.getRegionIconByParam(appRegionShow.getParam()));
             appRegionShow.setPartition(p);
             items.add(p);
 

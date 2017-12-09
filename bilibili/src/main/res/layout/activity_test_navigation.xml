@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.common.ui.test.activity.NavigationTestActivity">
+    tools:context=".ui.test.activity.NavigationTestActivity">
 
     <Button
         android:id="@+id/news_btn"
@@ -71,10 +71,10 @@
         app:layout_constraintTop_toBottomOf="@+id/test_no_base_btn" />
 
     <Button
-        android:id="@+id/test_player_btn"
+        android:id="@+id/test_loading_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="播放器"
+        android:text="测试Loading"
         app:layout_constraintStart_toStartOf="@id/activity_main"
         tools:layout_editor_absoluteX="0dp"
         app:layout_constraintTop_toBottomOf="@+id/test_no_base_mvp_btn" />
@@ -86,6 +86,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/activity_main"
         tools:layout_editor_absoluteX="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/test_player_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/test_loading_btn" />
 
 </android.support.constraint.ConstraintLayout>

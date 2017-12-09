@@ -14,7 +14,7 @@ class PlaceHolderFragment : BaseFragment() {
     @BindView(R.id.tv_place_holder)
     lateinit var tvPlaceHolder: TextView
 
-    override fun setContentView(): Int = R.layout.fragment_placeholder
+    override fun getLayoutId(): Int = R.layout.fragment_placeholder
 
     override fun initInject() {
 

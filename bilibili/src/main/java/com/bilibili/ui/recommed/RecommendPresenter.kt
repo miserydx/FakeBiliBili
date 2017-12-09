@@ -4,7 +4,6 @@ import android.util.Log
 
 import com.bilibili.model.api.ApiHelper
 import com.bilibili.model.api.RecommendApis
-import com.bilibili.ui.bangumi.BangumiFragment
 import com.bilibili.ui.recommed.viewbinder.RecommendBannerItemViewBinder
 import com.common.base.AbsBasePresenter
 import com.common.util.DateUtil
@@ -132,7 +131,7 @@ constructor(private val recommendApis: RecommendApis) : AbsBasePresenter<Recomme
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        Log.e(BangumiFragment.TAG, "onError")
+                        Log.e(TAG, "onError")
                         e.printStackTrace()
                     }
 

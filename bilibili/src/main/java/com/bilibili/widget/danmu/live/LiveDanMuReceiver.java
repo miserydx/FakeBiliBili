@@ -110,20 +110,21 @@ public class LiveDanMuReceiver implements Closeable {
      * @throws IOException              when socket error
      * @throws IllegalArgumentException when room id invalid
      */
-    public LiveDanMuReceiver connect(final String urlString) throws IOException, IllegalArgumentException {
+    public LiveDanMuReceiver connect(int id) throws IOException, IllegalArgumentException {
+        this.roomId = id;
         RxJavaUtil.runOnWorkThread(new CommonConsumer() {
             @Override
             public void accept(@NonNull Object o) throws Exception {
                 //得到房间号
-                if (urlString != null) {
-                    url = new URL(urlString);
-                }
-                if (url != null) {
-                    ScriptEntity scriptEntity = Utils.resolveScriptPartInHTML(url);
-                    roomId = scriptEntity.roomId;
-                    random = scriptEntity.random;
-                    roomURL = scriptEntity.roomURL;
-                }
+//                if (urlString != null) {
+//                    url = new URL(urlString);
+//                }
+//                if (url != null) {
+//                    ScriptEntity scriptEntity = Utils.resolveScriptPartInHTML(url);
+//                    roomId = scriptEntity.roomId;
+//                    random = scriptEntity.random;
+//                    roomURL = scriptEntity.roomURL;
+//                }
 
                 //获得服务器地址
                 String serverAddress;

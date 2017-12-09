@@ -24,33 +24,37 @@
 
     <!--Common-->
     <!--Don't use parent style-->
-    <style name="parent_text_style">
+    <style name="text_style_parent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <!--text-->
-    <style name="large_text_style" parent="parent_text_style">
+    <style name="text_style_xlarge" parent="text_style_parent">
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+    </style>
+
+    <style name="text_style_large" parent="text_style_parent">
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
 
-    <style name="normal_text_style" parent="parent_text_style">
+    <style name="text_style_normal" parent="text_style_parent">
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="small_text_style" parent="parent_text_style">
+    <style name="text_style_small" parent="text_style_parent">
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
-    <style name="navigation_text_style" parent="normal_text_style">
+    <style name="text_style_navigation" parent="text_style_normal">
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:padding">@dimen/margin_small</item>
     </style>
 
     <!--image-->
-    <style name="parent_image_style">
+    <style name="image_style_parent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

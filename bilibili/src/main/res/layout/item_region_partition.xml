@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/normal_text_style"
+        style="@style/text_style_normal"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_toEndOf="@+id/iv_icon"

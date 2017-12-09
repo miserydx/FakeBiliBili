@@ -4,7 +4,6 @@ import com.bilibili.di.module.FragmentModule
 import com.bilibili.di.module.PageModule
 import com.bilibili.di.scope.PerFragment
 import com.bilibili.ui.bangumi.BangumiFragment
-import com.bilibili.ui.bangumi.BangumiFragmentKotlin
 import com.bilibili.ui.live.LiveFragment
 import com.bilibili.ui.main.MainFragment
 import com.bilibili.ui.recommed.RecommendFragment
@@ -30,11 +29,9 @@ interface FragmentComponent {
 
     fun inject(liveFragment: LiveFragment)
 
-    fun inject(bangumiFragment: BangumiFragment)
-
     fun inject(recommendFragment: RecommendFragment)
 
     fun inject(regionFragment: RegionFragment)
 
-    fun inject(bangumiFragmentKotlin: BangumiFragmentKotlin)
+    fun inject(bangumiFragment: BangumiFragment)
 }

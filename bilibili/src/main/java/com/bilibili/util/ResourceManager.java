@@ -1,6 +1,11 @@
 package com.bilibili.util;
 
+import android.content.Context;
+import android.text.TextUtils;
+
+import com.bilibili.App;
 import com.bilibili.R;
+import com.common.util.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,5 +39,17 @@ public class ResourceManager {
 
     public static int getRegionIconByTitle(String title) {
         return regionResMap.get(title);
+    }
+
+    public static int getRegionIconByParam(String param) {
+        String name;
+        if (TextUtils.equals("177", param)) {//纪录片
+            return R.mipmap.ic_category_unknown;
+        } else if (TextUtils.equals("subarea", param)) {//活动中心
+            return R.drawable.ic_header_activity_center;
+        } else {
+            name = "ic_category_t" + param;
+        }
+        return Utils.getContext().getResources().getIdentifier(name, "mipmap", Utils.getContext().getPackageName());
     }
 }

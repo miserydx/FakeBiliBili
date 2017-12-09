@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/tv_name"
-            style="@style/small_text_style"
+            style="@style/text_style_small"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/tv_online"
-            style="@style/small_text_style"
+            style="@style/text_style_small"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

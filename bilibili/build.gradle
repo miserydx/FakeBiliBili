@@ -4,13 +4,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.bilibili"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,19 +35,16 @@ dependencies {
     compile project(':common')
     compile project(':ijkplayer')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'com.google.dagger:dagger:2.5'
+    compile 'com.google.dagger:dagger:2.11'
     compile("com.jakewharton:butterknife:8.6.0") {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-compat'
     }
-//    annotationProcessor 'com.google.dagger:dagger-compiler:2.5'
-//    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.alibaba:fastjson:1.1.63.android'
-    compile 'org.jsoup:jsoup:1.9.2'
+    compile 'com.alibaba:fastjson:1.2.14'
+    compile 'org.jsoup:jsoup:1.10.2'
     //弹幕烈焰使
     compile 'com.github.ctiao:DanmakuFlameMaster:0.9.12'
 
-    kapt 'com.google.dagger:dagger-compiler:2.5'
+    kapt 'com.google.dagger:dagger-compiler:2.11'
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 }

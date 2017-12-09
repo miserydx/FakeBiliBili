@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/large_text_style"
+        style="@style/text_style_large"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/iv_icon"
         android:layout_toRightOf="@+id/iv_icon"
@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/tv_count"
-        style="@style/normal_text_style"
+        style="@style/text_style_normal"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/iv_arrow"
         android:textColor="@color/black" />

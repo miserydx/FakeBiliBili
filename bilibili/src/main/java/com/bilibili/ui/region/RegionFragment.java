@@ -1,21 +1,36 @@
 package com.bilibili.ui.region;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.region.AppRegionShow;
+import com.bilibili.model.event.SwitchRegionMenuEvent;
+import com.bilibili.model.event.ToggleDrawerEvent;
 import com.bilibili.ui.region.viewbinder.RegionBannerItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionBodyItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionFooterItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionHeaderItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionPartitionItemViewBinder;
+import com.bilibili.widget.textview.AlwaysCenterTextView;
 import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.drakeet.multitype.Items;
 
 /**
@@ -28,6 +43,10 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
 
     private static final int SPAN_COUNT = 2;
 
+    @BindView(R.id.main_toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.tv_title)
+    AlwaysCenterTextView tvTitle;
     @BindView(R.id.rv_region)
     RecyclerView mRecyclerView;
 
@@ -47,6 +66,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
 
     @Override
     protected void initViewAndEvent() {
+        tvTitle.setText(getString(R.string.section_region));
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
         GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -71,6 +91,12 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     public void onDataUpdated(Items items) {
         mItems.clear();
         mItems.addAll(items);
@@ -78,5 +104,44 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         mAdapter.notifyDataSetChanged();
     }
 
+    @OnClick({R.id.ll_top_menu_nav})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_top_menu_nav:
+                ToggleDrawerEvent event = new ToggleDrawerEvent();
+                EventBus.getDefault().post(event);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.region, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_download:
+                //TODO
+                break;
+            case R.id.action_search:
+                //TODO
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(SwitchRegionMenuEvent event){
+        setUpToolBar(mToolbar);
+    }
 
 }

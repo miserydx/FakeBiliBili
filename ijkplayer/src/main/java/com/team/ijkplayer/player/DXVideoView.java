@@ -98,7 +98,9 @@ public class DXVideoView extends FrameLayout implements DXMediaManager.DXMediaPl
      */
     private void init() {
         addRenderView();
-        mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+        if (!isInEditMode()) {
+            mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+        }
         DXMediaManager.getInstance().setDXMediaPlayerListener(this);
     }
 
@@ -152,7 +154,7 @@ public class DXVideoView extends FrameLayout implements DXMediaManager.DXMediaPl
         mTextureView.setSurfaceTextureListener(this);
 //        FrameLayout videoContainer = new FrameLayout(getContext());
 //        videoContainer.
-                addView(mTextureView, lp);
+        addView(mTextureView, lp);
 //        addView(videoContainer, lp);
     }
 

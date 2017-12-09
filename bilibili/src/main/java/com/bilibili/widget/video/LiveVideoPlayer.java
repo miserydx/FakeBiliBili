@@ -25,9 +25,8 @@ import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.danmu.live.entity.DanMuMSGEntity;
 import com.common.util.SizeUtil;
 import com.common.util.StatusBarUtil;
+import com.common.widget.MaterialLoadingView;
 import com.team.ijkplayer.player.DXBaseVideoPlayer;
-
-import java.io.IOException;
 
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
@@ -73,6 +72,11 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
      * 竖屏全屏按钮
      */
     private ImageView ivFullscreen;
+
+    /**
+     * LoadingView
+     */
+    private MaterialLoadingView loadingView;
 
     /**
      * 全屏容器
@@ -150,15 +154,15 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
         quitFullscreenIv.setOnClickListener(this);
     }
 
-    public void setupToolbar(Toolbar toolbar){
-        ConstraintSet constraintSet=new ConstraintSet();//新建一个ConstraintSet
+    public void setupToolbar(Toolbar toolbar) {
+        ConstraintSet constraintSet = new ConstraintSet();//新建一个ConstraintSet
         containerControl.addView(toolbar);
         constraintSet.clone(containerControl);
         constraintSet.constrainWidth(toolbar.getId(), ConstraintLayout.LayoutParams.MATCH_PARENT);
-        constraintSet.constrainHeight(toolbar.getId(),toolbar.getLayoutParams().height);
-        constraintSet.connect(toolbar.getId(),ConstraintSet.LEFT, ConstraintSet.PARENT_ID,ConstraintSet.LEFT);
-        constraintSet.connect(toolbar.getId(),ConstraintSet.RIGHT, ConstraintSet.PARENT_ID,ConstraintSet.RIGHT);
-        constraintSet.connect(toolbar.getId(),ConstraintSet.TOP, ConstraintSet.PARENT_ID,ConstraintSet.TOP);
+        constraintSet.constrainHeight(toolbar.getId(), toolbar.getLayoutParams().height);
+        constraintSet.connect(toolbar.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
+        constraintSet.connect(toolbar.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
+        constraintSet.connect(toolbar.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
         constraintSet.applyTo(containerControl);
     }
 
@@ -256,7 +260,7 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
         return false;
     }
 
-    public void initDanmakuView(final String roomId) {
+    public void initDanmakuView() {
         danmakuView.enableDanmakuDrawingCache(true);//打开绘图缓存，提升绘制效率
         danmakuView.setCallback(new DrawHandler.Callback() {
             @Override
@@ -291,13 +295,13 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
                 return new Danmakus();
             }
         }, danmakuContext);
-        connectDanmu(roomId);
+        registerDanmuCallback();
     }
 
     /**
-     * 连接弹幕
+     * 注册直播弹幕监听
      */
-    private void connectDanmu(final String roomId) {
+    private void registerDanmuCallback() {
         LiveDanMuReceiver.getInstance()
                 .setPrintDebugInfo(true)
                 .addCallback(new LiveDanMuMsgCallback() {
@@ -312,11 +316,6 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
                         });
                     }
                 });
-        try {
-            LiveDanMuReceiver.getInstance().connect("http://live.bilibili.com/" + roomId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -334,10 +333,5 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
     @Override
     public void release() {
         super.release();
-        try {
-            LiveDanMuReceiver.getInstance().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

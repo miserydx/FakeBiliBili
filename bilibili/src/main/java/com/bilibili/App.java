@@ -116,6 +116,7 @@ public class App extends Application {
 
     private ApiComponent getApiComponent() {
         return DaggerApiComponent.builder()
+                .appComponent(getAppComponent())
                 .apiModule(new ApiModule())
                 .build();
     }

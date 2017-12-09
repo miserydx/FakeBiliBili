@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 27
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -22,33 +22,34 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //ui
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
-    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:appcompat-v7:$android_support_version"
+    compile "com.android.support.constraint:constraint-layout:$constraintlayout_version"
+    compile "com.android.support:design:$android_support_version"
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    compile 'com.android.support:cardview-v7:25.3.1'
+    compile "com.android.support:cardview-v7:$android_support_version"
     //rxjava
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    //eventbus
+    compile 'org.greenrobot:eventbus:3.0.0'
     //network
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     //di
     compile "com.jakewharton:butterknife:$butterknife_version"
-    compile 'com.google.dagger:dagger:2.5'
+    compile 'com.google.dagger:dagger:2.11'
     //picture
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.facebook.fresco:fresco:1.3.0'
     //other
-    compile 'me.yokeyword:fragmentation:0.10.1'
-    compile 'me.yokeyword:fragmentation-swipeback:0.7.10'
+    compile 'me.yokeyword:fragmentation:1.1.9'
     compile 'me.drakeet.multitype:multitype:3.0.1'
 
     testCompile 'junit:junit:4.12'
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.5'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 }

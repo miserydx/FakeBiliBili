@@ -12,7 +12,7 @@
 
         <TextView
             android:id="@+id/tv_more"
-            style="@style/small_text_style"
+            style="@style/text_style_small"
             android:text="@string/live_load_more"
             android:layout_gravity="center"/>
 
@@ -27,7 +27,7 @@
         android:layout_centerVertical="true">
 
         <TextView
-            style="@style/small_text_style"
+            style="@style/text_style_small"
             android:layout_gravity="center_vertical" />
 
         <ImageView

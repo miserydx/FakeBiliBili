@@ -9,7 +9,7 @@
     android:foreground="@drawable/item_background">
 
     <TextView
-        style="@style/normal_text_style"
+        style="@style/text_style_normal"
         android:text="@string/live_more"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_small"/>

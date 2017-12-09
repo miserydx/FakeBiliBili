@@ -30,7 +30,7 @@ public class NewsFragment extends BaseFragment {
     private String[] mTitles = {"直播", "推荐", "追番", "分区", "动态", "发现"};
 
     @Override
-    protected int setContentView() {
+    protected int getLayoutId() {
         return R.layout.fragment_main;
     }
 

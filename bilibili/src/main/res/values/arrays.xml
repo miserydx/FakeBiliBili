@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="sections">
+    <string-array name="main_sections">
+        <item>@string/section_home</item>
+        <item>@string/section_region</item>
+        <item>@string/section_dynamic</item>
+        <item>@string/section_message</item>
+    </string-array>
+    <integer-array name="main_selected_sections_pic">
+        <item>@drawable/ic_home_selected</item>
+        <item>@drawable/ic_category_selected</item>
+        <item>@drawable/ic_dynamic_selected</item>
+        <item>@drawable/ic_communicate_selected</item>
+    </integer-array>
+    <integer-array name="main_unselected_sections_pic">
+        <item>@drawable/ic_home_unselected</item>
+        <item>@drawable/ic_category_unselected</item>
+        <item>@drawable/ic_dynamic_unselected</item>
+        <item>@drawable/ic_communicate_unselected</item>
+    </integer-array>
+    <string-array name="home_sections">
         <item>@string/section_live</item>
         <item>@string/section_recommend</item>
         <item>@string/section_bangumi</item>
-        <item>@string/section_more</item>
-        <item>@string/section_dynamic</item>
+        <item>@string/section_movie</item>
+        <item>@string/section_special_column</item>
     </string-array>
     <string-array name="live_play">
         <item>@string/live_interaction</item>

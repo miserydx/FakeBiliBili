@@ -1,6 +1,8 @@
 package com.bilibili.ui.main;
 
-import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,17 +12,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.bilibili.App;
 import com.bilibili.R;
-import com.bilibili.ui.bangumi.BangumiFragmentKotlin;
+import com.bilibili.model.event.SwitchMainMenuEvent;
+import com.bilibili.model.event.ToggleDrawerEvent;
+import com.bilibili.ui.bangumi.BangumiFragment;
 import com.bilibili.ui.live.LiveFragment;
 import com.bilibili.ui.recommed.RecommendFragment;
-import com.bilibili.ui.region.RegionFragment;
-import com.bilibili.ui.test.fragment.NewsPageFragment;
+import com.bilibili.ui.test.fragment.PlaceHolderFragment;
 import com.common.base.BaseFragment;
-import com.flyco.tablayout.SlidingTabLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * 首页主Fragment
@@ -40,41 +44,24 @@ public class MainFragment extends BaseFragment {
 
     @BindView(R.id.main_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.top_menu_nav_ll)
-    LinearLayout llTopMenuNavigation;
     @BindView(R.id.tab_layout)
-    SlidingTabLayout tabLayout;
+    TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
     @Inject
-    BangumiFragmentKotlin mBangumiFragment;
-    @Inject
-    RegionFragment mRegionFragment;
-    @Inject
     LiveFragment mLiveFragmet;
     @Inject
     RecommendFragment mRecommendFragment;
+    @Inject
+    BangumiFragment mBangumiFragment;
 
-    private OnInteractionListener mListener;
     private MainPagerAdapter adapter;
     private List<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
 
-    public interface OnInteractionListener {
-
-        void toggleDrawer();
-
-    }
-
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mListener = (MainActivity) activity;
-    }
-
-    @Override
-    protected int setContentView() {
+    protected int getLayoutId() {
         return R.layout.fragment_main;
     }
 
@@ -85,21 +72,20 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initViewAndEvent() {
-        setHasOptionsMenu(true);
-        ((SupportActivity) getActivity()).setSupportActionBar(mToolbar);
-        ((SupportActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mTitles = getResources().getStringArray(R.array.sections);
+        setUpToolBar(mToolbar);
+        mTitles = getResources().getStringArray(R.array.home_sections);
         initChildFragment();
         adapter = new MainPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
-        tabLayout.setViewPager(viewPager, mTitles);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
-    @OnClick({R.id.top_menu_nav_ll})
+    @OnClick({R.id.ll_top_menu_nav})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.top_menu_nav_ll:
-                mListener.toggleDrawer();
+            case R.id.ll_top_menu_nav:
+                ToggleDrawerEvent event = new ToggleDrawerEvent();
+                EventBus.getDefault().post(event);
         }
     }
 
@@ -130,8 +116,8 @@ public class MainFragment extends BaseFragment {
         mFragments.add(mLiveFragmet);
         mFragments.add(mRecommendFragment);
         mFragments.add(mBangumiFragment);
-        mFragments.add(mRegionFragment);
-        mFragments.add(new NewsPageFragment());
+        mFragments.add(new PlaceHolderFragment());
+        mFragments.add(new PlaceHolderFragment());
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter {
@@ -154,6 +140,23 @@ public class MainFragment extends BaseFragment {
         public Fragment getItem(int position) {
             return mFragments.get(position);
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(SwitchMainMenuEvent event){
+        setUpToolBar(mToolbar);
     }
 
 }

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.live.liveplay.LivePlayActivity">
 
     <com.bilibili.widget.video.LiveVideoPlayer
         android:id="@+id/live_video_player"
@@ -18,7 +20,7 @@
         android:background="@drawable/bottom_divider_hfdp_gray_bg_white">
 
         <ImageView
-            android:id="@+id/avatar_iv"
+            android:id="@+id/iv_avatar"
             android:layout_width="@dimen/width_56"
             android:layout_height="@dimen/height_56"
             android:layout_margin="@dimen/margin_medium"
@@ -37,7 +39,7 @@
             android:drawableRight="@drawable/ic_pink_arrow_right"
             android:text="吃鸡吃鸡吃鸡"
             android:textColor="@color/TextColorBlack"
-            app:layout_constraintLeft_toRightOf="@id/avatar_iv"
+            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -69,7 +71,7 @@
 
         <TextView
             android:id="@+id/tv_online"
-            style="@style/normal_text_style"
+            style="@style/text_style_normal"
             android:layout_marginTop="@dimen/margin_tiny"
             android:drawableLeft="@drawable/ic_live_count"
             android:drawablePadding="@dimen/padding_2"
@@ -89,7 +91,7 @@
 
             <TextView
                 android:id="@+id/tv_attention"
-                style="@style/normal_text_style"
+                style="@style/text_style_normal"
                 android:background="@drawable/ic_attention_arrow"
                 android:gravity="center"
                 android:text="5.9万"

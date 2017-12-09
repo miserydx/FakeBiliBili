@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/tv_play"
-                style="@style/small_text_style"
+                style="@style/text_style_small"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_info_views"
@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/tv_danmaku"
-                style="@style/small_text_style"
+                style="@style/text_style_small"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_promo_index_follow"

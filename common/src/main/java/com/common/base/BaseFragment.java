@@ -3,6 +3,8 @@ package com.common.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,6 @@ public abstract class BaseFragment extends SupportFragment {
 
     protected Context mContext;
     private Unbinder mUnbinder;
-    private View mView;
 
     @Override
     public void onAttach(Context context) {
@@ -30,11 +31,8 @@ public abstract class BaseFragment extends SupportFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(setContentView(), null);
-        return mView;
+        return inflater.inflate(getLayoutId(), null);
     }
-
-    abstract protected int setContentView();
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -44,13 +42,32 @@ public abstract class BaseFragment extends SupportFragment {
         initViewAndEvent();
     }
 
-    abstract protected void initInject();
-
-    abstract protected void initViewAndEvent();
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
     }
+
+    protected void setUpToolBar(Toolbar toolBar){
+        setHasOptionsMenu(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolBar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    /**
+     * 设置布局
+     *
+     * @return 布局Rid
+     */
+    protected abstract int getLayoutId();
+
+    /**
+     * 初始化dagger注入
+     */
+    protected abstract void initInject();
+
+    /**
+     * 初始化页面
+     */
+    protected abstract void initViewAndEvent();
 }

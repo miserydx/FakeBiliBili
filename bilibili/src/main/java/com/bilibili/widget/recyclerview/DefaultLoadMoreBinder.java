@@ -1,16 +1,14 @@
 package com.bilibili.widget.recyclerview;
 
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.widget.material.MaterialProgressDrawable;
+import com.common.widget.MaterialLoadingView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +19,6 @@ import butterknife.ButterKnife;
 
 public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, DefaultLoadMoreBinder.LoadMoreHolder> {
 
-    private static final int CIRCLE_BG_LIGHT = 0xFFFAFAFA;
     private boolean isLoading = false;
     private BiliMultiTypeAdapter.OnLoadMoreListener onLoadMoreListener;
 
@@ -43,13 +40,11 @@ public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, 
 
     @Override
     void initLoadMoreItemView(LoadMoreHolder holder, final BaseFooterItem item) {
-        holder.ivIcon.setVisibility(View.VISIBLE);
         holder.tvDesc.setText(R.string.charge_loading);
         ((BiliMultiTypeAdapter) getAdapter()).setOnFooterViewVisibleChangedListener(new BiliMultiTypeAdapter.OnFooterViewVisibleChangedListener() {
             @Override
             public void attachedToWindow(LoadMoreHolder holder) {
                 if (item.getState() == BaseFooterItem.STATE_LOAD_MORE) {
-                    ((MaterialProgressDrawable) holder.ivIcon.getDrawable()).start();
                     if (onLoadMoreListener != null && isLoading) {
                         isLoading = true;
                         onLoadMoreListener.onLoadMore();
@@ -60,14 +55,12 @@ public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, 
             @Override
             public void detachedFromWindow(LoadMoreHolder holder) {
 //                item.setState(BaseFooterItem.STATE_LOAD_MORE);
-                ((MaterialProgressDrawable) holder.ivIcon.getDrawable()).stop();
             }
         });
     }
 
     @Override
     void initNoMoreItemView(LoadMoreHolder holder, BaseFooterItem item) {
-        holder.ivIcon.setVisibility(View.GONE);
         holder.tvDesc.setText(R.string.charge_no_data_tips);
     }
 
@@ -77,14 +70,11 @@ public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, 
             @Override
             public void onClick(View v) {
                 if (onLoadMoreListener != null) {
-                    holder.ivIcon.setVisibility(View.VISIBLE);
                     holder.tvDesc.setText(R.string.charge_loading);
-                    ((MaterialProgressDrawable) holder.ivIcon.getDrawable()).start();
                     onLoadMoreListener.onLoadMore();
                 }
             }
         });
-        holder.ivIcon.setVisibility(View.GONE);
         holder.tvDesc.setText(R.string.tips_load_error);
     }
 
@@ -94,21 +84,14 @@ public class DefaultLoadMoreBinder extends BaseFooterViewBinder<BaseFooterItem, 
 
     static class LoadMoreHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.icon_iv)
-        ImageView ivIcon;
+        @BindView(R.id.loading_view)
+        MaterialLoadingView loadingView;
         @BindView(R.id.desc_tv)
         TextView tvDesc;
 
         private LoadMoreHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            MaterialProgressDrawable progress = new MaterialProgressDrawable(ivIcon.getContext(), ivIcon);
-            progress.setBackgroundColor(CIRCLE_BG_LIGHT);
-            progress.setColorSchemeColors(ContextCompat.getColor(ivIcon.getContext(), R.color._progress__pink));
-            progress.updateSizes(MaterialProgressDrawable.LARGE);
-            ivIcon.setImageDrawable(progress);
-            progress.showArrow(false);
-            progress.setAlpha(255);
         }
     }
 }

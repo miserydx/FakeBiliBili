@@ -10,17 +10,23 @@
     <string name="charge_loading">加载中...</string>
     <string name="charge_no_data_tips">╮(╯3╰)╭再怎么找也没有啦</string>
     <string name="tips_load_error">加载失败了Σ(OДO，点击重新加载</string>
+    <string name="section_region">分区</string>
 
     <!-- Main -->
+    <string name="section_home">首页</string>
+    <string name="section_dynamic">动态</string>
+    <string name="section_message">消息</string>
+
+    <!-- Home -->
     <string name="home_top_default_nickname">未登录</string>
     <string name="menu_top_download_tips">离线列表</string>
     <string name="menu_top_search_tips">搜索</string>
     <string name="nav_offline_manager">离线缓存</string>
     <string name="section_bangumi">追番</string>
     <string name="section_discover">发现</string>
-    <string name="section_dynamic">动态</string>
     <string name="section_live">直播</string>
-    <string name="section_more">分区</string>
+    <string name="section_movie">影视</string>
+    <string name="section_special_column">专栏</string>
     <string name="section_recommend">推荐</string>
     <string name="title_game">游戏中心</string>
 

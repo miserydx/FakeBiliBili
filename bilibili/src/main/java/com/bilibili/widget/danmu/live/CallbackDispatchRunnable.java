@@ -52,7 +52,7 @@ class CallbackDispatchRunnable implements Runnable {
             byteBuffer.get(jsonBytes);
             if (printDebugInfo) {
 //                log.debug(new String(jsonBytes));
-                Log.d("danmu",new String(jsonBytes));
+                Log.d("danmu", new String(jsonBytes));
             }
             String cmd = ((JSONEntity) JSON.parseObject(jsonBytes, JSONEntity.class)).cmd;
             switch (cmd) {
@@ -61,7 +61,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onLivePackage((LiveEntity)JSON.parseObject(jsonBytes, LiveEntity.class));
+                            iLiveDanMuCallback.onLivePackage((LiveEntity) JSON.parseObject(jsonBytes, LiveEntity.class));
                         }
                     };
                 }
@@ -71,7 +71,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onPreparingPackage((PreparingEntity)JSON.parseObject(jsonBytes, PreparingEntity.class));
+                            iLiveDanMuCallback.onPreparingPackage((PreparingEntity) JSON.parseObject(jsonBytes, PreparingEntity.class));
                         }
                     };
                 }
@@ -81,7 +81,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onDanMuMSGPackage((DanMuMSGEntity)JSON.parseObject(jsonBytes, DanMuMSGEntity.class));
+                            iLiveDanMuCallback.onDanMuMSGPackage((DanMuMSGEntity) JSON.parseObject(jsonBytes, DanMuMSGEntity.class));
                         }
                     };
                 }
@@ -91,7 +91,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onSysMSGPackage((SysMSGEntity)JSON.parseObject(jsonBytes, SysMSGEntity.class));
+                            iLiveDanMuCallback.onSysMSGPackage((SysMSGEntity) JSON.parseObject(jsonBytes, SysMSGEntity.class));
                         }
                     };
                 }
@@ -101,7 +101,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onSendGiftPackage((SendGiftEntity)JSON.parseObject(jsonBytes, SendGiftEntity.class));
+                            iLiveDanMuCallback.onSendGiftPackage((SendGiftEntity) JSON.parseObject(jsonBytes, SendGiftEntity.class));
                         }
                     };
                 }
@@ -111,7 +111,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onSysGiftPackage((SysGiftEntity)JSON.parseObject(jsonBytes, SysGiftEntity.class));
+                            iLiveDanMuCallback.onSysGiftPackage((SysGiftEntity) JSON.parseObject(jsonBytes, SysGiftEntity.class));
                         }
                     };
                 }
@@ -121,7 +121,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onWelcomePackage((WelcomeEntity)JSON.parseObject(jsonBytes, WelcomeEntity.class));
+                            iLiveDanMuCallback.onWelcomePackage((WelcomeEntity) JSON.parseObject(jsonBytes, WelcomeEntity.class));
                         }
                     };
                 }
@@ -131,7 +131,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onWelcomeGuardPackage((WelcomeGuardEntity)JSON.parseObject(jsonBytes, WelcomeGuardEntity.class));
+                            iLiveDanMuCallback.onWelcomeGuardPackage((WelcomeGuardEntity) JSON.parseObject(jsonBytes, WelcomeGuardEntity.class));
                         }
                     };
                 }
@@ -141,7 +141,7 @@ class CallbackDispatchRunnable implements Runnable {
                     processer = new DanMuProcess<ILiveDanMuCallback>() {
                         @Override
                         public void process(ILiveDanMuCallback iLiveDanMuCallback) {
-                            iLiveDanMuCallback.onRoomAdminsPackage((RoomAdminsEntity)JSON.parseObject(jsonBytes, RoomAdminsEntity.class));
+                            iLiveDanMuCallback.onRoomAdminsPackage((RoomAdminsEntity) JSON.parseObject(jsonBytes, RoomAdminsEntity.class));
                         }
                     };
                 }
@@ -195,6 +195,7 @@ class CallbackDispatchRunnable implements Runnable {
                 Log.e("danmu", "Wrong JSON: " + new String(jsonBytes));
                 e.printStackTrace();
             } catch (Exception e) { //其他错误时显示错误信息并继续监听下一个数据包
+                Log.e("danmu", "another wrong");
                 e.printStackTrace();
             }
         }

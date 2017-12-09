@@ -79,6 +79,7 @@
     <dimen name="padding_178">178.0dip</dimen>
 
     <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_xlarge">18sp</dimen>
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="text_size_normal">14sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
@@ -113,12 +114,14 @@
     <dimen name="avatar_small_width">20.0dip</dimen>
     <dimen name="avatar_top_margin">40dp</dimen>
     <dimen name="list_item_avatar_large_size">70dp</dimen>
+    <dimen name="bottom_bar_height">48dp</dimen>
 
     <!--live-->
     <dimen name="live_card_image_height">101dp</dimen>
     <dimen name="live_bg_control_top">65dp</dimen>
     <dimen name="live_bg_control_bottom">60dp</dimen>
     <dimen name="live_video_player_height">200dp</dimen>
+    <dimen name="live_video_loading_size">60dp</dimen>
 
     <!--bangumi-->
     <dimen name="bangumi_card_image_height">105dp</dimen>

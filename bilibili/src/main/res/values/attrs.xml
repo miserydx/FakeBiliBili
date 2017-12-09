@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SmartViewPager">
-        <attr name="need_indicator" format="boolean"/>
-        <attr name="auto_scroll" format="boolean"/>
-        <attr name="circulate" format="boolean"/>
-        <attr name="scroll_delay" format="integer"/>
+        <attr name="need_indicator" format="boolean" />
+        <attr name="auto_scroll" format="boolean" />
+        <attr name="circulate" format="boolean" />
+        <attr name="scroll_delay" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="MaterialLoadingView">
+        <attr name="ring_color" format="color" />
+        <attr name="style">
+            <enum name="Default" value="0" />
+            <enum name="Large" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

@@ -55,6 +55,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/control_container"
             app:layout_constraintRight_toRightOf="@+id/control_container" />
 
+        <com.common.widget.MaterialLoadingView
+            android:id="@+id/loading_view"
+            android:layout_width="@dimen/live_video_loading_size"
+            android:layout_height="@dimen/live_video_loading_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ring_color="@color/_progress__pink" />
+
     </android.support.constraint.ConstraintLayout>
 
 </merge>

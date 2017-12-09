@@ -10,7 +10,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/avatar_iv"
+        android:id="@+id/iv_avatar"
         android:layout_width="@dimen/list_item_avatar_large_size"
         android:layout_height="@dimen/list_item_avatar_large_size"
         android:layout_marginLeft="@dimen/margin_normal"
@@ -26,8 +26,8 @@
         android:text="@string/nav_login"
         android:textSize="@dimen/text_size_normal"
         android:textColor="@color/_text__white"
-        app:layout_constraintLeft_toLeftOf="@id/avatar_iv"
-        app:layout_constraintTop_toBottomOf="@id/avatar_iv" />
+        app:layout_constraintLeft_toLeftOf="@id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -43,6 +43,6 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:src="@drawable/ic_switch_night"
         app:layout_constraintRight_toRightOf="@id/constraintLayout"
-        app:layout_constraintTop_toTopOf="@id/avatar_iv" />
+        app:layout_constraintTop_toTopOf="@id/iv_avatar" />
 
 </android.support.constraint.ConstraintLayout>

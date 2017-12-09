@@ -49,7 +49,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
             }
         }
         layoutManager.spanSizeLookup = spanSizeLookup
-        mRecyclerView.setBackgroundColor(ContextCompat.getColor(context, R.color.bg_main))
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(context!!, R.color.bg_main))
         mRecyclerView.layoutManager = layoutManager
         mRecyclerView.addItemDecoration(RecommendIndexItemDecoration(spanSizeLookup))
         mAdapter = BiliMultiTypeAdapter()

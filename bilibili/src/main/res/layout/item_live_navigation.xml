@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tv_live_follow"
-        style="@style/navigation_text_style"
+        style="@style/text_style_navigation"
         android:drawableTop="@drawable/live_home_follow_anchor"
         android:text="@string/nav_follow"
         android:clickable="true"
@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/tv_live_center"
-        style="@style/navigation_text_style"
+        style="@style/text_style_navigation"
         android:drawableTop="@drawable/live_home_live_center"
         android:text="@string/nav_center"
         android:clickable="true"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tv_live_video"
-        style="@style/navigation_text_style"
+        style="@style/text_style_navigation"
         android:drawableTop="@drawable/live_home_clip_video"
         android:text="@string/nav_video"
         android:clickable="true"
@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/tv_live_search"
-        style="@style/navigation_text_style"
+        style="@style/text_style_navigation"
         android:drawableTop="@drawable/live_home_search_room"
         android:text="@string/nav_search"
         android:clickable="true"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/tv_live_category"
-        style="@style/navigation_text_style"
+        style="@style/text_style_navigation"
         android:drawableTop="@drawable/live_home_all_category"
         android:text="@string/nav_category"
         android:clickable="true"
