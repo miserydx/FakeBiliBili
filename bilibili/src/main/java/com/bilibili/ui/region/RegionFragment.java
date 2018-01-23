@@ -1,7 +1,5 @@
 package com.bilibili.ui.region;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +12,16 @@ import android.view.View;
 import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.region.AppRegionShow;
-import com.bilibili.model.event.SwitchRegionMenuEvent;
+import com.bilibili.model.event.TabSelectedEvent;
 import com.bilibili.model.event.ToggleDrawerEvent;
+import com.bilibili.ui.main.MainActivity;
 import com.bilibili.ui.region.viewbinder.RegionBannerItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionBodyItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionFooterItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionHeaderItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionPartitionItemViewBinder;
+import com.bilibili.widget.recyclerview.CommonAdapter;
 import com.bilibili.widget.textview.AlwaysCenterTextView;
-import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
 import com.common.base.BaseMvpFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,9 +49,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
     @BindView(R.id.rv_region)
     RecyclerView mRecyclerView;
 
-    private Items mItems;
-
-    private BiliMultiTypeAdapter mAdapter;
+    private CommonAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -71,7 +68,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                Object item = mItems.get(position);
+                Object item = mAdapter.getItems().get(position);
                 return item instanceof AppRegionShow.Body ? 1 : SPAN_COUNT;
             }
         };
@@ -79,29 +76,38 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new RegionIndexItemDecoration(spanSizeLookup));
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
-        mItems = new Items();
-        mAdapter = new BiliMultiTypeAdapter();
+        mAdapter = new CommonAdapter();
         mAdapter.register(RegionHeaderItemViewBinder.RegionHeader.class, new RegionHeaderItemViewBinder());
         mAdapter.register(AppRegionShow.Partition.class, new RegionPartitionItemViewBinder());
         mAdapter.register(AppRegionShow.Body.class, new RegionBodyItemViewBinder());
         mAdapter.register(AppRegionShow.Banner.class, new RegionBannerItemViewBinder());
         mAdapter.register(RegionFooterItemViewBinder.RegionFooter.class, new RegionFooterItemViewBinder());
         mAdapter.setScrollSaveStrategyEnabled(true);
+        mAdapter.useDefaultLoadFailed();
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
         EventBus.getDefault().register(this);
     }
 
     @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
     public void onDataUpdated(Items items) {
-        mItems.clear();
-        mItems.addAll(items);
-        mAdapter.setItems(mItems);
+        mAdapter.setItems(items);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showLoadFailed() {
+        mAdapter.showLoadFailed();
     }
 
     @OnClick({R.id.ll_top_menu_nav})
@@ -133,15 +139,11 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(SwitchRegionMenuEvent event){
-        setUpToolBar(mToolbar);
+    public void onEvent(TabSelectedEvent event){
+        if(event.getPosition() == MainActivity.SECOND){
+            setUpToolBar(mToolbar);
+        }
     }
 
 }

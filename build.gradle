@@ -2,7 +2,7 @@
 
 buildscript {
 
-    ext.kotlin_version = '1.1.51'
+    ext.dagger_version = '2.11'
     ext.butterknife_version='8.8.0'
     ext.android_support_version='27.0.2'
     ext.constraintlayout_version='1.0.2'
@@ -13,8 +13,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 

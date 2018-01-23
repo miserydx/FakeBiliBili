@@ -29,5 +29,6 @@
         <item>@string/live_interaction</item>
         <item>@string/live_ranking_list</item>
         <item>@string/live_fleet</item>
+        <item>@string/live_friendly_society</item>
     </string-array>
 </resources>

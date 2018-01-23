@@ -25,7 +25,7 @@ import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.danmu.live.entity.DanMuMSGEntity;
 import com.common.util.SizeUtil;
 import com.common.util.StatusBarUtil;
-import com.common.widget.MaterialLoadingView;
+import com.common.widget.material.MaterialLoadingView;
 import com.team.ijkplayer.player.DXBaseVideoPlayer;
 
 import master.flame.danmaku.controller.DrawHandler;

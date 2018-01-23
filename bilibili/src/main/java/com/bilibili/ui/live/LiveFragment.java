@@ -14,7 +14,7 @@ import com.bilibili.ui.live.viewbinder.FooterItemViewBinder;
 import com.bilibili.ui.live.viewbinder.LiveListItemViewBinder;
 import com.bilibili.ui.live.viewbinder.NavigatorItemViewBinder;
 import com.bilibili.ui.live.viewbinder.RecommendedLiveListItemViewBinder;
-import com.bilibili.widget.recyclerview.BiliMultiTypeAdapter;
+import com.bilibili.widget.recyclerview.CommonAdapter;
 import com.common.base.BaseMvpFragment;
 
 import butterknife.BindView;
@@ -33,9 +33,7 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
     @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private BiliMultiTypeAdapter mAdapter;
-
-    private Items mItems;
+    private CommonAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -49,8 +47,7 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
 
     @Override
     protected void initViewAndEvent() {
-        mItems = new Items();
-        mAdapter = new BiliMultiTypeAdapter();
+        mAdapter = new CommonAdapter();
         //banner
         mAdapter.register(LiveCommon.class, new BannerItemViewBinder());
         //navigator
@@ -62,6 +59,7 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
         //footer
         mAdapter.register(FooterItemViewBinder.FooterItem.class, new FooterItemViewBinder());
         mAdapter.setScrollSaveStrategyEnabled(true);
+        mAdapter.useDefaultLoadFailed();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
@@ -77,14 +75,17 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
 
     @Override
     public void onDataUpdated(Items items) {
-        mItems.clear();
-        mItems.addAll(items);
-        mAdapter.setItems(mItems);
+        mAdapter.setItems(items);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onRefreshingStateChanged(boolean isRefresh) {
         mRefreshLayout.setRefreshing(isRefresh);
+    }
+
+    @Override
+    public void showLoadFailed() {
+        mAdapter.showLoadFailed();
     }
 }

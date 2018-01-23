@@ -94,6 +94,8 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
                     public void onError(@NonNull Throwable e) {
                         Log.e(LiveFragment.TAG, "onError");
                         e.printStackTrace();
+                        mView.showLoadFailed();
+                        mView.onRefreshingStateChanged(false);
                     }
 
                     @Override

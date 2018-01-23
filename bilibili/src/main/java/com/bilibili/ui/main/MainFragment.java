@@ -1,7 +1,5 @@
 package com.bilibili.ui.main;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +13,7 @@ import android.view.View;
 
 import com.bilibili.App;
 import com.bilibili.R;
-import com.bilibili.model.event.SwitchMainMenuEvent;
+import com.bilibili.model.event.TabSelectedEvent;
 import com.bilibili.model.event.ToggleDrawerEvent;
 import com.bilibili.ui.bangumi.BangumiFragment;
 import com.bilibili.ui.live.LiveFragment;
@@ -78,6 +76,7 @@ public class MainFragment extends BaseFragment {
         adapter = new MainPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(1).select();
     }
 
     @OnClick({R.id.ll_top_menu_nav})
@@ -143,20 +142,22 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
         EventBus.getDefault().register(this);
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
         EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(SwitchMainMenuEvent event){
-        setUpToolBar(mToolbar);
+    public void onEvent(TabSelectedEvent event){
+        if(event.getPosition() == MainActivity.FIRST){
+            setUpToolBar(mToolbar);
+        }
     }
 
 }

@@ -1,37 +1,35 @@
 package com.bilibili.ui.test.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.adapter.NewsItemViewBinder;
-import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
-import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
+import com.bilibili.ui.test.mvp.contract.NewsContract;
+import com.bilibili.ui.test.mvp.presenter.NewsPresenter;
+import com.bilibili.widget.recyclerview.CommonAdapter;
 import com.common.base.BaseMvpFragment;
+import com.common.widget.recyclerview.BaseAdapterWrapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by jiayiyang on 17/4/14.
  */
 
-public class NewsPageFragment extends BaseMvpFragment<MvpStructurePresenter> implements MvpStructureContract.View {
+public class NewsPageFragment extends BaseMvpFragment<NewsPresenter> implements NewsContract.View {
 
     @BindView(R.id.rv)
     RecyclerView mRecyclerView;
     @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private MultiTypeAdapter mAdapter;
-    private List<WeiXinJingXuanBean.NewsList> mData = new ArrayList<>();
-
+    private CommonAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -39,7 +37,7 @@ public class NewsPageFragment extends BaseMvpFragment<MvpStructurePresenter> imp
     }
 
     @Override
-    protected void initInject(){
+    protected void initInject() {
         App.getInstance().getFragmentComponent().inject(this);
     }
 
@@ -51,11 +49,22 @@ public class NewsPageFragment extends BaseMvpFragment<MvpStructurePresenter> imp
                 mPresenter.loadData();
             }
         });
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new MultiTypeAdapter();
+        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(
+                2,
+                StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new CommonAdapter();
         mAdapter.register(WeiXinJingXuanBean.NewsList.class, new NewsItemViewBinder(getContext()));
+        mAdapter.useDefaultLoadMore();
+//        mAdapter.useDefaultLoadMore();
+        mAdapter.setOnLoadMoreListener(new BaseAdapterWrapper.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                mPresenter.loadMore();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -63,10 +72,15 @@ public class NewsPageFragment extends BaseMvpFragment<MvpStructurePresenter> imp
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
         }
-        mData.clear();
-        mData.addAll(list);
-        mAdapter.setItems(mData);
+        mAdapter.setItems(list);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoadMore(List<WeiXinJingXuanBean.NewsList> list) {
+//        mAdapter.addItems(list);
+//        mAdapter.setLoadMoreFinished();
+        mAdapter.showNoMore();
     }
 
     @Override

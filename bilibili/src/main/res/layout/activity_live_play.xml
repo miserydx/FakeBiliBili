@@ -110,26 +110,28 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="36dp"-->
-    <!--android:background="@color/pink">-->
+    <!--<com.flyco.tablayout.SlidingTabLayout-->
+        <!--android:id="@+id/tab_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/tab_layout_height"-->
+        <!--android:background="@drawable/bottom_divider_hfdp_gray_bg_white"-->
+        <!--app:tl_indicator_color="?attr/colorPrimary"-->
+        <!--app:tl_indicator_margin_left="@dimen/margin_medium"-->
+        <!--app:tl_indicator_margin_right="@dimen/margin_medium"-->
+        <!--app:tl_tab_space_equal="true"-->
+        <!--app:tl_textAllCaps="true"-->
+        <!--app:tl_textSelectColor="?attr/colorPrimary"-->
+        <!--app:tl_textUnselectColor="@color/black"-->
+        <!--app:tl_textsize="14sp" />-->
 
-    <!--</RelativeLayout>-->
-
-    <com.flyco.tablayout.SlidingTabLayout
+    <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_layout_height"
-        android:background="@drawable/bottom_divider_hfdp_gray_bg_white"
-        app:tl_indicator_color="?attr/colorPrimary"
-        app:tl_indicator_margin_left="@dimen/margin_medium"
-        app:tl_indicator_margin_right="@dimen/margin_medium"
-        app:tl_tab_space_equal="true"
-        app:tl_textAllCaps="true"
-        app:tl_textSelectColor="?attr/colorPrimary"
-        app:tl_textUnselectColor="@color/black"
-        app:tl_textsize="14sp" />
+        app:tabIndicatorColor="@color/theme_color_primary"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/theme_color_primary"
+        app:tabTextColor="@color/TextColorBlack" />
 
 
     <android.support.v4.view.ViewPager

@@ -16,6 +16,8 @@ public interface LiveContract {
         void onDataUpdated(Items items);
 
         void onRefreshingStateChanged(boolean isRefresh);
+
+        void showLoadFailed();
     }
 
     interface Presenter extends BasePresenter {

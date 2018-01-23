@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/padding_60"
     android:foreground="@drawable/item_background"
     android:orientation="vertical">
 
@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:orientation="horizontal">
 
-        <com.common.widget.MaterialLoadingView
+        <com.common.widget.material.MaterialLoadingView
             android:id="@+id/loading_view"
             android:layout_width="@dimen/width_16"
             android:layout_height="@dimen/width_16"
@@ -21,13 +21,13 @@
             app:style="Large" />
 
         <TextView
-            android:id="@+id/desc_tv"
+            android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/height_32"
             android:layout_marginLeft="@dimen/margin_small"
             android:gravity="center_vertical"
             android:textColor="@color/_text__white_dark"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_normal" />
 
     </LinearLayout>
 

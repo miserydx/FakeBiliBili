@@ -1,13 +1,15 @@
 package com.bilibili.ui.test.fragment;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 
 import com.bilibili.R;
 import com.common.base.BaseFragment;
-import com.flyco.tablayout.SlidingTabLayout;
+import com.common.base.BaseMvpFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,12 @@ import butterknife.BindView;
 public class NewsFragment extends BaseFragment {
 
     @BindView(R.id.tab_layout)
-    SlidingTabLayout tabLayout;
+    TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
     private NewsPagerAdapter adapter;
-    private List<NewsPageFragment> mFragments = new ArrayList<>();
+    private List<BaseMvpFragment> mFragments = new ArrayList<>();
     private String[] mTitles = {"直播", "推荐", "追番", "分区", "动态", "发现"};
 
     @Override
@@ -41,12 +43,15 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     protected void initViewAndEvent() {
-        for (String s : mTitles) {
-            mFragments.add(new NewsPageFragment());
-        }
+        mFragments.add(new NewsPageFragment2());
+        mFragments.add(new NewsPageFragment());
+        mFragments.add(new NewsPageFragment());
+        mFragments.add(new NewsPageFragment());
+        mFragments.add(new NewsPageFragment());
+        mFragments.add(new NewsPageFragment());
         adapter = new NewsPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
-        tabLayout.setViewPager(viewPager, mTitles);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private class NewsPagerAdapter extends FragmentPagerAdapter {

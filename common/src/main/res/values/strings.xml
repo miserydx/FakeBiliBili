@@ -1,0 +1,6 @@
+<resources>
+    <string name="charge_loading">加载中</string>
+    <string name="charge_no_data_tips">没有更多数据</string>
+    <string name="upper_load_failed_with_click">加载失败,请点击重新尝试</string>
+    <string name="load_failed">加载失败</string>
+</resources>

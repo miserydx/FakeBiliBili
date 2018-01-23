@@ -15,6 +15,7 @@ public interface RegionContract {
 
         void onDataUpdated(Items items);
 
+        void showLoadFailed();
     }
 
     interface Presenter extends BasePresenter {

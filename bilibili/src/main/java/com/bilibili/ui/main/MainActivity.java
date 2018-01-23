@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -13,9 +12,7 @@ import android.widget.FrameLayout;
 
 import com.bilibili.App;
 import com.bilibili.R;
-import com.bilibili.model.event.BaseSwitchToolBarMenuEvent;
-import com.bilibili.model.event.SwitchMainMenuEvent;
-import com.bilibili.model.event.SwitchRegionMenuEvent;
+import com.bilibili.model.event.TabSelectedEvent;
 import com.bilibili.model.event.ToggleDrawerEvent;
 import com.bilibili.ui.region.RegionFragment;
 import com.bilibili.widget.bottombar.TabEntity;
@@ -38,6 +35,11 @@ import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends SupportActivity implements IBaseMvpActivity<MainPresenter>, MainContract.View {
+
+    public static final int FIRST = 0;
+    public static final int SECOND = 1;
+    public static final int THIRD = 2;
+    public static final int FOURTH = 3;
 
     @Inject
     MainPresenter mPresenter;
@@ -104,16 +106,8 @@ public class MainActivity extends SupportActivity implements IBaseMvpActivity<Ma
             @Override
             public void onTabSelected(int position, int prePosition) {
                 showHideFragment(mFragments[position], mFragments[prePosition]);
-                Fragment curFragment = mFragments[position];
-                BaseSwitchToolBarMenuEvent event = null;
-                if (curFragment instanceof MainFragment) {
-                    event = new SwitchMainMenuEvent();
-                } else if (curFragment instanceof RegionFragment) {
-                    event = new SwitchRegionMenuEvent();
-                }
-                if (event != null) {
-                    EventBus.getDefault().post(event);
-                }
+                TabSelectedEvent event = new TabSelectedEvent(position);
+                EventBus.getDefault().post(event);
             }
 
             @Override
@@ -131,16 +125,27 @@ public class MainActivity extends SupportActivity implements IBaseMvpActivity<Ma
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFragments[0] = mainFragment;
-        mFragments[1] = regionFragment;
-        mFragments[2] = new PlaceHolderFragment();
-        mFragments[3] = new PlaceHolderFragment();
+        mFragments[FIRST] = mainFragment;
+        mFragments[SECOND] = regionFragment;
+        mFragments[THIRD] = new PlaceHolderFragment();
+        mFragments[FOURTH] = new PlaceHolderFragment();
         loadMultipleRootFragment(R.id.main_container, 0,
-                mFragments[0],
-                mFragments[1],
-                mFragments[2],
-                mFragments[3]);
+                mFragments[FIRST],
+                mFragments[SECOND],
+                mFragments[THIRD],
+                mFragments[FOURTH]);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Override
@@ -154,12 +159,6 @@ public class MainActivity extends SupportActivity implements IBaseMvpActivity<Ma
                 finish();
             }
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     /**

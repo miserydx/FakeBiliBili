@@ -25,6 +25,8 @@ public class MvpStructurePresenter extends AbsBasePresenter<MvpStructureContract
 
     private WeChatApis weChatApis;
 
+    private int num = 1;
+
     @Inject
     public MvpStructurePresenter(WeChatApis weChatApis) {
         this.weChatApis = weChatApis;
@@ -33,7 +35,7 @@ public class MvpStructurePresenter extends AbsBasePresenter<MvpStructureContract
 
     @Override
     public void loadData() {
-        weChatApis.getWeiXinJingXuan(WeChatApis.KEY, 25, 1)
+        weChatApis.getWeiXinJingXuan(WeChatApis.KEY, 25, num)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WeiXinJingXuanBean>() {

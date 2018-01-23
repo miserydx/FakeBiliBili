@@ -9,7 +9,8 @@
     <!-- Common -->
     <string name="charge_loading">加载中...</string>
     <string name="charge_no_data_tips">╮(╯3╰)╭再怎么找也没有啦</string>
-    <string name="tips_load_error">加载失败了Σ(OДO，点击重新加载</string>
+    <string name="upper_load_failed_with_click">加载失败,请点击重新尝试</string>
+    <string name="tips_load_error">加载失败了Σ(OДO</string>
     <string name="section_region">分区</string>
 
     <!-- Main -->
@@ -44,6 +45,7 @@
     <string name="live_interaction">互动</string>
     <string name="live_ranking_list">排行榜</string>
     <string name="live_fleet">舰队</string>
+    <string name="live_friendly_society">友爱社</string>
 
     <!-- Navigation -->
     <string name="nav_login">点击头像登录</string>

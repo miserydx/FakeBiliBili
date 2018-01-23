@@ -38,7 +38,7 @@ public class RegionBannerItemViewBinder extends ItemViewBinder<AppRegionShow.Ban
     @NonNull
     @Override
     protected RegionBannerViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_banner, null);
+        View itemView = inflater.inflate(R.layout.item_banner, parent, false);
         return new RegionBannerViewHolder(itemView);
     }
 

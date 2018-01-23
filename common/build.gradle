@@ -25,7 +25,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:$android_support_version"
     compile "com.android.support.constraint:constraint-layout:$constraintlayout_version"
     compile "com.android.support:design:$android_support_version"
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     compile "com.android.support:cardview-v7:$android_support_version"
     //rxjava
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -41,15 +40,15 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     //di
     compile "com.jakewharton:butterknife:$butterknife_version"
-    compile 'com.google.dagger:dagger:2.11'
+    compile "com.google.dagger:dagger:$dagger_version"
     //picture
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.facebook.fresco:fresco:1.3.0'
     //other
     compile 'me.yokeyword:fragmentation:1.1.9'
-    compile 'me.drakeet.multitype:multitype:3.0.1'
+    compile 'me.drakeet.multitype:multitype:3.4.2'
 
     testCompile 'junit:junit:4.12'
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 }

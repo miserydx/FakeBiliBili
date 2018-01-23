@@ -55,7 +55,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/control_container"
             app:layout_constraintRight_toRightOf="@+id/control_container" />
 
-        <com.common.widget.MaterialLoadingView
+        <com.common.widget.material.MaterialLoadingView
             android:id="@+id/loading_view"
             android:layout_width="@dimen/live_video_loading_size"
             android:layout_height="@dimen/live_video_loading_size"
