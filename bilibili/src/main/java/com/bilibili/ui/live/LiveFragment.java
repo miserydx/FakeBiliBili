@@ -14,7 +14,7 @@ import com.bilibili.ui.live.viewbinder.FooterItemViewBinder;
 import com.bilibili.ui.live.viewbinder.LiveListItemViewBinder;
 import com.bilibili.ui.live.viewbinder.NavigatorItemViewBinder;
 import com.bilibili.ui.live.viewbinder.RecommendedLiveListItemViewBinder;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 import com.common.base.BaseMvpFragment;
 
 import butterknife.BindView;

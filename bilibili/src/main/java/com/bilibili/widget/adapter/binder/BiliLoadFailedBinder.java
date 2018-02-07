@@ -1,4 +1,4 @@
-package com.bilibili.widget.recyclerview.binder;
+package com.bilibili.widget.adapter.binder;
 
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.common.widget.adapter.base.BaseLoadFailedBinder;
-import com.common.widget.adapter.base.BaseViewHolder;
+import com.common.widget.adapter.BaseLoadFailedBinder;
+import com.common.widget.adapter.BaseViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

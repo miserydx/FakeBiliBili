@@ -1,4 +1,4 @@
-package com.common.widget.adapter.base;
+package com.common.widget.adapter;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;

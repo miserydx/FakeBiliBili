@@ -13,7 +13,7 @@ import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.adapter.NewsItemViewBinder;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 import com.common.base.IBaseMvpActivity;
 import com.common.base.adapter.OnItemClickListener;
 import com.common.util.StatusBarUtil;

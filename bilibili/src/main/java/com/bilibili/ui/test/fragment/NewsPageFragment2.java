@@ -11,7 +11,6 @@ import com.bilibili.ui.test.adapter.NewsItemViewBinder;
 import com.bilibili.ui.test.mvp.contract.NewsContract;
 import com.bilibili.ui.test.mvp.presenter.NewsPresenter;
 import com.common.base.BaseMvpFragment;
-import com.common.widget.adapter.base.BaseAdapterWrapper;
 import com.common.widget.adapter.DefaultAdapterWrapper;
 
 import java.util.List;
@@ -66,7 +65,7 @@ public class NewsPageFragment2 extends BaseMvpFragment<NewsPresenter> implements
         mAdapter = new MultiTypeAdapter();
         adapterWrapper = new DefaultAdapterWrapper(mAdapter);
         mAdapter.register(WeiXinJingXuanBean.NewsList.class, new NewsItemViewBinder(getContext()));
-        adapterWrapper.setOnLoadMoreListener(new BaseAdapterWrapper.OnLoadMoreListener() {
+        adapterWrapper.setOnLoadMoreListener(new DefaultAdapterWrapper.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 mPresenter.loadMore();

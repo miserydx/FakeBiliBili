@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import com.common.R;
 import com.common.widget.material.MaterialLoadingView;
-import com.common.widget.adapter.base.BaseLoadingBinder;
-import com.common.widget.adapter.base.BaseViewHolder;
+import com.common.widget.adapter.BaseLoadingBinder;
+import com.common.widget.adapter.BaseViewHolder;
 
 /**
  * Created by miserydx on 17/12/24.

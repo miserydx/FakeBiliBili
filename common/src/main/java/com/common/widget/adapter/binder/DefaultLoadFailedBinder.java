@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.common.R;
-import com.common.widget.adapter.base.BaseLoadFailedBinder;
-import com.common.widget.adapter.base.BaseViewHolder;
+import com.common.widget.adapter.BaseLoadFailedBinder;
+import com.common.widget.adapter.BaseViewHolder;
 
 /**
  * Created by miserydx on 17/12/20.

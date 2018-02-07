@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveRecommend;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 
 import java.util.List;
 

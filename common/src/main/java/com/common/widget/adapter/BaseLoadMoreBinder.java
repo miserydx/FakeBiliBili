@@ -1,4 +1,4 @@
-package com.common.widget.adapter.base;
+package com.common.widget.adapter;
 
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.view.View;
 
 public abstract class BaseLoadMoreBinder<VH extends BaseViewHolder> extends LoadViewBinder<VH> {
 
-    private BaseAdapterWrapper.OnClickRetryListener onClickRetryListener;
+    private DefaultAdapterWrapper.OnClickRetryListener onClickRetryListener;
 
     private boolean isLoading = false;
 
@@ -17,7 +17,7 @@ public abstract class BaseLoadMoreBinder<VH extends BaseViewHolder> extends Load
         isLoading = false;
     }
 
-    public final void setOnClickRetryListener(BaseAdapterWrapper.OnClickRetryListener onClickRetryListener) {
+    public final void setOnClickRetryListener(DefaultAdapterWrapper.OnClickRetryListener onClickRetryListener) {
         this.onClickRetryListener = onClickRetryListener;
     }
 

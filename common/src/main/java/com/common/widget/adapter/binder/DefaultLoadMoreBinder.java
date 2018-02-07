@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.common.R;
 import com.common.widget.material.MaterialLoadingView;
-import com.common.widget.adapter.base.BaseLoadMoreBinder;
-import com.common.widget.adapter.base.BaseViewHolder;
+import com.common.widget.adapter.BaseLoadMoreBinder;
+import com.common.widget.adapter.BaseViewHolder;
 
 /**
  * Created by miserydx on 17/7/2.

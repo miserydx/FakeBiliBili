@@ -18,9 +18,9 @@ import com.bilibili.ui.bangumi.viewbinder.BangumiIndexFollowBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexPageFootBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiIndexRecommendBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiRecommendDetailBinder;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.widget.adapter.base.BaseAdapterWrapper;
+import com.common.widget.adapter.DefaultAdapterWrapper;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -93,7 +93,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
                 mPresenter.loadMore();
             }
         });
-        mAdapter.setOnClickRetryListener(new BaseAdapterWrapper.OnClickRetryListener() {
+        mAdapter.setOnClickRetryListener(new DefaultAdapterWrapper.OnClickRetryListener() {
             @Override
             public void onClickRetry() {
                 mPresenter.loadMore();

@@ -11,7 +11,7 @@ import com.bilibili.util.CommonConsumer;
 import com.bilibili.util.RxJavaUtil;
 import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.danmu.live.entity.DanMuMSGEntity;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 import com.common.base.BaseFragment;
 
 import butterknife.BindView;

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.bilibili.R;
 import com.bilibili.model.bean.live.LiveCommon;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 
 import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.Items;

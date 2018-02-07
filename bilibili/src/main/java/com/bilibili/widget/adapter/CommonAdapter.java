@@ -1,4 +1,4 @@
-package com.bilibili.widget.recyclerview;
+package com.bilibili.widget.adapter;
 
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -6,9 +6,9 @@ import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 
 import com.bilibili.R;
-import com.bilibili.widget.recyclerview.binder.BiliLoadFailedBinder;
-import com.bilibili.widget.recyclerview.binder.BiliLoadMoreBinder;
-import com.common.widget.adapter.base.BaseAdapterWrapper;
+import com.bilibili.widget.adapter.binder.BiliLoadFailedBinder;
+import com.bilibili.widget.adapter.binder.BiliLoadMoreBinder;
+import com.common.widget.adapter.DefaultAdapterWrapper;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.List;
@@ -25,7 +25,7 @@ import me.drakeet.multitype.TypePool;
  * Created by miserydx on 18/1/17.
  */
 
-public class CommonAdapter extends BaseAdapterWrapper<MultiTypeAdapter> {
+public class CommonAdapter extends DefaultAdapterWrapper<MultiTypeAdapter> {
 
     private boolean mSaveStrategyEnabled = false;
 

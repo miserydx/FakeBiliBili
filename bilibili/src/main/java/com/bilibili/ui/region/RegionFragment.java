@@ -20,7 +20,7 @@ import com.bilibili.ui.region.viewbinder.RegionBodyItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionFooterItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionHeaderItemViewBinder;
 import com.bilibili.ui.region.viewbinder.RegionPartitionItemViewBinder;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 import com.bilibili.widget.textview.AlwaysCenterTextView;
 import com.common.base.BaseMvpFragment;
 

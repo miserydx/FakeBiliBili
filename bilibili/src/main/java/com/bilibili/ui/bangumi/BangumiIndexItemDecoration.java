@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.bilibili.R;
 import com.bilibili.ui.bangumi.viewbinder.BangumiDividerBinder;
-import com.common.widget.adapter.base.BaseAdapterWrapper;
+import com.common.widget.adapter.DefaultAdapterWrapper;
 
 /**
  * Created by miserydx on 17/7/2.
@@ -17,7 +17,7 @@ public class BangumiIndexItemDecoration extends RecyclerView.ItemDecoration {
 
     /**
      * 注意因为Adapter的封装，外部构造的spanSizeLookup在Adapter中的
-     * {@link BaseAdapterWrapper#onAttachedToRecyclerView(RecyclerView)}中被包裹一层，所以不能直接传入
+     * {@link DefaultAdapterWrapper#onAttachedToRecyclerView(RecyclerView)}中被包裹一层，所以不能直接传入
      * 用做参数，用时应从RecyclerView对象中获取
      */
     @Override

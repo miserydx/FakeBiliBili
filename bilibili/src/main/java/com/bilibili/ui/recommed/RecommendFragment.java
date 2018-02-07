@@ -12,7 +12,7 @@ import com.bilibili.R;
 import com.bilibili.model.bean.recommend.AppIndex;
 import com.bilibili.ui.recommed.viewbinder.RecommendBannerItemViewBinder;
 import com.bilibili.ui.recommed.viewbinder.RecommendIndexItemBinder;
-import com.bilibili.widget.recyclerview.CommonAdapter;
+import com.bilibili.widget.adapter.CommonAdapter;
 import com.common.base.BaseMvpFragment;
 
 import java.util.List;
