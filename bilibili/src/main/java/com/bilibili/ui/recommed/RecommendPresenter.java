@@ -151,6 +151,7 @@ public class RecommendPresenter extends AbsBasePresenter<RecommendContract.View>
                     public void onError(Throwable e) {
                         Log.e(TAG, "onError");
                         e.printStackTrace();
+                        mView.showLoadFailed();
                     }
 
                     @Override

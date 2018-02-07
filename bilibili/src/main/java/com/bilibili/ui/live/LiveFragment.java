@@ -59,7 +59,6 @@ public class LiveFragment extends BaseMvpFragment<LivePresenter> implements Live
         //footer
         mAdapter.register(FooterItemViewBinder.FooterItem.class, new FooterItemViewBinder());
         mAdapter.setScrollSaveStrategyEnabled(true);
-        mAdapter.useDefaultLoadFailed();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));

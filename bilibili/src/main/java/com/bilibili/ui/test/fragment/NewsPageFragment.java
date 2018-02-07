@@ -12,7 +12,7 @@ import com.bilibili.ui.test.mvp.contract.NewsContract;
 import com.bilibili.ui.test.mvp.presenter.NewsPresenter;
 import com.bilibili.widget.recyclerview.CommonAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.widget.recyclerview.BaseAdapterWrapper;
+import com.common.widget.adapter.base.BaseAdapterWrapper;
 
 import java.util.List;
 
@@ -56,8 +56,6 @@ public class NewsPageFragment extends BaseMvpFragment<NewsPresenter> implements 
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new CommonAdapter();
         mAdapter.register(WeiXinJingXuanBean.NewsList.class, new NewsItemViewBinder(getContext()));
-        mAdapter.useDefaultLoadMore();
-//        mAdapter.useDefaultLoadMore();
         mAdapter.setOnLoadMoreListener(new BaseAdapterWrapper.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -79,7 +77,7 @@ public class NewsPageFragment extends BaseMvpFragment<NewsPresenter> implements 
     @Override
     public void onLoadMore(List<WeiXinJingXuanBean.NewsList> list) {
 //        mAdapter.addItems(list);
-//        mAdapter.setLoadMoreFinished();
+//        mAdapter.loadMoreComplete();
         mAdapter.showNoMore();
     }
 

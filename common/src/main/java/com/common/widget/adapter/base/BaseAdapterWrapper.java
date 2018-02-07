@@ -1,33 +1,23 @@
-package com.common.widget.recyclerview;
+package com.common.widget.adapter.base;
 
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.common.widget.recyclerview.base.BaseLoadFailedBinder;
-import com.common.widget.recyclerview.base.BaseLoadMoreBinder;
-import com.common.widget.recyclerview.base.BaseLoadingBinder;
-import com.common.widget.recyclerview.base.BaseViewHolder;
-import com.common.widget.recyclerview.binder.DefaultLoadFailedBinder;
-import com.common.widget.recyclerview.binder.DefaultLoadMoreBinder;
-import com.common.widget.recyclerview.binder.DefaultLoadingBinder;
-import com.common.widget.recyclerview.listener.CommonOnScrollListener;
-import com.common.widget.recyclerview.base.BaseLoadFailedItem;
-import com.common.widget.recyclerview.base.BaseLoadMoreItem;
-import com.common.widget.recyclerview.base.BaseLoadingItem;
-import com.common.widget.recyclerview.item.DefaultLoadFailedItem;
-import com.common.widget.recyclerview.item.DefaultLoadMoreItem;
-import com.common.widget.recyclerview.item.DefaultLoadingItem;
-
+import com.common.widget.adapter.binder.DefaultLoadFailedBinder;
+import com.common.widget.adapter.binder.DefaultLoadMoreBinder;
+import com.common.widget.adapter.binder.DefaultLoadingBinder;
 
 /**
  * 实现加载更多、加载失败、Loading功能的AdapterWrapper
  * Created by miserydx on 18/1/17.
  */
-public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = BaseAdapterWrapper.class.getSimpleName();
 
@@ -44,39 +34,24 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
     private static final int STATE_LOAD_FAILED = 0x00000002;
 
     /**
-     * 加载更多项
-     */
-    private BaseLoadMoreItem loadMoreItem;
-
-    /**
-     * 加载失败项
-     */
-    private BaseLoadFailedItem loadFailedItem;
-
-    /**
-     * Loading项
-     */
-    private BaseLoadingItem loadingItem;
-
-    /**
      * 加载更多ItemViewBinder
      */
-    private BaseLoadMoreBinder loadMoreBinder;
+    private BaseLoadMoreBinder loadMoreBinder = new DefaultLoadMoreBinder();
 
     /**
      * 加载失败ItemViewBinder
      */
-    private BaseLoadFailedBinder loadFailedBinder;
+    private BaseLoadFailedBinder loadFailedBinder = new DefaultLoadFailedBinder();
 
     /**
      * Loading ItemViewBinder
      */
-    private BaseLoadingBinder loadingBinder;
+    private BaseLoadingBinder loadingBinder = new DefaultLoadingBinder();
 
     /**
      * 是否启用加载更多
      */
-    private boolean loadMoreEnabled = true;
+    private boolean loadMoreEnabled = false;
 
     /**
      * 当前状态
@@ -84,19 +59,44 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
     private int state = STATE_DEFAULT;
 
     /**
+     * onLoadMore是否在进行中
+     */
+    private boolean isLoading = false;
+
+    /**
+     * 加载更多监听器
+     */
+    private OnLoadMoreListener onLoadMoreListener;
+
+    /**
+     * 目标Adapter
+     */
+    protected T targetAdapter;
+
+    /**
      * 滑动事件处理
      */
-    private CommonOnScrollListener commonOnScrollListener;
-
-    protected T targetAdapter;
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (!ViewCompat.canScrollVertically(recyclerView, 1)
+                    && !isLoading
+                    && loadMoreBinder.getState() == BaseLoadMoreBinder.STATE_LOAD_MORE) {
+                if (onLoadMoreListener != null) {
+                    isLoading = true;
+                    onLoadMoreListener.onLoadMore();
+                }
+            }
+        }
+    };
 
     public BaseAdapterWrapper(T adapter) {
         targetAdapter = adapter;
-        commonOnScrollListener = new CommonOnScrollListener();
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public final int getItemViewType(int position) {
         if (state == STATE_LOADING) {
             return ITEM_TYPE_LOADING;
         } else if (state == STATE_LOAD_FAILED) {
@@ -108,7 +108,13 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
     }
 
     @Override
-    public long getItemId(int position) {
+    public void setHasStableIds(boolean hasStableIds) {
+        super.setHasStableIds(hasStableIds);
+        targetAdapter.setHasStableIds(hasStableIds);
+    }
+
+    @Override
+    public final long getItemId(int position) {
         if (state == STATE_LOADING || state == STATE_LOAD_FAILED) {
             return super.getItemId(position);
         } else if (isShowLoadMore(position)) {
@@ -118,14 +124,14 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ITEM_TYPE_LOAD_MORE:
-                return loadMoreBinder.onCreateVH(parent);
+                return loadMoreBinder.onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
             case ITEM_TYPE_LOADING:
-                return loadingBinder.onCreateVH(parent);
+                return loadingBinder.onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
             case ITEM_TYPE_LOAD_FAILED:
-                return loadFailedBinder.onCreateVH(parent);
+                return loadFailedBinder.onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
             default:
                 return targetAdapter.onCreateViewHolder(parent, viewType);
         }
@@ -133,16 +139,16 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case ITEM_TYPE_LOAD_MORE:
-                loadMoreBinder.onBindVH((BaseViewHolder) holder, loadMoreItem);
+                loadMoreBinder.onBindViewHolder((BaseViewHolder) holder);
                 break;
             case ITEM_TYPE_LOADING:
-                loadingBinder.onBindVH((BaseViewHolder) holder, loadingItem);
+                loadingBinder.onBindViewHolder((BaseViewHolder) holder);
                 break;
             case ITEM_TYPE_LOAD_FAILED:
-                loadFailedBinder.onBindVH((BaseViewHolder) holder, loadFailedItem);
+                loadFailedBinder.onBindViewHolder((BaseViewHolder) holder);
                 break;
             default:
                 targetAdapter.onBindViewHolder(holder, position);
@@ -152,12 +158,12 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
     }
 
     @Override
-    public int getItemCount() {
+    public final int getItemCount() {
         if (targetAdapter.getItemCount() == 0
                 && (state == STATE_LOADING || state == STATE_LOAD_FAILED)) {
             return 1;
         } else if (state == STATE_LOADING || state == STATE_LOAD_FAILED) {
-            Log.d(TAG, "the method getItemCount() not equal to 0 so it can not showLoading or loadFailed");
+            Log.d(TAG, "You can not call method showLoading() or showLoadFailed() with a empty data list.");
         }
         state = STATE_DEFAULT;
         return targetAdapter.getItemCount() == 0 ? 0 : targetAdapter.getItemCount() + (hasLoadMore() ? 1 : 0);
@@ -180,9 +186,13 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
         return super.onFailedToRecycleView(holder);
     }
 
+    /**
+     * 如果需要把{@link GridLayoutManager.SpanSizeLookup}传入自定义的{@link RecyclerView.ItemDecoration}
+     * 中，因为这里包裹了一层，所以不能直接传入用做参数，用时应从RecyclerView对象中获取
+     */
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        recyclerView.addOnScrollListener(commonOnScrollListener);
+        recyclerView.addOnScrollListener(mOnScrollListener);
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
             final GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
             final GridLayoutManager.SpanSizeLookup oldSpanSizeLookup = layoutManager.getSpanSizeLookup();
@@ -204,7 +214,7 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        recyclerView.removeOnScrollListener(commonOnScrollListener);
+        recyclerView.removeOnScrollListener(mOnScrollListener);
         targetAdapter.onDetachedFromRecyclerView(recyclerView);
     }
 
@@ -230,6 +240,18 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
         }
     }
 
+    @Override
+    public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+        targetAdapter.registerAdapterDataObserver(observer);
+    }
+
+    @Override
+    public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.unregisterAdapterDataObserver(observer);
+        targetAdapter.unregisterAdapterDataObserver(observer);
+    }
+
     public void setTargetAdapter(T targetAdapter) {
         this.targetAdapter = targetAdapter;
     }
@@ -238,26 +260,32 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
         return targetAdapter;
     }
 
-    public void setOnLoadMoreListener(BaseAdapterWrapper.OnLoadMoreListener listener) {
-        if (listener != null) {
-            loadMoreBinder.setOnLoadMoreListener(listener);
+    public void setOnLoadMoreListener(@NonNull BaseAdapterWrapper.OnLoadMoreListener listener) {
+        loadMoreEnabled = true;
+        onLoadMoreListener = listener;
+    }
+
+    public void setOnClickRetryListener(@NonNull BaseAdapterWrapper.OnClickRetryListener listener) {
+        if (loadMoreBinder != null) {
+            loadMoreBinder.setOnClickRetryListener(listener);
         }
     }
 
     /**
      * 通知加载更多状态完成
      */
-    public void setLoadMoreFinished() {
-        if (loadMoreBinder != null) {
-            loadMoreBinder.setLoadMoreFinished();
-            notifyDataSetChanged();
+    public final void loadMoreComplete() {
+        if (hasLoadMore()) {
+            isLoading = false;
+            loadMoreBinder.loadMoreComplete();
+            notifyItemInserted(getItemCount());
         }
     }
 
     /**
      * 设置是否启用加载更多
      */
-    public void setLoadMoreEnabled(boolean flag) {
+    public final void setLoadMoreEnabled(boolean flag) {
         loadMoreEnabled = flag;
         if (loadMoreEnabled) {
             notifyItemInserted(getItemCount());
@@ -271,8 +299,7 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
      * 设置LoadMoreItem，默认不显示
      */
     @SuppressWarnings("unchecked")
-    public void setLoadMoreItem(@NonNull BaseLoadMoreItem item, @NonNull BaseLoadMoreBinder binder) {
-        loadMoreItem = item;
+    public final void setLoadMoreBinder(@NonNull BaseLoadMoreBinder binder) {
         loadMoreBinder = binder;
     }
 
@@ -280,8 +307,7 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
      * 设置LoadFailedItem，默认不显示
      */
     @SuppressWarnings("unchecked")
-    public void setLoadFailedItem(@NonNull BaseLoadFailedItem item, @NonNull BaseLoadFailedBinder binder) {
-        loadFailedItem = item;
+    public final void setLoadFailedBinder(@NonNull BaseLoadFailedBinder binder) {
         loadFailedBinder = binder;
     }
 
@@ -289,30 +315,8 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
      * 设置LoadingItem，默认不显示
      */
     @SuppressWarnings("unchecked")
-    public void setLoadingItem(@NonNull BaseLoadingItem item, @NonNull BaseLoadingBinder binder) {
-        loadingItem = item;
+    public final void setLoadingBinder(@NonNull BaseLoadingBinder binder) {
         loadingBinder = binder;
-    }
-
-    /**
-     * 设置默认Loading
-     */
-    public void useDefaultLoading() {
-        setLoadingItem(new DefaultLoadingItem(), new DefaultLoadingBinder());
-    }
-
-    /**
-     * 设置默认加载更多
-     */
-    public void useDefaultLoadMore() {
-        setLoadMoreItem(new DefaultLoadMoreItem(), new DefaultLoadMoreBinder());
-    }
-
-    /**
-     * 设置默认加载失败
-     */
-    public void useDefaultLoadFailed() {
-        setLoadFailedItem(new DefaultLoadFailedItem(), new DefaultLoadFailedBinder());
     }
 
     /**
@@ -320,12 +324,10 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
      * 当目标Adapter的getItemCount返回0时此方法才会有效
      */
     @SuppressWarnings("unchecked")
-    public void showLoadFailed() {
-        if (loadFailedBinder != null && loadFailedItem != null) {
+    public final void showLoadFailed() {
+        if (loadFailedBinder != null) {
             state = STATE_LOAD_FAILED;
             notifyDataSetChanged();
-        } else {
-            Log.d(TAG, "loadFailedItem has not been initialized");
         }
     }
 
@@ -334,48 +336,44 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
      * 当目标Adapter的getItemCount返回0时此方法才会有效
      */
     @SuppressWarnings("unchecked")
-    public void showLoading() {
-        if (loadingBinder != null && loadingItem != null) {
+    public final void showLoading() {
+        if (loadingBinder != null) {
             state = STATE_LOADING;
             notifyDataSetChanged();
-        } else {
-            Log.d(TAG, "loadingItem has not been initialized");
         }
     }
 
-    public boolean isLoading() {
+    public final boolean isLoading() {
         return state == STATE_LOADING;
     }
 
-    public boolean isLoadFailed() {
+    public final boolean isLoadFailed() {
         return state == STATE_LOAD_FAILED;
     }
 
     /**
      * 设置默认footer显示没有更多
      */
-    public void showNoMore() {
-        changeLoadMoreState(BaseLoadMoreItem.STATE_NO_MORE);
+    public final void showNoMore() {
+        changeLoadMoreState(BaseLoadMoreBinder.STATE_NO_MORE);
     }
 
     /**
      * 设置默认footer显示加载失败
      */
-    public void showFailToLoadMore() {
-        changeLoadMoreState(BaseLoadMoreItem.STATE_LOAD_FAIL);
+    public final void showFailToLoadMore() {
+        changeLoadMoreState(BaseLoadMoreBinder.STATE_LOAD_FAIL);
     }
 
     private void changeLoadMoreState(int state) {
         if (hasLoadMore()) {
-            loadMoreItem.setState(state);
+            loadMoreBinder.setState(state);
             notifyItemChanged(getItemCount() - 1);
-        } else {
-            Log.d(TAG, "loadMoreItem has not been initialized");
         }
     }
 
     private boolean hasLoadMore() {
-        return loadMoreEnabled && (loadMoreItem != null || loadMoreBinder != null);
+        return loadMoreEnabled && loadMoreBinder != null && onLoadMoreListener != null;
     }
 
     private boolean isShowLoadMore(int position) {
@@ -387,10 +385,17 @@ public class BaseAdapterWrapper<T extends RecyclerView.Adapter> extends Recycler
     }
 
     /**
-     * 定义加载更多的回调接口
+     * 加载更多的回调接口
      */
     public interface OnLoadMoreListener {
         void onLoadMore();
+    }
+
+    /**
+     * 加载更多失败，点击重试的回调接口
+     */
+    public interface OnClickRetryListener {
+        void onClickRetry();
     }
 
 }

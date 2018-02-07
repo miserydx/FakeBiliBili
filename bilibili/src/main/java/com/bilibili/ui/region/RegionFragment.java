@@ -74,7 +74,7 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new RegionIndexItemDecoration(spanSizeLookup));
+        mRecyclerView.addItemDecoration(new RegionIndexItemDecoration());
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
         mAdapter = new CommonAdapter();
         mAdapter.register(RegionHeaderItemViewBinder.RegionHeader.class, new RegionHeaderItemViewBinder());
@@ -83,7 +83,6 @@ public class RegionFragment extends BaseMvpFragment<RegionPresenter> implements 
         mAdapter.register(AppRegionShow.Banner.class, new RegionBannerItemViewBinder());
         mAdapter.register(RegionFooterItemViewBinder.RegionFooter.class, new RegionFooterItemViewBinder());
         mAdapter.setScrollSaveStrategyEnabled(true);
-        mAdapter.useDefaultLoadFailed();
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.bilibili.R;
+import com.common.widget.adapter.base.BaseAdapterWrapper;
 
 /**
  * Created by Android_ZzT on 17/7/9.
@@ -13,15 +14,15 @@ import com.bilibili.R;
 
 public class RegionIndexItemDecoration extends RecyclerView.ItemDecoration {
 
-    private GridLayoutManager.SpanSizeLookup spanSizeLookup;
-
-    public RegionIndexItemDecoration(GridLayoutManager.SpanSizeLookup spanSizeLookup) {
-        this.spanSizeLookup = spanSizeLookup;
-    }
-
+    /**
+     * 注意因为Adapter的封装，外部构造的spanSizeLookup在Adapter中的
+     * {@link BaseAdapterWrapper#onAttachedToRecyclerView(RecyclerView)}中被包裹一层，所以不能直接传入
+     * 用做参数，用时应从RecyclerView对象中获取
+     */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = parent.getChildLayoutPosition(view);
+        GridLayoutManager.SpanSizeLookup spanSizeLookup = ((GridLayoutManager) parent.getLayoutManager()).getSpanSizeLookup();
         int spanSize = spanSizeLookup.getSpanSize(position);
         int margin_normal = view.getContext().getResources().getDimensionPixelOffset(R.dimen.margin_normal);
         int margin_small = view.getContext().getResources().getDimensionPixelOffset(R.dimen.margin_small);

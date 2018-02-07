@@ -20,6 +20,7 @@ import com.bilibili.ui.bangumi.viewbinder.BangumiIndexRecommendBinder;
 import com.bilibili.ui.bangumi.viewbinder.BangumiRecommendDetailBinder;
 import com.bilibili.widget.recyclerview.CommonAdapter;
 import com.common.base.BaseMvpFragment;
+import com.common.widget.adapter.base.BaseAdapterWrapper;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
@@ -86,12 +87,15 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
         mAdapter.register(BangumiIndexFall.class, new BangumiIndexFallBinder());
         mAdapter.register(BangumiDividerBinder.BangumiDivider.class, new BangumiDividerBinder());
         //other settings
-        mAdapter.setLoadMoreEnabled(true);
-        mAdapter.useDefaultLoadMore();
-        mAdapter.useDefaultLoadFailed();
         mAdapter.setOnLoadMoreListener(new CommonAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
+                mPresenter.loadMore();
+            }
+        });
+        mAdapter.setOnClickRetryListener(new BaseAdapterWrapper.OnClickRetryListener() {
+            @Override
+            public void onClickRetry() {
                 mPresenter.loadMore();
             }
         });
@@ -120,7 +124,7 @@ public class BangumiFragment extends BaseMvpFragment<BangumiPresenter> implement
                 }
                 mAdapter.addItems(items);
                 mRecyclerView.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0f, 0f, 0));//停止recyclerView滑动
-                mAdapter.setLoadMoreFinished();
+                mAdapter.loadMoreComplete();
                 break;
         }
     }

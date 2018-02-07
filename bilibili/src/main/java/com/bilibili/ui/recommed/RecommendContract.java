@@ -17,6 +17,8 @@ public interface RecommendContract {
 
         void onRefreshingStateChanged(boolean isRefresh);
 
+        void showLoadFailed();
+
     }
 
     interface Presenter extends BasePresenter {

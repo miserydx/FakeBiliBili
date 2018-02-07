@@ -11,7 +11,8 @@ import com.bilibili.ui.test.adapter.NewsItemViewBinder;
 import com.bilibili.ui.test.mvp.contract.NewsContract;
 import com.bilibili.ui.test.mvp.presenter.NewsPresenter;
 import com.common.base.BaseMvpFragment;
-import com.common.widget.recyclerview.BaseAdapterWrapper;
+import com.common.widget.adapter.base.BaseAdapterWrapper;
+import com.common.widget.adapter.DefaultAdapterWrapper;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class NewsPageFragment2 extends BaseMvpFragment<NewsPresenter> implements
     @BindView(R.id.layout_refresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private BaseAdapterWrapper adapterWrapper;
+    private DefaultAdapterWrapper adapterWrapper;
 
     private MultiTypeAdapter mAdapter;
 
@@ -63,11 +64,8 @@ public class NewsPageFragment2 extends BaseMvpFragment<NewsPresenter> implements
         mRecyclerView.setLayoutManager(mLayoutManager);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new MultiTypeAdapter();
-        adapterWrapper = new BaseAdapterWrapper(mAdapter);
+        adapterWrapper = new DefaultAdapterWrapper(mAdapter);
         mAdapter.register(WeiXinJingXuanBean.NewsList.class, new NewsItemViewBinder(getContext()));
-        adapterWrapper.useDefaultLoadMore();
-        adapterWrapper.useDefaultLoading();
-        adapterWrapper.useDefaultLoadFailed();
         adapterWrapper.setOnLoadMoreListener(new BaseAdapterWrapper.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -98,7 +96,7 @@ public class NewsPageFragment2 extends BaseMvpFragment<NewsPresenter> implements
     @Override
     public void onLoadMore(List<WeiXinJingXuanBean.NewsList> list) {
         items.addAll(list);
-        adapterWrapper.setLoadMoreFinished();
+        adapterWrapper.loadMoreComplete();
 //        adapterWrapper.showNoMore();
     }
 

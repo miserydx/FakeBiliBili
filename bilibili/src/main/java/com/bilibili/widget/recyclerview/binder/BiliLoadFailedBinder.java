@@ -3,7 +3,6 @@ package com.bilibili.widget.recyclerview.binder;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.widget.recyclerview.item.LoadFailedItem;
-import com.common.widget.recyclerview.base.BaseLoadFailedBinder;
-import com.common.widget.recyclerview.base.BaseViewHolder;
+import com.common.widget.adapter.base.BaseLoadFailedBinder;
+import com.common.widget.adapter.base.BaseViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by miserydx on 17/12/20.
  */
 
-public class BiliLoadFailedBinder extends BaseLoadFailedBinder<LoadFailedItem, BiliLoadFailedBinder.LoadFailedHolder> {
+public class BiliLoadFailedBinder extends BaseLoadFailedBinder<BiliLoadFailedBinder.LoadFailedHolder> {
 
     private static final int NO_ID = -1;
 
@@ -46,7 +44,7 @@ public class BiliLoadFailedBinder extends BaseLoadFailedBinder<LoadFailedItem, B
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull LoadFailedHolder holder, @NonNull LoadFailedItem item) {
+    protected void onBindViewHolder(@NonNull LoadFailedHolder holder) {
         if (resId != NO_ID) {
             holder.ivLoadFailed.setImageResource(resId);
         }

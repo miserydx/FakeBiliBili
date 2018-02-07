@@ -1,22 +1,20 @@
-package com.common.widget.recyclerview.binder;
+package com.common.widget.adapter.binder;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.common.R;
 import com.common.widget.material.MaterialLoadingView;
-import com.common.widget.recyclerview.base.BaseLoadingBinder;
-import com.common.widget.recyclerview.base.BaseViewHolder;
-import com.common.widget.recyclerview.item.DefaultLoadingItem;
+import com.common.widget.adapter.base.BaseLoadingBinder;
+import com.common.widget.adapter.base.BaseViewHolder;
 
 /**
  * Created by miserydx on 17/12/24.
  */
 
-public class DefaultLoadingBinder extends BaseLoadingBinder<DefaultLoadingItem, DefaultLoadingBinder.DefaultLoadingHolder> {
+public class DefaultLoadingBinder extends BaseLoadingBinder<DefaultLoadingBinder.DefaultLoadingHolder> {
 
     @NonNull
     @Override
@@ -26,7 +24,7 @@ public class DefaultLoadingBinder extends BaseLoadingBinder<DefaultLoadingItem, 
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull DefaultLoadingHolder holder, @NonNull DefaultLoadingItem item) {
+    protected void onBindViewHolder(@NonNull DefaultLoadingHolder holder) {
 
     }
 

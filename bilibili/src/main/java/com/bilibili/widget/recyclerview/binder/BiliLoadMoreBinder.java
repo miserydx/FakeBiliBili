@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.widget.recyclerview.item.LoadMoreItem;
 import com.common.widget.material.MaterialLoadingView;
-import com.common.widget.recyclerview.base.BaseLoadMoreBinder;
-import com.common.widget.recyclerview.base.BaseViewHolder;
+import com.common.widget.adapter.base.BaseLoadMoreBinder;
+import com.common.widget.adapter.base.BaseViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +18,7 @@ import butterknife.ButterKnife;
  * Created by miserydx on 17/7/2.
  */
 
-public class BiliLoadMoreBinder extends BaseLoadMoreBinder<LoadMoreItem, BiliLoadMoreBinder.LoadMoreHolder> {
+public class BiliLoadMoreBinder extends BaseLoadMoreBinder<BiliLoadMoreBinder.LoadMoreHolder> {
 
     @NonNull
     @Override
@@ -29,19 +28,19 @@ public class BiliLoadMoreBinder extends BaseLoadMoreBinder<LoadMoreItem, BiliLoa
     }
 
     @Override
-    protected void initLoadMoreItemView(LoadMoreHolder holder, final LoadMoreItem item) {
+    protected void onLoadMore(LoadMoreHolder holder) {
         holder.tvDesc.setText(R.string.charge_loading);
         holder.loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    protected void initNoMoreItemView(LoadMoreHolder holder, LoadMoreItem item) {
+    protected void onNoMore(LoadMoreHolder holder) {
         holder.tvDesc.setText(R.string.charge_no_data_tips);
         holder.loadingView.setVisibility(View.GONE);
     }
 
     @Override
-    protected void initLoadFailItemView(final LoadMoreHolder holder, final LoadMoreItem item) {
+    protected void onLoadFailed(final LoadMoreHolder holder) {
         holder.tvDesc.setText(R.string.upper_load_failed_with_click);
         holder.loadingView.setVisibility(View.GONE);
     }

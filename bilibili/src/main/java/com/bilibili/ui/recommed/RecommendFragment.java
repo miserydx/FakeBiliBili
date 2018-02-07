@@ -68,7 +68,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new RecommendIndexItemDecoration(spanSizeLookup));
+        mRecyclerView.addItemDecoration(new RecommendIndexItemDecoration());
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -123,6 +123,11 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     @Override
     public void onRefreshingStateChanged(boolean isRefresh) {
         mRefreshLayout.setRefreshing(isRefresh);
+    }
+
+    @Override
+    public void showLoadFailed() {
+        mAdapter.showLoadFailed();
     }
 
     @OnClick(R.id.load_more_tv)

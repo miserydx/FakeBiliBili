@@ -8,10 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import com.bilibili.R;
 import com.bilibili.widget.recyclerview.binder.BiliLoadFailedBinder;
 import com.bilibili.widget.recyclerview.binder.BiliLoadMoreBinder;
-import com.bilibili.widget.recyclerview.item.LoadFailedItem;
-import com.bilibili.widget.recyclerview.item.LoadMoreItem;
-import com.bilibili.widget.recyclerview.listener.BiliOnScrollListener;
-import com.common.widget.recyclerview.BaseAdapterWrapper;
+import com.common.widget.adapter.base.BaseAdapterWrapper;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.List;
 
@@ -29,30 +27,47 @@ import me.drakeet.multitype.TypePool;
 
 public class CommonAdapter extends BaseAdapterWrapper<MultiTypeAdapter> {
 
-    private BiliOnScrollListener biliOnScrollListener;
+    private boolean mSaveStrategyEnabled = false;
+
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (mSaveStrategyEnabled) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    Fresco.getImagePipeline().pause();
+                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Fresco.getImagePipeline().resume();
+                }
+            }
+        }
+    };
 
     public CommonAdapter() {
         super(new MultiTypeAdapter(new Items()));
-        biliOnScrollListener = new BiliOnScrollListener();
+        useDefaultLoadMore();
+        useDefaultLoadFailed();
     }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        recyclerView.addOnScrollListener(biliOnScrollListener);
+        recyclerView.addOnScrollListener(mOnScrollListener);
     }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        recyclerView.removeOnScrollListener(biliOnScrollListener);
+        recyclerView.removeOnScrollListener(mOnScrollListener);
     }
 
     public <T> void register(@NonNull Class<? extends T> clazz, @NonNull ItemViewBinder<T, ?> binder) {
-        targetAdapter.register(clazz,binder);
+        targetAdapter.register(clazz, binder);
     }
 
-    public @NonNull <T> OneToManyFlow<T> register(@NonNull Class<? extends T> clazz) {
+    public @NonNull
+    <T> OneToManyFlow<T> register(@NonNull Class<? extends T> clazz) {
         return targetAdapter.register(clazz);
     }
 
@@ -64,7 +79,8 @@ public class CommonAdapter extends BaseAdapterWrapper<MultiTypeAdapter> {
         targetAdapter.setItems(items);
     }
 
-    public @NonNull List<?> getItems() {
+    public @NonNull
+    List<?> getItems() {
         return targetAdapter.getItems();
     }
 
@@ -72,7 +88,8 @@ public class CommonAdapter extends BaseAdapterWrapper<MultiTypeAdapter> {
         targetAdapter.setTypePool(typePool);
     }
 
-    public @NonNull TypePool getTypePool() {
+    public @NonNull
+    TypePool getTypePool() {
         return targetAdapter.getTypePool();
     }
 
@@ -122,24 +139,22 @@ public class CommonAdapter extends BaseAdapterWrapper<MultiTypeAdapter> {
         notifyItemInserted(position);
     }
 
-    @Override
     public void useDefaultLoadMore() {
-        setLoadMoreItem(new LoadMoreItem(), new BiliLoadMoreBinder());
+        setLoadMoreBinder(new BiliLoadMoreBinder());
     }
 
-    @Override
     public void useDefaultLoadFailed() {
         BiliLoadFailedBinder binder = new BiliLoadFailedBinder();
         binder.setResId(R.drawable.img_tips_error_load_error);
         binder.setStringId(R.string.tips_load_error);
-        setLoadFailedItem(new LoadFailedItem(), binder);
+        setLoadFailedBinder(binder);
     }
 
-    public void setLoadFailedItem(@DrawableRes int resId, @StringRes int stringId) {
+    public void useDefaultLoadFailed(@DrawableRes int resId, @StringRes int stringId) {
         BiliLoadFailedBinder binder = new BiliLoadFailedBinder();
         binder.setResId(resId);
         binder.setStringId(stringId);
-        setLoadFailedItem(new LoadFailedItem(), binder);
+        setLoadFailedBinder(binder);
     }
 
     /**
@@ -148,6 +163,6 @@ public class CommonAdapter extends BaseAdapterWrapper<MultiTypeAdapter> {
      * @param flag 是否滑动中加载图片
      */
     public void setScrollSaveStrategyEnabled(boolean flag) {
-        biliOnScrollListener.setScrollSaveStrategyEnabled(flag);
+        mSaveStrategyEnabled = flag;
     }
 }

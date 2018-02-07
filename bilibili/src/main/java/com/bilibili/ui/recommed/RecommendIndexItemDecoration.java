@@ -13,15 +13,10 @@ import com.bilibili.R;
 
 public class RecommendIndexItemDecoration extends RecyclerView.ItemDecoration {
 
-    private GridLayoutManager.SpanSizeLookup spanSizeLookup;
-
-    public RecommendIndexItemDecoration(GridLayoutManager.SpanSizeLookup spanSizeLookup) {
-        this.spanSizeLookup = spanSizeLookup;
-    }
-
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = parent.getChildLayoutPosition(view);
+        GridLayoutManager.SpanSizeLookup spanSizeLookup = ((GridLayoutManager) parent.getLayoutManager()).getSpanSizeLookup();
         if (spanSizeLookup.getSpanSize(position) == 3) {
             outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
             outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);

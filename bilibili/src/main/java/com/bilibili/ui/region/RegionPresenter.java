@@ -31,6 +31,8 @@ import me.drakeet.multitype.Items;
 
 public class RegionPresenter extends AbsBasePresenter<RegionContract.View> {
 
+    private static final String TAG = RegionPresenter.class.getSimpleName();
+
     private RegionApis mRegionApis;
 
     @Inject
@@ -67,14 +69,14 @@ public class RegionPresenter extends AbsBasePresenter<RegionContract.View> {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(RegionFragment.TAG, "onError");
+                        Log.e(TAG, "onError");
                         e.printStackTrace();
                         mView.showLoadFailed();
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d(RegionFragment.TAG, "onComplete");
+                        Log.d(TAG, "onComplete");
 
                     }
                 });
