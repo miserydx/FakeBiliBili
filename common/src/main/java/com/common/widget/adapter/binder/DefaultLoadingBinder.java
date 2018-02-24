@@ -19,7 +19,7 @@ public class DefaultLoadingBinder extends BaseLoadingBinder<DefaultLoadingBinder
     @NonNull
     @Override
     protected DefaultLoadingHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_loading, parent, false);
+        View itemView = inflater.inflate(R.layout.common_item_loading, parent, false);
         return new DefaultLoadingHolder(itemView);
     }
 

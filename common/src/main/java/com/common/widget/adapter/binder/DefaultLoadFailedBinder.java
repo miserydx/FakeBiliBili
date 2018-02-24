@@ -19,7 +19,7 @@ public class DefaultLoadFailedBinder extends BaseLoadFailedBinder<DefaultLoadFai
     @NonNull
     @Override
     protected LoadFailedHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_load_failed, parent, false);
+        View itemView = inflater.inflate(R.layout.common_item_load_failed, parent, false);
         return new LoadFailedHolder(itemView);
     }
 

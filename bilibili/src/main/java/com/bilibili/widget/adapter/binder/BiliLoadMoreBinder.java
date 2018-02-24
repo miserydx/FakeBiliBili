@@ -23,7 +23,7 @@ public class BiliLoadMoreBinder extends BaseLoadMoreBinder<BiliLoadMoreBinder.Lo
     @NonNull
     @Override
     protected LoadMoreHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_load_more, parent, false);
+        View itemView = inflater.inflate(R.layout.common_item_load_more, parent, false);
         return new LoadMoreHolder(itemView);
     }
 

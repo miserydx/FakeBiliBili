@@ -74,7 +74,9 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
                 //列表中LastVisibleItem为倒数第二行时，加载更多
-                if (manager.findLastVisibleItemPosition() + SPAN_COUNT >= manager.getItemCount()) {
+                if (manager.findLastVisibleItemPosition() + SPAN_COUNT >= manager.getItemCount()
+                        && !mAdapter.isLoading()
+                        && !mAdapter.isLoadFailed()) {
                     mPresenter.loadMore(((AppIndex) mAdapter.getItems().get(mAdapter.getItems().size() - 1)).getIdx() - 1);
                 }
                 super.onScrolled(recyclerView, dx, dy);

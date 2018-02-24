@@ -71,7 +71,7 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
     /**
      * 目标Adapter
      */
-    protected T targetAdapter;
+    protected T innerAdapter;
 
     /**
      * 滑动事件处理
@@ -92,7 +92,7 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
     };
 
     public DefaultAdapterWrapper(T adapter) {
-        targetAdapter = adapter;
+        innerAdapter = adapter;
     }
 
     @Override
@@ -104,13 +104,13 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
         } else if (isShowLoadMore(position)) {
             return ITEM_TYPE_LOAD_MORE;
         }
-        return targetAdapter.getItemViewType(position);
+        return innerAdapter.getItemViewType(position);
     }
 
     @Override
     public void setHasStableIds(boolean hasStableIds) {
         super.setHasStableIds(hasStableIds);
-        targetAdapter.setHasStableIds(hasStableIds);
+        innerAdapter.setHasStableIds(hasStableIds);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
         } else if (isShowLoadMore(position)) {
             return ITEM_TYPE_LOAD_MORE;
         }
-        return targetAdapter.getItemId(position);
+        return innerAdapter.getItemId(position);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
             case ITEM_TYPE_LOAD_FAILED:
                 return loadFailedBinder.onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
             default:
-                return targetAdapter.onCreateViewHolder(parent, viewType);
+                return innerAdapter.onCreateViewHolder(parent, viewType);
         }
     }
 
@@ -151,7 +151,7 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
                 loadFailedBinder.onBindViewHolder((BaseViewHolder) holder);
                 break;
             default:
-                targetAdapter.onBindViewHolder(holder, position);
+                innerAdapter.onBindViewHolder(holder, position);
                 break;
         }
 
@@ -159,29 +159,29 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
 
     @Override
     public final int getItemCount() {
-        if (targetAdapter.getItemCount() == 0
+        if (innerAdapter.getItemCount() == 0
                 && (state == STATE_LOADING || state == STATE_LOAD_FAILED)) {
             return 1;
         } else if (state == STATE_LOADING || state == STATE_LOAD_FAILED) {
             Log.d(TAG, "You can not call method showLoading() or showLoadFailed() with a empty data list.");
         }
         state = STATE_DEFAULT;
-        return targetAdapter.getItemCount() == 0 ? 0 : targetAdapter.getItemCount() + (hasLoadMore() ? 1 : 0);
+        return innerAdapter.getItemCount() == 0 ? 0 : innerAdapter.getItemCount() + (hasLoadMore() ? 1 : 0);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
-        if (isTargetHolder(holder)) {
-            targetAdapter.onViewRecycled(holder);
+        if (!isBaseViewHolder(holder)) {
+            innerAdapter.onViewRecycled(holder);
         }
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
-        if (isTargetHolder(holder)) {
-            return targetAdapter.onFailedToRecycleView(holder);
+        if (!isBaseViewHolder(holder)) {
+            return innerAdapter.onFailedToRecycleView(holder);
         }
         return super.onFailedToRecycleView(holder);
     }
@@ -209,20 +209,20 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
                 }
             });
         }
-        targetAdapter.onAttachedToRecyclerView(recyclerView);
+        innerAdapter.onAttachedToRecyclerView(recyclerView);
     }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         recyclerView.removeOnScrollListener(mOnScrollListener);
-        targetAdapter.onDetachedFromRecyclerView(recyclerView);
+        innerAdapter.onDetachedFromRecyclerView(recyclerView);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-        if (isTargetHolder(holder)) {
-            targetAdapter.onViewAttachedToWindow(holder);
+        if (!isBaseViewHolder(holder)) {
+            innerAdapter.onViewAttachedToWindow(holder);
         } else {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
             if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
@@ -235,29 +235,29 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
     @SuppressWarnings("unchecked")
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
-        if (isTargetHolder(holder)) {
-            targetAdapter.onViewDetachedFromWindow(holder);
+        if (!isBaseViewHolder(holder)) {
+            innerAdapter.onViewDetachedFromWindow(holder);
         }
     }
 
     @Override
     public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
         super.registerAdapterDataObserver(observer);
-        targetAdapter.registerAdapterDataObserver(observer);
+        innerAdapter.registerAdapterDataObserver(observer);
     }
 
     @Override
     public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
         super.unregisterAdapterDataObserver(observer);
-        targetAdapter.unregisterAdapterDataObserver(observer);
+        innerAdapter.unregisterAdapterDataObserver(observer);
     }
 
-    public void setTargetAdapter(T targetAdapter) {
-        this.targetAdapter = targetAdapter;
+    public void setInnerAdapter(T innerAdapter) {
+        this.innerAdapter = innerAdapter;
     }
 
-    public T getTargetAdapter() {
-        return targetAdapter;
+    public T getInnerAdapter() {
+        return innerAdapter;
     }
 
     public void setOnLoadMoreListener(@NonNull DefaultAdapterWrapper.OnLoadMoreListener listener) {
@@ -377,11 +377,11 @@ public class DefaultAdapterWrapper<T extends RecyclerView.Adapter> extends Recyc
     }
 
     private boolean isShowLoadMore(int position) {
-        return hasLoadMore() && (position == targetAdapter.getItemCount());
+        return hasLoadMore() && (position == innerAdapter.getItemCount());
     }
 
-    private boolean isTargetHolder(RecyclerView.ViewHolder holder) {
-        return !(holder instanceof BaseViewHolder);
+    private boolean isBaseViewHolder(RecyclerView.ViewHolder holder) {
+        return holder instanceof BaseViewHolder;
     }
 
     /**

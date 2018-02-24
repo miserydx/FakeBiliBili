@@ -63,34 +63,34 @@ public class CommonAdapter extends DefaultAdapterWrapper<MultiTypeAdapter> {
     }
 
     public <T> void register(@NonNull Class<? extends T> clazz, @NonNull ItemViewBinder<T, ?> binder) {
-        targetAdapter.register(clazz, binder);
+        innerAdapter.register(clazz, binder);
     }
 
     public @NonNull
     <T> OneToManyFlow<T> register(@NonNull Class<? extends T> clazz) {
-        return targetAdapter.register(clazz);
+        return innerAdapter.register(clazz);
     }
 
     public void registerAll(@NonNull final TypePool pool) {
-        targetAdapter.registerAll(pool);
+        innerAdapter.registerAll(pool);
     }
 
     public void setItems(List<?> items) {
-        targetAdapter.setItems(items);
+        innerAdapter.setItems(items);
     }
 
     public @NonNull
     List<?> getItems() {
-        return targetAdapter.getItems();
+        return innerAdapter.getItems();
     }
 
     public void setTypePool(@NonNull TypePool typePool) {
-        targetAdapter.setTypePool(typePool);
+        innerAdapter.setTypePool(typePool);
     }
 
     public @NonNull
     TypePool getTypePool() {
-        return targetAdapter.getTypePool();
+        return innerAdapter.getTypePool();
     }
 
     /**
@@ -99,7 +99,7 @@ public class CommonAdapter extends DefaultAdapterWrapper<MultiTypeAdapter> {
      * @param item 项
      */
     public void addItem(@NonNull Object item) {
-        int position = targetAdapter.getItemCount();
+        int position = innerAdapter.getItemCount();
         addItem(item, position);
     }
 
@@ -109,7 +109,7 @@ public class CommonAdapter extends DefaultAdapterWrapper<MultiTypeAdapter> {
      * @param list 添加集合
      */
     public void addItems(@NonNull List<?> list) {
-        int position = targetAdapter.getItemCount();
+        int position = innerAdapter.getItemCount();
         addItems(list, position);
     }
 
