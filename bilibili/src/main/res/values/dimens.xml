@@ -107,6 +107,8 @@
     <dimen name="width_128">128.0dip</dimen>
     <dimen name="width_178">178.0dip</dimen>
 
+    <dimen name="ic_small">14dp</dimen>
+
     <!--main-->
     <dimen name="tab_layout_height">40dp</dimen>
     <dimen name="avatar_size">34.0dip</dimen>
@@ -122,6 +124,9 @@
     <dimen name="live_bg_control_bottom">60dp</dimen>
     <dimen name="live_video_player_height">200dp</dimen>
     <dimen name="live_video_loading_size">60dp</dimen>
+    <dimen name="live_item_title_height">49dp</dimen>
+    <dimen name="live_refresh_btn_width">120dp</dimen>
+    <dimen name="live_refresh_circle_side_length">14dp</dimen>
 
     <!--bangumi-->
     <dimen name="bangumi_card_image_height">105dp</dimen>

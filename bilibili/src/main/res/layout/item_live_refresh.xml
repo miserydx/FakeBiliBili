@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_container"
+        android:layout_width="@dimen/live_refresh_btn_width"
+        android:layout_height="@dimen/height_32"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_refresh_iv_live">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_style_live_common"
+                android:layout_gravity="center_vertical"
+                android:text="@string/live_click_refresh"
+                android:textColor="@color/theme_color_primary" />
+
+            <ImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="@dimen/live_refresh_circle_side_length"
+                android:layout_height="@dimen/live_refresh_circle_side_length"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:src="@drawable/ic_live_refresh" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

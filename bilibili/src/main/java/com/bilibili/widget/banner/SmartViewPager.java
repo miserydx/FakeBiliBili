@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -196,7 +197,8 @@ public class SmartViewPager extends FrameLayout {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            mIndicator.setPositionAndOffset(position, positionOffset);
+//            mIndicator.setPositionAndOffset(position, positionOffset);
+            mIndicator.setPosition(position);
         }
 
         @Override

@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -20,7 +21,7 @@ public class DateUtil {
      * @return
      */
     public static String getCurrentDate() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         return df.format(new Date());
     }
 
@@ -29,7 +30,7 @@ public class DateUtil {
      * @return
      */
     public static String getTomorrowDate() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         return String.valueOf(Integer.valueOf(df.format(new Date())) + 1);
     }
 
@@ -38,7 +39,7 @@ public class DateUtil {
      * @return
      */
     public static String getCurrentDateString() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
         return df.format(new Date());
     }
 
@@ -116,14 +117,14 @@ public class DateUtil {
             str = "半小时前";
         }else if(distance >= 2700){
             Date date = new Date(showTime * 1000);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             str = formatDateTime(sdf.format(date) , haveYear);
         }
         return str;
     }
 
     public static String formatDate2String(String time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         if(time == null){
             return "未知";
         }
@@ -142,7 +143,7 @@ public class DateUtil {
     }
 
     public static String formatDateTime(String time ,boolean haveYear) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         if(time == null){
             return "";
         }

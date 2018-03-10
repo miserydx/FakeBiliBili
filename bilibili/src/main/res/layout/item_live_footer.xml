@@ -10,7 +10,7 @@
 
     <TextView
         style="@style/text_style_normal"
-        android:text="@string/live_more"
+        android:text="@string/live_more_live"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_small"/>
 

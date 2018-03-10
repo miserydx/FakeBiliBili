@@ -2,6 +2,7 @@ package com.bilibili.di.component;
 
 import com.bilibili.di.module.ApiModule;
 import com.bilibili.di.scope.GlobalApis;
+import com.bilibili.model.api.ApiLiveApis;
 import com.bilibili.model.api.AppApis;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.api.LiveApis;
@@ -30,6 +31,8 @@ public interface ApiComponent {
     BangumiApis biliBiliApis();
 
     RegionApis regionApis();
+
+    ApiLiveApis apiLiveApis();
 
     //Test
     ZhihuApis zhihuApis();

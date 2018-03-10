@@ -30,6 +30,6 @@ public class PlaceHolderFragment extends BaseFragment {
 
     @Override
     protected void initViewAndEvent() {
-        tvPlaceHolder.setText(String.valueOf(new Random().nextInt(2345)));
+        tvPlaceHolder.setText("敬请期待");
     }
 }

@@ -18,18 +18,18 @@ public class RecommendIndexItemDecoration extends RecyclerView.ItemDecoration {
         int position = parent.getChildLayoutPosition(view);
         GridLayoutManager.SpanSizeLookup spanSizeLookup = ((GridLayoutManager) parent.getLayoutManager()).getSpanSizeLookup();
         if (spanSizeLookup.getSpanSize(position) == 3) {
-            outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
-            outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
+            outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
+            outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
         } else {
             int spanIndex = spanSizeLookup.getSpanIndex(position, 2);
             switch (spanIndex) {
                 case 0:
-                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
+                    outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
                     outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
                     break;
                 case 1:
                     outRect.left = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_tiny);
-                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_small);
+                    outRect.right = view.getContext().getResources().getDimensionPixelSize(R.dimen.margin_medium);
                     break;
             }
         }

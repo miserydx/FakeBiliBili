@@ -80,4 +80,29 @@ public class ScreenUtil {
         view.destroyDrawingCache();
         return bp;
     }
+
+    /**
+     * 获取屏幕dpi
+     */
+    public static String getDensityString() {
+        DisplayMetrics displayMetrics = Utils.getContext().getResources().getDisplayMetrics();
+        switch (displayMetrics.densityDpi) {
+            case DisplayMetrics.DENSITY_LOW:
+                return "ldpi";
+            case DisplayMetrics.DENSITY_MEDIUM:
+                return "mdpi";
+            case DisplayMetrics.DENSITY_HIGH:
+                return "hdpi";
+            case DisplayMetrics.DENSITY_XHIGH:
+                return "xhdpi";
+            case DisplayMetrics.DENSITY_XXHIGH:
+                return "xxhdpi";
+            case DisplayMetrics.DENSITY_XXXHIGH:
+                return "xxxhdpi";
+            case DisplayMetrics.DENSITY_TV:
+                return "tvdpi";
+            default:
+                return String.valueOf(displayMetrics.densityDpi);
+        }
+    }
 }

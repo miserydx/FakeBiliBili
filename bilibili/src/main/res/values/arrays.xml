@@ -25,6 +25,13 @@
         <item>@string/section_movie</item>
         <item>@string/section_special_column</item>
     </string-array>
+    <string-array name="live_entrance">
+        <item>@string/nav_follow</item>
+        <item>@string/nav_entertainment</item>
+        <item>@string/nav_game</item>
+        <item>@string/nav_mobile_game</item>
+        <item>@string/nav_painting</item>
+    </string-array>
     <string-array name="live_play">
         <item>@string/live_interaction</item>
         <item>@string/live_ranking_list</item>

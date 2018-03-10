@@ -1,8 +1,10 @@
 package com.bilibili.widget.danmu.live;
 
 import android.support.annotation.WorkerThread;
+import android.util.Log;
 
 import com.bilibili.util.CommonConsumer;
+import com.bilibili.util.ITask;
 import com.bilibili.util.RxJavaUtil;
 import com.team.ijkplayer.player.DXMediaManager;
 
@@ -24,6 +26,9 @@ import io.reactivex.annotations.NonNull;
  * Created by czp on 17-5-24.
  */
 public class LiveDanMuReceiver implements Closeable {
+
+    private static final String TAG = LiveDanMuReceiver.class.getSimpleName();
+
     private static final String CID_INFO_URL = "http://live.bilibili.com/api/player?id=cid:";
     private static final int LIVE_SERVER_PORT = 788;
     private static final int SOCKET_TIMEOUT = 40 * 1000;
@@ -110,11 +115,11 @@ public class LiveDanMuReceiver implements Closeable {
      * @throws IOException              when socket error
      * @throws IllegalArgumentException when room id invalid
      */
-    public LiveDanMuReceiver connect(int id) throws IOException, IllegalArgumentException {
+    public LiveDanMuReceiver connect(int id) throws IOException {
         this.roomId = id;
-        RxJavaUtil.runOnWorkThread(new CommonConsumer() {
+        RxJavaUtil.runOnWorkThread(new ITask() {
             @Override
-            public void accept(@NonNull Object o) throws Exception {
+            public void execute() {
                 //得到房间号
 //                if (urlString != null) {
 //                    url = new URL(urlString);
@@ -127,48 +132,52 @@ public class LiveDanMuReceiver implements Closeable {
 //                }
 
                 //获得服务器地址
-                String serverAddress;
                 try {
-                    InputStream inputStream = new URL(CID_INFO_URL + roomId).openStream();
-                    serverAddress = Jsoup.parse(inputStream,
+                    String serverAddress;
+                    InputStream is = new URL(CID_INFO_URL + roomId).openStream();
+                    serverAddress = Jsoup.parse(is,
                             "UTF-8",
                             "",
                             Parser.xmlParser())
                             .select("server").first()
                             .text();
+                    socket = new Socket(serverAddress, LIVE_SERVER_PORT);
+                    socket.setSoTimeout(SOCKET_TIMEOUT);
+                    OutputStream outputStream = socket.getOutputStream();
+
+                    //发送进房数据包
+                    outputStream.write(PackageRepository.getJoinPackage(roomId));
+                    outputStream.flush();
+
+                    InputStream inputStream = socket.getInputStream();
+
+                    if (!PackageRepository.readAndValidateJoinSuccessPackage(inputStream)) {
+                        socket.close();
+                        Log.d(TAG, "Join live channel failed");
+                    }
+
+                    //定时发送心跳包
+                    heartBeatThread = new Thread(new HeartBeatRunnable(outputStream));
+                    heartBeatThread.start();
+                    //启动回调分发线程
+                    callbackDispatchThread = new Thread(new CallbackDispatchRunnable(LiveDanMuReceiver.this, inputStream, callbacks, printDebugInfo));
+                    callbackDispatchThread.start();
+
+                    //由于回调本身可能继续添加回调, 因此需要按下标循环处理直到不再产生新回调. 直接 forEach 会导致 ConcurrentModificationException
+                    for (int i = 0; i < callbacks.size(); i++) {
+                        callbacks.get(i).onConnect();
+                    }
                 } catch (FileNotFoundException e) {
-                    throw new IllegalArgumentException("Invalid RoomID");
-                } catch (NullPointerException e) {
-                    throw new SocketException("Network error");
-                }
-
-                socket = new Socket(serverAddress, LIVE_SERVER_PORT);
-                socket.setSoTimeout(SOCKET_TIMEOUT);
-                OutputStream outputStream = socket.getOutputStream();
-
-                //发送进房数据包
-                outputStream.write(PackageRepository.getJoinPackage(roomId));
-                outputStream.flush();
-
-                InputStream inputStream = socket.getInputStream();
-
-                if (!PackageRepository.readAndValidateJoinSuccessPackage(inputStream)) {
-                    socket.close();
-                    throw new SocketException("Join live channel failed");
-                }
-
-                //定时发送心跳包
-                heartBeatThread = new Thread(new HeartBeatRunnable(outputStream));
-                heartBeatThread.start();
-                //启动回调分发线程
-                callbackDispatchThread = new Thread(new CallbackDispatchRunnable(LiveDanMuReceiver.this, inputStream, callbacks, printDebugInfo));
-                callbackDispatchThread.start();
-
-                //由于回调本身可能继续添加回调, 因此需要按下标循环处理直到不再产生新回调. 直接 forEach 会导致 ConcurrentModificationException
-                for (int i = 0; i < callbacks.size(); i++) {
-                    callbacks.get(i).onConnect();
+                    e.printStackTrace();
+                    Log.d(TAG, "Invalid RoomID");
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "Network error");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
+
         });
 
         return this;

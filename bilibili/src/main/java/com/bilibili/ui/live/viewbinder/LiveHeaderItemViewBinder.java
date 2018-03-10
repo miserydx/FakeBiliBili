@@ -12,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.live.LiveCommon;
+import com.bilibili.model.bean.common.Banner;
+import com.bilibili.model.bean.live.LiveHeader;
 import com.bilibili.widget.banner.BannerAdapter;
 import com.bilibili.widget.banner.SmartViewPager;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -29,18 +33,19 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by Android_ZzT on 17/6/21.
  */
 
-public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemViewBinder.BannerItemViewHolder> {
+public class LiveHeaderItemViewBinder extends ItemViewBinder<LiveHeader, LiveHeaderItemViewBinder.BannerItemViewHolder> {
 
     @NonNull
     @Override
     protected BannerItemViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_banner, null);
+        View itemView = inflater.inflate(R.layout.item_live_header, parent, false);
+        itemView.setTag(new LiveHeader());
         return new BannerItemViewHolder(itemView);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull BannerItemViewHolder holder, @NonNull LiveCommon item) {
-        holder.setData(item.getBanner());
+    protected void onBindViewHolder(@NonNull BannerItemViewHolder holder, @NonNull LiveHeader item) {
+        holder.setBannerData(item.getBanner());
     }
 
     static class BannerItemViewHolder extends RecyclerView.ViewHolder {
@@ -49,7 +54,6 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         SmartViewPager banner;
 
         private LiveBannerAdapter adapter;
-
 
         public BannerItemViewHolder(View itemView) {
             super(itemView);
@@ -65,13 +69,13 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
             adapter = new LiveBannerAdapter(itemView.getContext());
         }
 
-        private void setData(List<LiveCommon.Banner> data) {
+        private void setBannerData(List<Banner> data) {
             adapter.setData(data, true);
             banner.setAdapter(adapter);
         }
     }
 
-    static class LiveBannerAdapter extends BannerAdapter<LiveCommon.Banner, SimpleDraweeView> {
+    static class LiveBannerAdapter extends BannerAdapter<Banner, SimpleDraweeView> {
 
         private Context context;
 
@@ -87,6 +91,10 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         @Override
         protected SimpleDraweeView getItemView() {
             SimpleDraweeView imageView = new SimpleDraweeView(context);
+            GenericDraweeHierarchy hierarchy = GenericDraweeHierarchyBuilder.newInstance(imageView.getContext().getResources())
+                    .setRoundingParams(RoundingParams.fromCornersRadius(5))
+                    .build();
+            imageView.setHierarchy(hierarchy);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             ViewGroup.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             imageView.setLayoutParams(params);
@@ -94,7 +102,7 @@ public class BannerItemViewBinder extends ItemViewBinder<LiveCommon, BannerItemV
         }
 
         @Override
-        protected void bindData(SimpleDraweeView itemView, LiveCommon.Banner item) {
+        protected void bindData(SimpleDraweeView itemView, Banner item) {
             int width = ScreenUtil.getScreenWidth(context);
             int height = context.getResources().getDimensionPixelSize(R.dimen.top_banner_height);
             ImageUtil.load(itemView, item.getImg(), width, height);

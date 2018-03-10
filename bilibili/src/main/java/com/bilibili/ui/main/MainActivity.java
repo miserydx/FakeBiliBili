@@ -49,7 +49,7 @@ public class MainActivity extends SupportActivity implements IBaseMvpActivity<Ma
     RegionFragment regionFragment;
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mDrawerLayout;
-    @BindView(R.id.bottomBar)
+    @BindView(R.id.entrance_bar)
     BottomBar mBottomBar;
     @BindView(R.id.main_container)
     FrameLayout mFrameLayout;

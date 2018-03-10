@@ -8,6 +8,7 @@ import com.bilibili.R;
 import com.bilibili.ui.live.liveplay.LiveDanMuCallback;
 import com.bilibili.ui.live.liveplay.fragment.binder.LiveDanmuItemBinder;
 import com.bilibili.util.CommonConsumer;
+import com.bilibili.util.ITask;
 import com.bilibili.util.RxJavaUtil;
 import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.danmu.live.entity.DanMuMSGEntity;
@@ -64,9 +65,9 @@ public class LiveDanmuFragment extends BaseFragment {
             @Override
             public void onDanMuMSGPackage(final DanMuMSGEntity danMuMSGEntity) {
                 super.onDanMuMSGPackage(danMuMSGEntity);
-                RxJavaUtil.runOnUiThread(new CommonConsumer() {
+                RxJavaUtil.runOnUiThread(new ITask() {
                     @Override
-                    public void accept(Object o) throws Exception {
+                    public void execute() throws Exception {
                         String string = danMuMSGEntity.getSenderNick() + "：" + danMuMSGEntity.getDanMuContent();
                         mAdapter.addItem(string);
                         if (mRecyclerView != null) {

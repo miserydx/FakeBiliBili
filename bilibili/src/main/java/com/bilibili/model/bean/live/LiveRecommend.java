@@ -1,5 +1,9 @@
 package com.bilibili.model.bean.live;
 
+import com.bilibili.model.bean.common.Cover;
+import com.bilibili.model.bean.common.Owner;
+import com.bilibili.model.bean.common.Partition;
+
 import java.util.List;
 
 /**
@@ -47,92 +51,6 @@ public class LiveRecommend {
 
         public List<Banner_data> getBanner_data() {
             return this.banner_data;
-        }
-
-        public class Partition {
-            private int id;
-
-            private String name;
-
-            private String area;
-
-            private Sub_icon sub_icon;
-
-            private int count;
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public int getId() {
-                return this.id;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getName() {
-                return this.name;
-            }
-
-            public void setArea(String area) {
-                this.area = area;
-            }
-
-            public String getArea() {
-                return this.area;
-            }
-
-            public void setSub_icon(Sub_icon sub_icon) {
-                this.sub_icon = sub_icon;
-            }
-
-            public Sub_icon getSub_icon() {
-                return this.sub_icon;
-            }
-
-            public void setCount(int count) {
-                this.count = count;
-            }
-
-            public int getCount() {
-                return this.count;
-            }
-
-            public class Sub_icon {
-                private String src;
-
-                private String height;
-
-                private String width;
-
-                public void setSrc(String src) {
-                    this.src = src;
-                }
-
-                public String getSrc() {
-                    return this.src;
-                }
-
-                public void setHeight(String height) {
-                    this.height = height;
-                }
-
-                public String getHeight() {
-                    return this.height;
-                }
-
-                public void setWidth(String width) {
-                    this.width = width;
-                }
-
-                public String getWidth() {
-                    return this.width;
-                }
-
-            }
-
         }
 
         public class Lives {
@@ -377,72 +295,6 @@ public class LiveRecommend {
 
             public int getIs_tv() {
                 return this.is_tv;
-            }
-
-        }
-
-        public class Cover {
-            private String src;
-
-            private int height;
-
-            private int width;
-
-            public void setSrc(String src) {
-                this.src = src;
-            }
-
-            public String getSrc() {
-                return this.src;
-            }
-
-            public void setHeight(int height) {
-                this.height = height;
-            }
-
-            public int getHeight() {
-                return this.height;
-            }
-
-            public void setWidth(int width) {
-                this.width = width;
-            }
-
-            public int getWidth() {
-                return this.width;
-            }
-
-        }
-
-        public class Owner {
-            private String face;
-
-            private int mid;
-
-            private String name;
-
-            public void setFace(String face) {
-                this.face = face;
-            }
-
-            public String getFace() {
-                return this.face;
-            }
-
-            public void setMid(int mid) {
-                this.mid = mid;
-            }
-
-            public int getMid() {
-                return this.mid;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getName() {
-                return this.name;
             }
 
         }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/index_card_item_darker_background"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_32"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/bg_et_search_live"
+        android:drawableLeft="@drawable/ic_search_bar"
+        android:editable="false"
+        android:focusable="false"
+        android:hint="@string/nav_et_search"
+        android:textColorHint="@color/_text__white_dark"
+        android:textSize="@dimen/text_size_small" />
+
+    <com.bilibili.widget.banner.SmartViewPager
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_medium"
+        android:paddingRight="@dimen/margin_medium"
+        android:paddingTop="@dimen/margin_medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_72"
+        android:layout_weight="5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_live_follow"
+            style="@style/text_style_navigation"
+            android:clickable="true"
+            android:drawableTop="@drawable/live_home_follow_anchor"
+            android:foreground="@drawable/item_background"
+            android:text="@string/nav_follow" />
+
+        <TextView
+            android:id="@+id/tv_live_center"
+            style="@style/text_style_navigation"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_live_home_entertainment"
+            android:foreground="@drawable/item_background"
+            android:text="@string/nav_entertainment" />
+
+        <TextView
+            android:id="@+id/tv_live_video"
+            style="@style/text_style_navigation"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_live_home_game"
+            android:foreground="@drawable/item_background"
+            android:text="@string/nav_game" />
+
+        <TextView
+            android:id="@+id/tv_live_search"
+            style="@style/text_style_navigation"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_live_home_mobile_game"
+            android:foreground="@drawable/item_background"
+            android:text="@string/nav_mobile_game" />
+
+        <TextView
+            android:id="@+id/tv_live_category"
+            style="@style/text_style_navigation"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_live_home_painting"
+            android:foreground="@drawable/item_background"
+            android:text="@string/nav_painting" />
+
+    </LinearLayout>
+</LinearLayout>

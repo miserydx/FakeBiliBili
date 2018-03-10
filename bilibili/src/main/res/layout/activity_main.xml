@@ -15,13 +15,13 @@
             android:id="@+id/main_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+            app:layout_constraintBottom_toTopOf="@+id/entrance_bar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.bilibili.widget.bottombar.BottomBar
-            android:id="@+id/bottomBar"
+            android:id="@+id/entrance_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_bar_height"
             app:layout_constraintBottom_toBottomOf="parent"

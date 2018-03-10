@@ -117,7 +117,7 @@
     <color name="background_material_light">@color/material_grey_50</color>
     <color name="bangumi_pay_1">#ffffa726</color>
     <color name="bangumi_pay_2">#ffffb500</color>
-    <color name="bg_main">#ffeaeaea</color>
+    <color name="bg_main">#fff1f1f1</color>
     <color name="black">#ff000000</color>
     <color name="black_alpha10">#16000000</color>
     <color name="black_alpha15">#26000000</color>
@@ -406,4 +406,5 @@
     <color name="yellow_light_1">#fffabb12</color>
     <color name="transparent">#00000000</color>
     <color name="tab_unselected_color">#AAffffff</color>
+    <color name="et_search_bg_live">#E7E7E7</color>
 </resources>

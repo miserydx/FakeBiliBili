@@ -47,6 +47,10 @@
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
+    <style name="text_style_live_common" parent="text_style_parent">
+        <item name="android:textSize">13sp</item>
+    </style>
+
     <style name="text_style_navigation" parent="text_style_normal">
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_horizontal</item>

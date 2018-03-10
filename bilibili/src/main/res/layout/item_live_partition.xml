@@ -10,25 +10,27 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/text_style_large"
+        style="@style/text_style_live_common"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_tiny"
         android:layout_toEndOf="@+id/iv_icon"
         android:layout_toRightOf="@+id/iv_icon"
         android:textColor="@color/black" />
 
     <ImageView
         android:id="@+id/iv_arrow"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
+        android:layout_width="@dimen/ic_small"
+        android:layout_height="@dimen/ic_small"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_gray_arrow_right" />
+        android:src="@drawable/ic_live_home_more" />
 
     <TextView
         android:id="@+id/tv_count"
-        style="@style/text_style_normal"
+        style="@style/text_style_live_common"
         android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_tiny"
         android:layout_toLeftOf="@+id/iv_arrow"
         android:textColor="@color/black" />
 

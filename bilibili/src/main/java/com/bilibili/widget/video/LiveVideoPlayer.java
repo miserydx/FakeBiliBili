@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import com.bilibili.R;
 import com.bilibili.ui.live.liveplay.LiveDanMuMsgCallback;
 import com.bilibili.util.CommonConsumer;
+import com.bilibili.util.ITask;
 import com.bilibili.util.RxJavaUtil;
 import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.danmu.live.entity.DanMuMSGEntity;
@@ -308,9 +309,9 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
                     @Override
                     public void onDanMuMSGPackage(final DanMuMSGEntity danMuMSGEntity) {
                         super.onDanMuMSGPackage(danMuMSGEntity);
-                        RxJavaUtil.runOnUiThread(new CommonConsumer() {
+                        RxJavaUtil.runOnUiThread(new ITask() {
                             @Override
-                            public void accept(Object o) throws Exception {
+                            public void execute() throws Exception {
                                 addDanmu(danMuMSGEntity);
                             }
                         });

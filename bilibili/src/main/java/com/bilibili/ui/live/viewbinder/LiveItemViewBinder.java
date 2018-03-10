@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bilibili.R;
-import com.bilibili.model.bean.live.LiveCommon;
+import com.bilibili.model.bean.live.LiveAllList;
 import com.bilibili.ui.live.liveplay.LivePlayActivity;
 import com.common.util.ImageUtil;
 import com.common.util.ScreenUtil;
@@ -26,29 +26,29 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by Android_ZzT on 17/6/26.
  */
 
-public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Lives, LiveItemViewBinder.LiveViewHolder> {
+public class LiveItemViewBinder extends ItemViewBinder<LiveAllList.Lives, LiveItemViewBinder.LiveViewHolder> {
 
     @NonNull
     @Override
     protected LiveViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View itemView = inflater.inflate(R.layout.item_live_common, null);
+        View itemView = inflater.inflate(R.layout.item_live_common, parent, false);
         return new LiveViewHolder(itemView);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final LiveViewHolder holder, @NonNull final LiveCommon.Partitions.Lives item) {
+    protected void onBindViewHolder(@NonNull final LiveViewHolder holder, @NonNull final LiveAllList.Lives item) {
         final Context context = holder.cvContainer.getContext();
         int coverWidth = ScreenUtil.getScreenWidth(context) / 2 - SystemUtil.dp2px(context, 18);
         int coverHeight = context.getResources().getDimensionPixelSize(R.dimen.live_card_image_height);
-        ImageUtil.load(holder.ivCover, item.getCover().getSrc(), coverWidth, coverHeight);
+        ImageUtil.load(holder.ivCover, item.getUser_cover(), coverWidth, coverHeight);
+        holder.tvUserName.setText(item.getUname());
         holder.tvTitle.setText(item.getTitle());
         holder.tvOnline.setText(StringUtil.numberToWord(item.getOnline()));
-        holder.tvName.setText(item.getOwner().getName());
+        holder.tvAreaName.setText(item.getArea_name());
         holder.cvContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                TestDanmuActivity.Companion.startActivity(holder.cvContainer.getContext(), item.getPlayurl(), String.valueOf(item.getRoom_id()));
-                LivePlayActivity.startActivity(holder.cvContainer.getContext(), item.getPlayurl(), item.getRoom_id());
+                LivePlayActivity.startActivity(holder.cvContainer.getContext(), item.getPlay_url(), item.getRoomid());
             }
         });
     }
@@ -59,10 +59,12 @@ public class LiveItemViewBinder extends ItemViewBinder<LiveCommon.Partitions.Liv
         CardView cvContainer;
         @BindView(R.id.iv_cover)
         SimpleDraweeView ivCover;
-        @BindView(R.id.tv_area_title)
+        @BindView(R.id.tv_user_name)
+        TextView tvUserName;
+        @BindView(R.id.tv_title)
         TextView tvTitle;
-        @BindView(R.id.tv_name)
-        TextView tvName;
+        @BindView(R.id.tv_area_name)
+        TextView tvAreaName;
         @BindView(R.id.tv_online)
         TextView tvOnline;
 

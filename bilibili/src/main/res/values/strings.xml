@@ -32,20 +32,27 @@
     <string name="title_game">游戏中心</string>
 
     <!-- Live -->
+    <string name="nav_et_search">搜索房间或主播</string>
     <string name="nav_follow">关注</string>
     <string name="nav_center">中心</string>
+    <string name="nav_entertainment">娱乐</string>
     <string name="nav_video">小视频</string>
+    <string name="nav_game">游戏</string>
+    <string name="nav_mobile_game">手游</string>
     <string name="nav_search">搜索</string>
     <string name="nav_category">分类</string>
-    <string name="partition_count_format">当前%1$s个直播</string>
+    <string name="nav_painting">绘画</string>
+    <string name="partition_count_format">当前%1$s个直播，进去看看</string>
     <string name="live_load_more">查看更多</string>
-    <string name="live_more">更多直播</string>
+    <string name="live_more_live">更多直播</string>
+    <string name="live_more">更多</string>
     <string name="live_share">分享</string>
     <string name="live_report">举报</string>
     <string name="live_interaction">互动</string>
     <string name="live_ranking_list">排行榜</string>
     <string name="live_fleet">舰队</string>
     <string name="live_friendly_society">友爱社</string>
+    <string name="live_click_refresh">点击换一批</string>
 
     <!-- Navigation -->
     <string name="nav_login">点击头像登录</string>

@@ -59,6 +59,7 @@
             android:id="@+id/loading_view"
             android:layout_width="@dimen/live_video_loading_size"
             android:layout_height="@dimen/live_video_loading_size"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

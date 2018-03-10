@@ -94,10 +94,15 @@ public class IndicatorView extends View {
 
     }
 
+    public void setPosition(int position) {
+        mPosition = position % mItemCount;
+        invalidate();
+    }
+
     public void setPositionAndOffset(int position, float positionOffset) {
         mPosition = position % mItemCount;
         mIndicatorOffset = positionOffset;
-        if (mPosition == mItemCount -1) {
+        if (mPosition == mItemCount - 1) {
             mIndicatorOffset = 0;
         }
         invalidate();

@@ -2,6 +2,7 @@ package com.bilibili.di.module;
 
 import com.bilibili.di.scope.GlobalApis;
 import com.bilibili.model.api.ApiHelper;
+import com.bilibili.model.api.ApiLiveApis;
 import com.bilibili.model.api.AppApis;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.api.LiveApis;
@@ -64,6 +65,12 @@ public class ApiModule {
         return retrofit.create(RegionApis.class);
     }
 
+    @GlobalApis
+    @Provides
+    ApiLiveApis provideApiLiveService(@Named("ApiLiveApi") Retrofit retrofit) {
+        return retrofit.create(ApiLiveApis.class);
+    }
+
     //Test Api
     @GlobalApis
     @Provides
@@ -111,6 +118,13 @@ public class ApiModule {
     @Named("RegionApi")
     Retrofit provideRegionRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, RegionApis.HOST);
+    }
+
+    @GlobalApis
+    @Provides
+    @Named("ApiLiveApi")
+    Retrofit provideApiLiveRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, ApiLiveApis.HOST);
     }
 
     //Test Api
