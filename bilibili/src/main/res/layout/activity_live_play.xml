@@ -14,115 +14,112 @@
         android:layout_height="@dimen/live_video_player_height"
         android:background="@color/videoplay__preloading_background" />
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_divider_hfdp_gray_bg_white">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/width_56"
             android:layout_height="@dimen/height_56"
             android:layout_margin="@dimen/margin_medium"
-            android:src="@drawable/bili_default_avatar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="fitXY"
+            app:placeholderImage="@drawable/bili_default_avatar"
+            app:roundAsCircle="true" />
 
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/container_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:drawablePadding="@dimen/padding_2"
-            android:drawableRight="@drawable/ic_pink_arrow_right"
-            android:text="吃鸡吃鸡吃鸡"
-            android:textColor="@color/TextColorBlack"
-            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/author_ll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:orientation="horizontal"
-            app:layout_constraintLeft_toLeftOf="@id/title_tv"
-            app:layout_constraintTop_toBottomOf="@id/title_tv">
+            android:layout_toRightOf="@id/iv_avatar"
+            android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_transparent_corner_pink"
-                android:paddingLeft="@dimen/padding_2"
-                android:paddingRight="@dimen/padding_2"
-                android:text="UP31"
-                android:textColor="@color/theme_color_pink" />
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:drawablePadding="@dimen/padding_2"
+                android:drawableRight="@drawable/ic_pink_arrow_right"
+                android:textColor="@color/TextColorBlack"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/author_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_tiny"
-                android:text="Misery"
-                android:textColor="@color/theme_color_pink" />
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_master_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_transparent_corner_pink"
+                    android:paddingLeft="@dimen/padding_4"
+                    android:paddingRight="@dimen/padding_4"
+                    android:textColor="@color/theme_color_pink"
+                    android:textSize="@dimen/text_size_13" />
 
-        <TextView
-            android:id="@+id/tv_online"
-            style="@style/text_style_normal"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:drawableLeft="@drawable/ic_live_count"
-            android:drawablePadding="@dimen/padding_2"
-            android:drawableTint="@color/_bkgd__gray"
-            android:text="4396"
-            android:textColor="@color/_bkgd__gray_light"
-            app:layout_constraintLeft_toLeftOf="@id/author_ll"
-            app:layout_constraintTop_toBottomOf="@id/author_ll" />
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_tiny"
+                    android:maxLines="1"
+                    android:textColor="@color/theme_color_pink"
+                    android:textSize="@dimen/text_size_13" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_36"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:orientation="horizontal"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/author_ll">
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_attention"
+                android:id="@+id/tv_online"
                 style="@style/text_style_normal"
-                android:background="@drawable/ic_attention_arrow"
-                android:gravity="center"
-                android:text="5.9万"
-                android:textColor="@color/_bkgd__gray_light" />
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:drawableLeft="@drawable/ic_live_watch_count"
+                android:drawablePadding="@dimen/padding_2"
+                android:drawableTint="@color/_bkgd__gray"
+                android:textColor="@color/_bkgd__gray_light"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintLeft_toLeftOf="@id/author_ll"
+                app:layout_constraintTop_toBottomOf="@id/author_ll" />
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/margin_2"
-                android:background="@drawable/background_pink_corner"
-                android:gravity="center"
-                android:text="+关注"
-                android:textColor="@color/_text__white" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_36"
+                android:layout_marginRight="@dimen/margin_medium"
+                android:orientation="horizontal"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/author_ll">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_attention"
+                    android:layout_width="@dimen/width_56"
+                    android:layout_height="@dimen/height_32"
+                    android:background="@drawable/ic_attention_arrow"
+                    android:gravity="center"
+                    android:textColor="@color/_bkgd__gray_light"
+                    android:textSize="@dimen/text_size_13" />
 
-    </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:layout_width="@dimen/width_56"
+                    android:layout_height="@dimen/height_32"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    android:background="@drawable/bg_btn_attention"
+                    android:gravity="center"
+                    android:text="@string/live_play_add_attention"
+                    android:textColor="@color/theme_color_primary"
+                    android:textSize="@dimen/text_size_13" />
 
-    <!--<com.flyco.tablayout.SlidingTabLayout-->
-        <!--android:id="@+id/tab_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/tab_layout_height"-->
-        <!--android:background="@drawable/bottom_divider_hfdp_gray_bg_white"-->
-        <!--app:tl_indicator_color="?attr/colorPrimary"-->
-        <!--app:tl_indicator_margin_left="@dimen/margin_medium"-->
-        <!--app:tl_indicator_margin_right="@dimen/margin_medium"-->
-        <!--app:tl_tab_space_equal="true"-->
-        <!--app:tl_textAllCaps="true"-->
-        <!--app:tl_textSelectColor="?attr/colorPrimary"-->
-        <!--app:tl_textUnselectColor="@color/black"-->
-        <!--app:tl_textsize="14sp" />-->
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"

@@ -10,6 +10,7 @@
 
     <!--common-->
     <dimen name="banner_item_height">100.0dip</dimen>
+    <dimen name="common_avatar_size">60dp</dimen>
 
     <dimen name="height_8">8.0dip</dimen>
     <dimen name="height_16">16.0dip</dimen>
@@ -82,6 +83,7 @@
     <dimen name="text_size_xlarge">18sp</dimen>
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_tiny">10sp</dimen>
     <dimen name="top_banner_height">120.0dip</dimen>

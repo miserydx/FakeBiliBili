@@ -2,6 +2,7 @@ package com.bilibili.model.api;
 
 import com.bilibili.model.bean.DataObjectResponse;
 import com.bilibili.model.bean.live.LiveAllList;
+import com.bilibili.model.bean.live.LiveIndex;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -26,6 +27,25 @@ public interface ApiLiveApis {
                                                            @Query("device") String device,
                                                            @Query("mobi_app") String mobi_app,
                                                            @Query("platform") String platform,
+                                                           @Query("scale") String scale,
+                                                           @Query("src") String src,
+                                                           @Query("trace_id") String trace_id,
+                                                           @Query("ts") String ts,
+                                                           @Query("version") String version
+    );
+
+    /**
+     *
+     * http://api.live.bilibili.com/AppRoom/index?_device=android&_hwid=GipPLBx9THkfKEpyDnJKek0vFiAQdTVEIRAjTixQaFhvDTQCMldgBD0O&access_key=490410145f1259ae5414fc2bcbb24c0c&appkey=1d8b6e7d45233436&build=519000&buld=519000&jumpFrom=24000&mobi_app=android&platform=android&room_id=1365604&scale=xhdpi&src=bili&trace_id=20180312162600036&ts=1520843196&version=5.19.0.519000&sign=f00d43d2d8f9aa08d23155427ccd6002
+     */
+    @GET("/AppRoom/index")
+    Observable<DataObjectResponse<LiveIndex>> getLiveIndex(@Query("_device") String _device,
+                                                           @Query("appkey") String appkey,
+                                                           @Query("build") String build,
+                                                           @Query("device") String device,
+                                                           @Query("mobi_app") String mobi_app,
+                                                           @Query("platform") String platform,
+                                                           @Query("room_id") int room_id,
                                                            @Query("scale") String scale,
                                                            @Query("src") String src,
                                                            @Query("trace_id") String trace_id,

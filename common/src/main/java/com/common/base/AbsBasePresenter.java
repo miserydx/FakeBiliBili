@@ -21,6 +21,11 @@ public abstract class AbsBasePresenter<T extends BaseView> implements BasePresen
         clearRx();
     }
 
+    @Override
+    public void loadData() {
+        //do nothing
+    }
+
     //RXjava取消注册，以避免内存泄露
     public void clearRx() {
         if (mCompositeDisposable != null) {

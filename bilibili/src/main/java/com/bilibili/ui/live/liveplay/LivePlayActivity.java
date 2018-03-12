@@ -3,24 +3,32 @@ package com.bilibili.ui.live.liveplay;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.bilibili.App;
 import com.bilibili.R;
+import com.bilibili.model.bean.live.LiveIndex;
 import com.bilibili.ui.live.liveplay.fragment.LiveDanmuFragment;
 import com.bilibili.ui.test.fragment.PlaceHolderFragment;
 import com.bilibili.util.InflateUtil;
 import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.video.LiveVideoPlayer;
 import com.common.base.IBaseMvpActivity;
+import com.common.util.ImageUtil;
+import com.common.util.StringUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.team.ijkplayer.player.DXVideoView;
 
 import java.io.IOException;
@@ -44,7 +52,7 @@ public class LivePlayActivity extends SupportActivity implements IBaseMvpActivit
     private static String TYPE_LIVE_ROOM_ID = "type_live_room_id";
 
     public static void startActivity(Context context, String url, int roomId) {
-        Intent intent = new Intent(context, LivePlayActivity. class);
+        Intent intent = new Intent(context, LivePlayActivity.class);
         intent.putExtra(TYPE_LIVE_URL, url);
         intent.putExtra(TYPE_LIVE_ROOM_ID, roomId);
         context.startActivity(intent);
@@ -58,6 +66,20 @@ public class LivePlayActivity extends SupportActivity implements IBaseMvpActivit
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.iv_avatar)
+    SimpleDraweeView ivAvatar;
+    @BindView(R.id.container_info)
+    ConstraintLayout containerInfo;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_master_level)
+    TextView tvMasterLevel;
+    @BindView(R.id.tv_user_name)
+    TextView tvUserName;
+    @BindView(R.id.tv_online)
+    TextView tvOnline;
+    @BindView(R.id.tv_attention)
+    TextView tvAttention;
 
     private LivePlayPagerAdapter adapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -84,6 +106,7 @@ public class LivePlayActivity extends SupportActivity implements IBaseMvpActivit
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         String dynamicUrl = getIntent().getStringExtra(TYPE_LIVE_URL);
         int roomId = getIntent().getIntExtra(TYPE_LIVE_ROOM_ID, -1);
+        mPresenter.getLiveIndex(roomId);
         initToolbar();
         videoPlayer.setOnPreparedListener(this);
         videoPlayer.setUp(dynamicUrl);
@@ -158,14 +181,29 @@ public class LivePlayActivity extends SupportActivity implements IBaseMvpActivit
     }
 
     @Override
-    public void onPrepared() {
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.live_menu, menu);
         return true;
+    }
+
+    @Override
+    public void onInfoPrepared(LiveIndex liveIndex) {
+        int ivWidth = getResources().getDimensionPixelSize(R.dimen.common_avatar_size);
+        int ivHeight = getResources().getDimensionPixelSize(R.dimen.common_avatar_size);
+        ImageUtil.load(ivAvatar, liveIndex.getFace(), ivWidth, ivHeight);
+        tvTitle.setText(liveIndex.getTitle());
+        String levelText = getString(R.string.live_play_up) + liveIndex.getMaster_level();
+        tvMasterLevel.setText(levelText);
+//        tvMasterLevel.setTextColor(liveIndex.getMaster_level_color());
+        tvUserName.setText(liveIndex.getUname());
+        tvOnline.setText(StringUtil.numberToWord(liveIndex.getOnline()));
+        tvAttention.setText(StringUtil.numberToWord(liveIndex.getAttention()));
+        containerInfo.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onPrepared() {
+
     }
 
     private class LivePlayPagerAdapter extends FragmentPagerAdapter {

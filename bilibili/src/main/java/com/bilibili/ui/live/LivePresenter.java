@@ -83,7 +83,7 @@ public class LivePresenter extends AbsBasePresenter<LiveContract.View> implement
 
                     @Override
                     public void onComplete() {
-                        Log.e(LiveFragment.TAG, "onComplete");
+                        Log.d(LiveFragment.TAG, "onComplete");
                         mView.onRefreshingStateChanged(false);
                     }
                 });

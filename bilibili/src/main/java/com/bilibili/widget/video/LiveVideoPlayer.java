@@ -325,7 +325,7 @@ public class LiveVideoPlayer extends DXBaseVideoPlayer {
     public void addDanmu(DanMuMSGEntity danmu) {
         BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
         danmaku.text = danmu.getDanMuContent();
-        danmaku.textSize = SizeUtil.sp2px(12 * 1.0f);
+        danmaku.textSize = SizeUtil.sp2px(13 * 1.0f);
         danmaku.textColor = Color.WHITE;
         danmaku.setTime(danmakuView.getCurrentTime());
         danmakuView.addDanmaku(danmaku);

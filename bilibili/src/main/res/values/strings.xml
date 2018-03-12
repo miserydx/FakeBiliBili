@@ -53,6 +53,8 @@
     <string name="live_fleet">舰队</string>
     <string name="live_friendly_society">友爱社</string>
     <string name="live_click_refresh">点击换一批</string>
+    <string name="live_play_add_attention">+关注</string>
+    <string name="live_play_up">UP</string>
 
     <!-- Navigation -->
     <string name="nav_login">点击头像登录</string>
