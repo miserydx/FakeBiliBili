@@ -8,8 +8,8 @@ android {
         applicationId "com.bilibili"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 120
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"
