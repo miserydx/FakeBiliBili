@@ -6,15 +6,14 @@ import com.bilibili.model.bean.WeiXinJingXuanBean;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.NoBaseMvpPresenter;
 import com.common.base.IBaseMvpActivity;
+import com.common.base.BaseActivity;
 import com.common.util.StatusBarUtil;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import me.yokeyword.fragmentation.SupportActivity;
-
-public class TestNoBaseMvpActivity extends SupportActivity implements IBaseMvpActivity<NoBaseMvpPresenter>, MvpStructureContract.View{
+public class TestNoBaseMvpActivity extends BaseActivity implements IBaseMvpActivity<NoBaseMvpPresenter>, MvpStructureContract.View {
 
     @Inject
     NoBaseMvpPresenter mPresenter;

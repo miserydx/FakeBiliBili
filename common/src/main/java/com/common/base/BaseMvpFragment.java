@@ -1,5 +1,8 @@
 package com.common.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import javax.inject.Inject;
 
 /**
@@ -12,8 +15,8 @@ public abstract class BaseMvpFragment<T extends AbsBasePresenter> extends BaseFr
     protected T mPresenter;
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         if (mPresenter != null)
             mPresenter.attachView(this);
         mPresenter.loadData();
@@ -22,12 +25,12 @@ public abstract class BaseMvpFragment<T extends AbsBasePresenter> extends BaseFr
     @Override
     public void onStop() {
         super.onStop();
-        mPresenter.releaseData();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        mPresenter.releaseData();
         if (mPresenter != null)
             mPresenter.detachView();
     }

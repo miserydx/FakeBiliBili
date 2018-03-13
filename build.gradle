@@ -3,8 +3,8 @@
 buildscript {
 
     ext.dagger_version = '2.11'
-    ext.butterknife_version='8.8.0'
-    ext.android_support_version='27.0.2'
+    ext.butterknife_version='8.8.1'
+    ext.android_support_version='27.1.0'
     ext.constraintlayout_version='1.0.2'
 
     repositories {

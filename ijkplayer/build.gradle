@@ -40,7 +40,7 @@ dependencies {
     //Other ABIs: optional
 //    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.2'
 //    compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.2'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.2'
+    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.2'
 //    compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.2'
 
     //ExoPlayer as IMediaPlayer: optional, experimental

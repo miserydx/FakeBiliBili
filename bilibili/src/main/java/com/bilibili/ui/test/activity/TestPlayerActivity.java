@@ -6,12 +6,12 @@ import android.widget.TableLayout;
 
 import com.bilibili.R;
 import com.common.base.IBaseActivity;
+import com.common.base.BaseActivity;
 import com.team.ijkplayer.application.Settings;
 import com.team.ijkplayer.widget.media.AndroidMediaController;
 import com.team.ijkplayer.widget.media.IjkVideoView;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
@@ -19,7 +19,7 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
  * Created by Android_ZzT on 17/8/7.
  */
 
-public class TestPlayerActivity extends SupportActivity implements IBaseActivity {
+public class TestPlayerActivity extends BaseActivity implements IBaseActivity {
 
 //    private static final String URL = "http://txy.live-play.acgvideo.com/live-txy/874149/live_6837108_8470533.flv?wsSecret=af1827a677bb24d0ede358cb06fe5302&wsTime=1504598358";
 //    private static final String URL = "http://upos-hz-mirrorks3.acgvideo.com/upgcxcode/83/52/23025283/23025283-1-64.flv?um_deadline=1504604797&platform=android&rate=377325&oi=1875901889&um_sign=27f0e8dae6396a8c204e647e50b53033&gen=playurl&os=ks3";

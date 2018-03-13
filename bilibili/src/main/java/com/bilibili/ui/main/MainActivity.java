@@ -20,6 +20,7 @@ import com.bilibili.ui.test.fragment.PlaceHolderFragment;
 import com.bilibili.widget.bottombar.BottomBar;
 import com.bilibili.widget.bottombar.CustomTabEntity;
 import com.common.base.IBaseMvpActivity;
+import com.common.base.BaseActivity;
 import com.common.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -31,10 +32,9 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class MainActivity extends SupportActivity implements IBaseMvpActivity<MainPresenter>, MainContract.View {
+public class MainActivity extends BaseActivity implements IBaseMvpActivity<MainPresenter>, MainContract.View {
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;

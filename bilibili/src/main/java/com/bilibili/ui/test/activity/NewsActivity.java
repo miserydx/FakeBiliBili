@@ -15,12 +15,12 @@ import com.bilibili.App;
 import com.bilibili.R;
 import com.bilibili.ui.test.fragment.NewsFragment;
 import com.common.base.IBaseActivity;
+import com.common.base.BaseActivity;
 import com.common.util.StatusBarUtil;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 
-public class NewsActivity extends SupportActivity implements IBaseActivity {
+public class NewsActivity extends BaseActivity implements IBaseActivity {
 
     private final String TAG = NewsActivity.class.getSimpleName();
 

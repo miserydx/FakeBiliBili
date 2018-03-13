@@ -1,10 +1,12 @@
 package com.bilibili.ui.recommed;
 
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.bilibili.App;
@@ -107,6 +109,7 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
                 break;
             case RecommendPresenter.STATE_LOAD_MORE:
                 mAdapter.addItems(items);
+                mRecyclerView.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0f, 0f, 0));//停止recyclerView滑动
                 break;
         }
     }

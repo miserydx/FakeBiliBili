@@ -7,13 +7,13 @@ import android.widget.Button;
 import com.bilibili.R;
 import com.bilibili.ui.main.MainActivity;
 import com.common.base.IBaseActivity;
+import com.common.base.BaseActivity;
 import com.common.util.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import me.yokeyword.fragmentation.SupportActivity;
 
-public class NavigationTestActivity extends SupportActivity implements IBaseActivity {
+public class NavigationTestActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.news_btn)
     Button btnNews;

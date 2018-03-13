@@ -8,10 +8,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,6 +24,7 @@ import com.bilibili.util.InflateUtil;
 import com.bilibili.widget.danmu.live.LiveDanMuReceiver;
 import com.bilibili.widget.video.LiveVideoPlayer;
 import com.common.base.IBaseMvpActivity;
+import com.common.base.BaseActivity;
 import com.common.util.ImageUtil;
 import com.common.util.StringUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -37,13 +36,12 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * Created by miserydx on 17/12/20.
  */
 
-public class LivePlayActivity extends SupportActivity implements IBaseMvpActivity<LivePlayPresenter>, LivePlayContract.View,
+public class LivePlayActivity extends BaseActivity implements IBaseMvpActivity<LivePlayPresenter>, LivePlayContract.View,
         DXVideoView.OnPreparedListener {
 
     public static String TAG = LivePlayActivity.class.getSimpleName();

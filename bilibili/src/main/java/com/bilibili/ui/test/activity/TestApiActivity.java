@@ -9,17 +9,10 @@ import com.bilibili.model.api.ApiLiveApis;
 import com.bilibili.model.api.AppApis;
 import com.bilibili.model.api.BangumiApis;
 import com.bilibili.model.api.LiveApis;
-import com.bilibili.model.bean.AppSearchHot;
-import com.bilibili.model.bean.AppSplash;
-import com.bilibili.model.bean.DataListResponse;
 import com.bilibili.model.bean.DataObjectResponse;
-import com.bilibili.model.bean.ResultObjectResponse;
-import com.bilibili.model.bean.bangumi.BangumiIndexPage;
 import com.bilibili.model.bean.live.LiveAllList;
-import com.bilibili.model.bean.live.LiveAreas;
-import com.bilibili.model.bean.live.LiveCommon;
-import com.bilibili.model.bean.live.LiveRecommend;
 import com.common.base.IBaseActivity;
+import com.common.base.BaseActivity;
 import com.common.util.DateUtil;
 import com.common.util.StatusBarUtil;
 
@@ -28,9 +21,8 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import me.yokeyword.fragmentation.SupportActivity;
 
-public class TestApiActivity extends SupportActivity implements IBaseActivity {
+public class TestApiActivity extends BaseActivity implements IBaseActivity {
 
     @Inject
     AppApis appApis;

@@ -15,6 +15,7 @@ import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
 import com.bilibili.widget.adapter.CommonAdapter;
 import com.common.base.IBaseMvpActivity;
+import com.common.base.BaseActivity;
 import com.common.base.adapter.OnItemClickListener;
 import com.common.util.StatusBarUtil;
 
@@ -24,9 +25,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import me.drakeet.multitype.Items;
-import me.yokeyword.fragmentation.SupportActivity;
 
-public class StatusWithPictureActivity extends SupportActivity implements IBaseMvpActivity<MvpStructurePresenter>, MvpStructureContract.View {
+public class StatusWithPictureActivity extends BaseActivity implements IBaseMvpActivity<MvpStructurePresenter>, MvpStructureContract.View {
 
     private final String TAG = StatusWithPictureActivity.class.getSimpleName();
 

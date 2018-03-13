@@ -13,6 +13,7 @@ import com.bilibili.ui.test.adapter.MvpStructureAdapter;
 import com.bilibili.ui.test.mvp.contract.MvpStructureContract;
 import com.bilibili.ui.test.mvp.presenter.MvpStructurePresenter;
 import com.common.base.IBaseMvpActivity;
+import com.common.base.BaseActivity;
 import com.common.util.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -21,9 +22,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 
-public class ScrollGradientActivity extends SupportActivity implements IBaseMvpActivity<MvpStructurePresenter>, MvpStructureContract.View {
+public class ScrollGradientActivity extends BaseActivity implements IBaseMvpActivity<MvpStructurePresenter>, MvpStructureContract.View {
 
     private final String TAG = ScrollGradientActivity.class.getSimpleName();
 

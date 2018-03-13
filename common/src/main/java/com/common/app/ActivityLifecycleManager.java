@@ -51,6 +51,11 @@ public final class ActivityLifecycleManager implements Application.ActivityLifec
 
             //初始化
             iActivity.initViewAndEvent();
+            //加载数据
+            if (activity instanceof IBaseMvpActivity) {
+                IBaseMvpActivity mvpActivity = (IBaseMvpActivity) activity;
+                mvpActivity.getPresenter().loadData();
+            }
         }
         //TODO 第三方的 Activity 如需做公共处理，可在此处添加
 
@@ -58,10 +63,7 @@ public final class ActivityLifecycleManager implements Application.ActivityLifec
 
     @Override
     public void onActivityStarted(Activity activity) {
-        if (activity instanceof IBaseMvpActivity) {
-            IBaseMvpActivity mvpActivity = (IBaseMvpActivity) activity;
-            mvpActivity.getPresenter().loadData();
-        }
+
     }
 
     @Override
