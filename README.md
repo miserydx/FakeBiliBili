@@ -4,6 +4,8 @@
 
 > 项目地址：[https://github.com/TeamNB/FakeBiliBili](https://github.com/TeamNB/FakeBiliBili)
 
+[Demo下载](https://github.com/TeamNB/FakeBiliBili/blob/master/FakeBiliBili_demo.apk)
+
 目前完成**主页UI**以及**直播页**的部分UI（播放器和弹幕）
 
 这个项目完全出自个人爱好，平常也是个b站重度用户。以后会不定期更新~大家多提意见多交流
