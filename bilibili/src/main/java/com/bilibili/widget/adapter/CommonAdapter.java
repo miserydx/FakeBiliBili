@@ -136,7 +136,7 @@ public class CommonAdapter extends DefaultAdapterWrapper<MultiTypeAdapter> {
     public void addItems(@NonNull List<?> list, int position) {
         List items = getItems();
         items.addAll(position, list);
-        notifyItemRangeInserted(position, list.size());
+        notifyDataSetChanged();
     }
 
     public void useDefaultLoadMore() {

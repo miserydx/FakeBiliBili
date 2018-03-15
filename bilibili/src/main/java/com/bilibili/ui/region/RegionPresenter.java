@@ -42,6 +42,9 @@ public class RegionPresenter extends AbsBasePresenter<RegionContract.View> {
 
     @Override
     public void loadData() {
+        Items items = new Items();
+        items.add(new RegionHeaderItemViewBinder.RegionHeader());
+        mView.onDataUpdated(items);
         mRegionApis.getRegionShow(
                 ApiHelper.APP_KEY,
                 ApiHelper.BUILD,

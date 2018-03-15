@@ -115,6 +115,10 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     }
 
     private void pullToRefresh() {
+        if (mAdapter.getItems().size() < 1) {
+            mPresenter.loadData();
+            return;
+        }
         int idx = 0;
         List items = mAdapter.getItems();
         if (items.get(0) instanceof RecommendBannerItemViewBinder.Banner) {
